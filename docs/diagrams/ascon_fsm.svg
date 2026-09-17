@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="900" viewBox="0 0 1500 900">
+  <defs>
+    <style>
+      .state { fill:#fff; stroke:#000; stroke-width:3; }
+      .line { fill:none; stroke:#000; stroke-width:3; }
+      .dash { fill:none; stroke:#000; stroke-width:2; stroke-dasharray:9 6; }
+      .arrowhead { fill:#000; stroke:none; }
+      .title { font:700 28px Arial, sans-serif; }
+      .label { font:700 19px Arial, sans-serif; }
+      .small { font:16px Arial, sans-serif; }
+    </style>
+  </defs>
+  <rect width="1500" height="900" fill="#fff"/>
+  <text x="750" y="40" text-anchor="middle" class="title">Controller state flow used by the VHDL core</text>
+
+  <g id="states">
+    <rect x="50" y="95" width="180" height="70" rx="35" class="state"/><text x="140" y="138" text-anchor="middle" class="label">IDLE</text>
+    <rect x="300" y="85" width="230" height="90" rx="8" class="state"/><text x="415" y="122" text-anchor="middle" class="label">INIT START / WAIT</text><text x="415" y="151" text-anchor="middle" class="small">p12, then add key</text>
+    <rect x="610" y="85" width="230" height="90" rx="8" class="state"/><text x="725" y="122" text-anchor="middle" class="label">AD WAIT</text><text x="725" y="151" text-anchor="middle" class="small">check kind, keep, last</text>
+    <rect x="920" y="85" width="250" height="90" rx="8" class="state"/><text x="1045" y="122" text-anchor="middle" class="label">AD p8 START / WAIT</text><text x="1045" y="151" text-anchor="middle" class="small">absorb each nonempty block</text>
+    <rect x="1220" y="85" width="230" height="90" rx="8" class="state"/><text x="1335" y="122" text-anchor="middle" class="label">AD PAD p8</text><text x="1335" y="151" text-anchor="middle" class="small">exact-boundary ending</text>
+
+    <rect x="610" y="300" width="230" height="100" rx="8" class="state"/><text x="725" y="340" text-anchor="middle" class="label">MESSAGE WAIT</text><text x="725" y="370" text-anchor="middle" class="small">encrypt or decrypt rate bytes</text>
+    <rect x="920" y="300" width="250" height="100" rx="8" class="state"/><text x="1045" y="340" text-anchor="middle" class="label">MESSAGE OUTPUT</text><text x="1045" y="370" text-anchor="middle" class="small">hold valid data during stalls</text>
+    <rect x="1220" y="300" width="230" height="100" rx="8" class="state"/><text x="1335" y="340" text-anchor="middle" class="label">MESSAGE p8</text><text x="1335" y="370" text-anchor="middle" class="small">full block only</text>
+
+    <rect x="920" y="525" width="250" height="100" rx="8" class="state"/><text x="1045" y="565" text-anchor="middle" class="label">FINAL START / WAIT</text><text x="1045" y="595" text-anchor="middle" class="small">add key, p12, make tag</text>
+    <rect x="610" y="525" width="230" height="100" rx="8" class="state"/><text x="725" y="563" text-anchor="middle" class="label">TAG OUTPUT</text><text x="725" y="594" text-anchor="middle" class="small">encryption handshake</text>
+    <rect x="1220" y="525" width="230" height="100" rx="8" class="state"/><text x="1335" y="563" text-anchor="middle" class="label">TAG INPUT</text><text x="1335" y="594" text-anchor="middle" class="small">verify, commit or discard</text>
+    <rect x="610" y="735" width="230" height="90" rx="8" class="state"/><text x="725" y="772" text-anchor="middle" class="label">DONE</text><text x="725" y="801" text-anchor="middle" class="small">pulse status, return idle</text>
+    <rect x="50" y="735" width="250" height="90" rx="8" class="state"/><text x="175" y="772" text-anchor="middle" class="label">ZEROIZE</text><text x="175" y="801" text-anchor="middle" class="small">clear all transaction storage</text>
+  </g>
+
+  <path d="M230 130 H300" class="line"/><text x="265" y="117" text-anchor="middle" class="small">command</text>
+  <path d="M530 130 H610" class="line"/>
+  <path d="M840 130 H920" class="line"/><text x="880" y="117" text-anchor="middle" class="small">AD beat</text>
+  <path d="M1170 130 H1220" class="line"/><text x="1195" y="75" text-anchor="middle" class="small">last full</text>
+  <path d="M1045 175 C1045 235 725 220 725 300" class="line"/><text x="850" y="235" text-anchor="middle" class="small">last partial, then domain separation</text>
+  <path d="M1335 175 C1335 250 810 230 760 300" class="line"/>
+  <path d="M920 110 C875 50 690 45 665 85" class="line"/><text x="790" y="66" text-anchor="middle" class="small">more AD</text>
+  <path d="M840 350 H920" class="line"/><text x="880" y="335" text-anchor="middle" class="small">payload</text>
+  <path d="M1170 350 H1220" class="line"/><text x="1195" y="334" text-anchor="middle" class="small">full</text>
+  <path d="M1335 400 C1335 460 760 445 740 400" class="line"/><text x="1045" y="458" text-anchor="middle" class="small">more payload</text>
+  <path d="M1045 400 V525" class="line"/><text x="1090" y="470" class="small">last partial</text>
+  <path d="M1335 400 V525" class="line"/><text x="1368" y="470" class="small">last full + pad</text>
+  <path d="M920 575 H840" class="line"/><text x="880" y="560" text-anchor="middle" class="small">encrypt</text>
+  <path d="M1170 575 H1220" class="line"/><text x="1195" y="560" text-anchor="middle" class="small">decrypt</text>
+  <path d="M725 625 C725 680 330 680 250 735" class="line"/>
+  <path d="M1335 625 C1335 700 360 680 250 735" class="line"/>
+  <path d="M300 780 H610" class="line"/>
+  <path d="M610 350 C400 350 175 600 175 735" class="dash"/><text x="250" y="540" class="small">protocol error from an input wait state</text>
+  <path d="M610 795 C430 865 125 850 140 165" class="line"/>
+  <text x="65" y="450" class="small" transform="rotate(-90 65 450)">next command after cleanup</text>
+
+  <!-- Explicit arrowhead polygons remain visible in PNG, DOCX, and PDF
+       conversion paths that do not render SVG marker definitions. -->
+  <polygon points="300,130 288,123 288,137" class="arrowhead"/>
+  <polygon points="610,130 598,123 598,137" class="arrowhead"/>
+  <polygon points="920,130 908,123 908,137" class="arrowhead"/>
+  <polygon points="1220,130 1208,123 1208,137" class="arrowhead"/>
+  <polygon points="725,300 718,288 732,288" class="arrowhead"/>
+  <polygon points="760,300 753,288 767,288" class="arrowhead"/>
+  <polygon points="665,85 658,73 672,73" class="arrowhead"/>
+  <polygon points="920,350 908,343 908,357" class="arrowhead"/>
+  <polygon points="1220,350 1208,343 1208,357" class="arrowhead"/>
+  <polygon points="740,400 752,393 752,407" class="arrowhead"/>
+  <polygon points="1045,525 1038,513 1052,513" class="arrowhead"/>
+  <polygon points="1335,525 1328,513 1342,513" class="arrowhead"/>
+  <polygon points="840,575 852,568 852,582" class="arrowhead"/>
+  <polygon points="1220,575 1208,568 1208,582" class="arrowhead"/>
+  <polygon points="250,735 243,723 257,723" class="arrowhead"/>
+  <polygon points="610,780 598,773 598,787" class="arrowhead"/>
+  <polygon points="175,735 168,723 182,723" class="arrowhead"/>
+  <polygon points="140,165 133,177 147,177" class="arrowhead"/>
+
+  <text x="750" y="872" text-anchor="middle" class="small">START states issue one permutation request. WAIT states hold until the shared round engine asserts done.</text>
+</svg>

@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
+  <defs>
+    <style>
+      .box { fill:#fff; stroke:#000; stroke-width:3; }
+      .group { fill:#fff; stroke:#000; stroke-width:2; stroke-dasharray:10 7; }
+      .line { fill:none; stroke:#000; stroke-width:3; }
+      .thin { fill:none; stroke:#000; stroke-width:2; }
+      .arrowhead { fill:#000; stroke:none; }
+      .title { font:700 28px Arial, sans-serif; }
+      .label { font:700 22px Arial, sans-serif; }
+      .small { font:18px Arial, sans-serif; }
+      .note { font:italic 17px Arial, sans-serif; }
+    </style>
+  </defs>
+  <rect width="1400" height="820" fill="#fff"/>
+  <text x="700" y="42" text-anchor="middle" class="title">Ascon-AEAD128 iterative hardware architecture</text>
+
+  <rect x="35" y="100" width="240" height="120" rx="8" class="box"/>
+  <text x="155" y="142" text-anchor="middle" class="label">Command input</text>
+  <text x="155" y="174" text-anchor="middle" class="small">key, nonce, mode</text>
+  <text x="155" y="201" text-anchor="middle" class="small">valid / ready</text>
+
+  <rect x="35" y="300" width="240" height="160" rx="8" class="box"/>
+  <text x="155" y="340" text-anchor="middle" class="label">128-bit input</text>
+  <text x="155" y="373" text-anchor="middle" class="small">AD or payload</text>
+  <text x="155" y="403" text-anchor="middle" class="small">keep, last</text>
+  <text x="155" y="433" text-anchor="middle" class="small">valid / ready</text>
+
+  <rect x="355" y="115" width="290" height="320" rx="8" class="box"/>
+  <text x="500" y="155" text-anchor="middle" class="label">AEAD controller</text>
+  <text x="500" y="198" text-anchor="middle" class="small">phase ordering</text>
+  <text x="500" y="230" text-anchor="middle" class="small">round selection: p12 / p8</text>
+  <text x="500" y="262" text-anchor="middle" class="small">byte mask and padding</text>
+  <text x="500" y="294" text-anchor="middle" class="small">domain separation</text>
+  <text x="500" y="326" text-anchor="middle" class="small">key additions</text>
+  <text x="500" y="358" text-anchor="middle" class="small">tag check and zeroize</text>
+  <text x="500" y="402" text-anchor="middle" class="note">one clocked FSM</text>
+
+  <rect x="755" y="90" width="300" height="265" rx="8" class="box"/>
+  <text x="905" y="130" text-anchor="middle" class="label">320-bit state register</text>
+  <rect x="800" y="160" width="210" height="34" class="box"/><text x="905" y="184" text-anchor="middle" class="small">x0 — rate word 0</text>
+  <rect x="800" y="198" width="210" height="34" class="box"/><text x="905" y="222" text-anchor="middle" class="small">x1 — rate word 1</text>
+  <rect x="800" y="236" width="210" height="34" class="box"/><text x="905" y="260" text-anchor="middle" class="small">x2</text>
+  <rect x="800" y="274" width="210" height="34" class="box"/><text x="905" y="298" text-anchor="middle" class="small">x3</text>
+  <rect x="800" y="312" width="210" height="34" class="box"/><text x="905" y="336" text-anchor="middle" class="small">x4</text>
+
+  <rect x="755" y="450" width="300" height="225" rx="8" class="box"/>
+  <text x="905" y="492" text-anchor="middle" class="label">Shared round datapath</text>
+  <text x="905" y="535" text-anchor="middle" class="small">round constant addition</text>
+  <text x="905" y="570" text-anchor="middle" class="small">64 parallel 5-bit S-boxes</text>
+  <text x="905" y="605" text-anchor="middle" class="small">linear diffusion</text>
+  <text x="905" y="648" text-anchor="middle" class="note">one round per clock</text>
+
+  <rect x="1145" y="125" width="220" height="120" rx="8" class="box"/>
+  <text x="1255" y="168" text-anchor="middle" class="label">Payload output</text>
+  <text x="1255" y="200" text-anchor="middle" class="small">data, keep, last</text>
+  <text x="1255" y="226" text-anchor="middle" class="small">valid / ready</text>
+
+  <rect x="1145" y="305" width="220" height="120" rx="8" class="box"/>
+  <text x="1255" y="348" text-anchor="middle" class="label">Tag interface</text>
+  <text x="1255" y="380" text-anchor="middle" class="small">generate / verify</text>
+  <text x="1255" y="406" text-anchor="middle" class="small">valid / ready</text>
+
+  <rect x="1115" y="535" width="270" height="155" rx="8" class="group"/>
+  <text x="1250" y="575" text-anchor="middle" class="label">External quarantine</text>
+  <text x="1250" y="609" text-anchor="middle" class="small">holds tentative plaintext</text>
+  <text x="1250" y="640" text-anchor="middle" class="small">commit or discard</text>
+  <text x="1250" y="671" text-anchor="middle" class="note">outside the core</text>
+
+  <path d="M275 160 H355" class="line"/>
+  <path d="M275 380 H355" class="line"/>
+  <path d="M645 220 H755" class="line"/>
+  <path d="M755 300 H645" class="thin"/>
+  <path d="M905 355 V450" class="line"/>
+  <path d="M870 450 V355" class="thin"/>
+  <path d="M1055 185 H1145" class="line"/>
+  <path d="M1055 330 H1145" class="line"/>
+  <path d="M1255 245 V535" class="line"/>
+  <path d="M1055 625 H1115" class="line"/>
+  <!-- Explicit polygons are used instead of SVG markers because the same
+       arrowheads must survive conversion by Vivado reports, macOS, and Word. -->
+  <polygon points="355,160 343,153 343,167" class="arrowhead"/>
+  <polygon points="355,380 343,373 343,387" class="arrowhead"/>
+  <polygon points="755,220 743,213 743,227" class="arrowhead"/>
+  <polygon points="645,300 657,293 657,307" class="arrowhead"/>
+  <polygon points="905,450 898,438 912,438" class="arrowhead"/>
+  <polygon points="870,355 863,367 877,367" class="arrowhead"/>
+  <polygon points="1145,185 1133,178 1133,192" class="arrowhead"/>
+  <polygon points="1145,330 1133,323 1133,337" class="arrowhead"/>
+  <polygon points="1255,535 1248,523 1262,523" class="arrowhead"/>
+  <polygon points="1115,625 1103,618 1103,632" class="arrowhead"/>
+  <text x="1085" y="588" text-anchor="middle" class="small">commit /</text>
+  <text x="1085" y="610" text-anchor="middle" class="small">discard</text>
+
+  <text x="700" y="770" text-anchor="middle" class="small">Byte lane 0 is bits 7:0. The same datapath serves initialization, associated data, payload, and finalization.</text>
+</svg>

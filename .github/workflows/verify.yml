@@ -1,0 +1,28 @@
+name: verify
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  vhdl-and-generated-verilog:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install simulators
+        run: sudo apt-get update && sudo apt-get install -y ghdl iverilog verilator
+      - name: Install Python verification tools
+        run: python -m pip install -r verification/requirements.txt
+      - name: Fetch pinned official vectors
+        run: make vectors
+      - name: Run direct VHDL tests
+        run: make model-test permutation-test ghdl-test vhdl-textio-test
+      - name: Translate and lint with Icarus and Verilator
+        run: make iverilog-lint verilator-lint
+      - name: Run generated Verilog smoke tests
+        env:
+          KAT_LIMIT: "8"
+        run: make iverilog-test verilator-test
