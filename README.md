@@ -1,19 +1,21 @@
 # Ascon-AEAD128 in VHDL
 
-This repository implements the final NIST Ascon-AEAD128 algorithm in VHDL-2008.
-The design targets the Nexys A7 100T and uses a 128-bit ready/valid stream. It
-supports encryption, decryption, associated data, partial blocks, and messages
-of arbitrary byte length.
+I built this repository as part of my undergraduate research with Professor
+Wenjie Che at Howard University. It implements the final NIST Ascon-AEAD128
+algorithm in VHDL-2008 for the Nexys A7 100T. My core uses a 128-bit ready/valid
+stream and supports encryption, decryption, associated data, partial blocks,
+and messages of arbitrary byte length.
 
-The code follows NIST SP 800-232. That matters because the final standard uses
-little-endian byte mapping, a new initialization value, and a 128-bit rate.
-Older Ascon-128 and Ascon-128a examples are useful architecture references, but
-their test vectors are not byte-compatible with this core.
+I followed NIST SP 800-232. The final standard uses little-endian byte mapping,
+a new initialization value, and a 128-bit rate. I used older Ascon-128 and
+Ascon-128a designs only as architecture references because their test vectors
+are not byte-compatible with this core.
 
-The current portable verification passes all 1,089 official known-answer
-vectors in encryption and decryption. Vivado synthesis and board testing are
-prepared but have not been run on this Mac. See
-[verification status](docs/verification_status.md) for the exact boundary.
+I have passed all 1,089 official known-answer vectors in both encryption and
+decryption with the portable verification flow. I prepared the Vivado
+synthesis and board flow, but I have not run those steps on this Mac. The
+[verification status](docs/verification_status.md) separates completed tests
+from work that still requires Vivado 2023.2.
 
 ## Repository layout
 
@@ -35,29 +37,28 @@ paper/                       editable report source and rendered paper
 
 ## Architecture
 
-The core stores the 320-bit state as five 64-bit words. One combinational Ascon
-round is reused on every clock. The controller requests 12 rounds for
-initialization and finalization and 8 rounds while processing associated data
-and full payload blocks.
+I store the 320-bit state as five 64-bit words and reuse one combinational Ascon
+round on every clock. My controller requests 12 rounds for initialization and
+finalization and 8 rounds while processing associated data and full payload
+blocks.
 
 ![Ascon hardware architecture](docs/diagrams/ascon_architecture.svg)
 
-The controller states map directly to hardware actions. Separate start states
-issue one permutation request, and wait states hold until the iterative engine
-finishes. Every normal completion, protocol error, and tag result enters
-`ST_ZEROIZE` before `ST_DONE`. That state clears the key, permutation state,
-mode and phase flags, buffered payload, keep mask, last flag, tag, and stored
-authentication result. The diagram is original to this implementation.
+I made each controller state correspond to a hardware action. Separate start
+states issue permutation requests, and wait states hold until the iterative
+engine finishes. Every normal completion, protocol error, and tag result enters
+`ST_ZEROIZE` before `ST_DONE`. In that state, I clear the key, permutation
+state, mode and phase flags, buffered payload, keep mask, last flag, tag, and
+stored authentication result. I made the FSM diagram for this implementation.
 
 ![Ascon controller state flow](docs/diagrams/ascon_fsm.svg)
 
-This version does not include masking, redundant execution, or a fault sensor.
-Those are possible later additions. The present design focuses on a readable,
-testable baseline.
+I did not add masking, redundant execution, or a fault sensor in this version.
+I kept the first version focused on a readable and testable baseline.
 
 ## Core interface
 
-All inputs and outputs are synchronous to `clk_i`. Reset is active high and
+I made all inputs and outputs synchronous to `clk_i`. Reset is active high and
 synchronous.
 
 | Group | Signal | Direction | Meaning |
@@ -81,14 +82,14 @@ synchronous.
 
 ### Byte order and keep masks
 
-Byte lane 0 is `in_data_i(7 downto 0)` and uses `in_keep_i(0)`. If the first
+I map byte lane 0 to `in_data_i(7 downto 0)` and `in_keep_i(0)`. If the first
 four bytes are `11 22 33 44`, the low 32 bits of `in_data_i` are `44332211` and
 `in_keep_i` is `000F`.
 
-Keep bits must be contiguous from lane 0. `0000`, `0001`, `0003`, and `FFFF`
-are valid. `0005` is invalid. A non-final beat must have `FFFF`. Empty
-associated-data or payload phases are represented by one terminal beat with
-`keep=0000` and `last=1`.
+I require keep bits to be contiguous from lane 0. `0000`, `0001`, `0003`, and
+`FFFF` are valid. `0005` is invalid. A non-final beat must have `FFFF`. I
+represent an empty associated-data or payload phase with one terminal beat that
+has `keep=0000` and `last=1`.
 
 ### Transaction order
 
@@ -97,27 +98,27 @@ command -> associated-data beat(s) -> payload beat(s) -> tag -> done
              kind=0, last=1           kind=1, last=1
 ```
 
-Associated data must finish before payload starts. A handshake occurs on a
-rising edge when both valid and ready are high. An output remains unchanged
-while its valid signal is high and its ready input is low. A malformed keep
-mask or phase order raises `error_o`, passes through the same zeroization state
-used by normal completion, and ends the transaction.
+I require associated data to finish before the payload starts. A handshake
+occurs on a rising edge when both valid and ready are high. I hold an output
+unchanged while its valid signal is high and its ready input is low. A malformed
+keep mask or phase order raises `error_o`, passes through the same zeroization
+state used by normal completion, and ends the transaction.
 
 ### Safe decryption contract
 
-Decrypted bytes are tentative until the tag has been checked. The surrounding
-system must store `out_data_o` in a quarantine buffer. It may release that data
-only after `commit_o`. If authentication fails, the core pulses `discard_o`,
+I treat decrypted bytes as tentative until the tag has been checked. The
+surrounding system must store `out_data_o` in a quarantine buffer and release
+it only after `commit_o`. If authentication fails, my core pulses `discard_o`,
 does not pulse `commit_o`, and clears its state and stored key.
 
-The core intentionally does not contain an unbounded plaintext buffer. This
-keeps the reusable cryptographic block independent of maximum message length,
-but it makes the external commit/discard rule part of the security boundary.
+I did not put an unbounded plaintext buffer inside the core. This keeps the
+cryptographic block independent of the maximum message length, but the external
+system must follow the commit/discard rule.
 
 ## Portable verification
 
-Create a Python environment, install the pinned packages, and fetch the pinned
-official vectors:
+I use a Python environment with pinned packages and a pinned copy of the
+official vectors. Set it up with:
 
 ```sh
 python3 -m venv .venv
@@ -135,20 +136,19 @@ make PYTHON=.venv/bin/python full-kat
 make GHDL=ghdl vhdl-textio-test
 ```
 
-The permutation test checks the hardware state after every round of p12 and p8,
+My permutation test checks the hardware state after every round of p12 and p8,
 not only the final permutation output. The TextIO target runs all 1,089 vectors
 in encryption and decryption and writes its two result files under
 `build/ghdl-textio`.
 
-The normal GHDL run selects byte-boundary cases. `full-kat` runs all 1,089
-official cases in both directions. The cocotb suite also checks output stalls,
-delayed tags, authentication-result timing, reset in each major phase,
-malformed masks, held extra beats, phase ordering, zeroization, a clean command
-after failure, deterministic messages up to 80 bytes, tag corruption, and
-changed key, nonce, associated data, and ciphertext.
+I use the normal GHDL run for selected byte-boundary cases and `full-kat` for
+all 1,089 official cases in both directions. The cocotb suite also checks
+output stalls, delayed tags, authentication-result timing, reset in each major
+phase, malformed masks, held extra beats, phase ordering, zeroization, a clean
+command after failure, deterministic messages up to 80 bytes, tag corruption,
+and changed key, nonce, associated data, and ciphertext.
 
-To test the synthesized Verilog representation with the installed Icarus and
-Verilator tools:
+I also test the synthesized Verilog representation with Icarus and Verilator:
 
 ```sh
 make GHDL=ghdl synth-verilog
@@ -158,30 +158,30 @@ make GHDL=ghdl PYTHON=.venv/bin/python full-icarus-kat
 make GHDL=ghdl PYTHON=.venv/bin/python full-verilator-kat
 ```
 
-The first two simulator targets are short smoke runs when `KAT_LIMIT=8` is set,
-as it is in CI. The two `full-*` targets run every official vector manually.
-The generated Verilog is a build artifact. The maintained source is VHDL.
+I use `KAT_LIMIT=8` for the short simulator runs in CI. The two `full-*` targets
+run every official vector. I treat the generated Verilog as a build artifact;
+VHDL remains the maintained source.
 
 ### Docker fallback on macOS
 
-The repository pins `ghdl/ghdl:6.0.0-mcode-ubuntu-24.04` in the verification
-Dockerfile. Start Docker Desktop, then run:
+I pin `ghdl/ghdl:6.0.0-mcode-ubuntu-24.04` in the verification Dockerfile. Start
+Docker Desktop, then run:
 
 ```sh
 docker build --platform linux/amd64 -f verification/Dockerfile -t ascon-vhdl-verify .
 docker run --rm --platform linux/amd64 ascon-vhdl-verify
 ```
 
-The image copies the complete repository and its default command runs the model,
+The image copies the complete repository. Its default command runs the model,
 per-round permutation test, direct VHDL smoke suite, full TextIO bench, and both
-generated-netlist smoke suites. The local Docker daemon was not running during
-the September 17 verification, so the corrected image definition is prepared
-but not locally exercised. GitHub Actions runs the same paths on Ubuntu.
+generated-netlist smoke suites. My local Docker daemon was not running during
+the September 17 verification, so I prepared the corrected image definition
+but did not exercise it locally. GitHub Actions runs the same paths on Ubuntu.
 
 ## Vivado 2023.2
 
-Vivado is not installed on this Mac. Run these commands on a Windows or Linux
-machine with Vivado 2023.2 on `PATH`:
+I do not have Vivado installed on this Mac. I use these commands on a Windows or
+Linux machine with Vivado 2023.2 on `PATH`:
 
 ```sh
 vivado -mode batch -source vivado/create_project.tcl
@@ -189,16 +189,16 @@ vivado -mode batch -source vivado/run_sim.tcl
 vivado -mode batch -source vivado/run_impl.tcl
 ```
 
-The project script selects `xc7a100tcsg324-1`, VHDL-2008, the demonstration
-top level, and the 10 ns clock constraint. The simulation writes:
+My project script selects `xc7a100tcsg324-1`, VHDL-2008, the demonstration top
+level, and the 10 ns clock constraint. The simulation writes:
 
 - `build/vivado/simulation/simulation_results.txt`, with lengths, expected and
   actual values, authentication result, cycle count, and PASS/FAIL;
 - `build/vivado/simulation/simulation_vectors.txt`, stable pipe-delimited input,
   output, status, and latency records.
 
-`run_sim.tcl` copies both files from the generated XSim directory into that
-predictable location. The implementation script writes post-synthesis and
+I use `run_sim.tcl` to copy both files from the generated XSim directory into
+that predictable location. The implementation script writes post-synthesis and
 post-route utilization, timing, RAM, power, clock, clock-network, warning, and
 routed-checkpoint files under `build/vivado/reports`. It archives the bitstream
 as `build/vivado/artifacts/ascon_demo_top.bit`. The batch run fails if either
@@ -211,15 +211,16 @@ After simulation and implementation, create the paper metrics file with:
 make PYTHON=python summarize-results
 ```
 
-The summarizer checks for all 2,178 directional results, calculates
+My summarizer checks for all 2,178 directional results, calculates
 command-to-done latency and payload throughput at 100 MHz, and records Vivado
 measurements only when the implementation artifacts pass its completeness
 checks. The paper builder keeps its explicit pending wording otherwise.
 
 ## Nexys A7 demonstration
 
-Program the bitstream generated by `run_impl.tcl`. Press the upper button to
-reset. Choose a test and press the center button once.
+I program the board with the bitstream generated by `run_impl.tcl`. After that,
+I press the upper button to reset, choose a test, and press the center button
+once.
 
 | Control | Function |
 |---|---|
@@ -237,8 +238,9 @@ reset. Choose a test and press the center button once.
 | `LED[11]` | Authentication or encryption-vector fail |
 | `LED[12]` | Protocol error |
 
-The four compiled-in values come from the pinned official KAT file. The XDC is
-limited to the used pins and follows Digilent's Nexys A7 100T master XDC.
+I took the four compiled-in values from the pinned official KAT file. I limited
+the XDC to the pins used by this demonstration and followed Digilent's Nexys A7
+100T master XDC.
 
 ## References
 
@@ -246,4 +248,4 @@ limited to the used pins and follows Digilent's Nexys A7 100T master XDC.
 - [Official Ascon specification and software](https://github.com/ascon/ascon-c)
 - [Digilent Nexys A7 100T master XDC](https://github.com/Digilent/digilent-xdc/blob/master/Nexys-A7-100T-Master.xdc)
 
-No license has been selected for this repository.
+I have not selected a license for this repository.
