@@ -51,6 +51,7 @@ report_utilization -file [file join $report_dir post_route_utilization.txt]
 report_utilization -hierarchical -file [file join $report_dir post_route_hierarchical_utilization.txt]
 report_timing_summary -file [file join $report_dir post_route_timing.txt]
 report_power -file [file join $report_dir post_route_power.txt]
+report_drc -file [file join $report_dir post_route_drc.txt]
 report_clock_utilization -file [file join $report_dir clock_utilization.txt]
 if {[llength [info commands report_clock_networks]] > 0} {
   report_clock_networks -file [file join $report_dir clock_networks.txt]
@@ -86,7 +87,22 @@ if {![file exists $generated_bitstream]} {
 }
 file copy -force $generated_bitstream [file join $artifact_dir ascon_demo_top.bit]
 
-set critical_messages [get_messages -severity {CRITICAL WARNING}]
+# Vivado 2023.2 does not provide get_messages in batch Tcl. Inspect the
+# synthesis and implementation run logs instead so the release flow still
+# fails closed when either child run emits a critical warning.
+set critical_messages [list]
+foreach run_name {synth_1 impl_1} {
+  set run_log [file join [get_property DIRECTORY [get_runs $run_name]] runme.log]
+  if {[file exists $run_log]} {
+    set run_log_file [open $run_log r]
+    while {[gets $run_log_file log_line] >= 0} {
+      if {[string match "*CRITICAL WARNING:*" $log_line]} {
+        lappend critical_messages "$run_name: $log_line"
+      }
+    }
+    close $run_log_file
+  }
+}
 set warning_file [open [file join $report_dir critical_warnings.txt] w]
 foreach warning_message $critical_messages {
   puts $warning_file $warning_message

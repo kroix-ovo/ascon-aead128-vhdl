@@ -105,18 +105,30 @@ def add_result_table(doc, metrics):
         ("GHDL direct VHDL", "1,089 × 2", "PASS", "encrypt and decrypt"),
         ("Protocol/security", "9 test groups", "PASS", "stalls, reset, zeroization"),
         (
-            "GHDL TextIO bench",
+            "GHDL TextIO",
             "1,089 × 2" if textio_complete else "not rerun",
             "PASS" if textio_complete else "PENDING",
             "two output text files",
         ),
+        (
+            "Vivado XSim",
+            "1,089 × 2" if textio_complete else "not run",
+            "PASS" if textio_complete else "PENDING",
+            "official KAT TextIO bench",
+        ),
         ("Icarus netlist", "1,089 × 2", "PASS", "GHDL-generated Verilog"),
         ("Verilator netlist", "1,089 × 2", "PASS", "GHDL-generated Verilog"),
         (
-            "Vivado 2023.2",
-            "implemented" if metrics.get("vivado", {}).get("complete") else "not run",
+            "Vivado implementation",
+            "placed and routed" if metrics.get("vivado", {}).get("complete") else "not run",
             "PASS" if metrics.get("vivado", {}).get("complete") else "PENDING",
             "reports and bitstream" if metrics.get("vivado", {}).get("complete") else "requires Windows/Linux host",
+        ),
+        (
+            "Nexys A7 board",
+            "four demo vectors",
+            "PENDING",
+            "programming and hardware test",
         ),
     ]
     for values in rows:
@@ -147,8 +159,12 @@ def build():
     if vivado.get("complete"):
         implementation_summary = (
             f"Vivado used {int(vivado['slice_luts'])} slice LUTs and "
-            f"{int(vivado['slice_registers'])} slice registers. The post-route "
-            f"worst setup slack was {vivado['wns_ns']:.3f} ns at 100 MHz."
+            f"{int(vivado['slice_registers'])} slice registers, with no block RAM. "
+            f"The routed design met the 100 MHz constraint with "
+            f"{vivado['wns_ns']:.3f} ns worst setup slack. Vivado estimated "
+            f"{vivado['total_on_chip_power_w']:.3f} W total on-chip power and "
+            "generated the FPGA bitstream. Physical board programming and "
+            "demonstration testing remain pending."
         )
     else:
         implementation_summary = (
@@ -229,9 +245,9 @@ def build():
         "empty and partial blocks. Encryption returns ciphertext and a tag. Decryption "
         "returns tentative plaintext and releases it only after tag verification. The "
         "portable test flow passed all 1,089 official known-answer vectors in both "
-        "directions with GHDL. Generated Verilog was also checked with Icarus Verilog and "
-        "Verilator. Vivado scripts, a TextIO testbench, constraints, and a switch-and-LED "
-        f"demonstration are included. {implementation_summary}",
+        "directions with GHDL and Vivado XSim. Generated Verilog was also checked with "
+        "Icarus Verilog and Verilator. Vivado 2023.2 completed synthesis, placement, "
+        f"routing, timing analysis, and bitstream generation. {implementation_summary}",
         indent=False,
     )
 
@@ -348,7 +364,7 @@ def build():
         "and tag.",
     )
     add_result_table(doc, metrics)
-    add_caption(doc, "Table I. Verification results collected before Vivado implementation.")
+    add_caption(doc, "Table I. Verification and implementation status as of September 18, 2026.")
 
     doc.add_page_break()
     add_heading(doc, "VI. Vivado flow and FPGA demonstration")
@@ -358,10 +374,13 @@ def build():
         "Nexys A7 100T part xc7a100tcsg324-1. The constraint sets the board clock to 100 "
         "MHz. A pure VHDL XSim testbench writes simulation_results.txt for human review "
         "and simulation_vectors.txt for scripts. The same file-driven bench was checked "
-        "with GHDL across all 1,089 vectors in both directions. XSim uses the identical "
-        "TextIO input. " + latency_summary + " " + (
-            "The measured implementation results are read from the validated Vivado "
-            "metrics file. " + implementation_summary
+        "with GHDL across all 1,089 vectors in both directions. XSim used the identical "
+        "TextIO input and completed 2,178 encryption and decryption checks with no "
+        "failures. " + latency_summary + " " + (
+            "The implementation results were extracted from the routed Vivado reports. "
+            + implementation_summary + " The XDC sets CFGBVS to VCCO and "
+            "CONFIG_VOLTAGE to 3.3 V. A fresh routed DRC reported zero violations. "
+            "The power value is a Vivado estimate rather than a board measurement."
             if vivado.get("complete")
             else "XSim execution, synthesis, implementation, timing, and power reporting "
             "still require the Vivado machine. Resource use, maximum clock rate, and "
@@ -395,10 +414,11 @@ def build():
         doc,
         "The project now has a readable NIST Ascon-AEAD128 RTL core, an explicit streaming "
         "protocol, an authentication-safe decryption contract, official-vector tests, and "
-        "a reproducible Vivado setup. Portable simulation gives evidence that the algorithm "
-        "and boundary handling are correct. The next measured step is to run the prepared "
-        "Vivado flow, record utilization and post-route timing, and test the four-vector "
-        "demonstration on the Nexys A7 board.",
+        "a completed Vivado synthesis and implementation flow. GHDL and XSim each passed "
+        "all 1,089 official vectors in encryption and decryption. The routed design met "
+        "the 100 MHz constraint, and Vivado generated a bitstream. The remaining work is "
+        "to program the Nexys A7 and verify the four-vector demonstration on physical "
+        "hardware.",
     )
 
     add_heading(doc, "References")

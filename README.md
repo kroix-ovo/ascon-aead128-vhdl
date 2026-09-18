@@ -12,10 +12,11 @@ Ascon-128a designs only as architecture references because their test vectors
 are not byte-compatible with this core.
 
 I have passed all 1,089 official known-answer vectors in both encryption and
-decryption with the portable verification flow. I prepared the Vivado
-synthesis and board flow, but I have not run those steps on this Mac. The
-[verification status](docs/verification_status.md) separates completed tests
-from work that still requires Vivado 2023.2.
+decryption with GHDL and Vivado XSim. Vivado 2023.2 also completed synthesis,
+placement, routing, timing analysis, power estimation, and bitstream
+generation for the Nexys A7 100T. Physical FPGA programming and board-level
+demonstration testing remain pending. The [verification status](docs/verification_status.md)
+records the completed evidence and the remaining hardware work.
 
 ## Repository layout
 
@@ -53,8 +54,10 @@ stored authentication result. I made the FSM diagram for this implementation.
 
 ![Ascon controller state flow](docs/diagrams/ascon_fsm.svg)
 
-I did not add masking, redundant execution, or a fault sensor in this version.
-I kept the first version focused on a readable and testable baseline.
+The core is intentionally unmasked at this stage. It does not include
+side-channel masking, redundant execution, or a fault sensor. I kept this
+version focused on a readable and testable functional baseline; it must not be
+treated as a production-hardened cryptographic implementation.
 
 ## Core interface
 
@@ -180,8 +183,8 @@ but did not exercise it locally. GitHub Actions runs the same paths on Ubuntu.
 
 ## Vivado 2023.2
 
-I do not have Vivado installed on this Mac. I use these commands on a Windows or
-Linux machine with Vivado 2023.2 on `PATH`:
+I ran the Vivado flow on Windows with Vivado 2023.2. These commands recreate
+the project, run the self-checking XSim bench, and implement the board wrapper:
 
 ```sh
 vivado -mode batch -source vivado/create_project.tcl
@@ -204,6 +207,30 @@ routed-checkpoint files under `build/vivado/reports`. It archives the bitstream
 as `build/vivado/artifacts/ascon_demo_top.bit`. The batch run fails if either
 run is incomplete, setup slack is negative, the bitstream is absent, or Vivado
 reports a critical warning.
+
+The September 18, 2026 XSim run completed all 1,089 official vectors in both
+directions. All 2,178 encryption and decryption checks passed. Command-to-done
+latency ranged from 34 to 88 cycles. A 32-byte payload averaged 72.636 cycles
+across the 33 associated-data lengths, equal to 352.441 Mb/s when evaluated at
+100 MHz. This is a cycle-based result, not a measured maximum clock frequency.
+
+The routed implementation produced the following Vivado results:
+
+| Measurement | Result |
+|---|---:|
+| Target clock | 100 MHz |
+| Worst setup slack | +2.941 ns |
+| Slice LUTs | 1,717 (2.71%) |
+| Slice registers | 1,372 (1.08%) |
+| Block RAM tiles | 0 |
+| DSP blocks | 0 |
+| Estimated total on-chip power | 0.137 W |
+| Bitstream | Generated successfully |
+
+The XDC now sets `CFGBVS` to `VCCO` and `CONFIG_VOLTAGE` to `3.3`, matching the
+Nexys A7 configuration-bank supply and removing the earlier `CFGBVS-1`
+configuration warning. The power value is a Vivado estimate rather than a
+measurement from the physical board.
 
 After simulation and implementation, create the paper metrics file with:
 
@@ -248,4 +275,6 @@ the XDC to the pins used by this demonstration and followed Digilent's Nexys A7
 - [Official Ascon specification and software](https://github.com/ascon/ascon-c)
 - [Digilent Nexys A7 100T master XDC](https://github.com/Digilent/digilent-xdc/blob/master/Nexys-A7-100T-Master.xdc)
 
-I have not selected a license for this repository.
+## License
+
+This project is licensed under the [MIT License](LICENSE).

@@ -1,6 +1,11 @@
 ## Nexys A7 100T pins used by ascon_demo_top.
 ## Pin names come from Digilent's Nexys-A7-100T-Master.xdc.
 
+## The Nexys A7 configuration bank is powered at 3.3 V.  These properties
+## remove CFGBVS-1 and let Vivado validate the configuration-bank I/O voltage.
+set_property CFGBVS VCCO [current_design]
+set_property CONFIG_VOLTAGE 3.3 [current_design]
+
 set_property -dict { PACKAGE_PIN E3 IOSTANDARD LVCMOS33 } [get_ports CLK100MHZ]
 create_clock -add -name sys_clk_pin -period 10.000 -waveform {0.000 5.000} [get_ports CLK100MHZ]
 

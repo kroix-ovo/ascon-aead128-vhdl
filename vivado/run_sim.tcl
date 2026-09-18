@@ -8,7 +8,9 @@ open_project [file join $repo_root build vivado project ascon_aead128.xpr]
 set output_dir [file join $repo_root build vivado simulation]
 file mkdir $output_dir
 launch_simulation -simset sim_1 -mode behavioral
-run all
+# create_project.tcl sets xsim.simulate.runtime to "all", so
+# launch_simulation has already run the bench through its normal $finish.
+# A second `run all` can wait indefinitely after the completed simulation.
 close_sim
 
 # XSim runs from a generated directory inside the project. Copy the durable
