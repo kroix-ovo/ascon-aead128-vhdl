@@ -49,6 +49,7 @@ def main() -> None:
         )
         library = "work"
         language = "vhdl"
+        test_args = ["--std=08"]
     else:
         if args.netlist is None:
             parser.error("--netlist is required for Icarus and Verilator")
@@ -64,12 +65,14 @@ def main() -> None:
         )
         library = "top"
         language = "verilog"
+        test_args = []
 
     runner.test(
         hdl_toplevel="ascon_aead128_core",
         hdl_toplevel_library=library,
         hdl_toplevel_lang=language,
         test_module="test_ascon",
+        test_args=test_args,
         build_dir=build_dir,
         test_dir=build_dir,
         extra_env={"PYTHONPATH": verification_path},
