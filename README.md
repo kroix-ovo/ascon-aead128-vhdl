@@ -208,6 +208,30 @@ as `build/vivado/artifacts/ascon_demo_top.bit`. The batch run fails if either
 run is incomplete, setup slack is negative, the bitstream is absent, or Vivado
 reports a critical warning.
 
+For an Ubuntu VM, I include a testbench helper that generates the vectors,
+runs the same XSim flow, saves logs, and checks the final totals:
+
+```sh
+bash run_ubuntu_vivado_tb.sh
+```
+
+It needs Python 3.9 or newer, access to PyPI and the pinned vector download,
+and Vivado on `PATH`. Its Ubuntu and Vivado 2018.x behavior still needs a run
+on that machine; a passing run on Windows Vivado 2023.2 does not establish
+compatibility with 2018.x. See `build/vivado/debug_logs` for the first error.
+
+For a live 1–32 byte ASCII encryption comparison in Vivado 2023.2, first run
+`python verification/fetch_vectors.py`, then:
+
+```sh
+python verification/live_demo.py "Hello Ascon!"
+```
+
+The live demo replaces one official record with the entered phrase, so its
+2,178 encryption and decryption checks cover 1,088 official cases and one
+custom case. See [the live ASCII guide](docs/live_ascii_demo.md) for the key,
+nonce, online comparison, and output interpretation.
+
 The September 18, 2026 XSim run completed all 1,089 official vectors in both
 directions. All 2,178 encryption and decryption checks passed. Command-to-done
 latency ranged from 34 to 88 cycles. A 32-byte payload averaged 72.636 cycles

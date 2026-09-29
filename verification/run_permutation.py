@@ -31,6 +31,7 @@ def main():
         hdl_toplevel_library="work",
         hdl_toplevel_lang="vhdl",
         test_module="test_permutation",
+        test_args=["--std=08"],
         build_dir=build_dir,
         test_dir=build_dir,
         extra_env={"PYTHONPATH": verification_path},
