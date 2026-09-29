@@ -164,6 +164,8 @@ make GHDL=ghdl PYTHON=.venv/bin/python full-verilator-kat
 I use `KAT_LIMIT=8` for the short simulator runs in CI. The two `full-*` targets
 run every official vector. I treat the generated Verilog as a build artifact;
 VHDL remains the maintained source.
+CI installs Verilator 5.036 because cocotb 2.0.1 requires that version or newer
+for its Verilator runner.
 
 ### Docker fallback on macOS
 
