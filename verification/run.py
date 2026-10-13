@@ -7,6 +7,7 @@ import sys
 from pathlib import Path
 
 from cocotb_tools.runner import get_runner
+from check_sim_results import require_passing_results
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -67,7 +68,7 @@ def main() -> None:
         language = "verilog"
         test_args = []
 
-    runner.test(
+    results = runner.test(
         hdl_toplevel="ascon_aead128_core",
         hdl_toplevel_library=library,
         hdl_toplevel_lang=language,
@@ -78,6 +79,7 @@ def main() -> None:
         extra_env={"PYTHONPATH": verification_path},
         waves=args.waves,
     )
+    require_passing_results(results)
 
 
 if __name__ == "__main__":

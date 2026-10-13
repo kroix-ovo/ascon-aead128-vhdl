@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 
 from cocotb_tools.runner import get_runner
+from check_sim_results import require_passing_results
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -26,7 +27,7 @@ def main():
         build_dir=build_dir,
         clean=True,
     )
-    runner.test(
+    results = runner.test(
         hdl_toplevel="ascon_permutation",
         hdl_toplevel_library="work",
         hdl_toplevel_lang="vhdl",
@@ -36,6 +37,7 @@ def main():
         test_dir=build_dir,
         extra_env={"PYTHONPATH": verification_path},
     )
+    require_passing_results(results)
 
 
 if __name__ == "__main__":

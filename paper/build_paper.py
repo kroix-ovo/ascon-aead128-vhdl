@@ -11,6 +11,8 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK, WD_LINE_SPACING
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Inches, Pt, RGBColor
+from gpt2_report_sections import add_experiment, add_appendix, add_latency_research
+from behavior_report_sections import add_behavior_results
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -19,9 +21,10 @@ METRICS = ROOT / "build" / "vivado" / "reports" / "metrics.json"
 
 
 def load_metrics():
-    if not METRICS.exists():
+    source = METRICS if METRICS.exists() else ROOT / "paper/evidence/baseline_20260918/metrics.json"
+    if not source.exists():
         return {"simulation": {"complete": False}, "vivado": {"complete": False}}
-    return json.loads(METRICS.read_text(encoding="utf-8"))
+    return json.loads(source.read_text(encoding="utf-8"))
 
 
 def set_cell_border(cell, **edges):
@@ -247,7 +250,13 @@ def build():
         "portable test flow passed all 1,089 official known-answer vectors in both "
         "directions with GHDL and Vivado XSim. Generated Verilog was also checked with "
         "Icarus Verilog and Verilator. Vivado 2023.2 completed synthesis, placement, "
-        f"routing, timing analysis, and bitstream generation. {implementation_summary}",
+        f"routing, timing analysis, and bitstream generation. {implementation_summary} "
+        "An application experiment fine-tuned GPT-2 for 40 updates in Ubuntu under "
+        "WSL 2 and exported a 497,904,640-byte FP32 checkpoint. A 1,024-byte weight "
+        "sample was encrypted and authenticated by the same RTL core in XSim in "
+        "801 cycles, or 8.01 microseconds at a simulated 100 MHz clock. Decryption "
+        "recovered the original sample exactly. This result is behavioral simulation "
+        "latency rather than a physical board measurement.",
         indent=False,
     )
 
@@ -378,9 +387,11 @@ def build():
         "TextIO input and completed 2,178 encryption and decryption checks with no "
         "failures. " + latency_summary + " " + (
             "The implementation results were extracted from the routed Vivado reports. "
-            + implementation_summary + " The XDC sets CFGBVS to VCCO and "
-            "CONFIG_VOLTAGE to 3.3 V. A fresh routed DRC reported zero violations. "
-            "The power value is a Vivado estimate rather than a board measurement."
+            + implementation_summary + " The original routed report included a CFGBVS-1 "
+            "configuration warning. The repository XDC now sets CFGBVS to VCCO and "
+            "CONFIG_VOLTAGE to 3.3 for the Nexys A7 configuration bank. Physical-board "
+            "validation remains pending. The power value is a Vivado estimate rather "
+            "than a board measurement."
             if vivado.get("complete")
             else "XSim execution, synthesis, implementation, timing, and power reporting "
             "still require the Vivado machine. Resource use, maximum clock rate, and "
@@ -397,7 +408,11 @@ def build():
         "protocol error.",
     )
 
-    add_heading(doc, "VII. Limitations and next work")
+    add_experiment(doc, add_heading, add_body, add_caption)
+    add_latency_research(doc, add_heading, add_body, add_caption)
+    add_behavior_results(doc, add_heading, add_body, add_caption)
+    doc.add_page_break()
+    add_heading(doc, "XIII. Limitations and next work")
     add_body(
         doc,
         "This version is an unprotected cryptographic core. It does not prevent power or "
@@ -409,7 +424,7 @@ def build():
         "required part of safe decryption, not an optional application feature.",
     )
 
-    add_heading(doc, "VIII. Conclusion")
+    add_heading(doc, "XIV. Conclusion")
     add_body(
         doc,
         "The project now has a readable NIST Ascon-AEAD128 RTL core, an explicit streaming "
@@ -417,8 +432,16 @@ def build():
         "a completed Vivado synthesis and implementation flow. GHDL and XSim each passed "
         "all 1,089 official vectors in encryption and decryption. The routed design met "
         "the 100 MHz constraint, and Vivado generated a bitstream. The remaining work is "
-        "to program the Nexys A7 and verify the four-vector demonstration on physical "
-        "hardware.",
+        "to program the Nexys A7 with the corrected configuration properties and verify "
+        "the four-vector demonstration on physical hardware. The GPT-2 application "
+        "experiment also demonstrated the complete path from GPU fine-tuning to "
+        "exported weight bytes and authenticated VHDL encryption. A 1 KiB sample "
+        "passed encryption and decryption in 801 cycles per direction at the "
+        "testbench clock. Follow-up behavior tests passed all 17 checks, including "
+        "tamper rejection and stalled transfers. Restoring the recovered slice into "
+        "the full GPT-2 model preserved parameters, logits, generated tokens, and "
+        "validation losses exactly. Whole-checkpoint GPT-2 encryption, physical transfer overhead, "
+        "and board-level measurements remain future work.",
     )
 
     add_heading(doc, "References")
@@ -429,6 +452,12 @@ def build():
         "[4] K. Liu, L. Han, and Z. Quan, “A High Performance Ascon Architecture for Data Encryption and Authentication,” in Proc. 5th Int. Conf. on Cryptography, Network Security and Communication Technology (CNSCT 2026), Haikou, China, Jan. 23–25, 2026, doi: 10.1145/3802927.3802941.",
         "[5] N. T. M. Huong, T. V. Nam, and P. V. Phat, “Application of the Ascon-AEAD128 Algorithm for IoT Data Security,” 11th Int. Conf. on Applying New Technology in Green Buildings, 2026, doi: 10.1109/ATIGB70203.2026.11628316.",
         "[6] Digilent, “Nexys A7-100T Master XDC.” [Online]. Available: https://github.com/Digilent/digilent-xdc",
+        "[7] Microsoft, “Install WSL.” [Online]. Available: https://learn.microsoft.com/en-us/windows/wsl/install. Accessed Oct. 6, 2026.",
+        "[8] NVIDIA, “CUDA on WSL User Guide.” [Online]. Available: https://docs.nvidia.com/cuda/wsl-user-guide/. Accessed Oct. 6, 2026.",
+        "[9] SPIRE-GMU, “SAGE_Accelerator, llmc-gpt2,” commit 4e586d80b61ad7577c64391202a8c43104728f1d. [Online]. Available: https://github.com/SPIRE-GMU/SAGE_Accelerator/tree/4e586d80b61ad7577c64391202a8c43104728f1d/llmc-gpt2.",
+        "[10] PyTorch, “Start Locally.” [Online]. Available: https://pytorch.org/get-started/locally/. Accessed Oct. 6, 2026.",
+        "[11] R. Primas, “Hardware Design of Ascon (SP800-232),” ascon-verilog. [Online]. Available: https://github.com/rprimas/ascon-verilog. Accessed Oct. 6, 2026.",
+        "[12] OpenTitan, “Ascon: Theory of Operation.” [Online]. Available: https://opentitan.org/book/hw/ip/ascon/doc/theory_of_operation.html. Accessed Oct. 6, 2026.",
     ]
     for ref in references:
         p = doc.add_paragraph()
@@ -439,6 +468,7 @@ def build():
         r = p.add_run(ref)
         r.font.size = Pt(8.2)
 
+    add_appendix(doc, add_heading, add_body)
     core = doc.core_properties
     core.title = "VHDL Implementation of NIST Ascon AEAD128 on a Nexys A7 FPGA"
     core.author = "Kroix Jones"

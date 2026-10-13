@@ -21,6 +21,10 @@ model-test: vectors
 permutation-test:
 	$(PYTHON) verification/run_permutation.py
 
+.PHONY: weight-file-test
+weight-file-test: vectors
+	$(PYTHON) verification/run_weight_file.py --ghdl $(GHDL)
+
 ghdl-test: vectors
 	SIM=ghdl $(PYTHON) verification/run.py --sim ghdl
 

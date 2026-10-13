@@ -183,6 +183,34 @@ generated-netlist smoke suites. My local Docker daemon was not running during
 the September 17 verification, so I prepared the corrected image definition
 but did not exercise it locally. GitHub Actions runs the same paths on Ubuntu.
 
+## Model-weight experiments
+
+The maintained core uses one round per clock. The October 2026 weight
+experiments add application testbenches and model checks without changing
+that RTL baseline.
+
+- [GPT-2 slice results](docs/gpt2_behavior_results_20261006.md): 1,024 trained
+  weight bytes, 17 RTL behavior checks, seven tampering rejections, and exact
+  recovery. Restoring that slice preserved the evaluated model outputs.
+- [Full small-LLaMA workflow](verification/SMALL_LLAMA_ENCRYPTION.md): all
+  1,641,984 raw FP32 weight bytes from a 410,496-parameter experimental model
+  passed through RTL as one message. The recorded run took 1,231,521 cycles
+  in each direction, or 12.31521 ms at the assumed 100 MHz simulation clock.
+- [Training receipt](paper/evidence/small_llama_20261013_01/report.md) and
+  [encryption receipt](paper/evidence/small_llama_encryption_01/report.md)
+  separate numerical training evidence from exact byte recovery.
+
+These are historical simulation and model-evaluation receipts, not physical
+FPGA throughput measurements. The small LLaMA was trained from scratch;
+it is not a pretrained Meta model or a LoRA experiment. Model scripts need
+the external training checkout and its Python environment. CI does not train
+a model or require its checkpoint.
+
+`make weight-file-test` runs the full-file VHDL bench in GHDL using 32-byte and
+1,024-byte synthetic FP32 fixtures. It checks ciphertext, tag, authenticated
+decryption and exact recovery. The cocotb runners also require nonempty test
+results with zero failures/errors before returning success.
+
 ## Vivado 2023.2
 
 I ran the Vivado flow on Windows with Vivado 2023.2. These commands recreate

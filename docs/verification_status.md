@@ -1,6 +1,29 @@
 # Verification status
 
-Last updated: September 18, 2026.
+Last updated: October 13, 2026. The Vivado board implementation measurements
+below are historical September results; the board implementation was not
+rerun as part of this publication update.
+
+## October publication preflight
+
+The public update retains the original one-round RTL and the existing
+Verilator-version, VHDL-2008, and board-constraint fixes. Local validation
+passed four Python model tests, one permutation test, and ten core test groups
+in each of GHDL, Icarus and Verilator. The TextIO bench passed all 2178 official
+encryption/decryption checks. The new full-file bench passed encryption,
+authentication and exact recovery for 32-byte and 1024-byte synthetic FP32
+fixtures. Both generated-Verilog lint targets passed.
+
+Local WSL validation used an isolated Ubuntu GHDL 1.0.0 mcode package for
+simulation, the installed GHDL 7.0.0 development bundle for Verilog synthesis,
+Icarus 14.0 development and Verilator 5.053 development. GitHub Actions uses
+its own Ubuntu toolchain and the pinned Verilator 5.036 setup. The cocotb
+command-line runners now reject missing, empty or failing JUnit results.
+
+Historical application results are published separately in
+[the GPT-2 behavior report](gpt2_behavior_results_20261006.md) and
+[the full small-LLaMA workflow](../verification/SMALL_LLAMA_ENCRYPTION.md).
+CI uses synthetic fixtures and does not rerun model training or GPU inference.
 
 ## Portable verification
 
