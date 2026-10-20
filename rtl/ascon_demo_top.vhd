@@ -12,6 +12,8 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity ascon_demo_top is
+  generic (G_ROUNDS_PER_CYCLE : positive range 1 to 12 := 1;
+           G_BUFFERING_ENABLE : boolean := false);
   port (
     CLK100MHZ : in  std_logic;
     SW        : in  std_logic_vector(9 downto 0);
@@ -132,6 +134,8 @@ architecture rtl of ascon_demo_top is
   end function;
 begin
   core_u : entity work.ascon_aead128_core
+    generic map (G_ROUNDS_PER_CYCLE => G_ROUNDS_PER_CYCLE,
+                 G_BUFFERING_ENABLE => G_BUFFERING_ENABLE)
     port map (
       clk_i => CLK100MHZ, rst_i => BTNU,
       cmd_valid_i => cmd_valid, cmd_ready_o => cmd_ready,
@@ -148,6 +152,18 @@ begin
       auth_ok_o => auth_ok, commit_o => commit, discard_o => discard,
       error_o => core_error
     );
+
+  cmd_valid <= '1' when ui_state = UI_COMMAND else '0';
+  in_valid <= '1' when ui_state = UI_AD0 or ui_state = UI_AD1 or
+                       ui_state = UI_MSG0 or ui_state = UI_MSG1 else '0';
+  in_kind <= '0' when ui_state = UI_AD0 or ui_state = UI_AD1 else '1';
+  in_data <= ad_block(vector_reg, ui_state = UI_AD1) when in_kind = '0' else
+             cipher_block(vector_reg, ui_state = UI_MSG1) when decrypt_reg = '1' else
+             plain_block(vector_reg, ui_state = UI_MSG1);
+  in_keep <= phase_keep(vector_reg, ui_state = UI_AD1 or ui_state = UI_MSG1);
+  in_last <= '0' when vector_reg = 3 and (ui_state = UI_AD0 or ui_state = UI_MSG0) else '1';
+  tag_in <= expected_tag(vector_reg);
+  tag_in_valid <= '1' when ui_state = UI_TAG_IN else '0';
 
   -- The center button passes through two flip-flops before edge detection.
   -- This protects the controller from metastability.  The wrapper accepts one
@@ -174,9 +190,6 @@ begin
     variable is_second : boolean;
   begin
     if rising_edge(CLK100MHZ) then
-      cmd_valid    <= '0';
-      in_valid     <= '0';
-      tag_in_valid <= '0';
 
       if BTNU = '1' then
         ui_state      <= UI_IDLE;
@@ -228,34 +241,18 @@ begin
 
           when UI_COMMAND =>
             if cmd_ready = '1' then
-              cmd_valid <= '1';
               ui_state <= UI_AD0;
             end if;
 
           when UI_AD0 | UI_AD1 =>
             if in_ready = '1' then
-              is_second := ui_state = UI_AD1;
-              in_kind  <= '0';
-              in_data  <= ad_block(vector_reg, is_second);
-              in_keep  <= phase_keep(vector_reg, is_second);
-              if vector_reg = 3 and not is_second then in_last <= '0';
-              else in_last <= '1'; end if;
-              in_valid <= '1';
-              if vector_reg = 3 and not is_second then ui_state <= UI_AD1;
+              if vector_reg = 3 and ui_state = UI_AD0 then ui_state <= UI_AD1;
               else ui_state <= UI_MSG0; end if;
             end if;
 
           when UI_MSG0 | UI_MSG1 =>
             if in_ready = '1' then
-              is_second := ui_state = UI_MSG1;
-              in_kind <= '1';
-              if decrypt_reg = '1' then in_data <= cipher_block(vector_reg, is_second);
-              else in_data <= plain_block(vector_reg, is_second); end if;
-              in_keep <= phase_keep(vector_reg, is_second);
-              if vector_reg = 3 and not is_second then in_last <= '0';
-              else in_last <= '1'; end if;
-              in_valid <= '1';
-              if vector_reg = 3 and not is_second then ui_state <= UI_MSG1;
+              if vector_reg = 3 and ui_state = UI_MSG0 then ui_state <= UI_MSG1;
               else ui_state <= UI_WAIT_PAYLOAD; end if;
             end if;
 
@@ -265,9 +262,7 @@ begin
             end if;
 
           when UI_TAG_IN =>
-            tag_in       <= expected_tag(vector_reg);
-            tag_in_valid <= '1';
-            ui_state     <= UI_FINISH;
+            if tag_in_ready = '1' then ui_state <= UI_FINISH; end if;
 
           when UI_TAG_OUT =>
             result_tag <= tag_out;

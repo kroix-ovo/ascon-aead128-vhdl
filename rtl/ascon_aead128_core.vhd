@@ -15,7 +15,12 @@ use ieee.numeric_std.all;
 
 use work.ascon_pkg.all;
 
-entity ascon_aead128_core is
+entity ascon_aead128_engine is
+  generic (
+    G_ROUNDS_PER_CYCLE : positive range 1 to 12 := 1;
+    G_OVERLAP_OUTPUT : boolean := false;
+    G_FULL_BLOCK_FAST_PATH : boolean := false
+  );
   port (
     clk_i            : in  std_logic;
     rst_i            : in  std_logic;
@@ -57,7 +62,7 @@ entity ascon_aead128_core is
   );
 end entity;
 
-architecture rtl of ascon_aead128_core is
+architecture rtl of ascon_aead128_engine is
   type controller_state_t is (
     ST_IDLE,
     ST_INIT_START, ST_INIT_WAIT,
@@ -94,6 +99,7 @@ architecture rtl of ascon_aead128_core is
   signal discard_reg       : std_logic := '0';
   signal error_reg         : std_logic := '0';
 
+  signal perm_reset        : std_logic;
   signal perm_start        : std_logic := '0';
   signal perm_rounds       : unsigned(3 downto 0) := (others => '0');
   signal perm_state_in     : state_t := (others => '0');
@@ -133,10 +139,13 @@ architecture rtl of ascon_aead128_core is
     return result;
   end function;
 begin
+  -- Erase the permutation's private state along with the controller state.
+  perm_reset <= '1' when rst_i = '1' or controller_state = ST_ZEROIZE else '0';
   permutation_u : entity work.ascon_permutation
+    generic map (G_ROUNDS_PER_CYCLE => G_ROUNDS_PER_CYCLE)
     port map (
       clk_i    => clk_i,
-      rst_i    => rst_i,
+      rst_i    => perm_reset,
       start_i  => perm_start,
       rounds_i => perm_rounds,
       state_i  => perm_state_in,
@@ -171,7 +180,9 @@ begin
                             controller_state = ST_AD_PERM_START or
                             controller_state = ST_AD_PAD_START or
                             controller_state = ST_MSG_PERM_START or
-                            controller_state = ST_FINAL_START else '0';
+                            controller_state = ST_FINAL_START or
+                            (G_OVERLAP_OUTPUT and controller_state = ST_MSG_OUTPUT and
+                             out_valid_reg = '1' and out_ready_i = '1' and msg_full_reg = '1') else '0';
   perm_rounds   <= to_unsigned(12, 4) when controller_state = ST_INIT_START or
                                              controller_state = ST_FINAL_START else
                    to_unsigned(8, 4);
@@ -349,7 +360,11 @@ begin
                   controller_state <= ST_ZEROIZE;
                 end if;
               else
-                mask        := keep_mask(in_keep_i);
+                if G_FULL_BLOCK_FAST_PATH and in_keep_i = x"FFFF" then
+                  mask := (others => '1');
+                else
+                  mask := keep_mask(in_keep_i);
+                end if;
                 rate_before := state_rate(state_reg);
 
                 if decrypt_reg = '0' then
@@ -383,7 +398,13 @@ begin
               out_data_reg  <= (others => '0');
 
               if msg_full_reg = '1' then
-                controller_state <= ST_MSG_PERM_START;
+                if G_OVERLAP_OUTPUT then
+                  -- The output queue accepts this block on the same edge
+                  -- that launches p8. state_reg already holds its absorbed rate.
+                  controller_state <= ST_MSG_PERM_WAIT;
+                else
+                  controller_state <= ST_MSG_PERM_START;
+                end if;
               else
                 -- A partial final block is already padded and is not followed
                 -- by p8 before finalization.
@@ -484,6 +505,8 @@ begin
       if rst_i = '0' and controller_state = ST_DONE then
         assert state_reg = (state_reg'range => '0')
           report "state register was not cleared before ST_DONE" severity failure;
+        assert perm_state_out = (perm_state_out'range => '0')
+          report "permutation state was not cleared before ST_DONE" severity failure;
         assert key_reg = (key_reg'range => '0')
           report "key register was not cleared before ST_DONE" severity failure;
         assert decrypt_reg = '0' and ad_last_reg = '0' and
@@ -502,4 +525,246 @@ begin
     end if;
   end process;
   -- synthesis translate_on
+end architecture;
+
+-- SPDX-License-Identifier: UNLICENSED
+-- Optional transaction-local elastic queues. Plaintext remains provisional
+-- until commit_o. The consumer must quarantine and erase it on discard_o.
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use work.ascon_pkg.all;
+entity ascon_aead128_core is
+  generic (
+    G_ROUNDS_PER_CYCLE : positive range 1 to 12 := 1;
+    G_BUFFERING_ENABLE : boolean := false;
+    G_INPUT_FIFO_DEPTH : positive := 2;
+    G_OUTPUT_FIFO_DEPTH : positive := 2;
+    G_FULL_BLOCK_FAST_PATH : boolean := false
+  );
+  port (
+    clk_i            : in  std_logic;
+    rst_i            : in  std_logic;
+
+    cmd_valid_i      : in  std_logic;
+    cmd_ready_o      : out std_logic;
+    cmd_decrypt_i    : in  std_logic;
+    key_i            : in  std_logic_vector(127 downto 0);
+    nonce_i          : in  std_logic_vector(127 downto 0);
+
+    in_valid_i       : in  std_logic;
+    in_ready_o       : out std_logic;
+    in_kind_i        : in  std_logic; -- 0 = associated data, 1 = payload
+    in_data_i        : in  std_logic_vector(127 downto 0);
+    in_keep_i        : in  std_logic_vector(15 downto 0);
+    in_last_i        : in  std_logic;
+
+    tag_in_valid_i   : in  std_logic;
+    tag_in_ready_o   : out std_logic;
+    tag_in_i         : in  std_logic_vector(127 downto 0);
+
+    out_valid_o      : out std_logic;
+    out_ready_i      : in  std_logic;
+    out_data_o       : out std_logic_vector(127 downto 0);
+    out_keep_o       : out std_logic_vector(15 downto 0);
+    out_last_o       : out std_logic;
+
+    tag_out_valid_o  : out std_logic;
+    tag_out_ready_i  : in  std_logic;
+    tag_out_o        : out std_logic_vector(127 downto 0);
+
+    busy_o           : out std_logic;
+    done_o           : out std_logic;
+    auth_valid_o     : out std_logic;
+    auth_ok_o        : out std_logic;
+    commit_o         : out std_logic;
+    discard_o        : out std_logic;
+    error_o          : out std_logic
+  );
+end entity;
+
+architecture elastic of ascon_aead128_core is
+begin
+  bypass_g : if not G_BUFFERING_ENABLE generate
+    engine_u : entity work.ascon_aead128_engine
+      generic map (G_ROUNDS_PER_CYCLE => G_ROUNDS_PER_CYCLE,
+                   G_FULL_BLOCK_FAST_PATH => G_FULL_BLOCK_FAST_PATH)
+      port map (
+        clk_i => clk_i,
+        rst_i => rst_i,
+        cmd_valid_i => cmd_valid_i,
+        cmd_ready_o => cmd_ready_o,
+        cmd_decrypt_i => cmd_decrypt_i,
+        key_i => key_i,
+        nonce_i => nonce_i,
+        in_valid_i => in_valid_i,
+        in_ready_o => in_ready_o,
+        in_kind_i => in_kind_i,
+        in_data_i => in_data_i,
+        in_keep_i => in_keep_i,
+        in_last_i => in_last_i,
+        tag_in_valid_i => tag_in_valid_i,
+        tag_in_ready_o => tag_in_ready_o,
+        tag_in_i => tag_in_i,
+        out_valid_o => out_valid_o,
+        out_ready_i => out_ready_i,
+        out_data_o => out_data_o,
+        out_keep_o => out_keep_o,
+        out_last_o => out_last_o,
+        tag_out_valid_o => tag_out_valid_o,
+        tag_out_ready_i => tag_out_ready_i,
+        tag_out_o => tag_out_o,
+        busy_o => busy_o,
+        done_o => done_o,
+        auth_valid_o => auth_valid_o,
+        auth_ok_o => auth_ok_o,
+        commit_o => commit_o,
+        discard_o => discard_o,
+        error_o => error_o);
+  end generate;
+  buffered_g : if G_BUFFERING_ENABLE generate
+    type input_beat_t is record
+      data : std_logic_vector(127 downto 0);
+      keep : std_logic_vector(15 downto 0);
+      kind, last : std_logic;
+    end record;
+    type output_beat_t is record
+      data : std_logic_vector(127 downto 0);
+      keep : std_logic_vector(15 downto 0);
+      last : std_logic;
+    end record;
+    constant INPUT_ZERO : input_beat_t := ((others => '0'), (others => '0'), '0', '0');
+    constant OUTPUT_ZERO : output_beat_t := ((others => '0'), (others => '0'), '0');
+    type input_memory_t is array(natural range <>) of input_beat_t;
+    type output_memory_t is array(natural range <>) of output_beat_t;
+    signal iq : input_memory_t(0 to G_INPUT_FIFO_DEPTH-1) := (others => INPUT_ZERO);
+    signal oq : output_memory_t(0 to G_OUTPUT_FIFO_DEPTH-1) := (others => OUTPUT_ZERO);
+    signal ir, iw : natural range 0 to G_INPUT_FIFO_DEPTH-1 := 0;
+    signal orp, ow : natural range 0 to G_OUTPUT_FIFO_DEPTH-1 := 0;
+    signal ic : natural range 0 to G_INPUT_FIFO_DEPTH := 0;
+    signal oc : natural range 0 to G_OUTPUT_FIFO_DEPTH := 0;
+    signal active, closed, aborted : std_logic := '0';
+    signal ei_ready, ei_valid, eo_ready, eo_valid : std_logic;
+    signal e_cmd_ready, e_done, e_error, e_busy : std_logic;
+    signal et_ready, et_valid, drained : std_logic;
+    signal eo_data : std_logic_vector(127 downto 0);
+    signal eo_keep : std_logic_vector(15 downto 0);
+    signal eo_last : std_logic;
+    signal input_head : input_beat_t;
+    signal ipush, ipop, opush, opop : boolean;
+    function advance(p, depth : natural) return natural is
+    begin
+      if p = depth-1 then return 0; else return p+1; end if;
+    end function;
+  begin
+    input_head <= iq(ir);
+    cmd_ready_o <= e_cmd_ready and not e_done;
+    busy_o <= e_busy;
+    done_o <= e_done;
+    error_o <= e_error;
+    -- Full queues can accept a replacement on the same edge as a pop.
+    in_ready_o <= '1' when active = '1' and closed = '0' and aborted = '0'
+      and e_error = '0' and rst_i = '0' and (ic < G_INPUT_FIFO_DEPTH or ipop) else '0';
+    ei_valid <= '1' when ic > 0 and aborted = '0' and e_error = '0' else '0';
+    ipush <= in_valid_i = '1' and in_ready_o = '1';
+    ipop <= ei_valid = '1' and ei_ready = '1';
+    out_valid_o <= '1' when oc > 0 and aborted = '0' and e_error = '0' and rst_i = '0' else '0';
+    out_data_o <= oq(orp).data;
+    out_keep_o <= oq(orp).keep;
+    out_last_o <= oq(orp).last;
+    opop <= out_valid_o = '1' and out_ready_i = '1';
+    eo_ready <= '1' when oc < G_OUTPUT_FIFO_DEPTH or opop else '0';
+    opush <= eo_valid = '1' and eo_ready = '1';
+    drained <= '1' when oc = 0 else '0';
+    -- Final status must follow every provisional payload transfer. In
+    -- particular a valid tag cannot race queued plaintext or cleanup.
+    tag_in_ready_o <= et_ready and drained;
+    tag_out_valid_o <= et_valid and drained;
+    engine_u : entity work.ascon_aead128_engine
+      generic map (G_ROUNDS_PER_CYCLE => G_ROUNDS_PER_CYCLE,
+                   G_OVERLAP_OUTPUT => true,
+                   G_FULL_BLOCK_FAST_PATH => G_FULL_BLOCK_FAST_PATH)
+      port map (
+        clk_i => clk_i,
+        rst_i => rst_i,
+        cmd_valid_i => cmd_valid_i and not e_done,
+        cmd_ready_o => e_cmd_ready,
+        cmd_decrypt_i => cmd_decrypt_i,
+        key_i => key_i,
+        nonce_i => nonce_i,
+        in_valid_i => ei_valid,
+        in_ready_o => ei_ready,
+        in_kind_i => input_head.kind,
+        in_data_i => input_head.data,
+        in_keep_i => input_head.keep,
+        in_last_i => input_head.last,
+        tag_in_valid_i => tag_in_valid_i and drained,
+        tag_in_ready_o => et_ready,
+        tag_in_i => tag_in_i,
+        out_valid_o => eo_valid,
+        out_ready_i => eo_ready,
+        out_data_o => eo_data,
+        out_keep_o => eo_keep,
+        out_last_o => eo_last,
+        tag_out_valid_o => et_valid,
+        tag_out_ready_i => tag_out_ready_i and drained,
+        tag_out_o => tag_out_o,
+        busy_o => e_busy,
+        done_o => e_done,
+        auth_valid_o => auth_valid_o,
+        auth_ok_o => auth_ok_o,
+        commit_o => commit_o,
+        discard_o => discard_o,
+        error_o => e_error);
+    process(clk_i)
+    begin
+      if rising_edge(clk_i) then
+        if rst_i = '1' or e_error = '1' or e_done = '1' then
+          iq <= (others => INPUT_ZERO); oq <= (others => OUTPUT_ZERO);
+          ir <= 0; iw <= 0; orp <= 0; ow <= 0; ic <= 0; oc <= 0;
+          closed <= '0';
+          if rst_i = '1' or e_done = '1' then
+            active <= '0'; aborted <= '0';
+          else
+            aborted <= '1';
+          end if;
+        else
+          if cmd_valid_i = '1' and cmd_ready_o = '1' then
+            active <= '1'; closed <= '0'; aborted <= '0';
+          end if;
+          if ipop then iq(ir) <= INPUT_ZERO; ir <= advance(ir, G_INPUT_FIFO_DEPTH); end if;
+          if ipush then
+            iq(iw) <= (in_data_i, in_keep_i, in_kind_i, in_last_i);
+            iw <= advance(iw, G_INPUT_FIFO_DEPTH);
+            if in_kind_i = '1' and in_last_i = '1' then closed <= '1'; end if;
+          end if;
+          if ipush and not ipop then ic <= ic+1;
+          elsif ipop and not ipush then ic <= ic-1; end if;
+          if opop then oq(orp) <= OUTPUT_ZERO; orp <= advance(orp, G_OUTPUT_FIFO_DEPTH); end if;
+          if opush then
+            oq(ow) <= (eo_data, eo_keep, eo_last);
+            ow <= advance(ow, G_OUTPUT_FIFO_DEPTH);
+          end if;
+          if opush and not opop then oc <= oc+1;
+          elsif opop and not opush then oc <= oc-1; end if;
+        end if;
+      end if;
+    end process;
+    -- synthesis translate_off
+    process(clk_i)
+    begin
+      if rising_edge(clk_i) and rst_i = '0' then
+        assert not (ipush and ic = G_INPUT_FIFO_DEPTH and not ipop) report "input overflow" severity failure;
+        assert not (ipop and ic = 0) report "input underflow" severity failure;
+        assert not (opush and oc = G_OUTPUT_FIFO_DEPTH and not opop) report "output overflow" severity failure;
+        assert not (opop and oc = 0) report "output underflow" severity failure;
+        assert not ((commit_o = '1' or auth_valid_o = '1') and oc /= 0)
+          report "authentication preceded output drain" severity failure;
+        if e_done = '1' then
+          assert ic = 0 and oc = 0 report "transaction ended with queued beats" severity failure;
+        end if;
+      end if;
+    end process;
+    -- synthesis translate_on
+  end generate;
 end architecture;

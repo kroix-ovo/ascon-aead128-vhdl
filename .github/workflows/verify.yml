@@ -34,3 +34,18 @@ jobs:
         env:
           KAT_LIMIT: "8"
         run: make iverilog-test verilator-test
+
+      - name: Check grouped rounds and concurrent buffered traffic
+        run: |
+          python verification/run_permutation.py --rounds-per-cycle 3
+          FULL_KAT=1 python verification/run.py --rounds-per-cycle 3 --module test_stream
+          FULL_KAT=1 python verification/run.py --rounds-per-cycle 3 --buffering --module test_stream
+          FULL_KAT=0 python verification/run.py --rounds-per-cycle 3 --buffering --input-depth 1 --output-depth 1 --module test_stream
+      - name: Check hardware self-test in simulation
+        run: make board-selftest board-demo-test
+
+      - name: Check synthesized buffered candidate
+        run: |
+          ghdl synth --std=08 --out=verilog -gG_ROUNDS_PER_CYCLE=3 -gG_BUFFERING_ENABLE=true rtl/ascon_pkg.vhd rtl/ascon_permutation.vhd rtl/ascon_aead128_core.vhd -e ascon_aead128_core > build/generated/buffered.v
+          FULL_KAT=0 python verification/run.py --sim icarus --netlist build/generated/buffered.v --rounds-per-cycle 3 --buffering --module test_stream
+          FULL_KAT=0 python verification/run.py --sim verilator --netlist build/generated/buffered.v --rounds-per-cycle 3 --buffering --module test_stream

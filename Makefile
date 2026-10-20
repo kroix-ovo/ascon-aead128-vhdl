@@ -67,3 +67,16 @@ summarize-results:
 
 clean:
 	rm -rf $(BUILD_DIR) .pytest_cache verification/**/__pycache__ tb_ascon_aead128 e~tb_ascon_aead128.o
+
+.PHONY: board-selftest
+board-selftest:
+	mkdir -p $(BUILD_DIR)/board-selftest
+	cd $(BUILD_DIR)/board-selftest && $(GHDL) -a --std=08 ../../rtl/ascon_pkg.vhd ../../rtl/ascon_permutation.vhd ../../rtl/ascon_aead128_core.vhd ../../rtl/ascon_selftest_vectors.vhd ../../rtl/ascon_weight_selftest.vhd ../../verification/vhdl/tb_weight_selftest.vhd
+	cd $(BUILD_DIR)/board-selftest && $(GHDL) --elab-run --std=08 tb_weight_selftest --assert-level=error
+
+.PHONY: board-demo-test
+board-demo-test:
+	mkdir -p $(BUILD_DIR)/board-demo
+	cd $(BUILD_DIR)/board-demo && $(GHDL) -a --std=08 ../../rtl/ascon_pkg.vhd ../../rtl/ascon_permutation.vhd ../../rtl/ascon_aead128_core.vhd ../../rtl/ascon_demo_top.vhd ../../rtl/ascon_demo_autotest.vhd ../../verification/vhdl/tb_weight_demo.vhd
+	cd $(BUILD_DIR)/board-demo && $(GHDL) --elab-run --std=08 tb_weight_demo --assert-level=error
+	cd $(BUILD_DIR)/board-demo && $(GHDL) --elab-run --std=08 tb_weight_demo -gG_ROUNDS_PER_CYCLE=1 -gG_BUFFERING_ENABLE=false --assert-level=error

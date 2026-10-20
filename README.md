@@ -332,3 +332,10 @@ the XDC to the pins used by this demonstration and followed Digilent's Nexys A7
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+## Buffered three-round experiment
+
+The `codex/ascon-weight-stream-3rpc` branch adds configurable round unrolling,
+transaction-local input/output FIFOs and a Nexys A7-100T hardware self-test.
+See [the configuration, verification and timing report](docs/weight_stream_3rpc.md).
+Core-only timing and board-integrated timing are reported separately.

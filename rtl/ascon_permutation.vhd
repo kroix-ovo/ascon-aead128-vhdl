@@ -2,8 +2,9 @@
 --
 -- Iterative Ascon permutation engine.
 --
--- The engine owns one 320-bit state register and one combinational round.
--- It therefore advances by one round on each rising clock edge.  A 12-round
+-- The engine owns one 320-bit state register and a configurable chain of
+-- combinational rounds. G_ROUNDS_PER_CYCLE trades circuit depth and area
+-- for fewer cycles; its default preserves the original circuit. A 12-round
 -- request uses constants F0 through 4B; an 8-round request skips the first
 -- four constants and uses B4 through 4B.
 
@@ -14,6 +15,9 @@ use ieee.numeric_std.all;
 use work.ascon_pkg.all;
 
 entity ascon_permutation is
+  generic (
+    G_ROUNDS_PER_CYCLE : positive range 1 to 12 := 1
+  );
   port (
     clk_i    : in  std_logic;
     rst_i    : in  std_logic;
@@ -40,6 +44,7 @@ begin
   process (clk_i)
     variable next_state : state_t;
     variable start_round: natural;
+    variable rounds_this_cycle : natural;
   begin
     if rising_edge(clk_i) then
       done_reg <= '0';
@@ -61,14 +66,24 @@ begin
           busy_reg         <= '1';
         end if;
       else
-        next_state := ascon_round(state_reg, round_number_reg);
+        next_state := state_reg;
+        rounds_this_cycle := 0;
+        -- A static loop creates cascaded round logic, with no registers
+        -- between rounds. The guard handles the shorter final group when
+        -- the unrolling factor does not divide eight or twelve.
+        for lane in 0 to G_ROUNDS_PER_CYCLE - 1 loop
+          if round_number_reg + lane <= final_round_reg then
+            next_state := ascon_round(next_state, round_number_reg + lane);
+            rounds_this_cycle := rounds_this_cycle + 1;
+          end if;
+        end loop;
         state_reg  <= next_state;
 
-        if round_number_reg = final_round_reg then
+        if round_number_reg + rounds_this_cycle > final_round_reg then
           busy_reg <= '0';
           done_reg <= '1';
         else
-          round_number_reg <= round_number_reg + 1;
+          round_number_reg <= round_number_reg + rounds_this_cycle;
         end if;
       end if;
     end if;

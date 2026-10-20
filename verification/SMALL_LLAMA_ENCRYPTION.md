@@ -15,8 +15,12 @@ convert, quantize, or retrain weights.
 
 ```powershell
 Set-Location -LiteralPath 'C:\Users\Symok\Downloads\ascon-aead128-vhdl-main'
-python .\verification\simulate_weight_file.py .\build\small_llama_20261013_01\trained_weights_fp32.bin --output .\build\small_llama_encryption_02
+python .\verification\simulate_weight_file.py .\build\small_llama_20261013_01\trained_weights_fp32.bin --output .\build\small_llama_encryption_02 --nonce-id 6004514660593502000
 ```
+
+The runner now requires an explicit `--nonce-id`; allocate a distinct value for
+each independent message under the test key. Use `--rounds-per-cycle 3 --buffering`
+for the buffered candidate.
 
 Choose a fresh output directory for each run. The runner refuses to overwrite
 existing evidence. Vivado defaults to

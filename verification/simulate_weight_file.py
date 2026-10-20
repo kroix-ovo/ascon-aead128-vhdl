@@ -1,6 +1,6 @@
 """Simulate full weight-file encryption and decryption in Vivado XSim.
 
-One message per direction, one Ascon round per cycle, empty AD, 100 MHz
+One message per direction, configurable unrolling/buffering, empty AD, 100 MHz
 simulated clock. Fixed public demo key/nonce; this is an experiment runner.
 Outputs are accepted only after ciphertext, tag, authentication, and recovery
 checks pass. Core cycles exclude host file I/O and simulator wall time.
@@ -32,6 +32,9 @@ def main():
     p.add_argument('weights', type=Path)
     p.add_argument('--output', type=Path, required=True, help='New directory; existing evidence is preserved')
     p.add_argument('--vivado', type=Path, default=Path(r'C:\Xilinx\Vivado\2023.2\bin\vivado.bat'))
+    p.add_argument('--rounds-per-cycle', type=int, default=1, choices=range(1,13))
+    p.add_argument('--buffering', action='store_true')
+    p.add_argument('--nonce-id', type=int, required=True, help='Unique independent-message nonce under the public test key')
     p.add_argument('--prepare-only', action='store_true')
     p.add_argument('--timeout', type=int, default=1800, help='Vivado wall-clock timeout in seconds')
     args = p.parse_args()
@@ -49,7 +52,7 @@ def main():
         assert encrypt(v['key'], v['nonce'], v['ad'], v['pt']) == (v['ct'], v['tag'])
         assert decrypt(v['key'], v['nonce'], v['ad'], v['ct'], v['tag']) == (v['pt'], True)
     assert len(kats) == 1089
-    key, nonce = bytes(range(16)), bytes(range(16,32))
+    key, nonce = bytes(range(16)), args.nonce_id.to_bytes(16, 'little')
     print(f'Oracle passed 1089 KATs; preparing {len(plaintext):,} weight bytes', flush=True)
     started = time.perf_counter()
     expected, tag = encrypt(key, nonce, b'', plaintext)
@@ -71,6 +74,8 @@ def main():
     (output/'xsim_run.tcl').write_text('run all\nquit\n', encoding='ascii')
     tcl = '''set run_dir [file normalize [lindex $argv 0]]
 set root [file normalize [lindex $argv 1]]
+set rpc [lindex $argv 2]
+set buffered [lindex $argv 3]
 create_project weight_file [file join $run_dir project] -part xc7a100tcsg324-1
 foreach name {ascon_pkg.vhd ascon_permutation.vhd ascon_aead128_core.vhd} {
   set source_file [file join $root rtl $name]
@@ -82,7 +87,7 @@ set bench [file join $run_dir tb_weight_file.vhd]
 add_files -fileset sim_1 -norecurse $bench
 set_property file_type {VHDL 2008} [get_files $bench]
 set_property top tb_weight_file [get_filesets sim_1]
-set_property generic [list G_RUN_DIR=$run_dir] [get_filesets sim_1]
+set_property generic [list G_RUN_DIR=$run_dir G_ROUNDS_PER_CYCLE=$rpc G_BUFFERING_ENABLE=$buffered] [get_filesets sim_1]
 set_property xsim.simulate.custom_tcl [file join $run_dir xsim_run.tcl] [get_filesets sim_1]
 update_compile_order -fileset sources_1
 update_compile_order -fileset sim_1
@@ -94,7 +99,7 @@ close_project
     metadata = dict(sample=str(weights), sample_sha256=sha(plaintext), plaintext_bytes=len(plaintext),
         blocks=blocks, key_hex=key.hex(), nonce_hex=nonce.hex(), key_scope='Public fixed simulation inputs only',
         associated_data_bytes=0, oracle_kats_passed=1089, tag_hex=tag.hex(), clock_hz=100_000_000,
-        rounds_per_cycle=1, message_partition='Entire file in one AEAD message per direction',
+        rounds_per_cycle=args.rounds_per_cycle, buffering=args.buffering, message_partition='Entire file in one AEAD message per direction',
         measurement='Behavioral RTL simulation, command offered to done; includes empty AD, stream handshakes, padding and tag; excludes host I/O',
         python_reference_wall_seconds=dict(encrypt=reference_encrypt_seconds,decrypt=reference_decrypt_seconds),
         source_sha256={str(path.relative_to(ROOT)):sha(path.read_bytes()) for path in
@@ -103,7 +108,7 @@ close_project
     if args.prepare_only:
         print(f'Prepared {output}; no RTL timing measured', flush=True)
         return
-    command=[str(args.vivado.resolve()),'-mode','batch','-source',str(output/'run.tcl'),'-tclargs',str(output),str(ROOT)]
+    command=[str(args.vivado.resolve()),'-mode','batch','-source',str(output/'run.tcl'),'-tclargs',str(output),str(ROOT),str(args.rounds_per_cycle),str(args.buffering).lower()]
     print('Running XSim; progress is in vivado_console.log',flush=True)
     started=time.perf_counter()
     with (output/'vivado_console.log').open('w') as f:
@@ -141,7 +146,7 @@ close_project
     for mode,r in measurements.items():
         lines.append(f"| {mode} | {r['cycles']:,} | {r['milliseconds']:.5f} | {r['payload_mbps']:.3f} |")
     lines += ['',metadata['measurement']+'.', '',
-        'Clock: assumed 100 MHz, one round per cycle. These are behavioral simulation results, not measured FPGA performance or timing-closure proof.', '',
+        'Clock: assumed 100 MHz; configuration is recorded in report.json. These are behavioral simulation results, not measured FPGA performance or timing-closure proof.', '',
         'Python reference time and Vivado wall time are recorded separately in report.json; they are not RTL latency.', '',
         f'Original and recovered SHA-256: `{sha(plaintext)}`.', '',
         'Ciphertext and tag match the independently KAT-checked Python reference. RTL decryption authentication and commit were asserted by the testbench.', '',

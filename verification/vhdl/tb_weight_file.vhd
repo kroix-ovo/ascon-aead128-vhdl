@@ -9,7 +9,10 @@ use std.textio.all;
 use std.env.all;
 
 entity tb_weight_file is
-  generic (G_RUN_DIR : string := ".");
+  generic (
+    G_ROUNDS_PER_CYCLE : positive := 1;
+    G_BUFFERING_ENABLE : boolean := false;
+    G_FULL_BLOCK_FAST_PATH : boolean := false;G_RUN_DIR : string := ".");
 end entity;
 
 architecture sim of tb_weight_file is
@@ -30,6 +33,7 @@ architecture sim of tb_weight_file is
   signal tag_out : block_t;
   signal busy, done, auth_valid, auth_ok, commit, discard, error_status : std_logic;
   signal simulation_cycle : natural := 0;
+  signal received_count : natural := 0;
 begin
   clk <= not clk after CLOCK_PERIOD / 2;
   process(clk)
@@ -37,6 +41,9 @@ begin
     if rising_edge(clk) then simulation_cycle <= simulation_cycle + 1; end if;
   end process;
   dut : entity work.ascon_aead128_core
+    generic map (G_ROUNDS_PER_CYCLE => G_ROUNDS_PER_CYCLE,
+                 G_BUFFERING_ENABLE => G_BUFFERING_ENABLE,
+                 G_FULL_BLOCK_FAST_PATH => G_FULL_BLOCK_FAST_PATH)
     port map (
       clk_i => clk, rst_i => rst,
       cmd_valid_i => cmd_valid, cmd_ready_o => cmd_ready,
@@ -49,6 +56,39 @@ begin
       tag_out_valid_o => tag_out_valid, tag_out_ready_i => tag_out_ready, tag_out_o => tag_out,
       busy_o => busy, done_o => done, auth_valid_o => auth_valid,
       auth_ok_o => auth_ok, commit_o => commit, discard_o => discard, error_o => error_status);
+
+
+  -- Independent output collector: input is never serialized behind output.
+  -- Decryption dump is provisional until the stimulus observes commit.
+  collector : process(clk)
+    file expected_file, dump_file : text;
+    variable l, o : line;
+    variable blocks, count : natural := 0;
+    variable dummy, expected : block_t;
+  begin
+    if rising_edge(clk) then
+      if cmd_valid = '1' and cmd_ready = '1' then
+        count := 0; received_count <= 0;
+        if cmd_decrypt = '1' then
+          file_open(expected_file, G_RUN_DIR & "/decrypt_vectors.txt", read_mode);
+          file_open(dump_file, G_RUN_DIR & "/recovered_blocks.txt", write_mode);
+        else
+          file_open(expected_file, G_RUN_DIR & "/encrypt_vectors.txt", read_mode);
+          file_open(dump_file, G_RUN_DIR & "/ciphertext_blocks.txt", write_mode);
+        end if;
+        readline(expected_file, l); read(l, blocks);
+      end if;
+      if out_valid = '1' and out_ready = '1' then
+        assert count < blocks report "Extra output" severity failure;
+        readline(expected_file, l); hread(l, dummy); hread(l, expected);
+        assert out_data = expected and out_keep = x"FFFF" report "Concurrent file output mismatch" severity failure;
+        assert (out_last = '1') = (count = blocks-1) report "Output last mismatch" severity failure;
+        hwrite(o, out_data); writeline(dump_file, o);
+        count := count+1; received_count <= count;
+        if count = blocks then file_close(expected_file); file_close(dump_file); end if;
+      end if;
+    end if;
+  end process;
 
   watchdog : process
   begin
@@ -93,7 +133,7 @@ begin
     begin
       file_open(status, vectors, G_RUN_DIR & "/" & input_name, read_mode);
       assert status = open_ok report "Cannot open weight vectors" severity failure;
-      file_open(dump, G_RUN_DIR & "/" & output_name, write_mode);
+
       readline(vectors, input_line);
       read(input_line, blocks);
       hread(input_line, key_value); hread(input_line, nonce_value); hread(input_line, expected_tag);
@@ -109,18 +149,15 @@ begin
         final_beat := '0';
         if i = blocks-1 then final_beat := '1'; end if;
         send_beat('1', input_block, x"FFFF", final_beat);
-        wait_ready(out_valid);
-        assert out_data = expected_block report mode_name & " block mismatch " & integer'image(i) severity failure;
-        assert out_keep = x"FFFF" and out_last = final_beat report "Unexpected output keep/last" severity failure;
-        hwrite(output_line, out_data); writeline(dump, output_line);
-        out_ready <= '1';
-        wait until rising_edge(clk); wait for 1 ns; out_ready <= '0';
         if (i+1) mod 16384 = 0 then
           report mode_name & " blocks=" & integer'image(i+1) severity note;
         end if;
       end loop;
       assert endfile(vectors) report "Extra weight vectors" severity failure;
-      file_close(vectors); file_close(dump);
+      file_close(vectors);
+      while received_count < blocks loop
+        wait until rising_edge(clk); wait for 1 ns;
+      end loop;
       if decrypt_mode = '0' then
         wait_ready(tag_out_valid);
         assert tag_out = expected_tag report "Encryption tag mismatch" severity failure;
@@ -147,6 +184,7 @@ begin
       report mode_name & " cycles=" & integer'image(elapsed_cycles) & " PASS" severity note;
     end procedure;
   begin
+    out_ready <= '1';
     rst <= '1';
     wait until rising_edge(clk); wait until rising_edge(clk); rst <= '0';
     wait until rising_edge(clk); wait for 1 ns;

@@ -15,6 +15,9 @@ use std.env.all;
 
 entity tb_ascon_aead128 is
   generic (
+    G_ROUNDS_PER_CYCLE : positive := 1;
+    G_BUFFERING_ENABLE : boolean := false;
+    G_FULL_BLOCK_FAST_PATH : boolean := false;
     G_VECTOR_FILE : string := "verification/vectors/xsim_vectors.txt"
   );
 end entity;
@@ -64,6 +67,9 @@ begin
   end process;
 
   dut : entity work.ascon_aead128_core
+    generic map (G_ROUNDS_PER_CYCLE => G_ROUNDS_PER_CYCLE,
+                 G_BUFFERING_ENABLE => G_BUFFERING_ENABLE,
+                 G_FULL_BLOCK_FAST_PATH => G_FULL_BLOCK_FAST_PATH)
     port map (
       clk_i => clk, rst_i => rst,
       cmd_valid_i => cmd_valid, cmd_ready_o => cmd_ready,

@@ -1,0 +1,733 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Tue Oct 20 10:54:49 2026
+| Host         : KroixLaptop running 64-bit major release  (build 9200)
+| Command      : report_timing -delay_type max -max_paths 10 -path_type full_clock_expanded -file C:/Users/Symok/.codex/worktrees/ascon-weight-stream-3rpc/build/board-cleanup-100/setup_paths.txt
+| Design       : ascon_weight_board_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -0.130ns  (required time - arrival time)
+  Source:                 demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[222]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[59]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        9.961ns  (logic 1.913ns (19.205%)  route 8.048ns (80.795%))
+  Logic Levels:           7  (LUT3=1 LUT5=6)
+  Clock Path Skew:        -0.127ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.518ns = ( 8.482 - 10.000 )
+    Source Clock Delay      (SCD):    -0.904ns
+    Clock Pessimism Removal (CPR):    0.487ns
+  Clock Uncertainty:      0.074ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.129ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=6059, routed)        1.636    -0.904    demo_u/core_u/buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X37Y87         FDRE                                         r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[222]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X37Y87         FDRE (Prop_fdre_C_Q)         0.419    -0.485 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[222]/Q
+                         net (fo=8, routed)           1.521     1.037    demo_u/core_u/buffered_g.engine_u/permutation_u/state_o[222]
+    SLICE_X51Y93         LUT5 (Prop_lut5_I0_O)        0.296     1.333 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[119]_i_10/O
+                         net (fo=3, routed)           1.126     2.459    demo_u/core_u/buffered_g.engine_u/permutation_u/value111_out[30]
+    SLICE_X50Y99         LUT5 (Prop_lut5_I0_O)        0.124     2.583 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[97]_i_6/O
+                         net (fo=6, routed)           1.221     3.804    demo_u/core_u/buffered_g.engine_u/permutation_u/state_word017_in[33]
+    SLICE_X32Y100        LUT5 (Prop_lut5_I4_O)        0.150     3.954 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[33]_i_5/O
+                         net (fo=3, routed)           1.319     5.273    demo_u/core_u/buffered_g.engine_u/permutation_u/ARG78_out[33]
+    SLICE_X33Y91         LUT5 (Prop_lut5_I0_O)        0.326     5.599 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[14]_i_3/O
+                         net (fo=5, routed)           1.152     6.752    demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[14]_i_3_n_0
+    SLICE_X34Y89         LUT5 (Prop_lut5_I2_O)        0.146     6.898 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[59]_i_3/O
+                         net (fo=3, routed)           0.758     7.656    demo_u/core_u/buffered_g.engine_u/permutation_u/ARG58_out[14]
+    SLICE_X43Y89         LUT5 (Prop_lut5_I0_O)        0.328     7.984 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[59]_i_2/O
+                         net (fo=1, routed)           0.949     8.933    demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[59]_i_2_n_0
+    SLICE_X52Y89         LUT3 (Prop_lut3_I0_O)        0.124     9.057 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[59]_i_1/O
+                         net (fo=1, routed)           0.000     9.057    demo_u/core_u/buffered_g.engine_u/permutation_u/p_1_in[59]
+    SLICE_X52Y89         FDRE                                         r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[59]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=6059, routed)        1.502     8.482    demo_u/core_u/buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X52Y89         FDRE                                         r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[59]/C
+                         clock pessimism              0.487     8.969
+                         clock uncertainty           -0.074     8.896
+    SLICE_X52Y89         FDRE (Setup_fdre_C_D)        0.031     8.927    demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[59]
+  -------------------------------------------------------------------
+                         required time                          8.927
+                         arrival time                          -9.057
+  -------------------------------------------------------------------
+                         slack                                 -0.130
+
+Slack (MET) :             0.124ns  (required time - arrival time)
+  Source:                 demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[62]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[26]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        9.837ns  (logic 2.237ns (22.741%)  route 7.600ns (77.259%))
+  Logic Levels:           7  (LUT3=1 LUT4=1 LUT5=5)
+  Clock Path Skew:        -0.041ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.510ns = ( 8.490 - 10.000 )
+    Source Clock Delay      (SCD):    -0.910ns
+    Clock Pessimism Removal (CPR):    0.559ns
+  Clock Uncertainty:      0.074ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.129ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=6059, routed)        1.630    -0.910    demo_u/core_u/buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X50Y89         FDRE                                         r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[62]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X50Y89         FDRE (Prop_fdre_C_Q)         0.478    -0.432 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[62]/Q
+                         net (fo=6, routed)           1.228     0.797    demo_u/core_u/buffered_g.engine_u/permutation_u/state_o[62]
+    SLICE_X51Y97         LUT5 (Prop_lut5_I0_O)        0.323     1.120 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[254]_i_12/O
+                         net (fo=3, routed)           0.984     2.104    demo_u/core_u/buffered_g.engine_u/permutation_u/value120_out[62]
+    SLICE_X45Y99         LUT5 (Prop_lut5_I2_O)        0.326     2.430 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[237]_i_6/O
+                         net (fo=6, routed)           1.200     3.630    demo_u/core_u/buffered_g.engine_u/permutation_u/state_word210_in[45]
+    SLICE_X29Y99         LUT4 (Prop_lut4_I0_O)        0.150     3.780 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[173]_i_5/O
+                         net (fo=3, routed)           1.056     4.836    demo_u/core_u/buffered_g.engine_u/permutation_u/p_92_in[45]
+    SLICE_X32Y102        LUT5 (Prop_lut5_I1_O)        0.326     5.162 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[173]_i_4/O
+                         net (fo=5, routed)           0.995     6.157    demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[173]_i_4_n_0
+    SLICE_X32Y99         LUT5 (Prop_lut5_I3_O)        0.152     6.309 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[45]_i_4/O
+                         net (fo=3, routed)           1.431     7.739    demo_u/core_u/buffered_g.engine_u/permutation_u/ARG58_out[45]
+    SLICE_X42Y87         LUT5 (Prop_lut5_I0_O)        0.332     8.071 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[26]_i_2/O
+                         net (fo=1, routed)           0.706     8.777    demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[26]_i_2_n_0
+    SLICE_X45Y86         LUT3 (Prop_lut3_I0_O)        0.150     8.927 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[26]_i_1/O
+                         net (fo=1, routed)           0.000     8.927    demo_u/core_u/buffered_g.engine_u/permutation_u/p_1_in[26]
+    SLICE_X45Y86         FDRE                                         r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[26]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=6059, routed)        1.510     8.490    demo_u/core_u/buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X45Y86         FDRE                                         r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[26]/C
+                         clock pessimism              0.559     9.049
+                         clock uncertainty           -0.074     8.976
+    SLICE_X45Y86         FDRE (Setup_fdre_C_D)        0.075     9.051    demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[26]
+  -------------------------------------------------------------------
+                         required time                          9.051
+                         arrival time                          -8.927
+  -------------------------------------------------------------------
+                         slack                                  0.124
+
+Slack (MET) :             0.159ns  (required time - arrival time)
+  Source:                 selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[82]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[58]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        9.760ns  (logic 1.790ns (18.339%)  route 7.970ns (81.661%))
+  Logic Levels:           7  (LUT3=1 LUT4=1 LUT5=5)
+  Clock Path Skew:        -0.038ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.351ns = ( 8.649 - 10.000 )
+    Source Clock Delay      (SCD):    -0.745ns
+    Clock Pessimism Removal (CPR):    0.568ns
+  Clock Uncertainty:      0.074ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.129ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=6059, routed)        1.795    -0.745    selftest_u/core_u/buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X35Y26         FDRE                                         r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[82]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X35Y26         FDRE (Prop_fdre_C_Q)         0.456    -0.289 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[82]/Q
+                         net (fo=7, routed)           1.634     1.345    selftest_u/core_u/buffered_g.engine_u/permutation_u/state_o[82]
+    SLICE_X21Y20         LUT5 (Prop_lut5_I4_O)        0.152     1.497 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[63]_i_11/O
+                         net (fo=3, routed)           1.160     2.657    selftest_u/core_u/buffered_g.engine_u/permutation_u/value104_out[18]
+    SLICE_X38Y19         LUT5 (Prop_lut5_I2_O)        0.332     2.989 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[54]_i_8/O
+                         net (fo=5, routed)           1.072     4.061    selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[54]_i_8_n_0
+    SLICE_X38Y13         LUT4 (Prop_lut4_I0_O)        0.124     4.185 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[310]_i_6/O
+                         net (fo=3, routed)           0.994     5.179    selftest_u/core_u/buffered_g.engine_u/permutation_u/ARG101_out[54]
+    SLICE_X26Y16         LUT5 (Prop_lut5_I2_O)        0.124     5.303 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[269]_i_3/O
+                         net (fo=6, routed)           1.223     6.526    selftest_u/core_u/buffered_g.engine_u/permutation_u/state_word[13]
+    SLICE_X26Y22         LUT5 (Prop_lut5_I1_O)        0.152     6.678 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[58]_i_3/O
+                         net (fo=3, routed)           1.274     7.952    selftest_u/core_u/buffered_g.engine_u/permutation_u/ARG58_out[13]
+    SLICE_X38Y25         LUT5 (Prop_lut5_I0_O)        0.326     8.278 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[58]_i_2/O
+                         net (fo=1, routed)           0.614     8.892    selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[58]_i_2_n_0
+    SLICE_X36Y23         LUT3 (Prop_lut3_I0_O)        0.124     9.016 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[58]_i_1/O
+                         net (fo=1, routed)           0.000     9.016    selftest_u/core_u/buffered_g.engine_u/permutation_u/p_1_in[58]
+    SLICE_X36Y23         FDRE                                         r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[58]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=6059, routed)        1.670     8.649    selftest_u/core_u/buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X36Y23         FDRE                                         r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[58]/C
+                         clock pessimism              0.568     9.217
+                         clock uncertainty           -0.074     9.144
+    SLICE_X36Y23         FDRE (Setup_fdre_C_D)        0.031     9.175    selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[58]
+  -------------------------------------------------------------------
+                         required time                          9.175
+                         arrival time                          -9.016
+  -------------------------------------------------------------------
+                         slack                                  0.159
+
+Slack (MET) :             0.168ns  (required time - arrival time)
+  Source:                 selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[4]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[214]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        9.805ns  (logic 1.811ns (18.471%)  route 7.994ns (81.529%))
+  Logic Levels:           7  (LUT3=1 LUT5=5 LUT6=1)
+  Clock Path Skew:        -0.029ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.344ns = ( 8.656 - 10.000 )
+    Source Clock Delay      (SCD):    -0.747ns
+    Clock Pessimism Removal (CPR):    0.568ns
+  Clock Uncertainty:      0.074ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.129ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=6059, routed)        1.793    -0.747    selftest_u/core_u/buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X35Y25         FDRE                                         r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[4]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X35Y25         FDRE (Prop_fdre_C_Q)         0.456    -0.291 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[4]/Q
+                         net (fo=6, routed)           1.837     1.547    selftest_u/core_u/buffered_g.engine_u/permutation_u/state_o[4]
+    SLICE_X19Y16         LUT6 (Prop_lut6_I0_O)        0.124     1.671 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[250]_i_13/O
+                         net (fo=3, routed)           1.195     2.866    selftest_u/core_u/buffered_g.engine_u/permutation_u/value120_out[4]
+    SLICE_X32Y12         LUT5 (Prop_lut5_I0_O)        0.124     2.990 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[250]_i_11/O
+                         net (fo=6, routed)           0.821     3.811    selftest_u/core_u/buffered_g.engine_u/permutation_u/state_word210_in[58]
+    SLICE_X33Y13         LUT5 (Prop_lut5_I0_O)        0.154     3.965 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[58]_i_8/O
+                         net (fo=3, routed)           0.984     4.948    selftest_u/core_u/buffered_g.engine_u/permutation_u/ARG78_out[58]
+    SLICE_X34Y16         LUT5 (Prop_lut5_I0_O)        0.327     5.275 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[39]_i_4/O
+                         net (fo=5, routed)           1.262     6.538    selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[39]_i_4_n_0
+    SLICE_X45Y24         LUT5 (Prop_lut5_I0_O)        0.150     6.688 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[231]_i_3/O
+                         net (fo=3, routed)           1.261     7.949    selftest_u/core_u/buffered_g.engine_u/permutation_u/ARG70_out[39]
+    SLICE_X22Y21         LUT5 (Prop_lut5_I2_O)        0.326     8.275 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[214]_i_2/O
+                         net (fo=1, routed)           0.633     8.908    selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[214]_i_2_n_0
+    SLICE_X22Y21         LUT3 (Prop_lut3_I0_O)        0.150     9.058 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[214]_i_1/O
+                         net (fo=1, routed)           0.000     9.058    selftest_u/core_u/buffered_g.engine_u/permutation_u/p_1_in[214]
+    SLICE_X22Y21         FDRE                                         r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[214]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=6059, routed)        1.677     8.656    selftest_u/core_u/buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X22Y21         FDRE                                         r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[214]/C
+                         clock pessimism              0.568     9.224
+                         clock uncertainty           -0.074     9.151
+    SLICE_X22Y21         FDRE (Setup_fdre_C_D)        0.075     9.226    selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[214]
+  -------------------------------------------------------------------
+                         required time                          9.226
+                         arrival time                          -9.058
+  -------------------------------------------------------------------
+                         slack                                  0.168
+
+Slack (MET) :             0.205ns  (required time - arrival time)
+  Source:                 demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[154]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[217]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        9.693ns  (logic 2.150ns (22.181%)  route 7.543ns (77.819%))
+  Logic Levels:           7  (LUT3=1 LUT4=2 LUT5=4)
+  Clock Path Skew:        -0.110ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.507ns = ( 8.493 - 10.000 )
+    Source Clock Delay      (SCD):    -0.917ns
+    Clock Pessimism Removal (CPR):    0.480ns
+  Clock Uncertainty:      0.074ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.129ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=6059, routed)        1.623    -0.917    demo_u/core_u/buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X40Y105        FDRE                                         r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[154]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X40Y105        FDRE (Prop_fdre_C_Q)         0.419    -0.498 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[154]/Q
+                         net (fo=6, routed)           1.373     0.875    demo_u/core_u/buffered_g.engine_u/permutation_u/state_o[154]
+    SLICE_X48Y93         LUT4 (Prop_lut4_I2_O)        0.325     1.200 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[154]_i_7/O
+                         net (fo=3, routed)           0.992     2.192    demo_u/core_u/buffered_g.engine_u/permutation_u/p_118_in[26]
+    SLICE_X44Y100        LUT5 (Prop_lut5_I1_O)        0.326     2.518 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[154]_i_6/O
+                         net (fo=5, routed)           1.297     3.814    demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[154]_i_6_n_0
+    SLICE_X31Y99         LUT4 (Prop_lut4_I2_O)        0.152     3.966 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[154]_i_5/O
+                         net (fo=3, routed)           0.843     4.809    demo_u/core_u/buffered_g.engine_u/permutation_u/p_92_in[26]
+    SLICE_X32Y98         LUT5 (Prop_lut5_I0_O)        0.326     5.135 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[153]_i_4/O
+                         net (fo=5, routed)           1.170     6.306    demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[153]_i_4_n_0
+    SLICE_X41Y94         LUT5 (Prop_lut5_I3_O)        0.152     6.458 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[217]_i_3/O
+                         net (fo=3, routed)           1.085     7.542    demo_u/core_u/buffered_g.engine_u/permutation_u/ARG70_out[25]
+    SLICE_X37Y90         LUT5 (Prop_lut5_I1_O)        0.326     7.868 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[217]_i_2/O
+                         net (fo=1, routed)           0.783     8.652    demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[217]_i_2_n_0
+    SLICE_X38Y86         LUT3 (Prop_lut3_I0_O)        0.124     8.776 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[217]_i_1/O
+                         net (fo=1, routed)           0.000     8.776    demo_u/core_u/buffered_g.engine_u/permutation_u/p_1_in[217]
+    SLICE_X38Y86         FDRE                                         r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[217]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=6059, routed)        1.513     8.493    demo_u/core_u/buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X38Y86         FDRE                                         r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[217]/C
+                         clock pessimism              0.480     8.973
+                         clock uncertainty           -0.074     8.900
+    SLICE_X38Y86         FDRE (Setup_fdre_C_D)        0.081     8.981    demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[217]
+  -------------------------------------------------------------------
+                         required time                          8.981
+                         arrival time                          -8.776
+  -------------------------------------------------------------------
+                         slack                                  0.205
+
+Slack (MET) :             0.235ns  (required time - arrival time)
+  Source:                 selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[10]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[59]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        9.681ns  (logic 2.024ns (20.908%)  route 7.657ns (79.092%))
+  Logic Levels:           7  (LUT3=1 LUT4=1 LUT5=5)
+  Clock Path Skew:        -0.040ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.355ns = ( 8.645 - 10.000 )
+    Source Clock Delay      (SCD):    -0.747ns
+    Clock Pessimism Removal (CPR):    0.568ns
+  Clock Uncertainty:      0.074ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.129ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=6059, routed)        1.793    -0.747    selftest_u/core_u/buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X36Y25         FDRE                                         r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[10]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X36Y25         FDRE (Prop_fdre_C_Q)         0.456    -0.291 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[10]/Q
+                         net (fo=6, routed)           1.590     1.299    selftest_u/core_u/buffered_g.engine_u/permutation_u/state_o[10]
+    SLICE_X23Y14         LUT4 (Prop_lut4_I0_O)        0.152     1.451 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[289]_i_7/O
+                         net (fo=3, routed)           1.268     2.720    selftest_u/core_u/buffered_g.engine_u/permutation_u/value126_out[10]
+    SLICE_X43Y13         LUT5 (Prop_lut5_I2_O)        0.326     3.046 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[289]_i_6/O
+                         net (fo=6, routed)           0.871     3.916    selftest_u/core_u/buffered_g.engine_u/permutation_u/state_word95_in[33]
+    SLICE_X45Y13         LUT5 (Prop_lut5_I1_O)        0.152     4.068 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[33]_i_5/O
+                         net (fo=3, routed)           1.370     5.439    selftest_u/core_u/buffered_g.engine_u/permutation_u/ARG78_out[33]
+    SLICE_X31Y19         LUT5 (Prop_lut5_I0_O)        0.332     5.771 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[14]_i_3/O
+                         net (fo=5, routed)           0.973     6.744    selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[14]_i_3_n_0
+    SLICE_X31Y22         LUT5 (Prop_lut5_I2_O)        0.150     6.894 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[59]_i_3/O
+                         net (fo=3, routed)           1.010     7.904    selftest_u/core_u/buffered_g.engine_u/permutation_u/ARG58_out[14]
+    SLICE_X41Y23         LUT5 (Prop_lut5_I0_O)        0.332     8.236 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[59]_i_2/O
+                         net (fo=1, routed)           0.573     8.810    selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[59]_i_2_n_0
+    SLICE_X41Y24         LUT3 (Prop_lut3_I0_O)        0.124     8.934 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[59]_i_1/O
+                         net (fo=1, routed)           0.000     8.934    selftest_u/core_u/buffered_g.engine_u/permutation_u/p_1_in[59]
+    SLICE_X41Y24         FDRE                                         r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[59]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=6059, routed)        1.666     8.645    selftest_u/core_u/buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X41Y24         FDRE                                         r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[59]/C
+                         clock pessimism              0.568     9.213
+                         clock uncertainty           -0.074     9.140
+    SLICE_X41Y24         FDRE (Setup_fdre_C_D)        0.029     9.169    selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[59]
+  -------------------------------------------------------------------
+                         required time                          9.169
+                         arrival time                          -8.934
+  -------------------------------------------------------------------
+                         slack                                  0.235
+
+Slack (MET) :             0.259ns  (required time - arrival time)
+  Source:                 demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[33]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[181]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        9.560ns  (logic 1.696ns (17.741%)  route 7.864ns (82.259%))
+  Logic Levels:           7  (LUT3=1 LUT4=1 LUT5=4 LUT6=1)
+  Clock Path Skew:        -0.139ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.523ns = ( 8.477 - 10.000 )
+    Source Clock Delay      (SCD):    -0.904ns
+    Clock Pessimism Removal (CPR):    0.480ns
+  Clock Uncertainty:      0.074ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.129ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=6059, routed)        1.636    -0.904    demo_u/core_u/buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X39Y88         FDRE                                         r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[33]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X39Y88         FDRE (Prop_fdre_C_Q)         0.419    -0.485 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[33]/Q
+                         net (fo=6, routed)           1.530     1.045    demo_u/core_u/buffered_g.engine_u/permutation_u/state_o[33]
+    SLICE_X48Y107        LUT5 (Prop_lut5_I2_O)        0.297     1.342 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[33]_i_7/O
+                         net (fo=3, routed)           0.918     2.260    demo_u/core_u/buffered_g.engine_u/permutation_u/value104_out[33]
+    SLICE_X49Y93         LUT5 (Prop_lut5_I2_O)        0.124     2.384 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[5]_i_4/O
+                         net (fo=5, routed)           1.373     3.758    demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[5]_i_4_n_0
+    SLICE_X29Y92         LUT6 (Prop_lut6_I0_O)        0.124     3.882 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[251]_i_8/O
+                         net (fo=3, routed)           0.939     4.821    demo_u/core_u/buffered_g.engine_u/permutation_u/ARG94_out[5]
+    SLICE_X29Y94         LUT5 (Prop_lut5_I0_O)        0.124     4.945 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[251]_i_6/O
+                         net (fo=6, routed)           1.019     5.964    demo_u/core_u/buffered_g.engine_u/permutation_u/state_word2[59]
+    SLICE_X36Y95         LUT4 (Prop_lut4_I0_O)        0.152     6.116 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[187]_i_3/O
+                         net (fo=3, routed)           1.240     7.356    demo_u/core_u/buffered_g.engine_u/permutation_u/p_69_in[59]
+    SLICE_X41Y104        LUT5 (Prop_lut5_I2_O)        0.332     7.688 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[181]_i_2/O
+                         net (fo=1, routed)           0.844     8.532    demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[181]_i_2_n_0
+    SLICE_X48Y101        LUT3 (Prop_lut3_I0_O)        0.124     8.656 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[181]_i_1/O
+                         net (fo=1, routed)           0.000     8.656    demo_u/core_u/buffered_g.engine_u/permutation_u/p_1_in[181]
+    SLICE_X48Y101        FDRE                                         r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[181]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=6059, routed)        1.498     8.477    demo_u/core_u/buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X48Y101        FDRE                                         r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[181]/C
+                         clock pessimism              0.480     8.958
+                         clock uncertainty           -0.074     8.884
+    SLICE_X48Y101        FDRE (Setup_fdre_C_D)        0.031     8.915    demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[181]
+  -------------------------------------------------------------------
+                         required time                          8.915
+                         arrival time                          -8.656
+  -------------------------------------------------------------------
+                         slack                                  0.259
+
+Slack (MET) :             0.265ns  (required time - arrival time)
+  Source:                 demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[199]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[77]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        9.610ns  (logic 1.775ns (18.470%)  route 7.835ns (81.530%))
+  Logic Levels:           7  (LUT3=1 LUT5=5 LUT6=1)
+  Clock Path Skew:        -0.126ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.518ns = ( 8.482 - 10.000 )
+    Source Clock Delay      (SCD):    -0.905ns
+    Clock Pessimism Removal (CPR):    0.487ns
+  Clock Uncertainty:      0.074ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.129ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=6059, routed)        1.635    -0.905    demo_u/core_u/buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X34Y85         FDRE                                         r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[199]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X34Y85         FDRE (Prop_fdre_C_Q)         0.478    -0.427 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[199]/Q
+                         net (fo=8, routed)           1.220     0.793    demo_u/core_u/buffered_g.engine_u/permutation_u/state_o[199]
+    SLICE_X45Y85         LUT6 (Prop_lut6_I0_O)        0.295     1.088 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[52]_i_9/O
+                         net (fo=3, routed)           1.583     2.672    demo_u/core_u/buffered_g.engine_u/permutation_u/value104_out[7]
+    SLICE_X44Y100        LUT5 (Prop_lut5_I0_O)        0.124     2.796 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[52]_i_8/O
+                         net (fo=5, routed)           1.183     3.978    demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[52]_i_8_n_0
+    SLICE_X30Y99         LUT5 (Prop_lut5_I2_O)        0.150     4.128 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[52]_i_7/O
+                         net (fo=3, routed)           0.639     4.767    demo_u/core_u/buffered_g.engine_u/permutation_u/ARG78_out[52]
+    SLICE_X29Y99         LUT5 (Prop_lut5_I1_O)        0.328     5.095 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[52]_i_5/O
+                         net (fo=5, routed)           1.162     6.257    demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[52]_i_5_n_0
+    SLICE_X35Y99         LUT5 (Prop_lut5_I3_O)        0.124     6.381 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[119]_i_3/O
+                         net (fo=3, routed)           1.079     7.460    demo_u/core_u/buffered_g.engine_u/permutation_u/ARG62_out[52]
+    SLICE_X43Y90         LUT5 (Prop_lut5_I2_O)        0.124     7.584 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[77]_i_2/O
+                         net (fo=1, routed)           0.970     8.554    demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[77]_i_2_n_0
+    SLICE_X53Y90         LUT3 (Prop_lut3_I0_O)        0.152     8.706 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[77]_i_1/O
+                         net (fo=1, routed)           0.000     8.706    demo_u/core_u/buffered_g.engine_u/permutation_u/p_1_in[77]
+    SLICE_X53Y90         FDRE                                         r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[77]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=6059, routed)        1.502     8.482    demo_u/core_u/buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X53Y90         FDRE                                         r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[77]/C
+                         clock pessimism              0.487     8.969
+                         clock uncertainty           -0.074     8.896
+    SLICE_X53Y90         FDRE (Setup_fdre_C_D)        0.075     8.971    demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[77]
+  -------------------------------------------------------------------
+                         required time                          8.971
+                         arrival time                          -8.706
+  -------------------------------------------------------------------
+                         slack                                  0.265
+
+Slack (MET) :             0.278ns  (required time - arrival time)
+  Source:                 selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[10]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[215]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        9.693ns  (logic 2.046ns (21.108%)  route 7.647ns (78.892%))
+  Logic Levels:           7  (LUT3=1 LUT4=1 LUT5=5)
+  Clock Path Skew:        -0.031ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.346ns = ( 8.654 - 10.000 )
+    Source Clock Delay      (SCD):    -0.747ns
+    Clock Pessimism Removal (CPR):    0.568ns
+  Clock Uncertainty:      0.074ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.129ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=6059, routed)        1.793    -0.747    selftest_u/core_u/buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X36Y25         FDRE                                         r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[10]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X36Y25         FDRE (Prop_fdre_C_Q)         0.456    -0.291 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[10]/Q
+                         net (fo=6, routed)           1.590     1.299    selftest_u/core_u/buffered_g.engine_u/permutation_u/state_o[10]
+    SLICE_X23Y14         LUT4 (Prop_lut4_I0_O)        0.152     1.451 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[289]_i_7/O
+                         net (fo=3, routed)           1.268     2.720    selftest_u/core_u/buffered_g.engine_u/permutation_u/value126_out[10]
+    SLICE_X43Y13         LUT5 (Prop_lut5_I2_O)        0.326     3.046 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[289]_i_6/O
+                         net (fo=6, routed)           0.871     3.916    selftest_u/core_u/buffered_g.engine_u/permutation_u/state_word95_in[33]
+    SLICE_X45Y13         LUT5 (Prop_lut5_I1_O)        0.152     4.068 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[33]_i_5/O
+                         net (fo=3, routed)           0.895     4.963    selftest_u/core_u/buffered_g.engine_u/permutation_u/ARG78_out[33]
+    SLICE_X45Y20         LUT5 (Prop_lut5_I1_O)        0.332     5.295 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[33]_i_4/O
+                         net (fo=5, routed)           1.173     6.468    selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[33]_i_4_n_0
+    SLICE_X46Y22         LUT5 (Prop_lut5_I0_O)        0.150     6.618 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[225]_i_3/O
+                         net (fo=3, routed)           1.270     7.889    selftest_u/core_u/buffered_g.engine_u/permutation_u/ARG70_out[33]
+    SLICE_X21Y22         LUT5 (Prop_lut5_I0_O)        0.328     8.217 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[215]_i_2/O
+                         net (fo=1, routed)           0.580     8.796    selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[215]_i_2_n_0
+    SLICE_X19Y22         LUT3 (Prop_lut3_I0_O)        0.150     8.946 r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg[215]_i_1/O
+                         net (fo=1, routed)           0.000     8.946    selftest_u/core_u/buffered_g.engine_u/permutation_u/p_1_in[215]
+    SLICE_X19Y22         FDRE                                         r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[215]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=6059, routed)        1.675     8.654    selftest_u/core_u/buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X19Y22         FDRE                                         r  selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[215]/C
+                         clock pessimism              0.568     9.222
+                         clock uncertainty           -0.074     9.149
+    SLICE_X19Y22         FDRE (Setup_fdre_C_D)        0.075     9.224    selftest_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[215]
+  -------------------------------------------------------------------
+                         required time                          9.224
+                         arrival time                          -8.946
+  -------------------------------------------------------------------
+                         slack                                  0.278
+
+Slack (MET) :             0.295ns  (required time - arrival time)
+  Source:                 demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[270]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[50]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        9.602ns  (logic 2.145ns (22.338%)  route 7.457ns (77.662%))
+  Logic Levels:           7  (LUT3=1 LUT5=6)
+  Clock Path Skew:        -0.108ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.512ns = ( 8.488 - 10.000 )
+    Source Clock Delay      (SCD):    -0.917ns
+    Clock Pessimism Removal (CPR):    0.487ns
+  Clock Uncertainty:      0.074ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.129ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=6059, routed)        1.623    -0.917    demo_u/core_u/buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X53Y89         FDRE                                         r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[270]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X53Y89         FDRE (Prop_fdre_C_Q)         0.419    -0.498 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[270]/Q
+                         net (fo=8, routed)           1.157     0.660    demo_u/core_u/buffered_g.engine_u/permutation_u/state_o[270]
+    SLICE_X47Y89         LUT5 (Prop_lut5_I1_O)        0.324     0.984 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[59]_i_11/O
+                         net (fo=3, routed)           1.028     2.012    demo_u/core_u/buffered_g.engine_u/permutation_u/value104_out[14]
+    SLICE_X46Y94         LUT5 (Prop_lut5_I2_O)        0.326     2.338 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[50]_i_8/O
+                         net (fo=5, routed)           1.419     3.757    demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[50]_i_8_n_0
+    SLICE_X34Y100        LUT5 (Prop_lut5_I2_O)        0.146     3.903 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[50]_i_7/O
+                         net (fo=3, routed)           0.989     4.892    demo_u/core_u/buffered_g.engine_u/permutation_u/ARG78_out[50]
+    SLICE_X34Y95         LUT5 (Prop_lut5_I1_O)        0.328     5.220 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[50]_i_5/O
+                         net (fo=5, routed)           1.072     6.292    demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[50]_i_5_n_0
+    SLICE_X37Y100        LUT5 (Prop_lut5_I2_O)        0.152     6.444 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[50]_i_4/O
+                         net (fo=3, routed)           1.017     7.461    demo_u/core_u/buffered_g.engine_u/permutation_u/ARG58_out[50]
+    SLICE_X37Y86         LUT5 (Prop_lut5_I1_O)        0.326     7.787 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[50]_i_2/O
+                         net (fo=1, routed)           0.775     8.562    demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[50]_i_2_n_0
+    SLICE_X46Y86         LUT3 (Prop_lut3_I0_O)        0.124     8.686 r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg[50]_i_1/O
+                         net (fo=1, routed)           0.000     8.686    demo_u/core_u/buffered_g.engine_u/permutation_u/p_1_in[50]
+    SLICE_X46Y86         FDRE                                         r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[50]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=6059, routed)        1.508     8.488    demo_u/core_u/buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X46Y86         FDRE                                         r  demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[50]/C
+                         clock pessimism              0.487     8.975
+                         clock uncertainty           -0.074     8.902
+    SLICE_X46Y86         FDRE (Setup_fdre_C_D)        0.079     8.981    demo_u/core_u/buffered_g.engine_u/permutation_u/state_reg_reg[50]
+  -------------------------------------------------------------------
+                         required time                          8.981
+                         arrival time                          -8.686
+  -------------------------------------------------------------------
+                         slack                                  0.295

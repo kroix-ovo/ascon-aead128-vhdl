@@ -1,6 +1,8 @@
-"""Independent checks for the one-round-per-clock permutation engine."""
+"""Independent checks at every registered group of permutation rounds."""
 
 import sys
+import os
+import random
 from pathlib import Path
 
 import cocotb
@@ -20,6 +22,7 @@ def pack(words):
 
 
 async def run_permutation(dut, words, rounds):
+    factor = int(os.environ.get("ROUNDS_PER_CYCLE", "1"))
     dut.state_i.value = pack(words)
     dut.rounds_i.value = rounds
     dut.start_i.value = 1
@@ -27,11 +30,12 @@ async def run_permutation(dut, words, rounds):
     await Timer(1, unit="ns")
     dut.start_i.value = 0
     observed = []
-    for round_index in range(rounds):
+    cycles = (rounds + factor - 1) // factor
+    for round_index in range(cycles):
         await RisingEdge(dut.clk_i)
         await Timer(1, unit="ns")
         observed.append(int(dut.state_o.value))
-        if round_index < rounds - 1:
+        if round_index < cycles - 1:
             assert not int(dut.done_o.value), "permutation finished before its final round"
     assert int(dut.done_o.value), "permutation did not finish on its final round"
     return observed
@@ -58,9 +62,13 @@ async def p12_and_p8_match_reference(dut):
             0xA5A5A5A55A5A5A5A,
         ],
     ]
+    rng = random.Random(20261020)
+    states += [[rng.getrandbits(64) for _ in range(5)] for _ in range(30)]
     for words in states:
-        for rounds in (12, 8):
-            expected = [pack(state) for state in permutation_trace(words, rounds)]
+        for rounds in range(1, 13):
+            factor = int(os.environ.get("ROUNDS_PER_CYCLE", "1"))
+            trace = permutation_trace(words, rounds)
+            expected = [pack(trace[min(i + factor, rounds) - 1]) for i in range(0, rounds, factor)]
             observed = await run_permutation(dut, words, rounds)
             for round_index, (actual_state, expected_state) in enumerate(
                 zip(observed, expected, strict=True), start=1
