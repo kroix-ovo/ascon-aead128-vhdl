@@ -1,0 +1,20 @@
+counts: perm=320 rnd=4 eng=320 ctl=23 fifo=0 outd=128
+ALL                                           slack= -0.241 levels= 6 datapath= 6.686 logic= 1.623 route= 5.063 start=bypass_g.engine_u/permutation_u/round_number_reg_reg[1]/C end=bypass_g.engine_u/permutation_u/state_reg_reg[208]/D
+perm.state -> perm.state (round datapath)     slack= -0.144 levels= 6 datapath= 6.591 logic= 1.396 route= 5.195 start=bypass_g.engine_u/permutation_u/state_reg_reg[152]/C end=bypass_g.engine_u/permutation_u/state_reg_reg[49]/D
+perm.round_number -> perm.state (RC/guard)    slack= -0.241 levels= 6 datapath= 6.686 logic= 1.623 route= 5.063 start=bypass_g.engine_u/permutation_u/round_number_reg_reg[1]/C end=bypass_g.engine_u/permutation_u/state_reg_reg[208]/D
+perm.busy -> perm.state                       slack=  1.050 levels= 1 datapath= 5.395 logic= 0.580 route= 4.815 start=bypass_g.engine_u/permutation_u/busy_reg_reg/C end=bypass_g.engine_u/permutation_u/state_reg_reg[179]/D
+eng.state -> perm.state (load mux)            slack=  3.877 levels= 1 datapath= 2.616 logic= 0.642 route= 1.974 start=bypass_g.engine_u/state_reg_reg[194]/C end=bypass_g.engine_u/permutation_u/state_reg_reg[194]/D
+ctl -> perm.state (start/load select)         slack=  0.381 levels= 4 datapath= 5.830 logic= 1.264 route= 4.566 start=bypass_g.engine_u/controller_state_reg[2]_rep/C end=bypass_g.engine_u/permutation_u/state_reg_reg[244]/CE
+perm.state -> eng.state (writeback/key xor)   slack=  2.764 levels= 3 datapath= 3.729 logic= 0.828 route= 2.901 start=bypass_g.engine_u/permutation_u/state_reg_reg[23]/C end=bypass_g.engine_u/state_reg_reg[23]/D
+eng.state -> eng.state (absorb)               slack=  3.111 levels= 3 datapath= 3.334 logic= 1.058 route= 2.276 start=bypass_g.engine_u/state_reg_reg[16]/C end=bypass_g.engine_u/state_reg_reg[16]/D
+fifo -> eng.state (absorb from FIFO head)     slack=  0.780 levels= 1 datapath= 5.713 logic= 0.642 route= 5.071 start=bypass_g.engine_u/controller_state_reg[1]_rep__1/C end=bypass_g.engine_u/state_reg_reg[164]/D
+fifo -> out_data (encrypt/decrypt output)     slack=  0.670 levels= 1 datapath= 5.716 logic= 0.642 route= 5.074 start=bypass_g.engine_u/controller_state_reg[4]/C end=bypass_g.engine_u/out_data_reg_reg[7]/D
+eng.state -> out_data                         slack=  4.090 levels= 1 datapath= 2.265 logic= 0.642 route= 1.623 start=bypass_g.engine_u/state_reg_reg[9]/C end=bypass_g.engine_u/out_data_reg_reg[9]/D
+ctl -> eng.state                              slack=  0.780 levels= 1 datapath= 5.713 logic= 0.642 route= 5.071 start=bypass_g.engine_u/controller_state_reg[1]_rep__1/C end=bypass_g.engine_u/state_reg_reg[164]/D
+any -> ctl                                    slack=  1.437 levels= 2 datapath= 4.898 logic= 0.766 route= 4.132 start=bypass_g.engine_u/decrypt_reg_reg/C end=bypass_g.engine_u/controller_state_reg[0]_rep__2/D
+any -> fifo                                   slack= -0.241 levels= 6 datapath= 6.686 logic= 1.623 route= 5.063 start=bypass_g.engine_u/permutation_u/round_number_reg_reg[1]/C end=bypass_g.engine_u/permutation_u/state_reg_reg[208]/D
+perm.state -> tag                             slack=  3.591 levels= 1 datapath= 2.856 logic= 0.580 route= 2.276 start=bypass_g.engine_u/permutation_u/state_reg_reg[279]/C end=bypass_g.engine_u/tag_reg_reg[87]/D
+any -> key                                    slack=  0.271 levels= 1 datapath= 6.222 logic= 0.580 route= 5.642 start=bypass_g.engine_u/controller_state_reg[4]_rep/C end=bypass_g.engine_u/key_reg_reg[74]/D
+input ports -> any                            UNCONSTRAINED levels=6 datapath=9.401 start=in_keep_i[6] end=bypass_g.engine_u/state_reg_reg[30]/D
+any -> output ports                           UNCONSTRAINED levels=2 datapath=4.197 start=bypass_g.engine_u/controller_state_reg[2]_rep/C end=in_ready_o
+input ports -> output ports                   none

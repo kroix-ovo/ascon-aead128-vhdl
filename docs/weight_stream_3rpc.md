@@ -1,5 +1,12 @@
 # Three-round model-weight stream experiment
 
+## Folded absorption update October 21 2026
+
+Branch `ascon-weight-stream-fold-absorb` adds the opt-in `G_FOLDED_ABSORB` core. The complete adapter takes 449,581 cycles per direction, about 4.50 ms at simulated 100 MHz, with exact authenticated recovery. Its steady interval is three clocks per full block. Saved core-only timing meets 100 MHz; a board-integrated copy also met 100 MHz in one run. No folded hardware programming or physical full-file measurement was performed.
+
+Both legacy-engine defects are fixed here: empty-terminator AD framing receives mandatory padding, and the expected decryption tag is hidden. Historical results below retain their original source scope; they do not establish final patched legacy timing. See [the current report](../reports/Ascon%20weight%20stream%20bottlenecks.md), [the source ledger](../reports/Ascon%20source%20ledger.md), and [the fix note](ad_padding_fix.md).
+
+
 Branch: `codex/ascon-weight-stream-3rpc`. This work starts from publication main
 `3cceb3c5d3e610728a0876c18e5ebd8bd6af4aa0`, with selected unrolling changes from
 the separate dirty experiment. That checkout and the existing detached worktree

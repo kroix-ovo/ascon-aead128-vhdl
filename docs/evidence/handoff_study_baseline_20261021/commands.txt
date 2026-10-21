@@ -1,0 +1,28 @@
+All commands were launched from Windows PowerShell as
+  wsl -d Ubuntu-22.04 -u kroix -- bash /mnt/c/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-weight-stream-handoff/build/handoff_sim/scripts/<script>
+(scripts are LF bash/python files; S = ~/ascon_handoff_scratch)
+
+0. Source export (Git Bash, worktree root):
+   git show origin/main:rtl/{ascon_pkg,ascon_permutation,ascon_aead128_core}.vhd > build/handoff_sim/src_baseline/...
+   cp rtl/{...}.vhd verification/vhdl/tb_weight_file.vhd build/handoff_sim/src_head/
+   origin/main = 3cceb3c5d3e610728a0876c18e5ebd8bd6af4aa0, HEAD = 8b886c075241d4f599f0a299f114b5fae133291e
+1. setup.sh                       copy sources + pinned KAT (sha bbbc3469...) into S, build src_trace via make_trace_copy.py,
+                                  strip generic map from baseline bench exactly as compare_stream.py does.
+2. run_batch.sh 1KiB adapter 5207435946358640640 baseline head-u1 u3 u3-buffered trace-u1 trace-u3 trace-u3-buffered
+   run_batch.sh full adapter 5207435946358640740 baseline head-u1 u3 u3-buffered trace-u1 trace-u3 trace-u3-buffered
+   run_batch.sh full llama   5207435946358640840 baseline head-u1 u3 u3-buffered
+   (each case: run_weight_case.py -> python oracle vectors, then
+      ghdl -a --std=08 --workdir=W ascon_pkg.vhd ascon_permutation.vhd ascon_aead128_core.vhd tb_weight_file.vhd
+      ghdl --elab-run --std=08 --workdir=W tb_weight_file -gG_RUN_DIR=D [-gG_ROUNDS_PER_CYCLE=R -gG_BUFFERING_ENABLE=B] --assert-level=error
+    then ciphertext/tag/recovery/SHA-256 checks as in compare_stream.py; public key bytes(range(16)), nonce = base+index)
+3. analyze_dir.sh / post_full.sh  analyze_trace.py on every trace (labels each clock, splits transactions).
+4. run_traffic.py S S/runs/traffic 5207435946358641000          (instrumented copy)
+   run_traffic.py S S/runs/traffic_plain 5207435946358641000 --plain   (uninstrumented HEAD RTL, same inputs)
+   bench: scripts/tb_handoff_traffic.vhd (study-only), generics G_GAP_PERIOD/LEN, G_STALL_PERIOD/LEN, G_TAG_EARLY
+5. rpc_sweep.sh                   nonces 5207435946358641200..213, 1 KiB, R in {1,2,3,4,6,8,12} x buffering.
+6. regressions.sh, regressions2.sh  fetch_vectors (offline), test_adapter_export.py, simulate_adapter.validate on real
+                                  artifacts, tb_ascon_aead128 TextIO for u1/u3/u3-buffered, cocotb run_permutation (u3),
+                                  run.py test_stream (u3 buffered, u3 unbuffered, u3 buffered depth 1/1; FULL_KAT=0),
+                                  run.py test_ascon (u1, u3 unbuffered; and u3 buffered which is not a CI configuration).
+7. collect_evidence.sh            copies small summaries here; refuses to overwrite an existing evidence dir.
+8. python build/handoff_sim/scripts/cycle_model.py traffic_results.json weight_file_runs.json  (Windows python)

@@ -1,0 +1,26 @@
+Handoff-study baseline evidence, 2026-10-21 (branch codex/ascon-weight-stream-handoff-study, HEAD 8b886c075241d4f599f0a299f114b5fae133291e).
+Small text summaries only. No weights, dumps, traces or simulator projects are stored here.
+Committed RTL was NOT modified. Traces came from an instrumented COPY (make_trace_copy.py adds
+three passive textio processes); instrumented and plain RTL gave identical cycles in all 117
+traffic rows and in all 1 KiB / full-adapter weight-file runs.
+
+Simulator: WSL Ubuntu-22.04 system GHDL 1.0.0 (mcode), VHDL-2008, 10 ns clock. Vivado not run.
+Scratch copy: WSL ~/ascon_handoff_scratch (sources hashed in source_and_artifact_sha256.txt).
+Helper scripts: build/handoff_sim/scripts/ (gitignored; hashes listed in source_and_artifact_sha256.txt).
+
+Files
+  weight_file_runs.json            tb_weight_file runs: baseline (origin/main 3cceb3c RTL), head-u1, u3, u3-buffered,
+                                   trace-* (instrumented) on adapter 1 KiB prefix, full adapter, full small-llama payload.
+                                   Each row: cycles enc/dec, oracle ciphertext/tag match, RTL auth+commit, recovered SHA-256.
+  traffic_results.json             117 rows: tb_handoff_traffic scenarios (AD, partial final, gaps, backpressure, bad tag)
+                                   for u1/u3/u3-buffered, both directions, all checked against verification/model/ascon_ref.py.
+  traffic_phase_summary.txt        per-scenario phase split, first-in/out, tail, absorb/output interval histograms.
+  traffic_instrumented_vs_plain.txt  equality check instrumented vs uninstrumented RTL.
+  trace_tables/*.txt               labelled per-clock tables (first 40-45 and last 30 clocks of each transaction).
+  trace_summaries/*.json           label histograms / phase cycles / steady-state block for 1 KiB and full adapter.
+  decrypt_commit_tail_offsets.txt  last plaintext handshake -> tag_in accept -> commit/discard -> done offsets.
+  kat_textio_cycle_stats.txt       official 1,089-vector TextIO bench, 2,178 checks per config, cycle min/max/mean.
+  rpc_sweep_1KiB.json              existing controller, G_ROUNDS_PER_CYCLE 1,2,3,4,6,8,12 x buffering, 1 KiB.
+  cycle_model_predictions.txt      closed-form model validated on 93 measured rows; predictions are INFERRED.
+  regressions_log.txt, regressions2_log.txt  existing-suite runs in the scratch copy (cocotb 2.0.1 + GHDL 1.0.0).
+  source_and_artifact_sha256.txt, tool_versions.txt, commands.txt

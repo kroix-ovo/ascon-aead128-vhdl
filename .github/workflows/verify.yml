@@ -43,6 +43,20 @@ jobs:
           FULL_KAT=1 python verification/run.py --rounds-per-cycle 3 --module test_stream
           FULL_KAT=1 python verification/run.py --rounds-per-cycle 3 --buffering --module test_stream
           FULL_KAT=0 python verification/run.py --rounds-per-cycle 3 --buffering --input-depth 1 --output-depth 1 --module test_stream
+          python verification/run.py --rounds-per-cycle 3 --buffering --module test_ascon
+      - name: Check folded-absorb core (G_FOLDED_ABSORB)
+        run: |
+          make vhdl-textio-fold-test
+          python verification/run.py --rounds-per-cycle 3 --buffering --folded --module test_ascon
+          python verification/run.py --rounds-per-cycle 3 --buffering --folded --module test_fold
+          FULL_KAT=1 python verification/run.py --rounds-per-cycle 3 --buffering --folded --module test_stream
+          FULL_KAT=0 python verification/run.py --rounds-per-cycle 3 --buffering --folded --input-depth 1 --output-depth 1 --module test_stream
+      - name: Check cycle-count regressions
+        run: |
+          python verification/run.py --rounds-per-cycle 1 --module test_cycles
+          python verification/run.py --rounds-per-cycle 3 --module test_cycles
+          python verification/run.py --rounds-per-cycle 3 --buffering --module test_cycles
+          python verification/run.py --rounds-per-cycle 3 --buffering --folded --module test_cycles
       - name: Check hardware self-test in simulation
         run: make board-selftest board-demo-test
 
@@ -51,3 +65,10 @@ jobs:
           ghdl synth --std=08 --out=verilog -gG_ROUNDS_PER_CYCLE=3 -gG_BUFFERING_ENABLE=true rtl/ascon_pkg.vhd rtl/ascon_permutation.vhd rtl/ascon_aead128_core.vhd -e ascon_aead128_core > build/generated/buffered.v
           FULL_KAT=0 python verification/run.py --sim icarus --netlist build/generated/buffered.v --rounds-per-cycle 3 --buffering --module test_stream
           FULL_KAT=0 python verification/run.py --sim verilator --netlist build/generated/buffered.v --rounds-per-cycle 3 --buffering --module test_stream
+
+      - name: Check synthesized folded-absorb core
+        run: |
+          ghdl synth --std=08 --out=verilog -gG_ROUNDS_PER_CYCLE=3 -gG_BUFFERING_ENABLE=true -gG_FOLDED_ABSORB=true rtl/ascon_pkg.vhd rtl/ascon_permutation.vhd rtl/ascon_aead128_core.vhd -e ascon_aead128_core > build/generated/folded.v
+          FULL_KAT=0 python verification/run.py --sim icarus --netlist build/generated/folded.v --rounds-per-cycle 3 --buffering --folded --module test_stream
+          FULL_KAT=0 python verification/run.py --sim verilator --netlist build/generated/folded.v --rounds-per-cycle 3 --buffering --folded --module test_stream
+          python verification/run.py --sim verilator --netlist build/generated/folded.v --rounds-per-cycle 3 --buffering --folded --module test_cycles

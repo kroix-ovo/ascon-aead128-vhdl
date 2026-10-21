@@ -56,6 +56,8 @@ def main():
     parser.add_argument('--checkpoint', type=Path)
     parser.add_argument('--output', type=Path, required=True, help='Fresh evidence directory')
     parser.add_argument('--nonce-base', type=int, required=True, help='Unused public test nonce range (four messages)')
+    parser.add_argument('--candidate', choices=['u3-buffered', 'u3-fold'], default='u3-buffered',
+                        help='Accelerated configuration compared with the baseline (u3-fold = G_FOLDED_ABSORB)')
     args = parser.parse_args()
     tensors, digest = validate(args.weights, args.manifest, args.checkpoint)
     out = args.output.resolve()
@@ -64,10 +66,10 @@ def main():
     tensor_manifest.write_text(json.dumps(tensors, indent=2)+'\n')
     subprocess.run([sys.executable, str(ROOT/'verification/compare_stream.py'), str(args.weights.resolve()),
                     '--manifest', str(tensor_manifest), '--output', str(out/'runs'),
-                    '--variants', 'baseline', 'u3-buffered', '--nonce-base', str(args.nonce_base)], check=True)
+                    '--variants', 'baseline', args.candidate, '--nonce-base', str(args.nonce_base)], check=True)
     result = json.loads((out/'runs/report.json').read_text())
     full = {r['variant']: r for r in result['variants'] if r['sample']=='full'}
-    for variant in ['baseline', 'u3-buffered']:
+    for variant in ['baseline', args.candidate]:
         row = full[variant]
         assert row['result']=='PASS' and row['recovered_sha256']==digest
         # compare_stream checks reference ciphertext/tag and the bench requires
@@ -81,10 +83,10 @@ def main():
             assert restored == args.checkpoint.read_bytes()
             (out/f'{variant}_reconstructed_checkpoint.bin').write_bytes(restored)
     baseline = full['baseline']['cycles']['ENCRYPT']
-    candidate = full['u3-buffered']['cycles']['ENCRYPT']
+    candidate = full[args.candidate]['cycles']['ENCRYPT']
     for row in full.values():
         assert row['cycles']['ENCRYPT'] == row['cycles']['DECRYPT']
-    result.update(clock_hz=100_000_000, result='PASS', payload_sha256=digest,
+    result.update(clock_hz=100_000_000, result='PASS', payload_sha256=digest, candidate=args.candidate,
                   speedup=baseline/candidate, cycle_reduction_percent=(1-candidate/baseline)*100,
                   checkpoint_reconstructed_exactly=bool(args.checkpoint), training_performed=False,
                   scope='Behavioral RTL simulation, command through done; no physical timing claim')

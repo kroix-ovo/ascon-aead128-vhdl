@@ -33,6 +33,13 @@ vhdl-textio-test: vectors
 	cd $(BUILD_DIR)/ghdl-textio && $(GHDL) -a --std=08 ../../$(word 1,$(DEMO_SOURCES)) ../../$(word 2,$(DEMO_SOURCES)) ../../$(word 3,$(DEMO_SOURCES)) ../../$(word 4,$(DEMO_SOURCES)) ../../$(VHDL_TESTBENCH)
 	cd $(BUILD_DIR)/ghdl-textio && $(GHDL) --elab-run --std=08 tb_ascon_aead128 -gG_VECTOR_FILE=$(abspath verification/vectors/xsim_vectors.txt) --assert-level=error
 
+.PHONY: vhdl-textio-fold-test
+# Official KAT TextIO bench on the folded-absorb core (G_FOLDED_ABSORB).
+vhdl-textio-fold-test: vectors
+	mkdir -p $(BUILD_DIR)/ghdl-textio-fold
+	cd $(BUILD_DIR)/ghdl-textio-fold && $(GHDL) -a --std=08 $(addprefix ../../,$(VHDL_SOURCES)) ../../$(VHDL_TESTBENCH)
+	cd $(BUILD_DIR)/ghdl-textio-fold && $(GHDL) --elab-run --std=08 tb_ascon_aead128 -gG_VECTOR_FILE=$(abspath verification/vectors/xsim_vectors.txt) -gG_ROUNDS_PER_CYCLE=3 -gG_BUFFERING_ENABLE=true -gG_FOLDED_ABSORB=true --assert-level=error
+
 full-kat:
 	FULL_KAT=1 $(MAKE) ghdl-test
 

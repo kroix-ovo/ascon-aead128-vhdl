@@ -1,10 +1,12 @@
-# Usage: vivado -mode batch -source route_stream.tcl -tclargs OUT ROOT RPC BUFFER FAST PERIOD
+# Usage: vivado -mode batch -source route_stream.tcl -tclargs OUT ROOT RPC BUFFER FAST PERIOD [FOLDED]
+# FOLDED (optional, default 0) selects G_FOLDED_ABSORB; omitted, the generics are unchanged.
 set out [file normalize [lindex $argv 0]]
 set root [file normalize [lindex $argv 1]]
 set rpc [lindex $argv 2]
 set buffered [expr {[lindex $argv 3] ? "true" : "false"}]
 set fast [expr {[lindex $argv 4] ? "true" : "false"}]
 set period [lindex $argv 5]
+set folded [expr {[llength $argv] > 6 && [lindex $argv 6]}]
 file mkdir $out
 create_project -in_memory -part xc7a100tcsg324-1
 foreach n {ascon_pkg.vhd ascon_permutation.vhd ascon_aead128_core.vhd} {
@@ -13,6 +15,7 @@ foreach n {ascon_pkg.vhd ascon_permutation.vhd ascon_aead128_core.vhd} {
 set generics {}
 if {$rpc ne "baseline"} {
   set generics [list G_ROUNDS_PER_CYCLE=$rpc G_BUFFERING_ENABLE=$buffered G_FULL_BLOCK_FAST_PATH=$fast]
+  if {$folded} {lappend generics G_FOLDED_ABSORB=true}
 }
 set_param general.maxThreads 1
 synth_design -top ascon_aead128_core -mode out_of_context -part xc7a100tcsg324-1 -generic $generics

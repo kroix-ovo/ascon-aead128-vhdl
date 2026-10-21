@@ -20,6 +20,8 @@ def main() -> None:
     parser.add_argument("--input-depth", type=int, default=2)
     parser.add_argument("--output-depth", type=int, default=2)
     parser.add_argument("--fast-path", action="store_true")
+    parser.add_argument("--folded", action="store_true",
+                        help="G_FOLDED_ABSORB (requires --rounds-per-cycle 3 --buffering)")
     parser.add_argument("--module", default="test_ascon")
     parser.add_argument("--netlist", type=Path)
     parser.add_argument("--waves", action="store_true")
@@ -79,11 +81,11 @@ def main() -> None:
         hdl_toplevel_library=library,
         hdl_toplevel_lang=language,
         test_module=args.module,
-        parameters={"G_ROUNDS_PER_CYCLE": args.rounds_per_cycle, "G_BUFFERING_ENABLE": args.buffering, "G_INPUT_FIFO_DEPTH": args.input_depth, "G_OUTPUT_FIFO_DEPTH": args.output_depth, "G_FULL_BLOCK_FAST_PATH": args.fast_path} if args.sim == "ghdl" else {},
+        parameters={"G_ROUNDS_PER_CYCLE": args.rounds_per_cycle, "G_BUFFERING_ENABLE": args.buffering, "G_INPUT_FIFO_DEPTH": args.input_depth, "G_OUTPUT_FIFO_DEPTH": args.output_depth, "G_FULL_BLOCK_FAST_PATH": args.fast_path, "G_FOLDED_ABSORB": args.folded} if args.sim == "ghdl" else {},
         test_args=test_args,
         build_dir=build_dir,
         test_dir=build_dir,
-        extra_env={"PYTHONPATH": verification_path, "BUFFERING": str(int(args.buffering)), "ROUNDS_PER_CYCLE": str(args.rounds_per_cycle)},
+        extra_env={"PYTHONPATH": verification_path, "BUFFERING": str(int(args.buffering)), "ROUNDS_PER_CYCLE": str(args.rounds_per_cycle), "FOLDED": str(int(args.folded))},
         waves=args.waves,
     )
     require_passing_results(results)

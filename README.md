@@ -1,5 +1,12 @@
 # Ascon-AEAD128 in VHDL
 
+## Folded absorption update October 21 2026
+
+Branch `ascon-weight-stream-fold-absorb` adds the opt-in `G_FOLDED_ABSORB` core. The complete adapter takes 449,581 cycles per direction, about 4.50 ms at simulated 100 MHz, with exact authenticated recovery. Its steady interval is three clocks per full block. Saved core-only timing meets 100 MHz; a board-integrated copy also met 100 MHz in one run. No folded hardware programming or physical full-file measurement was performed.
+
+Both legacy-engine defects are fixed here: empty-terminator AD framing receives mandatory padding, and the expected decryption tag is hidden. Historical results below retain their original source scope; they do not establish final patched legacy timing. See [the current report](reports/Ascon%20weight%20stream%20bottlenecks.md), [the source ledger](reports/Ascon%20source%20ledger.md), and [the fix note](docs/ad_padding_fix.md).
+
+
 I built this repository as part of my undergraduate research with Professor
 Wenjie Che at Howard University. It implements the final NIST Ascon-AEAD128
 algorithm in VHDL-2008 for the Nexys A7 100T. My core uses a 128-bit ready/valid
@@ -51,6 +58,8 @@ engine finishes. Every normal completion, protocol error, and tag result enters
 `ST_ZEROIZE` before `ST_DONE`. In that state, I clear the key, permutation
 state, mode and phase flags, buffered payload, keep mask, last flag, tag, and
 stored authentication result. I made the FSM diagram for this implementation.
+
+The diagram below describes the original controller. The folded entity and its schedule are documented in the fold-absorb report.
 
 ![Ascon controller state flow](docs/diagrams/ascon_fsm.svg)
 

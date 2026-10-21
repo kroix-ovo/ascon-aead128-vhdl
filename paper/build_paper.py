@@ -14,11 +14,12 @@ from docx.shared import Inches, Pt, RGBColor
 from gpt2_report_sections import add_experiment, add_appendix, add_latency_research
 from behavior_report_sections import add_behavior_results
 from weight_stream_report_sections import add_weight_stream_results
+from fold_report_sections import add_fold_results
 
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "paper" / "VHDL_Implementation_of_NIST_Ascon_AEAD128_on_a_Nexys_A7_FPGA.docx"
-METRICS = ROOT / "build" / "vivado" / "reports" / "metrics.json"
+METRICS = ROOT / "paper" / "evidence" / "baseline_20260918" / "metrics.json"
 
 
 def load_metrics():
@@ -253,12 +254,14 @@ def build():
         "Icarus Verilog and Verilator. Vivado 2023.2 completed synthesis, placement, "
         "routing, timing analysis, and bitstream generation. At a simulated 100 MHz, "
         "the complete 2,397,696-byte FP32 adapter payload encrypts and decrypts in "
-        "899,153 cycles per direction with three rounds and buffering, compared with "
-        "1,798,305 for the one-round baseline: approximately twice the throughput. "
-        "All recovered bytes match and authentication passes. Core-only routed timing "
-        "closes at 100 MHz; the final board wrapper closes at 83.333 MHz and passes "
-        "captured self-test and demo fixtures. Full-payload throughput remains a "
-        "behavioral simulation result, separate from physical board validation.",
+        "449,581 cycles per direction with folded absorption, compared with "
+        "899,153 for the buffered three-round core and 1,798,305 for the one-round "
+        "baseline. All recovered bytes match and authentication passes. The folded "
+        "core routes at 100 MHz with unconstrained external I/O; a board-integrated "
+        "copy also meets 100 MHz in one run. Earlier physical captures validate only "
+        "the buffered design. The folded core has not been programmed or measured "
+        "on hardware. Section XIV separates these evidence scopes and documents "
+        "the later AD padding and decryption tag output fixes.",
         indent=False,
     )
 
@@ -317,7 +320,7 @@ def build():
     add_caption(doc, "Fig. 1. Ascon-AEAD128 processing phases, adapted from NIST SP 800-232 [1].")
 
     doc.add_page_break()
-    add_heading(doc, "III. Hardware architecture")
+    add_heading(doc, "III. Original hardware architecture")
     add_body(
         doc,
         "The datapath contains five 64-bit state registers and one combinational round. "
@@ -351,7 +354,7 @@ def build():
     )
 
     doc.add_page_break()
-    add_heading(doc, "V. Controller and verification")
+    add_heading(doc, "V. Original controller and verification")
     add_body(
         doc,
         "The finite-state machine was made for this streaming architecture. Start states "
@@ -414,40 +417,39 @@ def build():
     add_latency_research(doc, add_heading, add_body, add_caption)
     add_behavior_results(doc, add_heading, add_body, add_caption)
     add_weight_stream_results(doc, add_heading, add_body, add_caption)
+    add_fold_results(doc, add_heading, add_body, add_caption)
     doc.add_page_break()
-    add_heading(doc, "XIV. Limitations and next work")
+    add_heading(doc, "XV. Limitations and next work")
     add_body(
         doc,
         "This version is an unprotected cryptographic core. It does not prevent power or "
         "electromagnetic side-channel analysis, and it does not detect injected faults. "
         "Kandi et al. describe threshold and redundancy-based hardware options that could "
-        "be studied in subsequent work [3]. Section XIII measures the implemented unrolling "
-        "and buffering tradeoff. Independent lanes, memory transport and lossless compression "
+        "be studied in subsequent work [3]. Sections XIII and XIV measure the implemented unrolling "
+        "and buffering tradeoff, including folded absorption. Independent lanes, memory transport and lossless compression "
         "remain separate experiments requiring additional interfaces and components. The external quarantine buffer is also a "
         "required part of safe decryption, not an optional application feature.",
     )
 
-    add_heading(doc, "XV. Conclusion")
+    add_heading(doc, "XVI. Findings")
     add_body(
         doc,
-        "The configurable Ascon-AEAD128 core preserves standard round counts, exact byte "
-        "recovery and authentication while reducing complete adapter simulation cycles by "
-        "approximately 50%. At a simulated 100 MHz, all 2,397,696 adapter bytes encrypt or "
-        "decrypt in 899,153 cycles (8.99153 ms), versus 1,798,305 cycles for the unchanged "
-        "one-round baseline. All three configurations pass official encryption/decryption "
-        "vectors and the added buffered protocol tests. Core-only routed timing closes at "
-        "100 MHz with a narrow candidate margin; the final board-integrated design closes "
-        "at 83.333 MHz and passes captured self-test and demo fixtures. These are distinct "
-        "evidence scopes. Full adapter transport on hardware and whole GPT-2 checkpoint "
-        "encryption remain future work. The earlier GPT-2 slice experiment separately "
-        "established unchanged inference after exact recovery of its tested 1 KiB slice.",
+        "For this adapter, eliminating controller handoffs halves the buffered "
+        "three-round core's cycle count without removing rounds. The folded core "
+        "requires 449,581 cycles per direction, matches the reference ciphertext and "
+        "tag, and reconstructs the complete checkpoint exactly. Its three-clock "
+        "full-block interval is supported by simulation; its 100 MHz closure is a "
+        "routed implementation result. Physical full-file transfer, memory bandwidth "
+        "and authenticated compute integration remain unmeasured. Both the AD "
+        "empty-terminator defect and legacy decryption tag exposure are fixed in "
+        "this branch, with focused regressions and negative controls.",
     )
 
     add_heading(doc, "References")
     references = [
         "[1] M. S. Turan, K. A. McKay, D. Chang, J. Kang, and J. Kelsey, “Ascon-Based Lightweight Cryptography Standards for Constrained Devices,” NIST SP 800-232, Aug. 2025, doi: 10.6028/NIST.SP.800-232.",
         "[2] Ascon Team, “ascon-c: Reference and optimized implementations of Ascon,” commit 446347f21b209f3921c65ece70027c366cbe1693. [Online]. Available: https://github.com/ascon/ascon-c",
-        "[3] A. Kandi et al., “Hardware Implementation of ASCON,” NIST Lightweight Cryptography Workshop, June 2023.",
+        "[3] A. Kandi et al., “Hardware Implementation of ASCON,” NIST Lightweight Cryptography Workshop, June 2023. https://csrc.nist.gov/csrc/media/Events/2023/lightweight-cryptography-workshop-2023/documents/accepted-papers/07-hardware-implementation-of-ascon.pdf",
         "[4] K. Liu, L. Han, and Z. Quan, “A High Performance Ascon Architecture for Data Encryption and Authentication,” in Proc. 5th Int. Conf. on Cryptography, Network Security and Communication Technology (CNSCT 2026), Haikou, China, Jan. 23–25, 2026, doi: 10.1145/3802927.3802941.",
         "[5] N. T. M. Huong, T. V. Nam, and P. V. Phat, “Application of the Ascon-AEAD128 Algorithm for IoT Data Security,” 11th Int. Conf. on Applying New Technology in Green Buildings, 2026, doi: 10.1109/ATIGB70203.2026.11628316.",
         "[6] Digilent, “Nexys A7-100T Master XDC.” [Online]. Available: https://github.com/Digilent/digilent-xdc",
@@ -458,6 +460,11 @@ def build():
         "[11] R. Primas, “Hardware Design of Ascon (SP800-232),” ascon-verilog. [Online]. Available: https://github.com/rprimas/ascon-verilog. Accessed Oct. 6, 2026.",
         "[12] OpenTitan, “Ascon: Theory of Operation.” [Online]. Available: https://opentitan.org/book/hw/ip/ascon/doc/theory_of_operation.html. Accessed Oct. 6, 2026.",
         "[13] C. E. LaForest, “Rules for Ready/Valid Handshakes and Synchronization,” FPGA Design Elements. [Online]. Available: https://fpgacpu.ca/fpga/handshake.html. Accessed Oct. 21, 2026.",
+        "[14] K. Jones, Folded Ascon weight stream study, October 21, 2026. Repository reports/Ascon weight stream bottlenecks.md and docs/evidence/handoff_study_fold_20261021/. https://github.com/kroix-ovo/ascon-aead128-vhdl/tree/ascon-weight-stream-fold-absorb",
+        "[15] T. Itschner, ascon_cipher_verilog, source architecture reference. https://github.com/tristanitschner/ascon_cipher_verilog. No third-party timing result is adopted here.",
+        "[16] K. Jones, Associated data padding and decryption tag output fixes, October 21, 2026. Repository docs/ad_padding_fix.md; docs/evidence/ad_padding_fix_20261021/; docs/evidence/tag_output_gate_20261021/.",
+        "[17] AMD, Vivado Design Suite User Guide Design Analysis and Closure Techniques, UG906, Category 1 Timing, 2026.1. https://docs.amd.com/r/en-US/ug906-vivado-design-analysis/Category-1-Timing",
+        "[18] W. Hua, M. Umar, Z. Zhang and G. E. Suh, GuardNN Secure Accelerator Architecture for Privacy-Preserving Deep Learning, DAC 2022, doi: 10.1145/3489517.3530439. https://arxiv.org/html/2008.11632v2.",
     ]
     for ref in references:
         p = doc.add_paragraph()
