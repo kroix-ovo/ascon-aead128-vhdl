@@ -13,6 +13,7 @@ from docx.oxml.ns import qn
 from docx.shared import Inches, Pt, RGBColor
 from gpt2_report_sections import add_experiment, add_appendix, add_latency_research
 from behavior_report_sections import add_behavior_results
+from weight_stream_report_sections import add_weight_stream_results
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -167,7 +168,7 @@ def build():
             f"{vivado['wns_ns']:.3f} ns worst setup slack. Vivado estimated "
             f"{vivado['total_on_chip_power_w']:.3f} W total on-chip power and "
             "generated the FPGA bitstream. Physical board programming and "
-            "demonstration testing remain pending."
+            "demonstration testing were pending at this baseline stage; Section XIII records the later board tests."
         )
     else:
         implementation_summary = (
@@ -243,20 +244,21 @@ def build():
         doc,
         "This paper describes a VHDL-2008 implementation of the standardized NIST "
         "Ascon-AEAD128 algorithm for a Nexys A7 100T FPGA. The design uses one shared "
-        "320-bit permutation datapath and completes one Ascon round per clock cycle. A "
+        "320-bit permutation datapath with configurable round unrolling and optional input/output queues. A "
         "128-bit streaming interface accepts associated data and payload bytes, including "
         "empty and partial blocks. Encryption returns ciphertext and a tag. Decryption "
-        "returns tentative plaintext and releases it only after tag verification. The "
+        "returns provisional plaintext that an external quarantine releases only after tag verification. The "
         "portable test flow passed all 1,089 official known-answer vectors in both "
         "directions with GHDL and Vivado XSim. Generated Verilog was also checked with "
         "Icarus Verilog and Verilator. Vivado 2023.2 completed synthesis, placement, "
-        f"routing, timing analysis, and bitstream generation. {implementation_summary} "
-        "An application experiment fine-tuned GPT-2 for 40 updates in Ubuntu under "
-        "WSL 2 and exported a 497,904,640-byte FP32 checkpoint. A 1,024-byte weight "
-        "sample was encrypted and authenticated by the same RTL core in XSim in "
-        "801 cycles, or 8.01 microseconds at a simulated 100 MHz clock. Decryption "
-        "recovered the original sample exactly. This result is behavioral simulation "
-        "latency rather than a physical board measurement.",
+        "routing, timing analysis, and bitstream generation. At a simulated 100 MHz, "
+        "the complete 2,397,696-byte FP32 adapter payload encrypts and decrypts in "
+        "899,153 cycles per direction with three rounds and buffering, compared with "
+        "1,798,305 for the one-round baseline: approximately twice the throughput. "
+        "All recovered bytes match and authentication passes. Core-only routed timing "
+        "closes at 100 MHz; the final board wrapper closes at 83.333 MHz and passes "
+        "captured self-test and demo fixtures. Full-payload throughput remains a "
+        "behavioral simulation result, separate from physical board validation.",
         indent=False,
     )
 
@@ -390,7 +392,7 @@ def build():
             + implementation_summary + " The original routed report included a CFGBVS-1 "
             "configuration warning. The repository XDC now sets CFGBVS to VCCO and "
             "CONFIG_VOLTAGE to 3.3 for the Nexys A7 configuration bank. Physical-board "
-            "validation remains pending. The power value is a Vivado estimate rather "
+            "validation was pending at this baseline stage; later results appear in Section XIII. The power value is a Vivado estimate rather "
             "than a board measurement."
             if vivado.get("complete")
             else "XSim execution, synthesis, implementation, timing, and power reporting "
@@ -411,37 +413,34 @@ def build():
     add_experiment(doc, add_heading, add_body, add_caption)
     add_latency_research(doc, add_heading, add_body, add_caption)
     add_behavior_results(doc, add_heading, add_body, add_caption)
+    add_weight_stream_results(doc, add_heading, add_body, add_caption)
     doc.add_page_break()
-    add_heading(doc, "XIII. Limitations and next work")
+    add_heading(doc, "XIV. Limitations and next work")
     add_body(
         doc,
         "This version is an unprotected cryptographic core. It does not prevent power or "
         "electromagnetic side-channel analysis, and it does not detect injected faults. "
         "Kandi et al. describe threshold and redundancy-based hardware options that could "
-        "be studied after the baseline is stable [3]. A faster unrolled or ping-pong "
-        "architecture is another option, but it would use more logic and make the first "
-        "implementation harder to inspect [4]. The external quarantine buffer is also a "
+        "be studied in subsequent work [3]. Section XIII measures the implemented unrolling "
+        "and buffering tradeoff. Independent lanes, memory transport and lossless compression "
+        "remain separate experiments requiring additional interfaces and components. The external quarantine buffer is also a "
         "required part of safe decryption, not an optional application feature.",
     )
 
-    add_heading(doc, "XIV. Conclusion")
+    add_heading(doc, "XV. Conclusion")
     add_body(
         doc,
-        "The project now has a readable NIST Ascon-AEAD128 RTL core, an explicit streaming "
-        "protocol, an authentication-safe decryption contract, official-vector tests, and "
-        "a completed Vivado synthesis and implementation flow. GHDL and XSim each passed "
-        "all 1,089 official vectors in encryption and decryption. The routed design met "
-        "the 100 MHz constraint, and Vivado generated a bitstream. The remaining work is "
-        "to program the Nexys A7 with the corrected configuration properties and verify "
-        "the four-vector demonstration on physical hardware. The GPT-2 application "
-        "experiment also demonstrated the complete path from GPU fine-tuning to "
-        "exported weight bytes and authenticated VHDL encryption. A 1 KiB sample "
-        "passed encryption and decryption in 801 cycles per direction at the "
-        "testbench clock. Follow-up behavior tests passed all 17 checks, including "
-        "tamper rejection and stalled transfers. Restoring the recovered slice into "
-        "the full GPT-2 model preserved parameters, logits, generated tokens, and "
-        "validation losses exactly. Whole-checkpoint GPT-2 encryption, physical transfer overhead, "
-        "and board-level measurements remain future work.",
+        "The configurable Ascon-AEAD128 core preserves standard round counts, exact byte "
+        "recovery and authentication while reducing complete adapter simulation cycles by "
+        "approximately 50%. At a simulated 100 MHz, all 2,397,696 adapter bytes encrypt or "
+        "decrypt in 899,153 cycles (8.99153 ms), versus 1,798,305 cycles for the unchanged "
+        "one-round baseline. All three configurations pass official encryption/decryption "
+        "vectors and the added buffered protocol tests. Core-only routed timing closes at "
+        "100 MHz with a narrow candidate margin; the final board-integrated design closes "
+        "at 83.333 MHz and passes captured self-test and demo fixtures. These are distinct "
+        "evidence scopes. Full adapter transport on hardware and whole GPT-2 checkpoint "
+        "encryption remain future work. The earlier GPT-2 slice experiment separately "
+        "established unchanged inference after exact recovery of its tested 1 KiB slice.",
     )
 
     add_heading(doc, "References")
@@ -458,6 +457,7 @@ def build():
         "[10] PyTorch, “Start Locally.” [Online]. Available: https://pytorch.org/get-started/locally/. Accessed Oct. 6, 2026.",
         "[11] R. Primas, “Hardware Design of Ascon (SP800-232),” ascon-verilog. [Online]. Available: https://github.com/rprimas/ascon-verilog. Accessed Oct. 6, 2026.",
         "[12] OpenTitan, “Ascon: Theory of Operation.” [Online]. Available: https://opentitan.org/book/hw/ip/ascon/doc/theory_of_operation.html. Accessed Oct. 6, 2026.",
+        "[13] C. E. LaForest, “Rules for Ready/Valid Handshakes and Synchronization,” FPGA Design Elements. [Online]. Available: https://fpgacpu.ca/fpga/handshake.html. Accessed Oct. 21, 2026.",
     ]
     for ref in references:
         p = doc.add_paragraph()

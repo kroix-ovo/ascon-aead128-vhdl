@@ -140,7 +140,7 @@ close_project
     metadata.update(result='PASS',measurements=measurements,recovered_sha256=sha(actual_recovered),
         ciphertext_sha256=sha(actual),mismatched_recovered_bytes=0,rtl_authenticated_and_committed=True)
     (output/'report.json').write_text(json.dumps(metadata,indent=2)+'\n')
-    lines=['# Full small-LLaMA weight encryption simulation','',
+    lines=['# Complete weight file encryption simulation','',
         f'Payload: {len(plaintext):,} bytes, one AEAD message, empty AD. All recovered bytes match.', '',
         '| Direction | Cycles | Simulated milliseconds | Payload Mb/s |', '|---|---:|---:|---:|']
     for mode,r in measurements.items():

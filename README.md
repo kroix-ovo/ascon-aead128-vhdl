@@ -339,3 +339,9 @@ The `codex/ascon-weight-stream-3rpc` branch adds configurable round unrolling,
 transaction-local input/output FIFOs and a Nexys A7-100T hardware self-test.
 See [the configuration, verification and timing report](docs/weight_stream_3rpc.md).
 Core-only timing and board-integrated timing are reported separately.
+
+The complete 2,397,696-byte FP32 adapter export takes 899,153 cycles per direction
+with buffering, versus 1,798,305 for the unchanged one-round core at a simulated
+100 MHz (approximately 2x throughput). Both pass authenticated exact recovery.
+See [the adapter simulation evidence and reproduction command](paper/evidence/adapter_100mhz_20261021/README.md)
+and Section XIII of the [research report](paper/VHDL_Implementation_of_NIST_Ascon_AEAD128_on_a_Nexys_A7_FPGA.pdf).

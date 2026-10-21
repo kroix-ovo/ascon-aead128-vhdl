@@ -3,7 +3,56 @@
 Branch: `codex/ascon-weight-stream-3rpc`. This work starts from publication main
 `3cceb3c5d3e610728a0876c18e5ebd8bd6af4aa0`, with selected unrolling changes from
 the separate dirty experiment. That checkout and the existing detached worktree
-are preserved. No training, push, or merge is part of this experiment.
+are preserved. No training or merge is part of this experiment. The user authorized
+publication of this branch and the updated research report on October 21, 2026.
+
+## Complete adapter simulation at 100 MHz
+
+The existing `runs/adapter_fp32_200/export/adapter_weights.bin` contains all
+599,424 little-endian FP32 adapter values (2,397,696 bytes, no alignment padding).
+The four tensor groups are `down_w`, `down_b`, `up_w`, and `up_b`. On October 20,
+XSim verified the buffered candidate and a fresh GHDL run reproduced the earlier
+one-round baseline on the same complete payload.
+
+| Configuration | Cycles per direction | Simulated latency at 100 MHz | Payload MB/s |
+|---|---:|---:|---:|
+| Unchanged one-round baseline | 1,798,305 | 17.98305 ms | 133.331 |
+| Three rounds with buffering and overlap | 899,153 | 8.99153 ms | 266.662 |
+
+Both encryption and decryption passed reference ciphertext/tag parity,
+authentication and commit, and exact byte recovery. The approximately 2x gain
+combines unrolling and buffering; unrolling alone was not measured on this adapter.
+Payload original/recovered SHA-256:
+`c184175fc18d24373f009875c03698e630e8c36a5341146aab2bd13a98fff8eb`.
+Preserving the original 20-byte format header reconstructs the checkpoint exactly;
+the header is outside the exported weight payload. These are simulated 10 ns
+clock results, not physical board throughput.
+
+The research report's Section XIII and
+[compact adapter evidence](../paper/evidence/adapter_100mhz_20261021/README.md)
+record provenance, source hashes and verification. Reproduce with existing files:
+
+```powershell
+python verification/simulate_adapter.py <adapter_weights.bin> --manifest <export/manifest.json> --checkpoint <adapter_params_00000200.bin> --output build/adapter-new --nonce-base <unused-integer-range>
+```
+
+The new output directory must not exist. The runner tests unchanged `origin/main`
+and the buffered candidate, at both 1 KiB and complete length, without training.
+Allocate four unused nonces under the public test key for each invocation.
+
+## Architecture references
+
+The algorithm and required round counts come from
+[NIST SP 800-232](https://csrc.nist.gov/pubs/sp/800/232/final).
+[Primas's Ascon hardware](https://github.com/rprimas/ascon-verilog) provides
+one-, two- and four-round variants that informed the earlier unrolling study.
+[OpenTitan's design discussion](https://opentitan.org/book/hw/ip/ascon/doc/theory_of_operation.html)
+explains unrolling tradeoffs and dependent-state limits; its masking constraints
+also show why unhardened throughput does not imply protected throughput.
+[LaForest's handshake rules](https://fpgacpu.ca/fpga/handshake.html) support the
+FIFO ready/valid rationale. These sources motivate general techniques; the
+three-round grouping, queues, launch overlap and measured results are local
+implementation work. They are not third-party performance claims or copied FIFO RTL.
 
 ## Measured results (October 20, 2026)
 

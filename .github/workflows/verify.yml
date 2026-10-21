@@ -26,6 +26,8 @@ jobs:
         run: make vectors
       - name: Check Python source syntax
         run: python -m compileall -q verification paper
+      - name: Check adapter export and checkpoint guards with synthetic data
+        run: python verification/test_adapter_export.py
       - name: Run direct VHDL tests
         run: make model-test permutation-test ghdl-test vhdl-textio-test weight-file-test
       - name: Translate and lint with Icarus and Verilator
