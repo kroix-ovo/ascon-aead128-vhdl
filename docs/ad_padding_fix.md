@@ -232,6 +232,6 @@ tag_out_o <= tag_reg when decrypt_reg = '0' else (others => '0');
     empty-terminator framing used the non-standard computation and will no
     longer decrypt. No repository runner produced such data.
   - **Published branch:** neither fix is on `codex/ascon-weight-stream-3rpc`.
-  - **CI:** neither fix has run in CI on GitHub.
+  - **CI at evidence capture:** the saved local fix logs predate publication. The HDL publication commit `e460452` subsequently passed [GitHub Actions run 39691698078](https://github.com/kroix-ovo/ascon-aead128-vhdl/actions/runs/39691698078).
 
 These fixes are included in the fold-absorb publication. Saved regression logs predate the publication commit; remote CI is reported by its workflow run.
