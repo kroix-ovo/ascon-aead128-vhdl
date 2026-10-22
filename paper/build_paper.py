@@ -15,6 +15,7 @@ from gpt2_report_sections import add_experiment, add_appendix, add_latency_resea
 from behavior_report_sections import add_behavior_results
 from weight_stream_report_sections import add_weight_stream_results
 from fold_report_sections import add_fold_results
+from figure_support import add_figure
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -319,19 +320,23 @@ def build():
         )
     add_caption(doc, "Fig. 1. Ascon-AEAD128 processing phases, adapted from NIST SP 800-232 [1].")
 
-    doc.add_page_break()
-    add_heading(doc, "III. Original hardware architecture")
+    section_heading = add_heading(doc, "III. Original hardware architecture")
+    section_heading.paragraph_format.page_break_before = True
     add_body(
         doc,
-        "The datapath contains five 64-bit state registers and one combinational round. "
-        "A small round counter selects the required constants and returns the updated state "
-        "after 8 or 12 clocks. Reusing one round reduces duplicated logic and keeps the "
-        "relationship between the VHDL and the algorithm visible. The same engine serves "
-        "initialization, associated data, payload processing, and finalization.",
+        "The controller owns a 320-bit transaction state S, organized as five "
+        "64-bit words. It handles byte masks, padding, key additions, domain "
+        "separation and tag comparison. A separate permutation engine owns a "
+        "second 320-bit register P, a combinational round and a round counter "
+        "(Fig. 2). A start request loads S into P. After eight or twelve round "
+        "clocks, the engine raises a registered done signal and the controller "
+        "copies P back into S. The same engine serves initialization, AD, payload "
+        "and finalization. Each call therefore includes a load clock and a "
+        "completion-copy clock in addition to its round clocks. Section XIV "
+        "removes this handoff from the unrolled design.",
     )
-    pic = doc.add_picture(str(ROOT / "paper" / "assets" / "ascon_architecture.png"), width=Inches(7.0))
-    pic.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    add_caption(doc, "Fig. 2. Original block diagram of the implemented architecture.")
+    add_figure(doc, "fig02_original_architecture.png",
+               "Fig. 2. Original one-round architecture. The controller owns S and the permutation engine owns P, both 320 bits. Their registered start/done interface transfers the state between them. Decrypted bytes remain provisional until an external quarantine receives commit.", add_caption)
     add_body(
         doc,
         "The controller accepts a command containing the key, nonce, and direction. "
@@ -353,8 +358,8 @@ def build():
         "the safe release rule explicit, but the system integrator must enforce it.",
     )
 
-    doc.add_page_break()
-    add_heading(doc, "V. Original controller and verification")
+    section_heading = add_heading(doc, "V. Original controller and verification")
+    section_heading.paragraph_format.page_break_before = True
     add_body(
         doc,
         "The finite-state machine was made for this streaming architecture. Start states "
@@ -363,9 +368,9 @@ def build():
         "backpressure. Tag states either wait for the encryption tag to be accepted or wait "
         "for a decryption tag to be supplied.",
     )
-    pic = doc.add_picture(str(ROOT / "paper" / "assets" / "ascon_fsm.png"), width=Inches(7.0))
-    pic.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    add_caption(doc, "Fig. 3. Original controller state flow used by the VHDL core.")
+    add_body(doc, "The AD path must distinguish empty AD from an empty beat that terminates earlier full AD blocks. Non-empty AD is padded with 0x01 and zeros to a multiple of the 16-byte rate. An exact boundary therefore requires a separate padding-only block and its p8; genuinely empty AD needs only domain separation [1]. Fig. 3 includes the corrected empty-terminator transition. A full final payload block also needs an empty padded block, but that block is combined with the finalization key before p12 rather than followed by another p8.")
+    add_figure(doc, "fig03_original_fsm.png",
+               "Fig. 3. Original controller after the AD-padding fix. START and WAIT pairs are grouped for readability. The gray edge handles an empty terminator after non-empty AD. Protocol errors in AD WAIT or MSG WAIT enter ZEROIZE; TAG IN compares the tag and pulses commit or discard.", add_caption)
     add_body(
         doc,
         "Verification began with an independent Python model. The model was compared with "
@@ -380,8 +385,8 @@ def build():
     add_result_table(doc, metrics)
     add_caption(doc, "Table I. Verification and implementation status as of September 18, 2026.")
 
-    doc.add_page_break()
-    add_heading(doc, "VI. Vivado flow and FPGA demonstration")
+    section_heading = add_heading(doc, "VI. Vivado flow and FPGA demonstration")
+    section_heading.paragraph_format.page_break_before = True
     add_body(
         doc,
         "The repository contains Tcl scripts for Vivado 2023.2 and an XDC file for the "
@@ -418,8 +423,8 @@ def build():
     add_behavior_results(doc, add_heading, add_body, add_caption)
     add_weight_stream_results(doc, add_heading, add_body, add_caption)
     add_fold_results(doc, add_heading, add_body, add_caption)
-    doc.add_page_break()
-    add_heading(doc, "XV. Limitations and next work")
+    section_heading = add_heading(doc, "XV. Limitations and next work")
+    section_heading.paragraph_format.page_break_before = True
     add_body(
         doc,
         "This version is an unprotected cryptographic core. It does not prevent power or "
