@@ -1,0 +1,3291 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Tue Oct 27 17:58:40 2026
+# Process ID: 50512
+# Current directory: C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/A_retime/p5.800
+# Command line: vivado.exe -mode batch -nojournal -log C:\Users\Symok\Downloads\ascon-aead128-vhdl-main\worktrees\ascon-p8-pipeline\experiments\p8_pipeline\results\runs\A_retime\p5.800\vivado.log -source C:\Users\Symok\Downloads\ascon-aead128-vhdl-main\worktrees\ascon-p8-pipeline\experiments\p8_pipeline\scripts\impl_one.tcl -tclargs C:\Users\Symok\Downloads\ascon-aead128-vhdl-main\worktrees\ascon-p8-pipeline\rtl 5.800 retime C:\Users\Symok\Downloads\ascon-aead128-vhdl-main\worktrees\ascon-p8-pipeline\experiments\p8_pipeline\results\runs\A_retime\p5.800
+# Log file: C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/A_retime/p5.800/vivado.log
+# Journal file: 
+# Running On: KroixLaptop, OS: Windows, CPU Frequency: 2304 MHz, CPU Physical cores: 8, Host memory: 34089 MB
+#-----------------------------------------------------------
+source {C:\Users\Symok\Downloads\ascon-aead128-vhdl-main\worktrees\ascon-p8-pipeline\experiments\p8_pipeline\scripts\impl_one.tcl}
+# if {[llength $argv] != 4} {
+#   error "usage: impl_one.tcl VARIANT_DIR PERIOD_NS STRATEGY OUT_DIR"
+# }
+# lassign $argv variant_dir period strategy out_dir
+# set variant_dir [file normalize $variant_dir]
+# set out_dir [file normalize $out_dir]
+# file mkdir $out_dir
+# set exp_root  [file normalize [file join [file dirname [info script]] ..]]
+# set repo_root [file normalize [file join $exp_root .. ..]]
+# set part xc7a100tcsg324-1
+# set sources [list \
+#   [file join $repo_root rtl ascon_pkg.vhd] \
+#   [file join $variant_dir ascon_permutation.vhd] \
+#   [file join $variant_dir ascon_aead128_core.vhd] \
+#   [file join $exp_root bench ascon_bench_top.vhd]]
+# foreach f $sources { read_vhdl -vhdl2008 $f }
+read_vhdl: Time (s): cpu = 00:00:08 ; elapsed = 00:00:10 . Memory (MB): peak = 476.125 ; gain = 180.852
+# set xdc [file join $out_dir constraints.xdc]
+# set fh [open [file join $exp_root bench ascon_bench_pins.xdc] r]
+# set pin_text [read $fh]
+# close $fh
+# set fh [open $xdc w]
+# puts $fh $pin_text
+# puts $fh [format "create_clock -name sys_clk_pin -period %.3f \[get_ports CLK100MHZ\]" $period]
+# close $fh
+# read_xdc $xdc
+# set synth_args {}
+# set place_dir Default
+# set phys_dir  {}
+# set route_dir Default
+# switch -- $strategy {
+#   default {}
+#   retime  { set synth_args {-retiming} }
+#   explore {
+#     set synth_args {-directive PerformanceOptimized}
+#     set place_dir ExtraTimingOpt
+#     set phys_dir  AggressiveExplore
+#     set route_dir AggressiveExplore
+#   }
+#   explore_retime {
+#     set synth_args {-directive PerformanceOptimized -retiming}
+#     set place_dir ExtraTimingOpt
+#     set phys_dir  AggressiveExplore
+#     set route_dir AggressiveExplore
+#   }
+#   physopt { set phys_dir Default }
+#   default { error "unknown strategy $strategy" }
+# }
+# synth_design -top ascon_bench_top -part $part {*}$synth_args
+WARNING: [Common 17-576] 'retiming' is deprecated. Please use -global_retiming option
+Command: synth_design -top ascon_bench_top -part xc7a100tcsg324-1 -retiming
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Device 21-403] Loading part xc7a100tcsg324-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 64696
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:10 . Memory (MB): peak = 1324.789 ; gain = 439.246
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'ascon_bench_top' [C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/bench/ascon_bench_top.vhd:38]
+INFO: [Synth 8-638] synthesizing module 'ascon_aead128_core' [C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/rtl/ascon_aead128_core.vhd:60]
+INFO: [Synth 8-638] synthesizing module 'ascon_permutation' [C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/rtl/ascon_permutation.vhd:29]
+INFO: [Synth 8-256] done synthesizing module 'ascon_permutation' (0#1) [C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/rtl/ascon_permutation.vhd:29]
+INFO: [Synth 8-256] done synthesizing module 'ascon_aead128_core' (0#1) [C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/rtl/ascon_aead128_core.vhd:60]
+INFO: [Synth 8-256] done synthesizing module 'ascon_bench_top' (0#1) [C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/bench/ascon_bench_top.vhd:38]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 1449.746 ; gain = 564.203
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 1449.746 ; gain = 564.203
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 1449.746 ; gain = 564.203
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.106 . Memory (MB): peak = 1449.746 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/A_retime/p5.800/constraints.xdc]
+Finished Parsing XDC File [C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/A_retime/p5.800/constraints.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/A_retime/p5.800/constraints.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/ascon_bench_top_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/ascon_bench_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1488.000 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.017 . Memory (MB): peak = 1488.000 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:24 ; elapsed = 00:00:27 . Memory (MB): peak = 1488.000 ; gain = 602.457
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a100tcsg324-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:24 ; elapsed = 00:00:27 . Memory (MB): peak = 1488.000 ; gain = 602.457
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:24 ; elapsed = 00:00:27 . Memory (MB): peak = 1488.000 ; gain = 602.457
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'drive_state_reg' in module 'ascon_bench_top'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                   d_cmd |                              000 |                              000
+                    d_ad |                              001 |                              001
+                   d_msg |                              010 |                              010
+                   d_tag |                              011 |                              011
+             d_wait_done |                              100 |                              100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'drive_state_reg' using encoding 'sequential' in module 'ascon_bench_top'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:26 ; elapsed = 00:00:29 . Memory (MB): peak = 1488.000 ; gain = 602.457
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   16 Bit       Adders := 1     
+	   2 Input    5 Bit       Adders := 1     
+	   2 Input    4 Bit       Adders := 4     
+	   9 Input    4 Bit       Adders := 1     
+	   5 Input    3 Bit       Adders := 1     
+	   2 Input    2 Bit       Adders := 1     
+	   3 Input    2 Bit       Adders := 1     
++---XORs : 
+	   2 Input    128 Bit         XORs := 6     
+	   6 Input    128 Bit         XORs := 1     
+	   2 Input     64 Bit         XORs := 18    
+	   3 Input     64 Bit         XORs := 7     
+	   2 Input      8 Bit         XORs := 1     
+	   2 Input      1 Bit         XORs := 1     
+	   4 Input      1 Bit         XORs := 1     
++---Registers : 
+	              320 Bit    Registers := 2     
+	              128 Bit    Registers := 9     
+	               16 Bit    Registers := 2     
+	                5 Bit    Registers := 1     
+	                4 Bit    Registers := 3     
+	                1 Bit    Registers := 24    
++---Muxes : 
+	   2 Input  320 Bit        Muxes := 6     
+	   5 Input  320 Bit        Muxes := 1     
+	  19 Input  320 Bit        Muxes := 2     
+	   2 Input  256 Bit        Muxes := 4     
+	   3 Input  256 Bit        Muxes := 1     
+	  19 Input  128 Bit        Muxes := 3     
+	   2 Input  128 Bit        Muxes := 5     
+	  19 Input   16 Bit        Muxes := 1     
+	   2 Input   16 Bit        Muxes := 1     
+	   5 Input   16 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 14    
+	   4 Input    5 Bit        Muxes := 2     
+	   3 Input    4 Bit        Muxes := 2     
+	   2 Input    4 Bit        Muxes := 4     
+	   5 Input    4 Bit        Muxes := 1     
+	   3 Input    3 Bit        Muxes := 1     
+	   5 Input    3 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 75    
+	  19 Input    1 Bit        Muxes := 22    
+	   5 Input    1 Bit        Muxes := 13    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 240 (col length:80)
+BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:51 ; elapsed = 00:00:57 . Memory (MB): peak = 1500.551 ; gain = 615.008
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:00 ; elapsed = 00:01:06 . Memory (MB): peak = 1500.551 ; gain = 615.008
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:01:13 ; elapsed = 00:01:22 . Memory (MB): peak = 1572.789 ; gain = 687.246
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+RETIMING: forward move fails for register in_keep_reg[0] along load instance i_1607
+RETIMING: forward move fails for register in_keep_reg[0] along load instance i_1612
+RETIMING: forward move fails for register in_keep_reg[14] along load instance i_1592
+RETIMING: forward move fails for register in_keep_reg[14] along load instance i_1611
+RETIMING: forward move fails for register in_keep_reg[13] along load instance i_1592
+RETIMING: forward move fails for register in_keep_reg[13] along load instance i_1611
+RETIMING: forward move fails for register in_keep_reg[6] along load instance i_1607
+RETIMING: forward move fails for register in_keep_reg[6] along load instance i_1612
+RETIMING: forward move fails for register in_keep_reg[2] along load instance i_1607
+RETIMING: forward move fails for register in_keep_reg[2] along load instance i_1612
+RETIMING: forward move fails for register in_keep_reg[1] along load instance i_1607
+RETIMING: forward move fails for register in_keep_reg[1] along load instance i_1612
+INFO: [Synth 8-5816] Retiming module `ascon_bench_top`
+	Numbers of forward move = 3, and backward move = 1401
+
+	Retimed registers names:
+		core_u/ad_full_last_reg_reg_bret
+		core_u/ad_full_last_reg_reg_bret__0
+		core_u/ad_full_last_reg_reg_bret__1
+		core_u/ad_full_last_reg_reg_bret__2
+		core_u/ad_full_last_reg_reg_bret__3
+		core_u/ad_full_last_reg_reg_bret__4
+		core_u/ad_last_reg_reg_bret
+		core_u/ad_last_reg_reg_bret__0
+		core_u/ad_last_reg_reg_bret__1
+		core_u/ad_last_reg_reg_bret__2
+		core_u/ad_last_reg_reg_bret__3
+		core_u/ad_last_reg_reg_bret__4
+		core_u/auth_ok_reg_reg_bret
+		core_u/auth_ok_reg_reg_bret__0
+		core_u/auth_ok_reg_reg_bret__1
+		core_u/auth_ok_reg_reg_bret__2
+		core_u/commit_reg_reg_bret
+		core_u/commit_reg_reg_bret__0
+		core_u/commit_reg_reg_bret__1
+		core_u/commit_reg_reg_bret__2
+		core_u/commit_reg_reg_bret__3
+		core_u/commit_reg_reg_bret__4
+		core_u/controller_state_reg[0]_bret
+		core_u/controller_state_reg[0]_bret__0
+		core_u/controller_state_reg[0]_bret__1
+		core_u/controller_state_reg[0]_bret__2
+		core_u/controller_state_reg[0]_bret__3
+		core_u/controller_state_reg[0]_bret__4
+		core_u/controller_state_reg[2]_bret
+		core_u/controller_state_reg[2]_bret__0
+		core_u/controller_state_reg[2]_bret__1
+		core_u/controller_state_reg[2]_bret__2
+		core_u/controller_state_reg[2]_bret__3
+		core_u/controller_state_reg[2]_bret__4
+		core_u/controller_state_reg[3]_bret
+		core_u/controller_state_reg[3]_bret__0
+		core_u/controller_state_reg[3]_bret__1
+		core_u/controller_state_reg[3]_bret__2
+		core_u/controller_state_reg[3]_bret__3
+		core_u/controller_state_reg[3]_bret__4
+		core_u/controller_state_reg[4]_bret
+		core_u/controller_state_reg[4]_bret__0
+		core_u/controller_state_reg[4]_bret__1
+		core_u/controller_state_reg[4]_bret__2
+		core_u/controller_state_reg[4]_bret__3
+		core_u/controller_state_reg[4]_bret__4
+		core_u/discard_reg_reg_bret
+		core_u/discard_reg_reg_bret__0
+		core_u/discard_reg_reg_bret__1
+		core_u/discard_reg_reg_bret__2
+		core_u/discard_reg_reg_bret__3
+		core_u/discard_reg_reg_bret__4
+		core_u/error_reg_reg_bret
+		core_u/error_reg_reg_bret__0
+		core_u/error_reg_reg_bret__1
+		core_u/error_reg_reg_bret__2
+		core_u/error_reg_reg_bret__3
+		core_u/error_reg_reg_bret__4
+		core_u/msg_full_reg_reg_bret
+		core_u/msg_full_reg_reg_bret__0
+		core_u/msg_full_reg_reg_bret__1
+		core_u/msg_full_reg_reg_bret__2
+		core_u/msg_last_reg_reg_bret
+		core_u/msg_last_reg_reg_bret__0
+		core_u/out_data_reg_reg[0]_bret
+		core_u/out_data_reg_reg[0]_bret__0
+		core_u/out_data_reg_reg[0]_bret__1
+		core_u/out_data_reg_reg[0]_bret__2
+		core_u/out_data_reg_reg[0]_bret__3
+		core_u/out_data_reg_reg[0]_bret__4
+		core_u/out_data_reg_reg[100]_bret
+		core_u/out_data_reg_reg[100]_bret__0
+		core_u/out_data_reg_reg[100]_bret__1
+		core_u/out_data_reg_reg[100]_bret__2
+		core_u/out_data_reg_reg[100]_bret__3
+		core_u/out_data_reg_reg[100]_bret__4
+		core_u/out_data_reg_reg[101]_bret
+		core_u/out_data_reg_reg[101]_bret__0
+		core_u/out_data_reg_reg[101]_bret__1
+		core_u/out_data_reg_reg[101]_bret__2
+		core_u/out_data_reg_reg[101]_bret__3
+		core_u/out_data_reg_reg[101]_bret__4
+		core_u/out_data_reg_reg[102]_bret
+		core_u/out_data_reg_reg[102]_bret__0
+		core_u/out_data_reg_reg[102]_bret__1
+		core_u/out_data_reg_reg[102]_bret__2
+		core_u/out_data_reg_reg[102]_bret__3
+		core_u/out_data_reg_reg[102]_bret__4
+		core_u/out_data_reg_reg[103]_bret
+		core_u/out_data_reg_reg[103]_bret__0
+		core_u/out_data_reg_reg[103]_bret__1
+		core_u/out_data_reg_reg[103]_bret__2
+		core_u/out_data_reg_reg[103]_bret__3
+		core_u/out_data_reg_reg[103]_bret__4
+		core_u/out_data_reg_reg[104]_bret
+		core_u/out_data_reg_reg[104]_bret__0
+		core_u/out_data_reg_reg[104]_bret__1
+		core_u/out_data_reg_reg[104]_bret__2
+		core_u/out_data_reg_reg[104]_bret__3
+		core_u/out_data_reg_reg[104]_bret__4
+		core_u/out_data_reg_reg[105]_bret
+		core_u/out_data_reg_reg[105]_bret__0
+		core_u/out_data_reg_reg[105]_bret__1
+		core_u/out_data_reg_reg[105]_bret__2
+		core_u/out_data_reg_reg[105]_bret__3
+		core_u/out_data_reg_reg[105]_bret__4
+		core_u/out_data_reg_reg[106]_bret
+		core_u/out_data_reg_reg[106]_bret__0
+		core_u/out_data_reg_reg[106]_bret__1
+		core_u/out_data_reg_reg[106]_bret__2
+		core_u/out_data_reg_reg[106]_bret__3
+		core_u/out_data_reg_reg[106]_bret__4
+		core_u/out_data_reg_reg[107]_bret
+		core_u/out_data_reg_reg[107]_bret__0
+		core_u/out_data_reg_reg[107]_bret__1
+		core_u/out_data_reg_reg[107]_bret__2
+		core_u/out_data_reg_reg[107]_bret__3
+		core_u/out_data_reg_reg[107]_bret__4
+		core_u/out_data_reg_reg[108]_bret
+		core_u/out_data_reg_reg[108]_bret__0
+		core_u/out_data_reg_reg[108]_bret__1
+		core_u/out_data_reg_reg[108]_bret__2
+		core_u/out_data_reg_reg[108]_bret__3
+		core_u/out_data_reg_reg[108]_bret__4
+		core_u/out_data_reg_reg[109]_bret
+		core_u/out_data_reg_reg[109]_bret__0
+		core_u/out_data_reg_reg[109]_bret__1
+		core_u/out_data_reg_reg[109]_bret__2
+		core_u/out_data_reg_reg[109]_bret__3
+		core_u/out_data_reg_reg[109]_bret__4
+		core_u/out_data_reg_reg[10]_bret
+		core_u/out_data_reg_reg[10]_bret__0
+		core_u/out_data_reg_reg[10]_bret__1
+		core_u/out_data_reg_reg[10]_bret__2
+		core_u/out_data_reg_reg[10]_bret__3
+		core_u/out_data_reg_reg[10]_bret__4
+		core_u/out_data_reg_reg[110]_bret
+		core_u/out_data_reg_reg[110]_bret__0
+		core_u/out_data_reg_reg[110]_bret__1
+		core_u/out_data_reg_reg[110]_bret__2
+		core_u/out_data_reg_reg[110]_bret__3
+		core_u/out_data_reg_reg[110]_bret__4
+		core_u/out_data_reg_reg[111]_bret
+		core_u/out_data_reg_reg[111]_bret__0
+		core_u/out_data_reg_reg[111]_bret__1
+		core_u/out_data_reg_reg[111]_bret__2
+		core_u/out_data_reg_reg[111]_bret__3
+		core_u/out_data_reg_reg[111]_bret__4
+		core_u/out_data_reg_reg[112]_bret
+		core_u/out_data_reg_reg[112]_bret__0
+		core_u/out_data_reg_reg[112]_bret__1
+		core_u/out_data_reg_reg[112]_bret__2
+		core_u/out_data_reg_reg[112]_bret__3
+		core_u/out_data_reg_reg[112]_bret__4
+		core_u/out_data_reg_reg[113]_bret
+		core_u/out_data_reg_reg[113]_bret__0
+		core_u/out_data_reg_reg[113]_bret__1
+		core_u/out_data_reg_reg[113]_bret__2
+		core_u/out_data_reg_reg[113]_bret__3
+		core_u/out_data_reg_reg[113]_bret__4
+		core_u/out_data_reg_reg[114]_bret
+		core_u/out_data_reg_reg[114]_bret__0
+		core_u/out_data_reg_reg[114]_bret__1
+		core_u/out_data_reg_reg[114]_bret__2
+		core_u/out_data_reg_reg[114]_bret__3
+		core_u/out_data_reg_reg[114]_bret__4
+		core_u/out_data_reg_reg[115]_bret
+		core_u/out_data_reg_reg[115]_bret__0
+		core_u/out_data_reg_reg[115]_bret__1
+		core_u/out_data_reg_reg[115]_bret__2
+		core_u/out_data_reg_reg[115]_bret__3
+		core_u/out_data_reg_reg[115]_bret__4
+		core_u/out_data_reg_reg[116]_bret
+		core_u/out_data_reg_reg[116]_bret__0
+		core_u/out_data_reg_reg[116]_bret__1
+		core_u/out_data_reg_reg[116]_bret__2
+		core_u/out_data_reg_reg[116]_bret__3
+		core_u/out_data_reg_reg[116]_bret__4
+		core_u/out_data_reg_reg[117]_bret
+		core_u/out_data_reg_reg[117]_bret__0
+		core_u/out_data_reg_reg[117]_bret__1
+		core_u/out_data_reg_reg[117]_bret__2
+		core_u/out_data_reg_reg[117]_bret__3
+		core_u/out_data_reg_reg[117]_bret__4
+		core_u/out_data_reg_reg[118]_bret
+		core_u/out_data_reg_reg[118]_bret__0
+		core_u/out_data_reg_reg[118]_bret__1
+		core_u/out_data_reg_reg[118]_bret__2
+		core_u/out_data_reg_reg[118]_bret__3
+		core_u/out_data_reg_reg[118]_bret__4
+		core_u/out_data_reg_reg[119]_bret
+		core_u/out_data_reg_reg[119]_bret__0
+		core_u/out_data_reg_reg[119]_bret__1
+		core_u/out_data_reg_reg[119]_bret__2
+		core_u/out_data_reg_reg[119]_bret__3
+		core_u/out_data_reg_reg[119]_bret__4
+		core_u/out_data_reg_reg[11]_bret
+		core_u/out_data_reg_reg[11]_bret__0
+		core_u/out_data_reg_reg[11]_bret__1
+		core_u/out_data_reg_reg[11]_bret__2
+		core_u/out_data_reg_reg[11]_bret__3
+		core_u/out_data_reg_reg[11]_bret__4
+		core_u/out_data_reg_reg[120]_bret
+		core_u/out_data_reg_reg[120]_bret__0
+		core_u/out_data_reg_reg[120]_bret__1
+		core_u/out_data_reg_reg[120]_bret__2
+		core_u/out_data_reg_reg[120]_bret__3
+		core_u/out_data_reg_reg[120]_bret__4
+		core_u/out_data_reg_reg[121]_bret
+		core_u/out_data_reg_reg[121]_bret__0
+		core_u/out_data_reg_reg[121]_bret__1
+		core_u/out_data_reg_reg[121]_bret__2
+		core_u/out_data_reg_reg[121]_bret__3
+		core_u/out_data_reg_reg[121]_bret__4
+		core_u/out_data_reg_reg[122]_bret
+		core_u/out_data_reg_reg[122]_bret__0
+		core_u/out_data_reg_reg[122]_bret__1
+		core_u/out_data_reg_reg[122]_bret__2
+		core_u/out_data_reg_reg[122]_bret__3
+		core_u/out_data_reg_reg[122]_bret__4
+		core_u/out_data_reg_reg[123]_bret
+		core_u/out_data_reg_reg[123]_bret__0
+		core_u/out_data_reg_reg[123]_bret__1
+		core_u/out_data_reg_reg[123]_bret__2
+		core_u/out_data_reg_reg[123]_bret__3
+		core_u/out_data_reg_reg[123]_bret__4
+		core_u/out_data_reg_reg[124]_bret
+		core_u/out_data_reg_reg[124]_bret__0
+		core_u/out_data_reg_reg[124]_bret__1
+		core_u/out_data_reg_reg[124]_bret__2
+		core_u/out_data_reg_reg[124]_bret__3
+		core_u/out_data_reg_reg[124]_bret__4
+		core_u/out_data_reg_reg[125]_bret
+		core_u/out_data_reg_reg[125]_bret__0
+		core_u/out_data_reg_reg[125]_bret__1
+		core_u/out_data_reg_reg[125]_bret__2
+		core_u/out_data_reg_reg[125]_bret__3
+		core_u/out_data_reg_reg[125]_bret__4
+		core_u/out_data_reg_reg[126]_bret
+		core_u/out_data_reg_reg[126]_bret__0
+		core_u/out_data_reg_reg[126]_bret__1
+		core_u/out_data_reg_reg[126]_bret__2
+		core_u/out_data_reg_reg[126]_bret__3
+		core_u/out_data_reg_reg[126]_bret__4
+		core_u/out_data_reg_reg[127]_bret
+		core_u/out_data_reg_reg[127]_bret__0
+		core_u/out_data_reg_reg[127]_bret__1
+		core_u/out_data_reg_reg[127]_bret__2
+		core_u/out_data_reg_reg[127]_bret__3
+		core_u/out_data_reg_reg[127]_bret__4
+		core_u/out_data_reg_reg[12]_bret
+		core_u/out_data_reg_reg[12]_bret__0
+		core_u/out_data_reg_reg[12]_bret__1
+		core_u/out_data_reg_reg[12]_bret__2
+		core_u/out_data_reg_reg[12]_bret__3
+		core_u/out_data_reg_reg[12]_bret__4
+		core_u/out_data_reg_reg[13]_bret
+		core_u/out_data_reg_reg[13]_bret__0
+		core_u/out_data_reg_reg[13]_bret__1
+		core_u/out_data_reg_reg[13]_bret__2
+		core_u/out_data_reg_reg[13]_bret__3
+		core_u/out_data_reg_reg[13]_bret__4
+		core_u/out_data_reg_reg[14]_bret
+		core_u/out_data_reg_reg[14]_bret__0
+		core_u/out_data_reg_reg[14]_bret__1
+		core_u/out_data_reg_reg[14]_bret__2
+		core_u/out_data_reg_reg[14]_bret__3
+		core_u/out_data_reg_reg[14]_bret__4
+		core_u/out_data_reg_reg[15]_bret
+		core_u/out_data_reg_reg[15]_bret__0
+		core_u/out_data_reg_reg[15]_bret__1
+		core_u/out_data_reg_reg[15]_bret__2
+		core_u/out_data_reg_reg[15]_bret__3
+		core_u/out_data_reg_reg[15]_bret__4
+		core_u/out_data_reg_reg[16]_bret
+		core_u/out_data_reg_reg[16]_bret__0
+		core_u/out_data_reg_reg[16]_bret__1
+		core_u/out_data_reg_reg[16]_bret__2
+		core_u/out_data_reg_reg[16]_bret__3
+		core_u/out_data_reg_reg[16]_bret__4
+		core_u/out_data_reg_reg[17]_bret
+		core_u/out_data_reg_reg[17]_bret__0
+		core_u/out_data_reg_reg[17]_bret__1
+		core_u/out_data_reg_reg[17]_bret__2
+		core_u/out_data_reg_reg[17]_bret__3
+		core_u/out_data_reg_reg[17]_bret__4
+		core_u/out_data_reg_reg[18]_bret
+		core_u/out_data_reg_reg[18]_bret__0
+		core_u/out_data_reg_reg[18]_bret__1
+		core_u/out_data_reg_reg[18]_bret__2
+		core_u/out_data_reg_reg[18]_bret__3
+		core_u/out_data_reg_reg[18]_bret__4
+		core_u/out_data_reg_reg[19]_bret
+		core_u/out_data_reg_reg[19]_bret__0
+		core_u/out_data_reg_reg[19]_bret__1
+		core_u/out_data_reg_reg[19]_bret__2
+		core_u/out_data_reg_reg[19]_bret__3
+		core_u/out_data_reg_reg[19]_bret__4
+		core_u/out_data_reg_reg[1]_bret
+		core_u/out_data_reg_reg[1]_bret__0
+		core_u/out_data_reg_reg[1]_bret__1
+		core_u/out_data_reg_reg[1]_bret__2
+		core_u/out_data_reg_reg[1]_bret__3
+		core_u/out_data_reg_reg[1]_bret__4
+		core_u/out_data_reg_reg[20]_bret
+		core_u/out_data_reg_reg[20]_bret__0
+		core_u/out_data_reg_reg[20]_bret__1
+		core_u/out_data_reg_reg[20]_bret__2
+		core_u/out_data_reg_reg[20]_bret__3
+		core_u/out_data_reg_reg[20]_bret__4
+		core_u/out_data_reg_reg[21]_bret
+		core_u/out_data_reg_reg[21]_bret__0
+		core_u/out_data_reg_reg[21]_bret__1
+		core_u/out_data_reg_reg[21]_bret__2
+		core_u/out_data_reg_reg[21]_bret__3
+		core_u/out_data_reg_reg[21]_bret__4
+		core_u/out_data_reg_reg[22]_bret
+		core_u/out_data_reg_reg[22]_bret__0
+		core_u/out_data_reg_reg[22]_bret__1
+		core_u/out_data_reg_reg[22]_bret__2
+		core_u/out_data_reg_reg[22]_bret__3
+		core_u/out_data_reg_reg[22]_bret__4
+		core_u/out_data_reg_reg[23]_bret
+		core_u/out_data_reg_reg[23]_bret__0
+		core_u/out_data_reg_reg[23]_bret__1
+		core_u/out_data_reg_reg[23]_bret__2
+		core_u/out_data_reg_reg[23]_bret__3
+		core_u/out_data_reg_reg[23]_bret__4
+		core_u/out_data_reg_reg[24]_bret
+		core_u/out_data_reg_reg[24]_bret__0
+		core_u/out_data_reg_reg[24]_bret__1
+		core_u/out_data_reg_reg[24]_bret__2
+		core_u/out_data_reg_reg[24]_bret__3
+		core_u/out_data_reg_reg[24]_bret__4
+		core_u/out_data_reg_reg[25]_bret
+		core_u/out_data_reg_reg[25]_bret__0
+		core_u/out_data_reg_reg[25]_bret__1
+		core_u/out_data_reg_reg[25]_bret__2
+		core_u/out_data_reg_reg[25]_bret__3
+		core_u/out_data_reg_reg[25]_bret__4
+		core_u/out_data_reg_reg[26]_bret
+		core_u/out_data_reg_reg[26]_bret__0
+		core_u/out_data_reg_reg[26]_bret__1
+		core_u/out_data_reg_reg[26]_bret__2
+		core_u/out_data_reg_reg[26]_bret__3
+		core_u/out_data_reg_reg[26]_bret__4
+		core_u/out_data_reg_reg[27]_bret
+		core_u/out_data_reg_reg[27]_bret__0
+		core_u/out_data_reg_reg[27]_bret__1
+		core_u/out_data_reg_reg[27]_bret__2
+		core_u/out_data_reg_reg[27]_bret__3
+		core_u/out_data_reg_reg[27]_bret__4
+		core_u/out_data_reg_reg[28]_bret
+		core_u/out_data_reg_reg[28]_bret__0
+		core_u/out_data_reg_reg[28]_bret__1
+		core_u/out_data_reg_reg[28]_bret__2
+		core_u/out_data_reg_reg[28]_bret__3
+		core_u/out_data_reg_reg[28]_bret__4
+		core_u/out_data_reg_reg[29]_bret
+		core_u/out_data_reg_reg[29]_bret__0
+		core_u/out_data_reg_reg[29]_bret__1
+		core_u/out_data_reg_reg[29]_bret__2
+		core_u/out_data_reg_reg[29]_bret__3
+		core_u/out_data_reg_reg[29]_bret__4
+		core_u/out_data_reg_reg[2]_bret
+		core_u/out_data_reg_reg[2]_bret__0
+		core_u/out_data_reg_reg[2]_bret__1
+		core_u/out_data_reg_reg[2]_bret__2
+		core_u/out_data_reg_reg[2]_bret__3
+		core_u/out_data_reg_reg[2]_bret__4
+		core_u/out_data_reg_reg[30]_bret
+		core_u/out_data_reg_reg[30]_bret__0
+		core_u/out_data_reg_reg[30]_bret__1
+		core_u/out_data_reg_reg[30]_bret__2
+		core_u/out_data_reg_reg[30]_bret__3
+		core_u/out_data_reg_reg[30]_bret__4
+		core_u/out_data_reg_reg[31]_bret
+		core_u/out_data_reg_reg[31]_bret__0
+		core_u/out_data_reg_reg[31]_bret__1
+		core_u/out_data_reg_reg[31]_bret__2
+		core_u/out_data_reg_reg[31]_bret__3
+		core_u/out_data_reg_reg[31]_bret__4
+		core_u/out_data_reg_reg[32]_bret
+		core_u/out_data_reg_reg[32]_bret__0
+		core_u/out_data_reg_reg[32]_bret__1
+		core_u/out_data_reg_reg[32]_bret__2
+		core_u/out_data_reg_reg[32]_bret__3
+		core_u/out_data_reg_reg[32]_bret__4
+		core_u/out_data_reg_reg[33]_bret
+		core_u/out_data_reg_reg[33]_bret__0
+		core_u/out_data_reg_reg[33]_bret__1
+		core_u/out_data_reg_reg[33]_bret__2
+		core_u/out_data_reg_reg[33]_bret__3
+		core_u/out_data_reg_reg[33]_bret__4
+		core_u/out_data_reg_reg[34]_bret
+		core_u/out_data_reg_reg[34]_bret__0
+		core_u/out_data_reg_reg[34]_bret__1
+		core_u/out_data_reg_reg[34]_bret__2
+		core_u/out_data_reg_reg[34]_bret__3
+		core_u/out_data_reg_reg[34]_bret__4
+		core_u/out_data_reg_reg[35]_bret
+		core_u/out_data_reg_reg[35]_bret__0
+		core_u/out_data_reg_reg[35]_bret__1
+		core_u/out_data_reg_reg[35]_bret__2
+		core_u/out_data_reg_reg[35]_bret__3
+		core_u/out_data_reg_reg[35]_bret__4
+		core_u/out_data_reg_reg[36]_bret
+		core_u/out_data_reg_reg[36]_bret__0
+		core_u/out_data_reg_reg[36]_bret__1
+		core_u/out_data_reg_reg[36]_bret__2
+		core_u/out_data_reg_reg[36]_bret__3
+		core_u/out_data_reg_reg[36]_bret__4
+		core_u/out_data_reg_reg[37]_bret
+		core_u/out_data_reg_reg[37]_bret__0
+		core_u/out_data_reg_reg[37]_bret__1
+		core_u/out_data_reg_reg[37]_bret__2
+		core_u/out_data_reg_reg[37]_bret__3
+		core_u/out_data_reg_reg[37]_bret__4
+		core_u/out_data_reg_reg[38]_bret
+		core_u/out_data_reg_reg[38]_bret__0
+		core_u/out_data_reg_reg[38]_bret__1
+		core_u/out_data_reg_reg[38]_bret__2
+		core_u/out_data_reg_reg[38]_bret__3
+		core_u/out_data_reg_reg[38]_bret__4
+		core_u/out_data_reg_reg[39]_bret
+		core_u/out_data_reg_reg[39]_bret__0
+		core_u/out_data_reg_reg[39]_bret__1
+		core_u/out_data_reg_reg[39]_bret__2
+		core_u/out_data_reg_reg[39]_bret__3
+		core_u/out_data_reg_reg[39]_bret__4
+		core_u/out_data_reg_reg[3]_bret
+		core_u/out_data_reg_reg[3]_bret__0
+		core_u/out_data_reg_reg[3]_bret__1
+		core_u/out_data_reg_reg[3]_bret__2
+		core_u/out_data_reg_reg[3]_bret__3
+		core_u/out_data_reg_reg[3]_bret__4
+		core_u/out_data_reg_reg[40]_bret
+		core_u/out_data_reg_reg[40]_bret__0
+		core_u/out_data_reg_reg[40]_bret__1
+		core_u/out_data_reg_reg[40]_bret__2
+		core_u/out_data_reg_reg[40]_bret__3
+		core_u/out_data_reg_reg[40]_bret__4
+		core_u/out_data_reg_reg[41]_bret
+		core_u/out_data_reg_reg[41]_bret__0
+		core_u/out_data_reg_reg[41]_bret__1
+		core_u/out_data_reg_reg[41]_bret__2
+		core_u/out_data_reg_reg[41]_bret__3
+		core_u/out_data_reg_reg[41]_bret__4
+		core_u/out_data_reg_reg[42]_bret
+		core_u/out_data_reg_reg[42]_bret__0
+		core_u/out_data_reg_reg[42]_bret__1
+		core_u/out_data_reg_reg[42]_bret__2
+		core_u/out_data_reg_reg[42]_bret__3
+		core_u/out_data_reg_reg[42]_bret__4
+		core_u/out_data_reg_reg[43]_bret
+		core_u/out_data_reg_reg[43]_bret__0
+		core_u/out_data_reg_reg[43]_bret__1
+		core_u/out_data_reg_reg[43]_bret__2
+		core_u/out_data_reg_reg[43]_bret__3
+		core_u/out_data_reg_reg[43]_bret__4
+		core_u/out_data_reg_reg[44]_bret
+		core_u/out_data_reg_reg[44]_bret__0
+		core_u/out_data_reg_reg[44]_bret__1
+		core_u/out_data_reg_reg[44]_bret__2
+		core_u/out_data_reg_reg[44]_bret__3
+		core_u/out_data_reg_reg[44]_bret__4
+		core_u/out_data_reg_reg[45]_bret
+		core_u/out_data_reg_reg[45]_bret__0
+		core_u/out_data_reg_reg[45]_bret__1
+		core_u/out_data_reg_reg[45]_bret__2
+		core_u/out_data_reg_reg[45]_bret__3
+		core_u/out_data_reg_reg[45]_bret__4
+		core_u/out_data_reg_reg[46]_bret
+		core_u/out_data_reg_reg[46]_bret__0
+		core_u/out_data_reg_reg[46]_bret__1
+		core_u/out_data_reg_reg[46]_bret__2
+		core_u/out_data_reg_reg[46]_bret__3
+		core_u/out_data_reg_reg[46]_bret__4
+		core_u/out_data_reg_reg[47]_bret
+		core_u/out_data_reg_reg[47]_bret__0
+		core_u/out_data_reg_reg[47]_bret__1
+		core_u/out_data_reg_reg[47]_bret__2
+		core_u/out_data_reg_reg[47]_bret__3
+		core_u/out_data_reg_reg[47]_bret__4
+		core_u/out_data_reg_reg[48]_bret
+		core_u/out_data_reg_reg[48]_bret__0
+		core_u/out_data_reg_reg[48]_bret__1
+		core_u/out_data_reg_reg[48]_bret__2
+		core_u/out_data_reg_reg[48]_bret__3
+		core_u/out_data_reg_reg[48]_bret__4
+		core_u/out_data_reg_reg[49]_bret
+		core_u/out_data_reg_reg[49]_bret__0
+		core_u/out_data_reg_reg[49]_bret__1
+		core_u/out_data_reg_reg[49]_bret__2
+		core_u/out_data_reg_reg[49]_bret__3
+		core_u/out_data_reg_reg[49]_bret__4
+		core_u/out_data_reg_reg[4]_bret
+		core_u/out_data_reg_reg[4]_bret__0
+		core_u/out_data_reg_reg[4]_bret__1
+		core_u/out_data_reg_reg[4]_bret__2
+		core_u/out_data_reg_reg[4]_bret__3
+		core_u/out_data_reg_reg[4]_bret__4
+		core_u/out_data_reg_reg[50]_bret
+		core_u/out_data_reg_reg[50]_bret__0
+		core_u/out_data_reg_reg[50]_bret__1
+		core_u/out_data_reg_reg[50]_bret__2
+		core_u/out_data_reg_reg[50]_bret__3
+		core_u/out_data_reg_reg[50]_bret__4
+		core_u/out_data_reg_reg[51]_bret
+		core_u/out_data_reg_reg[51]_bret__0
+		core_u/out_data_reg_reg[51]_bret__1
+		core_u/out_data_reg_reg[51]_bret__2
+		core_u/out_data_reg_reg[51]_bret__3
+		core_u/out_data_reg_reg[51]_bret__4
+		core_u/out_data_reg_reg[52]_bret
+		core_u/out_data_reg_reg[52]_bret__0
+		core_u/out_data_reg_reg[52]_bret__1
+		core_u/out_data_reg_reg[52]_bret__2
+		core_u/out_data_reg_reg[52]_bret__3
+		core_u/out_data_reg_reg[52]_bret__4
+		core_u/out_data_reg_reg[53]_bret
+		core_u/out_data_reg_reg[53]_bret__0
+		core_u/out_data_reg_reg[53]_bret__1
+		core_u/out_data_reg_reg[53]_bret__2
+		core_u/out_data_reg_reg[53]_bret__3
+		core_u/out_data_reg_reg[53]_bret__4
+		core_u/out_data_reg_reg[54]_bret
+		core_u/out_data_reg_reg[54]_bret__0
+		core_u/out_data_reg_reg[54]_bret__1
+		core_u/out_data_reg_reg[54]_bret__2
+		core_u/out_data_reg_reg[54]_bret__3
+		core_u/out_data_reg_reg[54]_bret__4
+		core_u/out_data_reg_reg[55]_bret
+		core_u/out_data_reg_reg[55]_bret__0
+		core_u/out_data_reg_reg[55]_bret__1
+		core_u/out_data_reg_reg[55]_bret__2
+		core_u/out_data_reg_reg[55]_bret__3
+		core_u/out_data_reg_reg[55]_bret__4
+		core_u/out_data_reg_reg[56]_bret
+		core_u/out_data_reg_reg[56]_bret__0
+		core_u/out_data_reg_reg[56]_bret__1
+		core_u/out_data_reg_reg[56]_bret__2
+		core_u/out_data_reg_reg[56]_bret__3
+		core_u/out_data_reg_reg[56]_bret__4
+		core_u/out_data_reg_reg[57]_bret
+		core_u/out_data_reg_reg[57]_bret__0
+		core_u/out_data_reg_reg[57]_bret__1
+		core_u/out_data_reg_reg[57]_bret__2
+		core_u/out_data_reg_reg[57]_bret__3
+		core_u/out_data_reg_reg[57]_bret__4
+		core_u/out_data_reg_reg[58]_bret
+		core_u/out_data_reg_reg[58]_bret__0
+		core_u/out_data_reg_reg[58]_bret__1
+		core_u/out_data_reg_reg[58]_bret__2
+		core_u/out_data_reg_reg[58]_bret__3
+		core_u/out_data_reg_reg[58]_bret__4
+		core_u/out_data_reg_reg[59]_bret
+		core_u/out_data_reg_reg[59]_bret__0
+		core_u/out_data_reg_reg[59]_bret__1
+		core_u/out_data_reg_reg[59]_bret__2
+		core_u/out_data_reg_reg[59]_bret__3
+		core_u/out_data_reg_reg[59]_bret__4
+		core_u/out_data_reg_reg[5]_bret
+		core_u/out_data_reg_reg[5]_bret__0
+		core_u/out_data_reg_reg[5]_bret__1
+		core_u/out_data_reg_reg[5]_bret__2
+		core_u/out_data_reg_reg[5]_bret__3
+		core_u/out_data_reg_reg[5]_bret__4
+		core_u/out_data_reg_reg[60]_bret
+		core_u/out_data_reg_reg[60]_bret__0
+		core_u/out_data_reg_reg[60]_bret__1
+		core_u/out_data_reg_reg[60]_bret__2
+		core_u/out_data_reg_reg[60]_bret__3
+		core_u/out_data_reg_reg[60]_bret__4
+		core_u/out_data_reg_reg[61]_bret
+		core_u/out_data_reg_reg[61]_bret__0
+		core_u/out_data_reg_reg[61]_bret__1
+		core_u/out_data_reg_reg[61]_bret__2
+		core_u/out_data_reg_reg[61]_bret__3
+		core_u/out_data_reg_reg[61]_bret__4
+		core_u/out_data_reg_reg[62]_bret
+		core_u/out_data_reg_reg[62]_bret__0
+		core_u/out_data_reg_reg[62]_bret__1
+		core_u/out_data_reg_reg[62]_bret__2
+		core_u/out_data_reg_reg[62]_bret__3
+		core_u/out_data_reg_reg[62]_bret__4
+		core_u/out_data_reg_reg[63]_bret
+		core_u/out_data_reg_reg[63]_bret__0
+		core_u/out_data_reg_reg[63]_bret__1
+		core_u/out_data_reg_reg[63]_bret__2
+		core_u/out_data_reg_reg[63]_bret__3
+		core_u/out_data_reg_reg[63]_bret__4
+		core_u/out_data_reg_reg[64]_bret
+		core_u/out_data_reg_reg[64]_bret__0
+		core_u/out_data_reg_reg[64]_bret__1
+		core_u/out_data_reg_reg[64]_bret__2
+		core_u/out_data_reg_reg[64]_bret__3
+		core_u/out_data_reg_reg[64]_bret__4
+		core_u/out_data_reg_reg[65]_bret
+		core_u/out_data_reg_reg[65]_bret__0
+		core_u/out_data_reg_reg[65]_bret__1
+		core_u/out_data_reg_reg[65]_bret__2
+		core_u/out_data_reg_reg[65]_bret__3
+		core_u/out_data_reg_reg[65]_bret__4
+		core_u/out_data_reg_reg[66]_bret
+		core_u/out_data_reg_reg[66]_bret__0
+		core_u/out_data_reg_reg[66]_bret__1
+		core_u/out_data_reg_reg[66]_bret__2
+		core_u/out_data_reg_reg[66]_bret__3
+		core_u/out_data_reg_reg[66]_bret__4
+		core_u/out_data_reg_reg[67]_bret
+		core_u/out_data_reg_reg[67]_bret__0
+		core_u/out_data_reg_reg[67]_bret__1
+		core_u/out_data_reg_reg[67]_bret__2
+		core_u/out_data_reg_reg[67]_bret__3
+		core_u/out_data_reg_reg[67]_bret__4
+		core_u/out_data_reg_reg[68]_bret
+		core_u/out_data_reg_reg[68]_bret__0
+		core_u/out_data_reg_reg[68]_bret__1
+		core_u/out_data_reg_reg[68]_bret__2
+		core_u/out_data_reg_reg[68]_bret__3
+		core_u/out_data_reg_reg[68]_bret__4
+		core_u/out_data_reg_reg[69]_bret
+		core_u/out_data_reg_reg[69]_bret__0
+		core_u/out_data_reg_reg[69]_bret__1
+		core_u/out_data_reg_reg[69]_bret__2
+		core_u/out_data_reg_reg[69]_bret__3
+		core_u/out_data_reg_reg[69]_bret__4
+		core_u/out_data_reg_reg[6]_bret
+		core_u/out_data_reg_reg[6]_bret__0
+		core_u/out_data_reg_reg[6]_bret__1
+		core_u/out_data_reg_reg[6]_bret__2
+		core_u/out_data_reg_reg[6]_bret__3
+		core_u/out_data_reg_reg[6]_bret__4
+		core_u/out_data_reg_reg[70]_bret
+		core_u/out_data_reg_reg[70]_bret__0
+		core_u/out_data_reg_reg[70]_bret__1
+		core_u/out_data_reg_reg[70]_bret__2
+		core_u/out_data_reg_reg[70]_bret__3
+		core_u/out_data_reg_reg[70]_bret__4
+		core_u/out_data_reg_reg[71]_bret
+		core_u/out_data_reg_reg[71]_bret__0
+		core_u/out_data_reg_reg[71]_bret__1
+		core_u/out_data_reg_reg[71]_bret__2
+		core_u/out_data_reg_reg[71]_bret__3
+		core_u/out_data_reg_reg[71]_bret__4
+		core_u/out_data_reg_reg[72]_bret
+		core_u/out_data_reg_reg[72]_bret__0
+		core_u/out_data_reg_reg[72]_bret__1
+		core_u/out_data_reg_reg[72]_bret__2
+		core_u/out_data_reg_reg[72]_bret__3
+		core_u/out_data_reg_reg[72]_bret__4
+		core_u/out_data_reg_reg[73]_bret
+		core_u/out_data_reg_reg[73]_bret__0
+		core_u/out_data_reg_reg[73]_bret__1
+		core_u/out_data_reg_reg[73]_bret__2
+		core_u/out_data_reg_reg[73]_bret__3
+		core_u/out_data_reg_reg[73]_bret__4
+		core_u/out_data_reg_reg[74]_bret
+		core_u/out_data_reg_reg[74]_bret__0
+		core_u/out_data_reg_reg[74]_bret__1
+		core_u/out_data_reg_reg[74]_bret__2
+		core_u/out_data_reg_reg[74]_bret__3
+		core_u/out_data_reg_reg[74]_bret__4
+		core_u/out_data_reg_reg[75]_bret
+		core_u/out_data_reg_reg[75]_bret__0
+		core_u/out_data_reg_reg[75]_bret__1
+		core_u/out_data_reg_reg[75]_bret__2
+		core_u/out_data_reg_reg[75]_bret__3
+		core_u/out_data_reg_reg[75]_bret__4
+		core_u/out_data_reg_reg[76]_bret
+		core_u/out_data_reg_reg[76]_bret__0
+		core_u/out_data_reg_reg[76]_bret__1
+		core_u/out_data_reg_reg[76]_bret__2
+		core_u/out_data_reg_reg[76]_bret__3
+		core_u/out_data_reg_reg[76]_bret__4
+		core_u/out_data_reg_reg[77]_bret
+		core_u/out_data_reg_reg[77]_bret__0
+		core_u/out_data_reg_reg[77]_bret__1
+		core_u/out_data_reg_reg[77]_bret__2
+		core_u/out_data_reg_reg[77]_bret__3
+		core_u/out_data_reg_reg[77]_bret__4
+		core_u/out_data_reg_reg[78]_bret
+		core_u/out_data_reg_reg[78]_bret__0
+		core_u/out_data_reg_reg[78]_bret__1
+		core_u/out_data_reg_reg[78]_bret__2
+		core_u/out_data_reg_reg[78]_bret__3
+		core_u/out_data_reg_reg[78]_bret__4
+		core_u/out_data_reg_reg[79]_bret
+		core_u/out_data_reg_reg[79]_bret__0
+		core_u/out_data_reg_reg[79]_bret__1
+		core_u/out_data_reg_reg[79]_bret__2
+		core_u/out_data_reg_reg[79]_bret__3
+		core_u/out_data_reg_reg[79]_bret__4
+		core_u/out_data_reg_reg[7]_bret
+		core_u/out_data_reg_reg[7]_bret__0
+		core_u/out_data_reg_reg[7]_bret__1
+		core_u/out_data_reg_reg[7]_bret__2
+		core_u/out_data_reg_reg[7]_bret__3
+		core_u/out_data_reg_reg[7]_bret__4
+		core_u/out_data_reg_reg[80]_bret
+		core_u/out_data_reg_reg[80]_bret__0
+		core_u/out_data_reg_reg[80]_bret__1
+		core_u/out_data_reg_reg[80]_bret__2
+		core_u/out_data_reg_reg[80]_bret__3
+		core_u/out_data_reg_reg[80]_bret__4
+		core_u/out_data_reg_reg[81]_bret
+		core_u/out_data_reg_reg[81]_bret__0
+		core_u/out_data_reg_reg[81]_bret__1
+		core_u/out_data_reg_reg[81]_bret__2
+		core_u/out_data_reg_reg[81]_bret__3
+		core_u/out_data_reg_reg[81]_bret__4
+		core_u/out_data_reg_reg[82]_bret
+		core_u/out_data_reg_reg[82]_bret__0
+		core_u/out_data_reg_reg[82]_bret__1
+		core_u/out_data_reg_reg[82]_bret__2
+		core_u/out_data_reg_reg[82]_bret__3
+		core_u/out_data_reg_reg[82]_bret__4
+		core_u/out_data_reg_reg[83]_bret
+		core_u/out_data_reg_reg[83]_bret__0
+		core_u/out_data_reg_reg[83]_bret__1
+		core_u/out_data_reg_reg[83]_bret__2
+		core_u/out_data_reg_reg[83]_bret__3
+		core_u/out_data_reg_reg[83]_bret__4
+		core_u/out_data_reg_reg[84]_bret
+		core_u/out_data_reg_reg[84]_bret__0
+		core_u/out_data_reg_reg[84]_bret__1
+		core_u/out_data_reg_reg[84]_bret__2
+		core_u/out_data_reg_reg[84]_bret__3
+		core_u/out_data_reg_reg[84]_bret__4
+		core_u/out_data_reg_reg[85]_bret
+		core_u/out_data_reg_reg[85]_bret__0
+		core_u/out_data_reg_reg[85]_bret__1
+		core_u/out_data_reg_reg[85]_bret__2
+		core_u/out_data_reg_reg[85]_bret__3
+		core_u/out_data_reg_reg[85]_bret__4
+		core_u/out_data_reg_reg[86]_bret
+		core_u/out_data_reg_reg[86]_bret__0
+		core_u/out_data_reg_reg[86]_bret__1
+		core_u/out_data_reg_reg[86]_bret__2
+		core_u/out_data_reg_reg[86]_bret__3
+		core_u/out_data_reg_reg[86]_bret__4
+		core_u/out_data_reg_reg[87]_bret
+		core_u/out_data_reg_reg[87]_bret__0
+		core_u/out_data_reg_reg[87]_bret__1
+		core_u/out_data_reg_reg[87]_bret__2
+		core_u/out_data_reg_reg[87]_bret__3
+		core_u/out_data_reg_reg[87]_bret__4
+		core_u/out_data_reg_reg[88]_bret
+		core_u/out_data_reg_reg[88]_bret__0
+		core_u/out_data_reg_reg[88]_bret__1
+		core_u/out_data_reg_reg[88]_bret__2
+		core_u/out_data_reg_reg[88]_bret__3
+		core_u/out_data_reg_reg[88]_bret__4
+		core_u/out_data_reg_reg[89]_bret
+		core_u/out_data_reg_reg[89]_bret__0
+		core_u/out_data_reg_reg[89]_bret__1
+		core_u/out_data_reg_reg[89]_bret__2
+		core_u/out_data_reg_reg[89]_bret__3
+		core_u/out_data_reg_reg[89]_bret__4
+		core_u/out_data_reg_reg[8]_bret
+		core_u/out_data_reg_reg[8]_bret__0
+		core_u/out_data_reg_reg[8]_bret__1
+		core_u/out_data_reg_reg[8]_bret__2
+		core_u/out_data_reg_reg[8]_bret__3
+		core_u/out_data_reg_reg[8]_bret__4
+		core_u/out_data_reg_reg[90]_bret
+		core_u/out_data_reg_reg[90]_bret__0
+		core_u/out_data_reg_reg[90]_bret__1
+		core_u/out_data_reg_reg[90]_bret__2
+		core_u/out_data_reg_reg[90]_bret__3
+		core_u/out_data_reg_reg[90]_bret__4
+		core_u/out_data_reg_reg[91]_bret
+		core_u/out_data_reg_reg[91]_bret__0
+		core_u/out_data_reg_reg[91]_bret__1
+		core_u/out_data_reg_reg[91]_bret__2
+		core_u/out_data_reg_reg[91]_bret__3
+		core_u/out_data_reg_reg[91]_bret__4
+		core_u/out_data_reg_reg[92]_bret
+		core_u/out_data_reg_reg[92]_bret__0
+		core_u/out_data_reg_reg[92]_bret__1
+		core_u/out_data_reg_reg[92]_bret__2
+		core_u/out_data_reg_reg[92]_bret__3
+		core_u/out_data_reg_reg[92]_bret__4
+		core_u/out_data_reg_reg[93]_bret
+		core_u/out_data_reg_reg[93]_bret__0
+		core_u/out_data_reg_reg[93]_bret__1
+		core_u/out_data_reg_reg[93]_bret__2
+		core_u/out_data_reg_reg[93]_bret__3
+		core_u/out_data_reg_reg[93]_bret__4
+		core_u/out_data_reg_reg[94]_bret
+		core_u/out_data_reg_reg[94]_bret__0
+		core_u/out_data_reg_reg[94]_bret__1
+		core_u/out_data_reg_reg[94]_bret__2
+		core_u/out_data_reg_reg[94]_bret__3
+		core_u/out_data_reg_reg[94]_bret__4
+		core_u/out_data_reg_reg[95]_bret
+		core_u/out_data_reg_reg[95]_bret__0
+		core_u/out_data_reg_reg[95]_bret__1
+		core_u/out_data_reg_reg[95]_bret__2
+		core_u/out_data_reg_reg[95]_bret__3
+		core_u/out_data_reg_reg[95]_bret__4
+		core_u/out_data_reg_reg[96]_bret
+		core_u/out_data_reg_reg[96]_bret__0
+		core_u/out_data_reg_reg[96]_bret__1
+		core_u/out_data_reg_reg[96]_bret__2
+		core_u/out_data_reg_reg[96]_bret__3
+		core_u/out_data_reg_reg[96]_bret__4
+		core_u/out_data_reg_reg[97]_bret
+		core_u/out_data_reg_reg[97]_bret__0
+		core_u/out_data_reg_reg[97]_bret__1
+		core_u/out_data_reg_reg[97]_bret__2
+		core_u/out_data_reg_reg[97]_bret__3
+		core_u/out_data_reg_reg[97]_bret__4
+		core_u/out_data_reg_reg[98]_bret
+		core_u/out_data_reg_reg[98]_bret__0
+		core_u/out_data_reg_reg[98]_bret__1
+		core_u/out_data_reg_reg[98]_bret__2
+		core_u/out_data_reg_reg[98]_bret__3
+		core_u/out_data_reg_reg[98]_bret__4
+		core_u/out_data_reg_reg[99]_bret
+		core_u/out_data_reg_reg[99]_bret__0
+		core_u/out_data_reg_reg[99]_bret__1
+		core_u/out_data_reg_reg[99]_bret__2
+		core_u/out_data_reg_reg[99]_bret__3
+		core_u/out_data_reg_reg[99]_bret__4
+		core_u/out_data_reg_reg[9]_bret
+		core_u/out_data_reg_reg[9]_bret__0
+		core_u/out_data_reg_reg[9]_bret__1
+		core_u/out_data_reg_reg[9]_bret__2
+		core_u/out_data_reg_reg[9]_bret__3
+		core_u/out_data_reg_reg[9]_bret__4
+		core_u/out_keep_reg_reg[0]_bret
+		core_u/out_keep_reg_reg[0]_bret__0
+		core_u/out_keep_reg_reg[10]_bret
+		core_u/out_keep_reg_reg[10]_bret__0
+		core_u/out_keep_reg_reg[11]_bret
+		core_u/out_keep_reg_reg[11]_bret__0
+		core_u/out_keep_reg_reg[12]_bret
+		core_u/out_keep_reg_reg[12]_bret__0
+		core_u/out_keep_reg_reg[13]_bret
+		core_u/out_keep_reg_reg[13]_bret__0
+		core_u/out_keep_reg_reg[14]_bret
+		core_u/out_keep_reg_reg[14]_bret__0
+		core_u/out_keep_reg_reg[15]_bret
+		core_u/out_keep_reg_reg[15]_bret__0
+		core_u/out_keep_reg_reg[1]_bret
+		core_u/out_keep_reg_reg[1]_bret__0
+		core_u/out_keep_reg_reg[2]_bret
+		core_u/out_keep_reg_reg[2]_bret__0
+		core_u/out_keep_reg_reg[3]_bret
+		core_u/out_keep_reg_reg[3]_bret__0
+		core_u/out_keep_reg_reg[4]_bret
+		core_u/out_keep_reg_reg[4]_bret__0
+		core_u/out_keep_reg_reg[5]_bret
+		core_u/out_keep_reg_reg[5]_bret__0
+		core_u/out_keep_reg_reg[6]_bret
+		core_u/out_keep_reg_reg[6]_bret__0
+		core_u/out_keep_reg_reg[7]_bret
+		core_u/out_keep_reg_reg[7]_bret__0
+		core_u/out_keep_reg_reg[8]_bret
+		core_u/out_keep_reg_reg[8]_bret__0
+		core_u/out_keep_reg_reg[9]_bret
+		core_u/out_keep_reg_reg[9]_bret__0
+		core_u/out_valid_reg_reg_bret
+		core_u/out_valid_reg_reg_bret__0
+		core_u/out_valid_reg_reg_bret__1
+		core_u/permutation_u/state_reg_reg[0]_bret
+		core_u/permutation_u/state_reg_reg[0]_bret__0
+		core_u/permutation_u/state_reg_reg[0]_bret_bret
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__10
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__11
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__12
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__13
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__14
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__15
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__16
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__18
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__19
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__20
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__21
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__22
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__23
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__24
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__26
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[0]_bret_bret__9
+		core_u/permutation_u/state_reg_reg[100]_bret
+		core_u/permutation_u/state_reg_reg[100]_bret__0
+		core_u/permutation_u/state_reg_reg[100]_bret_bret
+		core_u/permutation_u/state_reg_reg[100]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[100]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[100]_bret_bret__10
+		core_u/permutation_u/state_reg_reg[100]_bret_bret__11
+		core_u/permutation_u/state_reg_reg[100]_bret_bret__12
+		core_u/permutation_u/state_reg_reg[100]_bret_bret__13
+		core_u/permutation_u/state_reg_reg[100]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[100]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[100]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[100]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[100]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[100]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[100]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[100]_bret_bret__9
+		core_u/permutation_u/state_reg_reg[104]_bret
+		core_u/permutation_u/state_reg_reg[104]_bret__0
+		core_u/permutation_u/state_reg_reg[104]_bret_bret
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__11
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__12
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__13
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__14
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__15
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__16
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__17
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__18
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__19
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__21
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__22
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__24
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__25
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__26
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__27
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__28
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__29
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__30
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__31
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__33
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__34
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__35
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__36
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[104]_bret_bret__9
+		core_u/permutation_u/state_reg_reg[108]_bret
+		core_u/permutation_u/state_reg_reg[108]_bret__0
+		core_u/permutation_u/state_reg_reg[108]_bret_bret
+		core_u/permutation_u/state_reg_reg[108]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[108]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[108]_bret_bret__10
+		core_u/permutation_u/state_reg_reg[108]_bret_bret__11
+		core_u/permutation_u/state_reg_reg[108]_bret_bret__12
+		core_u/permutation_u/state_reg_reg[108]_bret_bret__13
+		core_u/permutation_u/state_reg_reg[108]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[108]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[108]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[108]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[108]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[108]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[108]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[108]_bret_bret__9
+		core_u/permutation_u/state_reg_reg[112]_bret
+		core_u/permutation_u/state_reg_reg[112]_bret__0
+		core_u/permutation_u/state_reg_reg[112]_bret_bret
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__10
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__12
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__13
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__14
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__15
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__16
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__17
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__18
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__19
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__21
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__22
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__24
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__25
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__26
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__27
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__28
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__29
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__30
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__31
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__32
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__34
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__35
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__37
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[112]_bret_bret__9
+		core_u/permutation_u/state_reg_reg[116]_bret
+		core_u/permutation_u/state_reg_reg[116]_bret__0
+		core_u/permutation_u/state_reg_reg[116]_bret_bret
+		core_u/permutation_u/state_reg_reg[116]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[116]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[116]_bret_bret__10
+		core_u/permutation_u/state_reg_reg[116]_bret_bret__11
+		core_u/permutation_u/state_reg_reg[116]_bret_bret__12
+		core_u/permutation_u/state_reg_reg[116]_bret_bret__13
+		core_u/permutation_u/state_reg_reg[116]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[116]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[116]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[116]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[116]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[116]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[116]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[116]_bret_bret__9
+		core_u/permutation_u/state_reg_reg[120]_bret
+		core_u/permutation_u/state_reg_reg[120]_bret__0
+		core_u/permutation_u/state_reg_reg[120]_bret_bret
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__10
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__12
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__13
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__14
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__15
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__16
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__17
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__18
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__19
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__21
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__22
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__24
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__25
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__26
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__27
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__28
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__29
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__30
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__31
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__33
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__34
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__35
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__36
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[120]_bret_bret__9
+		core_u/permutation_u/state_reg_reg[124]_bret
+		core_u/permutation_u/state_reg_reg[124]_bret__0
+		core_u/permutation_u/state_reg_reg[124]_bret_bret
+		core_u/permutation_u/state_reg_reg[124]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[124]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[124]_bret_bret__10
+		core_u/permutation_u/state_reg_reg[124]_bret_bret__11
+		core_u/permutation_u/state_reg_reg[124]_bret_bret__12
+		core_u/permutation_u/state_reg_reg[124]_bret_bret__13
+		core_u/permutation_u/state_reg_reg[124]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[124]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[124]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[124]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[124]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[124]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[124]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[124]_bret_bret__9
+		core_u/permutation_u/state_reg_reg[128]_bret
+		core_u/permutation_u/state_reg_reg[128]_bret__0
+		core_u/permutation_u/state_reg_reg[129]_bret
+		core_u/permutation_u/state_reg_reg[129]_bret__0
+		core_u/permutation_u/state_reg_reg[130]_bret
+		core_u/permutation_u/state_reg_reg[130]_bret__0
+		core_u/permutation_u/state_reg_reg[131]_bret
+		core_u/permutation_u/state_reg_reg[131]_bret__0
+		core_u/permutation_u/state_reg_reg[132]_bret
+		core_u/permutation_u/state_reg_reg[132]_bret__0
+		core_u/permutation_u/state_reg_reg[133]_bret
+		core_u/permutation_u/state_reg_reg[133]_bret__0
+		core_u/permutation_u/state_reg_reg[134]_bret
+		core_u/permutation_u/state_reg_reg[134]_bret__0
+		core_u/permutation_u/state_reg_reg[134]_bret_bret
+		core_u/permutation_u/state_reg_reg[134]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[134]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[134]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[134]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[135]_bret
+		core_u/permutation_u/state_reg_reg[135]_bret__0
+		core_u/permutation_u/state_reg_reg[135]_bret_bret
+		core_u/permutation_u/state_reg_reg[135]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[135]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[135]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[135]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[136]_bret
+		core_u/permutation_u/state_reg_reg[136]_bret__0
+		core_u/permutation_u/state_reg_reg[136]_bret_bret
+		core_u/permutation_u/state_reg_reg[136]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[136]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[136]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[137]_bret
+		core_u/permutation_u/state_reg_reg[137]_bret__0
+		core_u/permutation_u/state_reg_reg[137]_bret_bret
+		core_u/permutation_u/state_reg_reg[137]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[137]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[137]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[138]_bret
+		core_u/permutation_u/state_reg_reg[138]_bret__0
+		core_u/permutation_u/state_reg_reg[138]_bret_bret
+		core_u/permutation_u/state_reg_reg[138]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[138]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[138]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[139]_bret
+		core_u/permutation_u/state_reg_reg[139]_bret__0
+		core_u/permutation_u/state_reg_reg[139]_bret_bret
+		core_u/permutation_u/state_reg_reg[139]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[139]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[139]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[140]_bret
+		core_u/permutation_u/state_reg_reg[140]_bret__0
+		core_u/permutation_u/state_reg_reg[140]_bret_bret
+		core_u/permutation_u/state_reg_reg[140]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[140]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[140]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[141]_bret
+		core_u/permutation_u/state_reg_reg[141]_bret__0
+		core_u/permutation_u/state_reg_reg[141]_bret_bret
+		core_u/permutation_u/state_reg_reg[141]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[141]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[141]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[142]_bret
+		core_u/permutation_u/state_reg_reg[142]_bret__0
+		core_u/permutation_u/state_reg_reg[142]_bret_bret
+		core_u/permutation_u/state_reg_reg[142]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[142]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[142]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[143]_bret
+		core_u/permutation_u/state_reg_reg[143]_bret__0
+		core_u/permutation_u/state_reg_reg[143]_bret_bret
+		core_u/permutation_u/state_reg_reg[143]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[143]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[143]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[144]_bret
+		core_u/permutation_u/state_reg_reg[144]_bret__0
+		core_u/permutation_u/state_reg_reg[144]_bret_bret
+		core_u/permutation_u/state_reg_reg[144]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[144]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[144]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[145]_bret
+		core_u/permutation_u/state_reg_reg[145]_bret__0
+		core_u/permutation_u/state_reg_reg[145]_bret_bret
+		core_u/permutation_u/state_reg_reg[145]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[145]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[145]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[146]_bret
+		core_u/permutation_u/state_reg_reg[146]_bret__0
+		core_u/permutation_u/state_reg_reg[146]_bret_bret
+		core_u/permutation_u/state_reg_reg[146]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[146]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[146]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[147]_bret
+		core_u/permutation_u/state_reg_reg[147]_bret__0
+		core_u/permutation_u/state_reg_reg[147]_bret_bret
+		core_u/permutation_u/state_reg_reg[147]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[147]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[147]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[148]_bret
+		core_u/permutation_u/state_reg_reg[148]_bret__0
+		core_u/permutation_u/state_reg_reg[148]_bret_bret
+		core_u/permutation_u/state_reg_reg[148]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[148]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[148]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[149]_bret
+		core_u/permutation_u/state_reg_reg[149]_bret__0
+		core_u/permutation_u/state_reg_reg[149]_bret_bret
+		core_u/permutation_u/state_reg_reg[149]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[149]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[149]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[150]_bret
+		core_u/permutation_u/state_reg_reg[150]_bret__0
+		core_u/permutation_u/state_reg_reg[150]_bret_bret
+		core_u/permutation_u/state_reg_reg[150]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[150]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[150]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[151]_bret
+		core_u/permutation_u/state_reg_reg[151]_bret__0
+		core_u/permutation_u/state_reg_reg[151]_bret_bret
+		core_u/permutation_u/state_reg_reg[151]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[151]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[151]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[152]_bret
+		core_u/permutation_u/state_reg_reg[152]_bret__0
+		core_u/permutation_u/state_reg_reg[152]_bret_bret
+		core_u/permutation_u/state_reg_reg[152]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[152]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[152]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[153]_bret
+		core_u/permutation_u/state_reg_reg[153]_bret__0
+		core_u/permutation_u/state_reg_reg[153]_bret_bret
+		core_u/permutation_u/state_reg_reg[153]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[153]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[153]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[154]_bret
+		core_u/permutation_u/state_reg_reg[154]_bret__0
+		core_u/permutation_u/state_reg_reg[154]_bret_bret
+		core_u/permutation_u/state_reg_reg[154]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[154]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[154]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[155]_bret
+		core_u/permutation_u/state_reg_reg[155]_bret__0
+		core_u/permutation_u/state_reg_reg[155]_bret_bret
+		core_u/permutation_u/state_reg_reg[155]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[155]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[155]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[156]_bret
+		core_u/permutation_u/state_reg_reg[156]_bret__0
+		core_u/permutation_u/state_reg_reg[156]_bret_bret
+		core_u/permutation_u/state_reg_reg[156]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[156]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[156]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[157]_bret
+		core_u/permutation_u/state_reg_reg[157]_bret__0
+		core_u/permutation_u/state_reg_reg[157]_bret_bret
+		core_u/permutation_u/state_reg_reg[157]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[157]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[157]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[158]_bret
+		core_u/permutation_u/state_reg_reg[158]_bret__0
+		core_u/permutation_u/state_reg_reg[158]_bret_bret
+		core_u/permutation_u/state_reg_reg[158]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[158]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[158]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[159]_bret
+		core_u/permutation_u/state_reg_reg[159]_bret__0
+		core_u/permutation_u/state_reg_reg[159]_bret_bret
+		core_u/permutation_u/state_reg_reg[159]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[159]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[159]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[160]_bret
+		core_u/permutation_u/state_reg_reg[160]_bret__0
+		core_u/permutation_u/state_reg_reg[160]_bret_bret
+		core_u/permutation_u/state_reg_reg[160]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[160]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[160]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[161]_bret
+		core_u/permutation_u/state_reg_reg[161]_bret__0
+		core_u/permutation_u/state_reg_reg[161]_bret_bret
+		core_u/permutation_u/state_reg_reg[161]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[161]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[161]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[162]_bret
+		core_u/permutation_u/state_reg_reg[162]_bret__0
+		core_u/permutation_u/state_reg_reg[162]_bret_bret
+		core_u/permutation_u/state_reg_reg[162]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[162]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[162]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[163]_bret
+		core_u/permutation_u/state_reg_reg[163]_bret__0
+		core_u/permutation_u/state_reg_reg[163]_bret_bret
+		core_u/permutation_u/state_reg_reg[163]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[163]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[163]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[164]_bret
+		core_u/permutation_u/state_reg_reg[164]_bret__0
+		core_u/permutation_u/state_reg_reg[164]_bret_bret
+		core_u/permutation_u/state_reg_reg[164]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[164]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[164]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[165]_bret
+		core_u/permutation_u/state_reg_reg[165]_bret__0
+		core_u/permutation_u/state_reg_reg[165]_bret_bret
+		core_u/permutation_u/state_reg_reg[165]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[165]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[165]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[166]_bret
+		core_u/permutation_u/state_reg_reg[166]_bret__0
+		core_u/permutation_u/state_reg_reg[166]_bret_bret
+		core_u/permutation_u/state_reg_reg[166]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[166]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[166]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[167]_bret
+		core_u/permutation_u/state_reg_reg[167]_bret__0
+		core_u/permutation_u/state_reg_reg[167]_bret_bret
+		core_u/permutation_u/state_reg_reg[167]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[167]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[167]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[168]_bret
+		core_u/permutation_u/state_reg_reg[168]_bret__0
+		core_u/permutation_u/state_reg_reg[168]_bret_bret
+		core_u/permutation_u/state_reg_reg[168]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[168]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[168]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[169]_bret
+		core_u/permutation_u/state_reg_reg[169]_bret__0
+		core_u/permutation_u/state_reg_reg[169]_bret_bret
+		core_u/permutation_u/state_reg_reg[169]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[169]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[169]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[16]_bret
+		core_u/permutation_u/state_reg_reg[16]_bret__0
+		core_u/permutation_u/state_reg_reg[16]_bret_bret
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__10
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__12
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__13
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__14
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__15
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__16
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__17
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__18
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__20
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__21
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__22
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__23
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__24
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__25
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__26
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__27
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[16]_bret_bret__9
+		core_u/permutation_u/state_reg_reg[170]_bret
+		core_u/permutation_u/state_reg_reg[170]_bret__0
+		core_u/permutation_u/state_reg_reg[170]_bret_bret
+		core_u/permutation_u/state_reg_reg[170]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[170]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[170]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[171]_bret
+		core_u/permutation_u/state_reg_reg[171]_bret__0
+		core_u/permutation_u/state_reg_reg[171]_bret_bret
+		core_u/permutation_u/state_reg_reg[171]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[171]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[171]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[172]_bret
+		core_u/permutation_u/state_reg_reg[172]_bret__0
+		core_u/permutation_u/state_reg_reg[172]_bret_bret
+		core_u/permutation_u/state_reg_reg[172]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[172]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[172]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[173]_bret
+		core_u/permutation_u/state_reg_reg[173]_bret__0
+		core_u/permutation_u/state_reg_reg[173]_bret_bret
+		core_u/permutation_u/state_reg_reg[173]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[173]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[173]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[174]_bret
+		core_u/permutation_u/state_reg_reg[174]_bret__0
+		core_u/permutation_u/state_reg_reg[174]_bret_bret
+		core_u/permutation_u/state_reg_reg[174]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[174]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[174]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[175]_bret
+		core_u/permutation_u/state_reg_reg[175]_bret__0
+		core_u/permutation_u/state_reg_reg[175]_bret_bret
+		core_u/permutation_u/state_reg_reg[175]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[175]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[175]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[176]_bret
+		core_u/permutation_u/state_reg_reg[176]_bret__0
+		core_u/permutation_u/state_reg_reg[176]_bret_bret
+		core_u/permutation_u/state_reg_reg[176]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[176]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[176]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[177]_bret
+		core_u/permutation_u/state_reg_reg[177]_bret__0
+		core_u/permutation_u/state_reg_reg[177]_bret_bret
+		core_u/permutation_u/state_reg_reg[177]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[177]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[177]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[178]_bret
+		core_u/permutation_u/state_reg_reg[178]_bret__0
+		core_u/permutation_u/state_reg_reg[178]_bret_bret
+		core_u/permutation_u/state_reg_reg[178]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[178]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[178]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[179]_bret
+		core_u/permutation_u/state_reg_reg[179]_bret__0
+		core_u/permutation_u/state_reg_reg[179]_bret_bret
+		core_u/permutation_u/state_reg_reg[179]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[179]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[179]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[180]_bret
+		core_u/permutation_u/state_reg_reg[180]_bret__0
+		core_u/permutation_u/state_reg_reg[180]_bret_bret
+		core_u/permutation_u/state_reg_reg[180]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[180]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[180]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[181]_bret
+		core_u/permutation_u/state_reg_reg[181]_bret__0
+		core_u/permutation_u/state_reg_reg[181]_bret_bret
+		core_u/permutation_u/state_reg_reg[181]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[181]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[181]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[182]_bret
+		core_u/permutation_u/state_reg_reg[182]_bret__0
+		core_u/permutation_u/state_reg_reg[182]_bret_bret
+		core_u/permutation_u/state_reg_reg[182]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[182]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[182]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[183]_bret
+		core_u/permutation_u/state_reg_reg[183]_bret__0
+		core_u/permutation_u/state_reg_reg[183]_bret_bret
+		core_u/permutation_u/state_reg_reg[183]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[183]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[183]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[184]_bret
+		core_u/permutation_u/state_reg_reg[184]_bret__0
+		core_u/permutation_u/state_reg_reg[184]_bret_bret
+		core_u/permutation_u/state_reg_reg[184]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[184]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[184]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[185]_bret
+		core_u/permutation_u/state_reg_reg[185]_bret__0
+		core_u/permutation_u/state_reg_reg[185]_bret_bret
+		core_u/permutation_u/state_reg_reg[185]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[185]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[185]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[186]_bret
+		core_u/permutation_u/state_reg_reg[186]_bret__0
+		core_u/permutation_u/state_reg_reg[186]_bret_bret
+		core_u/permutation_u/state_reg_reg[186]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[186]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[186]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[187]_bret
+		core_u/permutation_u/state_reg_reg[187]_bret__0
+		core_u/permutation_u/state_reg_reg[187]_bret_bret
+		core_u/permutation_u/state_reg_reg[187]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[187]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[187]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[187]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[187]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[187]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[187]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[187]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[188]_bret
+		core_u/permutation_u/state_reg_reg[188]_bret__0
+		core_u/permutation_u/state_reg_reg[188]_bret_bret
+		core_u/permutation_u/state_reg_reg[188]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[188]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[188]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[188]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[188]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[188]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[188]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[188]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[189]_bret
+		core_u/permutation_u/state_reg_reg[189]_bret__0
+		core_u/permutation_u/state_reg_reg[189]_bret_bret
+		core_u/permutation_u/state_reg_reg[189]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[189]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[189]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[189]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[189]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[189]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[189]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[189]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[18]_bret
+		core_u/permutation_u/state_reg_reg[18]_bret__0
+		core_u/permutation_u/state_reg_reg[18]_bret_bret
+		core_u/permutation_u/state_reg_reg[18]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[18]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[18]_bret_bret__10
+		core_u/permutation_u/state_reg_reg[18]_bret_bret__12
+		core_u/permutation_u/state_reg_reg[18]_bret_bret__13
+		core_u/permutation_u/state_reg_reg[18]_bret_bret__14
+		core_u/permutation_u/state_reg_reg[18]_bret_bret__15
+		core_u/permutation_u/state_reg_reg[18]_bret_bret__16
+		core_u/permutation_u/state_reg_reg[18]_bret_bret__17
+		core_u/permutation_u/state_reg_reg[18]_bret_bret__18
+		core_u/permutation_u/state_reg_reg[18]_bret_bret__19
+		core_u/permutation_u/state_reg_reg[18]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[18]_bret_bret__20
+		core_u/permutation_u/state_reg_reg[18]_bret_bret__21
+		core_u/permutation_u/state_reg_reg[18]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[18]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[18]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[18]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[18]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[18]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[18]_bret_bret__9
+		core_u/permutation_u/state_reg_reg[190]_bret
+		core_u/permutation_u/state_reg_reg[190]_bret__0
+		core_u/permutation_u/state_reg_reg[190]_bret_bret
+		core_u/permutation_u/state_reg_reg[190]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[190]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[190]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[190]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[190]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[190]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[190]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[190]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[191]_bret
+		core_u/permutation_u/state_reg_reg[191]_bret__0
+		core_u/permutation_u/state_reg_reg[191]_bret_bret
+		core_u/permutation_u/state_reg_reg[191]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[191]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[191]_bret_bret__10
+		core_u/permutation_u/state_reg_reg[191]_bret_bret__11
+		core_u/permutation_u/state_reg_reg[191]_bret_bret__12
+		core_u/permutation_u/state_reg_reg[191]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[191]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[191]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[191]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[191]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[191]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[191]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[191]_bret_bret__9
+		core_u/permutation_u/state_reg_reg[192]_bret
+		core_u/permutation_u/state_reg_reg[192]_bret__0
+		core_u/permutation_u/state_reg_reg[192]_bret_bret
+		core_u/permutation_u/state_reg_reg[192]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[192]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[192]_bret_bret__10
+		core_u/permutation_u/state_reg_reg[192]_bret_bret__11
+		core_u/permutation_u/state_reg_reg[192]_bret_bret__12
+		core_u/permutation_u/state_reg_reg[192]_bret_bret__13
+		core_u/permutation_u/state_reg_reg[192]_bret_bret__14
+		core_u/permutation_u/state_reg_reg[192]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[192]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[192]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[192]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[192]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[192]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[192]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[192]_bret_bret__9
+		core_u/permutation_u/state_reg_reg[193]_bret
+		core_u/permutation_u/state_reg_reg[193]_bret__0
+		core_u/permutation_u/state_reg_reg[193]_bret_bret
+		core_u/permutation_u/state_reg_reg[193]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[193]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[193]_bret_bret__10
+		core_u/permutation_u/state_reg_reg[193]_bret_bret__11
+		core_u/permutation_u/state_reg_reg[193]_bret_bret__12
+		core_u/permutation_u/state_reg_reg[193]_bret_bret__13
+		core_u/permutation_u/state_reg_reg[193]_bret_bret__14
+		core_u/permutation_u/state_reg_reg[193]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[193]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[193]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[193]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[193]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[193]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[193]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[193]_bret_bret__9
+		core_u/permutation_u/state_reg_reg[194]_bret
+		core_u/permutation_u/state_reg_reg[194]_bret__0
+		core_u/permutation_u/state_reg_reg[194]_bret_bret
+		core_u/permutation_u/state_reg_reg[194]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[194]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[194]_bret_bret__10
+		core_u/permutation_u/state_reg_reg[194]_bret_bret__11
+		core_u/permutation_u/state_reg_reg[194]_bret_bret__12
+		core_u/permutation_u/state_reg_reg[194]_bret_bret__13
+		core_u/permutation_u/state_reg_reg[194]_bret_bret__14
+		core_u/permutation_u/state_reg_reg[194]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[194]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[194]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[194]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[194]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[194]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[194]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[194]_bret_bret__9
+		core_u/permutation_u/state_reg_reg[195]_bret
+		core_u/permutation_u/state_reg_reg[195]_bret__0
+		core_u/permutation_u/state_reg_reg[195]_bret_bret
+		core_u/permutation_u/state_reg_reg[195]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[195]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[195]_bret_bret__10
+		core_u/permutation_u/state_reg_reg[195]_bret_bret__11
+		core_u/permutation_u/state_reg_reg[195]_bret_bret__12
+		core_u/permutation_u/state_reg_reg[195]_bret_bret__13
+		core_u/permutation_u/state_reg_reg[195]_bret_bret__14
+		core_u/permutation_u/state_reg_reg[195]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[195]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[195]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[195]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[195]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[195]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[195]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[195]_bret_bret__9
+		core_u/permutation_u/state_reg_reg[196]_bret
+		core_u/permutation_u/state_reg_reg[196]_bret__0
+		core_u/permutation_u/state_reg_reg[196]_bret_bret
+		core_u/permutation_u/state_reg_reg[196]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[196]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[196]_bret_bret__10
+		core_u/permutation_u/state_reg_reg[196]_bret_bret__11
+		core_u/permutation_u/state_reg_reg[196]_bret_bret__12
+		core_u/permutation_u/state_reg_reg[196]_bret_bret__13
+		core_u/permutation_u/state_reg_reg[196]_bret_bret__14
+		core_u/permutation_u/state_reg_reg[196]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[196]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[196]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[196]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[196]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[196]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[196]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[196]_bret_bret__9
+		core_u/permutation_u/state_reg_reg[197]_bret
+		core_u/permutation_u/state_reg_reg[197]_bret__0
+		core_u/permutation_u/state_reg_reg[197]_bret_bret
+		core_u/permutation_u/state_reg_reg[197]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[197]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[197]_bret_bret__10
+		core_u/permutation_u/state_reg_reg[197]_bret_bret__11
+		core_u/permutation_u/state_reg_reg[197]_bret_bret__12
+		core_u/permutation_u/state_reg_reg[197]_bret_bret__13
+		core_u/permutation_u/state_reg_reg[197]_bret_bret__14
+		core_u/permutation_u/state_reg_reg[197]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[197]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[197]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[197]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[197]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[197]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[197]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[197]_bret_bret__9
+		core_u/permutation_u/state_reg_reg[198]_bret
+		core_u/permutation_u/state_reg_reg[198]_bret__0
+		core_u/permutation_u/state_reg_reg[198]_bret_bret
+		core_u/permutation_u/state_reg_reg[198]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[198]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[198]_bret_bret__10
+		core_u/permutation_u/state_reg_reg[198]_bret_bret__11
+		core_u/permutation_u/state_reg_reg[198]_bret_bret__12
+		core_u/permutation_u/state_reg_reg[198]_bret_bret__13
+		core_u/permutation_u/state_reg_reg[198]_bret_bret__14
+		core_u/permutation_u/state_reg_reg[198]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[198]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[198]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[198]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[198]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[198]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[198]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[198]_bret_bret__9
+		core_u/permutation_u/state_reg_reg[199]_bret
+		core_u/permutation_u/state_reg_reg[199]_bret__0
+		core_u/permutation_u/state_reg_reg[199]_bret_bret
+		core_u/permutation_u/state_reg_reg[199]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[199]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[199]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[199]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[199]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[199]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[199]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[199]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[199]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[199]_bret_bret__9
+		core_u/permutation_u/state_reg_reg[19]_bret
+		core_u/permutation_u/state_reg_reg[19]_bret__0
+		core_u/permutation_u/state_reg_reg[19]_bret_bret
+		core_u/permutation_u/state_reg_reg[19]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[19]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[19]_bret_bret__11
+		core_u/permutation_u/state_reg_reg[19]_bret_bret__12
+		core_u/permutation_u/state_reg_reg[19]_bret_bret__13
+		core_u/permutation_u/state_reg_reg[19]_bret_bret__14
+		core_u/permutation_u/state_reg_reg[19]_bret_bret__15
+		core_u/permutation_u/state_reg_reg[19]_bret_bret__16
+		core_u/permutation_u/state_reg_reg[19]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[19]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[19]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[19]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[19]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[19]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[19]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[19]_bret_bret__9
+		core_u/permutation_u/state_reg_reg[200]_bret
+		core_u/permutation_u/state_reg_reg[200]_bret__0
+		core_u/permutation_u/state_reg_reg[200]_bret_bret
+		core_u/permutation_u/state_reg_reg[200]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[200]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[200]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[200]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[200]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[200]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[200]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[200]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[200]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[201]_bret
+		core_u/permutation_u/state_reg_reg[201]_bret__0
+		core_u/permutation_u/state_reg_reg[201]_bret_bret
+		core_u/permutation_u/state_reg_reg[201]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[201]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[201]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[201]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[201]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[201]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[201]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[201]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[201]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[202]_bret
+		core_u/permutation_u/state_reg_reg[202]_bret__0
+		core_u/permutation_u/state_reg_reg[202]_bret_bret
+		core_u/permutation_u/state_reg_reg[202]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[202]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[202]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[202]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[203]_bret
+		core_u/permutation_u/state_reg_reg[203]_bret__0
+		core_u/permutation_u/state_reg_reg[203]_bret_bret
+		core_u/permutation_u/state_reg_reg[203]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[203]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[203]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[203]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[204]_bret
+		core_u/permutation_u/state_reg_reg[204]_bret__0
+		core_u/permutation_u/state_reg_reg[204]_bret_bret
+		core_u/permutation_u/state_reg_reg[204]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[204]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[204]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[204]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[205]_bret
+		core_u/permutation_u/state_reg_reg[205]_bret__0
+		core_u/permutation_u/state_reg_reg[205]_bret_bret
+		core_u/permutation_u/state_reg_reg[205]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[205]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[205]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[205]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[206]_bret
+		core_u/permutation_u/state_reg_reg[206]_bret__0
+		core_u/permutation_u/state_reg_reg[206]_bret_bret
+		core_u/permutation_u/state_reg_reg[206]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[206]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[206]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[206]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[207]_bret
+		core_u/permutation_u/state_reg_reg[207]_bret__0
+		core_u/permutation_u/state_reg_reg[207]_bret_bret
+		core_u/permutation_u/state_reg_reg[207]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[207]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[207]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[207]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[208]_bret
+		core_u/permutation_u/state_reg_reg[208]_bret__0
+		core_u/permutation_u/state_reg_reg[208]_bret_bret
+		core_u/permutation_u/state_reg_reg[208]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[208]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[208]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[208]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[209]_bret
+		core_u/permutation_u/state_reg_reg[209]_bret__0
+		core_u/permutation_u/state_reg_reg[209]_bret_bret
+		core_u/permutation_u/state_reg_reg[209]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[209]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[209]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[209]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[210]_bret
+		core_u/permutation_u/state_reg_reg[210]_bret__0
+		core_u/permutation_u/state_reg_reg[210]_bret_bret
+		core_u/permutation_u/state_reg_reg[210]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[210]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[210]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[210]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[211]_bret
+		core_u/permutation_u/state_reg_reg[211]_bret__0
+		core_u/permutation_u/state_reg_reg[211]_bret_bret
+		core_u/permutation_u/state_reg_reg[211]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[211]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[211]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[211]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[212]_bret
+		core_u/permutation_u/state_reg_reg[212]_bret__0
+		core_u/permutation_u/state_reg_reg[212]_bret_bret
+		core_u/permutation_u/state_reg_reg[212]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[212]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[212]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[212]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[213]_bret
+		core_u/permutation_u/state_reg_reg[213]_bret__0
+		core_u/permutation_u/state_reg_reg[213]_bret_bret
+		core_u/permutation_u/state_reg_reg[213]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[213]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[213]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[213]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[214]_bret
+		core_u/permutation_u/state_reg_reg[214]_bret__0
+		core_u/permutation_u/state_reg_reg[214]_bret_bret
+		core_u/permutation_u/state_reg_reg[214]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[214]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[214]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[214]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[215]_bret
+		core_u/permutation_u/state_reg_reg[215]_bret__0
+		core_u/permutation_u/state_reg_reg[215]_bret_bret
+		core_u/permutation_u/state_reg_reg[215]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[215]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[215]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[215]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[216]_bret
+		core_u/permutation_u/state_reg_reg[216]_bret__0
+		core_u/permutation_u/state_reg_reg[216]_bret_bret
+		core_u/permutation_u/state_reg_reg[216]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[216]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[216]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[216]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[217]_bret
+		core_u/permutation_u/state_reg_reg[217]_bret__0
+		core_u/permutation_u/state_reg_reg[217]_bret_bret
+		core_u/permutation_u/state_reg_reg[217]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[217]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[217]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[217]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[218]_bret
+		core_u/permutation_u/state_reg_reg[218]_bret__0
+		core_u/permutation_u/state_reg_reg[218]_bret_bret
+		core_u/permutation_u/state_reg_reg[218]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[218]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[218]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[218]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[219]_bret
+		core_u/permutation_u/state_reg_reg[219]_bret__0
+		core_u/permutation_u/state_reg_reg[219]_bret_bret
+		core_u/permutation_u/state_reg_reg[219]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[219]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[219]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[219]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[220]_bret
+		core_u/permutation_u/state_reg_reg[220]_bret__0
+		core_u/permutation_u/state_reg_reg[220]_bret_bret
+		core_u/permutation_u/state_reg_reg[220]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[220]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[220]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[220]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[221]_bret
+		core_u/permutation_u/state_reg_reg[221]_bret__0
+		core_u/permutation_u/state_reg_reg[221]_bret_bret
+		core_u/permutation_u/state_reg_reg[221]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[221]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[221]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[221]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[222]_bret
+		core_u/permutation_u/state_reg_reg[222]_bret__0
+		core_u/permutation_u/state_reg_reg[222]_bret_bret
+		core_u/permutation_u/state_reg_reg[222]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[222]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[222]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[222]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[223]_bret
+		core_u/permutation_u/state_reg_reg[223]_bret__0
+		core_u/permutation_u/state_reg_reg[223]_bret_bret
+		core_u/permutation_u/state_reg_reg[223]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[223]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[223]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[223]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[224]_bret
+		core_u/permutation_u/state_reg_reg[224]_bret__0
+		core_u/permutation_u/state_reg_reg[224]_bret_bret
+		core_u/permutation_u/state_reg_reg[224]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[224]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[224]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[224]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[225]_bret
+		core_u/permutation_u/state_reg_reg[225]_bret__0
+		core_u/permutation_u/state_reg_reg[225]_bret_bret
+		core_u/permutation_u/state_reg_reg[225]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[225]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[225]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[225]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[226]_bret
+		core_u/permutation_u/state_reg_reg[226]_bret__0
+		core_u/permutation_u/state_reg_reg[226]_bret_bret
+		core_u/permutation_u/state_reg_reg[226]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[226]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[226]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[226]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[227]_bret
+		core_u/permutation_u/state_reg_reg[227]_bret__0
+		core_u/permutation_u/state_reg_reg[227]_bret_bret
+		core_u/permutation_u/state_reg_reg[227]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[227]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[227]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[227]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[228]_bret
+		core_u/permutation_u/state_reg_reg[228]_bret__0
+		core_u/permutation_u/state_reg_reg[228]_bret_bret
+		core_u/permutation_u/state_reg_reg[228]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[228]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[228]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[228]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[229]_bret
+		core_u/permutation_u/state_reg_reg[229]_bret__0
+		core_u/permutation_u/state_reg_reg[229]_bret_bret
+		core_u/permutation_u/state_reg_reg[229]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[229]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[229]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[229]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[230]_bret
+		core_u/permutation_u/state_reg_reg[230]_bret__0
+		core_u/permutation_u/state_reg_reg[230]_bret_bret
+		core_u/permutation_u/state_reg_reg[230]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[230]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[230]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[230]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[231]_bret
+		core_u/permutation_u/state_reg_reg[231]_bret__0
+		core_u/permutation_u/state_reg_reg[231]_bret_bret
+		core_u/permutation_u/state_reg_reg[231]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[231]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[231]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[231]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[232]_bret
+		core_u/permutation_u/state_reg_reg[232]_bret__0
+		core_u/permutation_u/state_reg_reg[232]_bret_bret
+		core_u/permutation_u/state_reg_reg[232]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[232]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[232]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[232]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[233]_bret
+		core_u/permutation_u/state_reg_reg[233]_bret__0
+		core_u/permutation_u/state_reg_reg[233]_bret_bret
+		core_u/permutation_u/state_reg_reg[233]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[233]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[233]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[233]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[234]_bret
+		core_u/permutation_u/state_reg_reg[234]_bret__0
+		core_u/permutation_u/state_reg_reg[234]_bret_bret
+		core_u/permutation_u/state_reg_reg[234]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[234]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[234]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[234]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[235]_bret
+		core_u/permutation_u/state_reg_reg[235]_bret__0
+		core_u/permutation_u/state_reg_reg[235]_bret_bret
+		core_u/permutation_u/state_reg_reg[235]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[235]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[235]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[235]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[236]_bret
+		core_u/permutation_u/state_reg_reg[236]_bret__0
+		core_u/permutation_u/state_reg_reg[236]_bret_bret
+		core_u/permutation_u/state_reg_reg[236]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[236]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[236]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[236]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[237]_bret
+		core_u/permutation_u/state_reg_reg[237]_bret__0
+		core_u/permutation_u/state_reg_reg[237]_bret_bret
+		core_u/permutation_u/state_reg_reg[237]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[237]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[237]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[237]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[238]_bret
+		core_u/permutation_u/state_reg_reg[238]_bret__0
+		core_u/permutation_u/state_reg_reg[238]_bret_bret
+		core_u/permutation_u/state_reg_reg[238]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[238]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[238]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[238]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[239]_bret
+		core_u/permutation_u/state_reg_reg[239]_bret__0
+		core_u/permutation_u/state_reg_reg[23]_bret
+		core_u/permutation_u/state_reg_reg[23]_bret__0
+		core_u/permutation_u/state_reg_reg[23]_bret_bret
+		core_u/permutation_u/state_reg_reg[23]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[23]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[23]_bret_bret__11
+		core_u/permutation_u/state_reg_reg[23]_bret_bret__12
+		core_u/permutation_u/state_reg_reg[23]_bret_bret__13
+		core_u/permutation_u/state_reg_reg[23]_bret_bret__14
+		core_u/permutation_u/state_reg_reg[23]_bret_bret__15
+		core_u/permutation_u/state_reg_reg[23]_bret_bret__16
+		core_u/permutation_u/state_reg_reg[23]_bret_bret__2
+		core_u/permutation_u/state_reg_reg[23]_bret_bret__3
+		core_u/permutation_u/state_reg_reg[23]_bret_bret__4
+		core_u/permutation_u/state_reg_reg[23]_bret_bret__5
+		core_u/permutation_u/state_reg_reg[23]_bret_bret__6
+		core_u/permutation_u/state_reg_reg[23]_bret_bret__7
+		core_u/permutation_u/state_reg_reg[23]_bret_bret__8
+		core_u/permutation_u/state_reg_reg[23]_bret_bret__9
+		core_u/permutation_u/state_reg_reg[240]_bret
+		core_u/permutation_u/state_reg_reg[240]_bret__0
+		core_u/permutation_u/state_reg_reg[241]_bret
+		core_u/permutation_u/state_reg_reg[241]_bret__0
+		core_u/permutation_u/state_reg_reg[242]_bret
+		core_u/permutation_u/state_reg_reg[242]_bret__0
+		core_u/permutation_u/state_reg_reg[243]_bret
+		core_u/permutation_u/state_reg_reg[243]_bret__0
+		core_u/permutation_u/state_reg_reg[244]_bret
+		core_u/permutation_u/state_reg_reg[244]_bret__0
+		core_u/permutation_u/state_reg_reg[245]_bret
+		core_u/permutation_u/state_reg_reg[245]_bret__0
+		core_u/permutation_u/state_reg_reg[246]_bret
+		core_u/permutation_u/state_reg_reg[246]_bret__0
+		core_u/permutation_u/state_reg_reg[247]_bret
+		core_u/permutation_u/state_reg_reg[247]_bret__0
+		core_u/permutation_u/state_reg_reg[248]_bret
+		core_u/permutation_u/state_reg_reg[248]_bret__0
+		core_u/permutation_u/state_reg_reg[249]_bret
+		core_u/permutation_u/state_reg_reg[249]_bret__0
+		core_u/permutation_u/state_reg_reg[24]_bret
+		core_u/permutation_u/state_reg_reg[24]_bret__0
+		core_u/permutation_u/state_reg_reg[24]_bret_bret
+		core_u/permutation_u/state_reg_reg[24]_bret_bret__0
+		core_u/permutation_u/state_reg_reg[24]_bret_bret__1
+		core_u/permutation_u/state_reg_reg[24]_bret_bret__10
+		core_u/permutation_u/state_reg_reg[24]_bret_bret__12
+		...
+ 
+
+INFO: [Synth 8-5816] Retiming module `ascon_bench_top' done
+
+
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[44]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[44]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[44]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[31]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[31]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[31]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[23]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[23]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[23]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[19]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[19]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[19]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[18]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[18]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[18]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[0]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[0]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[0]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[8]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[8]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[8]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[16]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[16]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[16]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[24]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[24]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[24]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[32]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[32]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[32]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[40]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[40]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[40]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[48]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[48]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[48]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[56]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[56]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[56]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[64]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[64]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[64]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[72]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[72]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[72]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[80]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[80]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[80]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[88]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[88]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[88]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[96]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[96]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[96]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[104]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[104]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[104]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[112]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[112]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[112]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[120]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[120]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[120]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[128]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[128]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[128]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[129]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[129]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[129]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[130]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[130]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[130]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[131]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[131]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[131]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[132]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[132]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[132]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[133]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[133]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[133]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[134]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[134]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[134]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[135]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[135]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[135]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[136]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[136]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[136]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[137]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[137]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[137]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[138]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[138]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[138]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[139]_bret__1) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[139]_bret__2) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[139]_bret__3) is unused and will be removed from module ascon_bench_top.
+WARNING: [Synth 8-3332] Sequential element (core_u/permutation_u/state_reg_reg[140]_bret__1) is unused and will be removed from module ascon_bench_top.
+INFO: [Common 17-14] Message 'Synth 8-3332' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:07:09 ; elapsed = 00:07:53 . Memory (MB): peak = 1801.762 ; gain = 916.219
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:07:16 ; elapsed = 00:08:01 . Memory (MB): peak = 1801.762 ; gain = 916.219
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:07:16 ; elapsed = 00:08:01 . Memory (MB): peak = 1801.762 ; gain = 916.219
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:07:17 ; elapsed = 00:08:01 . Memory (MB): peak = 1801.762 ; gain = 916.219
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:07:17 ; elapsed = 00:08:01 . Memory (MB): peak = 1801.762 ; gain = 916.219
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:07:17 ; elapsed = 00:08:02 . Memory (MB): peak = 1801.762 ; gain = 916.219
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:07:17 ; elapsed = 00:08:02 . Memory (MB): peak = 1801.762 ; gain = 916.219
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Retiming Report:
++--------------------+------+
+|Retiming summary:   |      | 
++--------------------+------+
+|Forward Retiming    | 3    | 
+|Backward Retiming   | 1401 | 
+|New registers added | 6045 | 
+|Registers deleted   | 740  | 
++--------------------+------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |    15|
+|3     |LUT2   |   173|
+|4     |LUT3   |   283|
+|5     |LUT4   |   256|
+|6     |LUT5   |   877|
+|7     |LUT6   |   768|
+|8     |FDRE   |  2776|
+|9     |FDSE   |    34|
+|10    |IBUF   |     2|
+|11    |OBUF   |     1|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:07:17 ; elapsed = 00:08:02 . Memory (MB): peak = 1801.762 ; gain = 916.219
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 2182 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:07:03 ; elapsed = 00:07:57 . Memory (MB): peak = 1801.762 ; gain = 877.965
+Synthesis Optimization Complete : Time (s): cpu = 00:07:18 ; elapsed = 00:08:02 . Memory (MB): peak = 1801.762 ; gain = 916.219
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.074 . Memory (MB): peak = 1801.762 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 15 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/A_retime/p5.800/constraints.xdc]
+Finished Parsing XDC File [C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/A_retime/p5.800/constraints.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1801.762 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: d3ebf2bb
+INFO: [Common 17-83] Releasing license: Synthesis
+26 Infos, 102 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:07:26 ; elapsed = 00:08:15 . Memory (MB): peak = 1801.762 ; gain = 1325.637
+# report_utilization -file [file join $out_dir post_synth_utilization.txt]
+# opt_design
+Command: opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a100t'
+Running DRC as a precondition to command opt_design
+
+Starting DRC Task
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Project 1-461] DRC finished with 0 Errors
+INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
+
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 1801.762 ; gain = 0.000
+
+Starting Cache Timing Information Task
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Ending Cache Timing Information Task | Checksum: 1d5d720c7
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1801.762 ; gain = 0.000
+
+Starting Logic Optimization Task
+
+Phase 1 Initialization
+
+Phase 1.1 Core Generation And Design Setup
+Phase 1.1 Core Generation And Design Setup | Checksum: 1d5d720c7
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 1.2 Setup Constraints And Sort Netlist
+Phase 1.2 Setup Constraints And Sort Netlist | Checksum: 1d5d720c7
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 2073.285 ; gain = 0.000
+Phase 1 Initialization | Checksum: 1d5d720c7
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 2 Timer Update And Timing Data Collection
+
+Phase 2.1 Timer Update
+Phase 2.1 Timer Update | Checksum: 1d5d720c7
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.186 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 2.2 Timing Data Collection
+Phase 2.2 Timing Data Collection | Checksum: 1d5d720c7
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.206 . Memory (MB): peak = 2073.285 ; gain = 0.000
+Phase 2 Timer Update And Timing Data Collection | Checksum: 1d5d720c7
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.207 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 3 Retarget
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Opt 31-49] Retargeted 0 cell(s).
+Phase 3 Retarget | Checksum: 1d5d720c7
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.289 . Memory (MB): peak = 2073.285 ; gain = 0.000
+Retarget | Checksum: 1d5d720c7
+INFO: [Opt 31-389] Phase Retarget created 0 cells and removed 0 cells
+
+Phase 4 Constant propagation
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Phase 4 Constant propagation | Checksum: 1d5d720c7
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.339 . Memory (MB): peak = 2073.285 ; gain = 0.000
+Constant propagation | Checksum: 1d5d720c7
+INFO: [Opt 31-389] Phase Constant propagation created 0 cells and removed 0 cells
+
+Phase 5 Sweep
+Phase 5 Sweep | Checksum: 1be7d9f8f
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.404 . Memory (MB): peak = 2073.285 ; gain = 0.000
+Sweep | Checksum: 1be7d9f8f
+INFO: [Opt 31-389] Phase Sweep created 0 cells and removed 0 cells
+
+Phase 6 BUFG optimization
+Phase 6 BUFG optimization | Checksum: 1be7d9f8f
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.496 . Memory (MB): peak = 2073.285 ; gain = 0.000
+BUFG optimization | Checksum: 1be7d9f8f
+INFO: [Opt 31-662] Phase BUFG optimization created 0 cells of which 0 are BUFGs and removed 0 cells.
+
+Phase 7 Shift Register Optimization
+INFO: [Opt 31-1064] SRL Remap converted 0 SRLs to 0 registers and converted 0 registers of register chains to 0 SRLs
+Phase 7 Shift Register Optimization | Checksum: 1be7d9f8f
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.501 . Memory (MB): peak = 2073.285 ; gain = 0.000
+Shift Register Optimization | Checksum: 1be7d9f8f
+INFO: [Opt 31-389] Phase Shift Register Optimization created 0 cells and removed 0 cells
+
+Phase 8 Post Processing Netlist
+Phase 8 Post Processing Netlist | Checksum: 1be7d9f8f
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.518 . Memory (MB): peak = 2073.285 ; gain = 0.000
+Post Processing Netlist | Checksum: 1be7d9f8f
+INFO: [Opt 31-389] Phase Post Processing Netlist created 0 cells and removed 0 cells
+
+Phase 9 Finalization
+
+Phase 9.1 Finalizing Design Cores and Updating Shapes
+Phase 9.1 Finalizing Design Cores and Updating Shapes | Checksum: 1bcf31f19
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.544 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 9.2 Verifying Netlist Connectivity
+
+Starting Connectivity Check Task
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 2073.285 ; gain = 0.000
+Phase 9.2 Verifying Netlist Connectivity | Checksum: 1bcf31f19
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.554 . Memory (MB): peak = 2073.285 ; gain = 0.000
+Phase 9 Finalization | Checksum: 1bcf31f19
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.554 . Memory (MB): peak = 2073.285 ; gain = 0.000
+Opt_design Change Summary
+=========================
+
+
+-------------------------------------------------------------------------------------------------------------------------
+|  Phase                        |  #Cells created  |  #Cells Removed  |  #Constrained objects preventing optimizations  |
+-------------------------------------------------------------------------------------------------------------------------
+|  Retarget                     |               0  |               0  |                                              0  |
+|  Constant propagation         |               0  |               0  |                                              0  |
+|  Sweep                        |               0  |               0  |                                              0  |
+|  BUFG optimization            |               0  |               0  |                                              0  |
+|  Shift Register Optimization  |               0  |               0  |                                              0  |
+|  Post Processing Netlist      |               0  |               0  |                                              0  |
+-------------------------------------------------------------------------------------------------------------------------
+
+
+Ending Logic Optimization Task | Checksum: 1bcf31f19
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.556 . Memory (MB): peak = 2073.285 ; gain = 0.000
+INFO: [Constraints 18-11670] Building netlist checker database with flags, 0x8
+Done building netlist checker database: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Starting Power Optimization Task
+INFO: [Pwropt 34-132] Skipping clock gating for clocks with a period < 2.00 ns.
+Ending Power Optimization Task | Checksum: 1bcf31f19
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.020 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Starting Final Cleanup Task
+Ending Final Cleanup Task | Checksum: 1bcf31f19
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Starting Netlist Obfuscation Task
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2073.285 ; gain = 0.000
+Ending Netlist Obfuscation Task | Checksum: 1bcf31f19
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2073.285 ; gain = 0.000
+INFO: [Common 17-83] Releasing license: Implementation
+18 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+opt_design completed successfully
+opt_design: Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 2073.285 ; gain = 271.523
+# place_design -directive $place_dir
+Command: place_design -directive Default
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Common 17-83] Releasing license: Implementation
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+Running DRC as a precondition to command place_design
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+INFO: [Place 46-5] The placer was invoked with the 'Default' directive.
+INFO: [Place 30-611] Multithreading enabled for place_design using a maximum of 2 CPUs
+
+Starting Placer Task
+
+Phase 1 Placer Initialization
+
+Phase 1.1 Placer Initialization Netlist Sorting
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 2073.285 ; gain = 0.000
+Phase 1.1 Placer Initialization Netlist Sorting | Checksum: c3153e17
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 2073.285 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: 11e81c48e
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.810 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 1.3 Build Placer Netlist Model
+Phase 1.3 Build Placer Netlist Model | Checksum: 1a883da79
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:02 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 1.4 Constrain Clocks/Macros
+Phase 1.4 Constrain Clocks/Macros | Checksum: 1a883da79
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:02 . Memory (MB): peak = 2073.285 ; gain = 0.000
+Phase 1 Placer Initialization | Checksum: 1a883da79
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:02 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 2 Global Placement
+
+Phase 2.1 Floorplanning
+Phase 2.1 Floorplanning | Checksum: 1f2f3c8fb
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:03 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 2.2 Update Timing before SLR Path Opt
+Phase 2.2 Update Timing before SLR Path Opt | Checksum: 1254bffa9
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:03 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 2.3 Post-Processing in Floorplanning
+Phase 2.3 Post-Processing in Floorplanning | Checksum: 1254bffa9
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:03 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 2.4 Global Placement Core
+
+Phase 2.4.1 UpdateTiming Before Physical Synthesis
+Phase 2.4.1 UpdateTiming Before Physical Synthesis | Checksum: 135e81292
+
+Time (s): cpu = 00:00:15 ; elapsed = 00:00:11 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 2.4.2 Physical Synthesis In Placer
+INFO: [Physopt 32-1035] Found 20 LUTNM shape to break, 8 LUT instances to create LUTNM shape
+INFO: [Physopt 32-1044] Break lutnm for timing: one critical 8, two critical 12, total 20, new lutff created 0
+INFO: [Physopt 32-1138] End 1 Pass. Optimized 21 nets or LUTs. Breaked 20 LUTs, combined 1 existing LUT and moved 0 existing LUT
+INFO: [Physopt 32-76] Pass 1. Identified 1 candidate net for fanout optimization.
+INFO: [Physopt 32-81] Processed net rst_sync. Replicated 16 times.
+INFO: [Physopt 32-232] Optimized 1 net. Created 16 new instances.
+INFO: [Physopt 32-775] End 1 Pass. Optimized 1 net or cell. Created 16 new cells, deleted 0 existing cell and moved 0 existing cell
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.072 . Memory (MB): peak = 2073.285 ; gain = 0.000
+INFO: [Physopt 32-456] No candidate cells for DSP register optimization found in the design.
+INFO: [Physopt 32-775] End 2 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+INFO: [Physopt 32-1123] No candidate cells found for Shift Register to Pipeline optimization
+INFO: [Physopt 32-775] End 2 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+INFO: [Physopt 32-1401] No candidate cells found for Shift Register optimization.
+INFO: [Physopt 32-677] No candidate cells for Shift Register optimization found in the design
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+INFO: [Physopt 32-526] No candidate cells for BRAM register optimization found in the design
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+INFO: [Physopt 32-846] No candidate cells for URAM register optimization found in the design
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+INFO: [Physopt 32-846] No candidate cells for URAM register optimization found in the design
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+INFO: [Physopt 32-949] No candidate nets found for dynamic/static region interface net replication
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Summary of Physical Synthesis Optimizations
+============================================
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+|  Optimization                                     |  Added Cells  |  Removed Cells  |  Optimized Cells/Nets  |  Dont Touch  |  Iterations  |  Elapsed   |
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+|  LUT Combining                                    |           20  |              1  |                    21  |           0  |           1  |  00:00:00  |
+|  Retime                                           |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  Very High Fanout                                 |           16  |              0  |                     1  |           0  |           1  |  00:00:01  |
+|  DSP Register                                     |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  Shift Register to Pipeline                       |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  Shift Register                                   |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  BRAM Register                                    |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  URAM Register                                    |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  Dynamic/Static Region Interface Net Replication  |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  Total                                            |           36  |              1  |                    22  |           0  |           9  |  00:00:01  |
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Phase 2.4.2 Physical Synthesis In Placer | Checksum: 1a6ca7851
+
+Time (s): cpu = 00:00:16 ; elapsed = 00:00:12 . Memory (MB): peak = 2073.285 ; gain = 0.000
+Phase 2.4 Global Placement Core | Checksum: 1461326ac
+
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:13 . Memory (MB): peak = 2073.285 ; gain = 0.000
+Phase 2 Global Placement | Checksum: 1461326ac
+
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:13 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 3 Detail Placement
+
+Phase 3.1 Commit Multi Column Macros
+Phase 3.1 Commit Multi Column Macros | Checksum: 153006180
+
+Time (s): cpu = 00:00:18 ; elapsed = 00:00:13 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 3.2 Commit Most Macros & LUTRAMs
+Phase 3.2 Commit Most Macros & LUTRAMs | Checksum: 10bd6458d
+
+Time (s): cpu = 00:00:19 ; elapsed = 00:00:14 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 3.3 Area Swap Optimization
+Phase 3.3 Area Swap Optimization | Checksum: f1a72eba
+
+Time (s): cpu = 00:00:19 ; elapsed = 00:00:14 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 3.4 Pipeline Register Optimization
+Phase 3.4 Pipeline Register Optimization | Checksum: 186d37fa6
+
+Time (s): cpu = 00:00:19 ; elapsed = 00:00:14 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 3.5 Fast Optimization
+Phase 3.5 Fast Optimization | Checksum: 154dfa292
+
+Time (s): cpu = 00:00:24 ; elapsed = 00:00:21 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 3.6 Small Shape Detail Placement
+Phase 3.6 Small Shape Detail Placement | Checksum: 16fe1c447
+
+Time (s): cpu = 00:00:29 ; elapsed = 00:00:26 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 3.7 Re-assign LUT pins
+Phase 3.7 Re-assign LUT pins | Checksum: caff287f
+
+Time (s): cpu = 00:00:29 ; elapsed = 00:00:26 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 3.8 Pipeline Register Optimization
+Phase 3.8 Pipeline Register Optimization | Checksum: f425173d
+
+Time (s): cpu = 00:00:29 ; elapsed = 00:00:26 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 3.9 Fast Optimization
+Phase 3.9 Fast Optimization | Checksum: 1190b3cb5
+
+Time (s): cpu = 00:00:33 ; elapsed = 00:00:30 . Memory (MB): peak = 2073.285 ; gain = 0.000
+Phase 3 Detail Placement | Checksum: 1190b3cb5
+
+Time (s): cpu = 00:00:33 ; elapsed = 00:00:30 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 4 Post Placement Optimization and Clean-Up
+
+Phase 4.1 Post Commit Optimization
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+
+Phase 4.1.1 Post Placement Optimization
+Post Placement Optimization Initialization | Checksum: 190a57cf7
+
+Phase 4.1.1.1 BUFG Insertion
+
+Starting Physical Synthesis Task
+
+Phase 1 Physical Synthesis Initialization
+INFO: [Physopt 32-721] Multithreading enabled for phys_opt_design using a maximum of 2 CPUs
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-2.026 | TNS=-1932.841 |
+Phase 1 Physical Synthesis Initialization | Checksum: 1fad31ef1
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.357 . Memory (MB): peak = 2073.285 ; gain = 0.000
+INFO: [Place 46-56] BUFG insertion identified 0 candidate nets. Inserted BUFG: 0, Replicated BUFG Driver: 0, Skipped due to Placement/Routing Conflicts: 0, Skipped due to Timing Degradation: 0, Skipped due to netlist editing failed: 0.
+Ending Physical Synthesis Task | Checksum: 1fad31ef1
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.442 . Memory (MB): peak = 2073.285 ; gain = 0.000
+Phase 4.1.1.1 BUFG Insertion | Checksum: 190a57cf7
+
+Time (s): cpu = 00:00:36 ; elapsed = 00:00:32 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 4.1.1.2 Post Placement Timing Optimization
+INFO: [Place 30-746] Post Placement Timing Summary WNS=-0.593. For the most accurate timing information please run report_timing.
+Phase 4.1.1.2 Post Placement Timing Optimization | Checksum: 2497b9c72
+
+Time (s): cpu = 00:02:05 ; elapsed = 00:02:14 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Time (s): cpu = 00:02:05 ; elapsed = 00:02:14 . Memory (MB): peak = 2073.285 ; gain = 0.000
+Phase 4.1 Post Commit Optimization | Checksum: 2497b9c72
+
+Time (s): cpu = 00:02:05 ; elapsed = 00:02:14 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 4.2 Post Placement Cleanup
+Phase 4.2 Post Placement Cleanup | Checksum: 2497b9c72
+
+Time (s): cpu = 00:02:05 ; elapsed = 00:02:14 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 4.3 Placer Reporting
+
+Phase 4.3.1 Print Estimated Congestion
+INFO: [Place 30-612] Post-Placement Estimated Congestion 
+ ____________________________________________________
+|           | Global Congestion | Short Congestion  |
+| Direction | Region Size       | Region Size       |
+|___________|___________________|___________________|
+|      North|                2x2|                8x8|
+|___________|___________________|___________________|
+|      South|                2x2|                4x4|
+|___________|___________________|___________________|
+|       East|                2x2|                4x4|
+|___________|___________________|___________________|
+|       West|                1x1|                1x1|
+|___________|___________________|___________________|
+
+Phase 4.3.1 Print Estimated Congestion | Checksum: 2497b9c72
+
+Time (s): cpu = 00:02:05 ; elapsed = 00:02:14 . Memory (MB): peak = 2073.285 ; gain = 0.000
+Phase 4.3 Placer Reporting | Checksum: 2497b9c72
+
+Time (s): cpu = 00:02:05 ; elapsed = 00:02:14 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 4.4 Final Placement Cleanup
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Time (s): cpu = 00:02:05 ; elapsed = 00:02:14 . Memory (MB): peak = 2073.285 ; gain = 0.000
+Phase 4 Post Placement Optimization and Clean-Up | Checksum: 1fe321009
+
+Time (s): cpu = 00:02:05 ; elapsed = 00:02:14 . Memory (MB): peak = 2073.285 ; gain = 0.000
+Ending Placer Task | Checksum: 14ad1bd98
+
+Time (s): cpu = 00:02:05 ; elapsed = 00:02:14 . Memory (MB): peak = 2073.285 ; gain = 0.000
+39 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+place_design completed successfully
+place_design: Time (s): cpu = 00:02:07 ; elapsed = 00:02:16 . Memory (MB): peak = 2073.285 ; gain = 0.000
+# if {$phys_dir ne {}} { phys_opt_design -directive $phys_dir }
+# route_design -directive $route_dir
+Command: route_design -directive Default
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a100t'
+Running DRC as a precondition to command route_design
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+
+Starting Routing Task
+INFO: [Route 35-270] Using Router directive 'Default'.
+INFO: [Route 35-254] Multithreading enabled for route_design using a maximum of 8 CPUs
+
+Phase 1 Build RT Design
+Checksum: PlaceDB: 987c07e5 ConstDB: 0 ShapeSum: b255b5b3 RouteDB: 0
+Post Restoration Checksum: NetGraph: 5f555b31 | NumContArr: c1eb3dfe | Constraints: c2a8fa9d | Timing: c2a8fa9d
+Phase 1 Build RT Design | Checksum: 2a6928e69
+
+Time (s): cpu = 00:01:04 ; elapsed = 00:01:07 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 2 Router Initialization
+
+Phase 2.1 Fix Topology Constraints
+Phase 2.1 Fix Topology Constraints | Checksum: 2a6928e69
+
+Time (s): cpu = 00:01:04 ; elapsed = 00:01:07 . Memory (MB): peak = 2073.285 ; gain = 0.000
+
+Phase 2.2 Pre Route Cleanup
+Phase 2.2 Pre Route Cleanup | Checksum: 2a6928e69
+
+Time (s): cpu = 00:01:04 ; elapsed = 00:01:07 . Memory (MB): peak = 2073.285 ; gain = 0.000
+ Number of Nodes with overlaps = 0
+
+Phase 2.3 Update Timing
+Phase 2.3 Update Timing | Checksum: 24591fc51
+
+Time (s): cpu = 00:01:07 ; elapsed = 00:01:11 . Memory (MB): peak = 2116.004 ; gain = 42.719
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-0.356 | TNS=-75.000| WHS=-0.145 | THS=-10.665|
+
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 0 %
+  Global Horizontal Routing Utilization  = 0 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 4635
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 4635
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+Phase 2 Router Initialization | Checksum: 297c6a115
+
+Time (s): cpu = 00:01:10 ; elapsed = 00:01:12 . Memory (MB): peak = 2129.875 ; gain = 56.590
+
+Phase 3 Initial Routing
+
+Phase 3.1 Global Routing
+Phase 3.1 Global Routing | Checksum: 297c6a115
+
+Time (s): cpu = 00:01:10 ; elapsed = 00:01:12 . Memory (MB): peak = 2129.875 ; gain = 56.590
+
+Phase 3.2 Initial Net Routing
+Phase 3.2 Initial Net Routing | Checksum: 2c11f10dd
+
+Time (s): cpu = 00:01:12 ; elapsed = 00:01:14 . Memory (MB): peak = 2129.875 ; gain = 56.590
+Phase 3 Initial Routing | Checksum: 2c11f10dd
+
+Time (s): cpu = 00:01:12 ; elapsed = 00:01:14 . Memory (MB): peak = 2129.875 ; gain = 56.590
+
+Phase 4 Rip-up And Reroute
+
+Phase 4.1 Global Iteration 0
+ Number of Nodes with overlaps = 1587
+ Number of Nodes with overlaps = 523
+ Number of Nodes with overlaps = 187
+ Number of Nodes with overlaps = 91
+ Number of Nodes with overlaps = 39
+ Number of Nodes with overlaps = 19
+ Number of Nodes with overlaps = 12
+ Number of Nodes with overlaps = 3
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-0.989 | TNS=-665.142| WHS=N/A    | THS=N/A    |
+
+Phase 4.1 Global Iteration 0 | Checksum: 2590eb4df
+
+Time (s): cpu = 00:01:44 ; elapsed = 00:01:36 . Memory (MB): peak = 2129.875 ; gain = 56.590
+
+Phase 4.2 Global Iteration 1
+ Number of Nodes with overlaps = 64
+ Number of Nodes with overlaps = 42
+ Number of Nodes with overlaps = 9
+ Number of Nodes with overlaps = 8
+ Number of Nodes with overlaps = 4
+ Number of Nodes with overlaps = 2
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-0.760 | TNS=-502.553| WHS=N/A    | THS=N/A    |
+
+Phase 4.2 Global Iteration 1 | Checksum: 200e9749b
+
+Time (s): cpu = 00:01:50 ; elapsed = 00:01:43 . Memory (MB): peak = 2129.875 ; gain = 56.590
+
+Phase 4.3 Global Iteration 2
+ Number of Nodes with overlaps = 81
+ Number of Nodes with overlaps = 29
+ Number of Nodes with overlaps = 17
+ Number of Nodes with overlaps = 17
+ Number of Nodes with overlaps = 4
+ Number of Nodes with overlaps = 4
+ Number of Nodes with overlaps = 3
+ Number of Nodes with overlaps = 7
+ Number of Nodes with overlaps = 8
+ Number of Nodes with overlaps = 4
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 3
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-0.893 | TNS=-753.373| WHS=N/A    | THS=N/A    |
+
+Phase 4.3 Global Iteration 2 | Checksum: 28ff77c5b
+
+Time (s): cpu = 00:01:59 ; elapsed = 00:01:52 . Memory (MB): peak = 2129.875 ; gain = 56.590
+Phase 4 Rip-up And Reroute | Checksum: 28ff77c5b
+
+Time (s): cpu = 00:01:59 ; elapsed = 00:01:52 . Memory (MB): peak = 2129.875 ; gain = 56.590
+
+Phase 5 Delay and Skew Optimization
+
+Phase 5.1 Delay CleanUp
+
+Phase 5.1.1 Update Timing
+Phase 5.1.1 Update Timing | Checksum: 2efa1f5b8
+
+Time (s): cpu = 00:02:00 ; elapsed = 00:01:53 . Memory (MB): peak = 2129.875 ; gain = 56.590
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-0.681 | TNS=-397.589| WHS=N/A    | THS=N/A    |
+
+ Number of Nodes with overlaps = 0
+Phase 5.1 Delay CleanUp | Checksum: 23be5e878
+
+Time (s): cpu = 00:02:00 ; elapsed = 00:01:53 . Memory (MB): peak = 2129.875 ; gain = 56.590
+
+Phase 5.2 Clock Skew Optimization
+Phase 5.2 Clock Skew Optimization | Checksum: 23be5e878
+
+Time (s): cpu = 00:02:00 ; elapsed = 00:01:53 . Memory (MB): peak = 2129.875 ; gain = 56.590
+Phase 5 Delay and Skew Optimization | Checksum: 23be5e878
+
+Time (s): cpu = 00:02:00 ; elapsed = 00:01:53 . Memory (MB): peak = 2129.875 ; gain = 56.590
+
+Phase 6 Post Hold Fix
+
+Phase 6.1 Hold Fix Iter
+
+Phase 6.1.1 Update Timing
+Phase 6.1.1 Update Timing | Checksum: 1e63db63a
+
+Time (s): cpu = 00:02:01 ; elapsed = 00:01:53 . Memory (MB): peak = 2129.875 ; gain = 56.590
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-0.681 | TNS=-395.551| WHS=0.103  | THS=0.000  |
+
+Phase 6.1 Hold Fix Iter | Checksum: 1e63db63a
+
+Time (s): cpu = 00:02:01 ; elapsed = 00:01:53 . Memory (MB): peak = 2129.875 ; gain = 56.590
+Phase 6 Post Hold Fix | Checksum: 1e63db63a
+
+Time (s): cpu = 00:02:01 ; elapsed = 00:01:53 . Memory (MB): peak = 2129.875 ; gain = 56.590
+
+Phase 7 Route finalize
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 1.60926 %
+  Global Horizontal Routing Utilization  = 1.88313 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 0
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 0
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+
+--GLOBAL Congestion:
+Utilization threshold used for congestion level computation: 0.85
+Congestion Report
+North Dir 1x1 Area, Max Cong = 72.973%, No Congested Regions.
+South Dir 1x1 Area, Max Cong = 82.8829%, No Congested Regions.
+East Dir 1x1 Area, Max Cong = 88.2353%, Congestion bounded by tiles (Lower Left Tile -> Upper Right Tile):
+   INT_R_X9Y74 -> INT_R_X9Y74
+West Dir 1x1 Area, Max Cong = 83.8235%, No Congested Regions.
+
+------------------------------
+Reporting congestion hotspots
+------------------------------
+Direction: North
+----------------
+Congested clusters found at Level 0
+Effective congestion level: 0 Aspect Ratio: 1 Sparse Ratio: 0
+Direction: South
+----------------
+Congested clusters found at Level 0
+Effective congestion level: 0 Aspect Ratio: 1 Sparse Ratio: 0
+Direction: East
+----------------
+Congested clusters found at Level 0
+Effective congestion level: 1 Aspect Ratio: 0.5 Sparse Ratio: 0.5
+Direction: West
+----------------
+Congested clusters found at Level 0
+Effective congestion level: 0 Aspect Ratio: 1 Sparse Ratio: 0
+
+Phase 7 Route finalize | Checksum: 1e63db63a
+
+Time (s): cpu = 00:02:01 ; elapsed = 00:01:54 . Memory (MB): peak = 2129.875 ; gain = 56.590
+
+Phase 8 Verifying routed nets
+
+ Verification completed successfully
+Phase 8 Verifying routed nets | Checksum: 1e63db63a
+
+Time (s): cpu = 00:02:01 ; elapsed = 00:01:54 . Memory (MB): peak = 2129.875 ; gain = 56.590
+
+Phase 9 Depositing Routes
+Phase 9 Depositing Routes | Checksum: 2206816a6
+
+Time (s): cpu = 00:02:02 ; elapsed = 00:01:54 . Memory (MB): peak = 2129.875 ; gain = 56.590
+
+Phase 10 Post Router Timing
+INFO: [Route 35-57] Estimated Timing Summary | WNS=-0.681 | TNS=-395.551| WHS=0.103  | THS=0.000  |
+
+WARNING: [Route 35-328] Router estimated timing not met.
+Resolution: For a complete and accurate timing signoff, report_timing_summary must be run after route_design. Alternatively, route_design can be run with the -timing_summary option to enable a complete timing signoff at the end of route_design.
+Phase 10 Post Router Timing | Checksum: 2206816a6
+
+Time (s): cpu = 00:02:02 ; elapsed = 00:01:54 . Memory (MB): peak = 2129.875 ; gain = 56.590
+INFO: [Route 35-16] Router Completed Successfully
+
+Phase 11 Post-Route Event Processing
+Phase 11 Post-Route Event Processing | Checksum: 193707124
+
+Time (s): cpu = 00:02:03 ; elapsed = 00:01:55 . Memory (MB): peak = 2129.875 ; gain = 56.590
+Ending Routing Task | Checksum: 193707124
+
+Time (s): cpu = 00:02:03 ; elapsed = 00:01:55 . Memory (MB): peak = 2129.875 ; gain = 56.590
+
+Routing Is Done.
+INFO: [Common 17-83] Releasing license: Implementation
+15 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
+route_design completed successfully
+route_design: Time (s): cpu = 00:02:06 ; elapsed = 00:01:58 . Memory (MB): peak = 2129.875 ; gain = 56.590
+# if {$phys_dir ne {}} { phys_opt_design -directive $phys_dir }
+# report_timing_summary -max_paths 20 -report_unconstrained -file [file join $out_dir timing_summary.txt]
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
+# report_timing -delay_type max -max_paths 40 -nworst 1 -unique_pins -input_pins \
+#   -file [file join $out_dir critical_paths.txt]
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
+INFO: [Timing 38-78] ReportTimingParams: -max_paths 40 -nworst 1 -delay_type max -sort_by slack.
+# report_utilization -file [file join $out_dir utilization.txt]
+# report_utilization -hierarchical -file [file join $out_dir utilization_hier.txt]
+# report_drc -file [file join $out_dir drc.txt]
+Command: report_drc -file C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/A_retime/p5.800/drc.txt
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2023.2/data/ip'.
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Vivado_Tcl 2-168] The results of DRC are in file C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/A_retime/p5.800/drc.txt.
+report_drc completed successfully
+report_drc: Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2129.875 ; gain = 0.000
+# report_route_status -file [file join $out_dir route_status.txt]
+# report_pulse_width -file [file join $out_dir pulse_width.txt]
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
+# check_timing -verbose -file [file join $out_dir check_timing.txt]
+# report_methodology -file [file join $out_dir methodology.txt]
+Command: report_methodology -file C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/A_retime/p5.800/methodology.txt
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [DRC 23-133] Running Methodology with 2 threads
+INFO: [Vivado_Tcl 2-1520] The results of Report Methodology are in file C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/A_retime/p5.800/methodology.txt.
+report_methodology completed successfully
+# proc jstr {s} { return "\"[string map {\\ \\\\ \" \\\"} $s]\"" }
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+# set setup [get_timing_paths -delay_type max -max_paths 1]
+# set hold  [get_timing_paths -delay_type min -max_paths 1]
+# set wns [get_property SLACK $setup]
+# set whs [get_property SLACK $hold]
+# set tns "null"
+# set wpws "null"
+# set fh [open [file join $out_dir timing_summary.txt] r]
+# set after_header 0
+# while {[gets $fh line] >= 0} {
+#   if {[string match "*WNS(ns)*TNS(ns)*" $line]} { set after_header 1; continue }
+#   if {$after_header && [regexp {^\s*-?\d} $line]} {
+#     set fields [regexp -all -inline {\S+} $line]
+#     set tns  [lindex $fields 1]
+#     set wpws [lindex $fields 8]
+#     break
+#   }
+# }
+# close $fh
+# set rs [report_route_status -return_string]
+# set unrouted 0
+# if {[regexp {# of nets with routing errors\.*\s*:\s*(\d+)} $rs -> n]} { set unrouted $n }
+# set drc_errs [llength [get_drc_violations -quiet -filter {SEVERITY == Error}]]
+# set drc_crit [llength [get_drc_violations -quiet -filter {SEVERITY == "Critical Warning"}]]
+# set luts [llength [get_cells -hier -quiet -filter {PRIMITIVE_GROUP == LUT}]]
+# set ffs  [llength [get_cells -hier -quiet -filter {PRIMITIVE_GROUP == FLOP_LATCH}]]
+# set core_luts [llength [get_cells -hier -quiet -filter {PRIMITIVE_GROUP == LUT && NAME =~ core_u/*}]]
+# set core_ffs  [llength [get_cells -hier -quiet -filter {PRIMITIVE_GROUP == FLOP_LATCH && NAME =~ core_u/*}]]
+# set path_json {}
+# foreach p [get_timing_paths -delay_type max -max_paths 25 -nworst 1 -unique_pins] {
+#   set nets [get_nets -quiet -of_objects $p]
+#   set max_fo 0
+#   foreach n $nets {
+#     set fo [get_property FLAT_PIN_COUNT $n]
+#     if {$fo ne {} && $fo > $max_fo} { set max_fo $fo }
+#   }
+#   lappend path_json [format {{"slack": %s, "start": %s, "end": %s, "levels": %s, "logic_ns": %s, "route_ns": %s, "skew_ns": %s, "uncertainty_ns": %s, "max_net_pins": %s}} \
+#     [get_property SLACK $p] \
+#     [jstr [get_property NAME [get_property STARTPOINT_PIN $p]]] \
+#     [jstr [get_property NAME [get_property ENDPOINT_PIN $p]]] \
+#     [get_property LOGIC_LEVELS $p] \
+#     [get_property DATAPATH_LOGIC_DELAY $p] \
+#     [get_property DATAPATH_NET_DELAY $p] \
+#     [get_property SKEW $p] \
+#     [get_property UNCERTAINTY $p] \
+#     $max_fo]
+# }
+# proc seq_cells {patterns} {
+#   set result {}
+#   foreach pat $patterns {
+#     set result [concat $result [get_cells -quiet -hier -filter "IS_SEQUENTIAL && NAME =~ $pat"]]
+#   }
+#   return $result
+# }
+# set P core_u/permutation_u
+# set categories [list \
+#   [list input_decode   {in_keep_reg* in_data_reg* in_valid_reg in_last_reg in_kind_reg} {core_u/*}] \
+#   [list ctrl_to_state  {core_u/FSM_* core_u/controller_state*} {core_u/state_reg_reg*}] \
+#   [list ctrl_to_perm   {core_u/FSM_* core_u/controller_state*} "$P/*"] \
+#   [list ctrl_to_output {core_u/FSM_* core_u/controller_state*} {core_u/out_* core_u/tag_reg* core_u/auth* core_u/commit* core_u/discard*}] \
+#   [list perm_round     "$P/state_reg_reg*" "$P/state_reg_reg* $P/sbox_reg_reg* $P/s1_reg_reg*"] \
+#   [list perm_stage_mid "$P/s1_reg_reg*" "$P/s2_reg_reg*"] \
+#   [list perm_stage_out "$P/sbox_reg_reg* $P/s2_reg_reg*" "$P/state_reg_reg*"] \
+#   [list perm_control   "$P/round_number* $P/busy* $P/phase* $P/final*" "$P/state_reg_reg* $P/sbox_reg_reg* $P/s1_reg_reg* $P/s2_reg_reg*"] \
+#   [list perm_load      {core_u/state_reg_reg*} "$P/state_reg_reg*"] \
+#   [list perm_capture   "$P/state_reg_reg*" {core_u/state_reg_reg*}] \
+#   [list perm_done      "$P/done_reg*" {core_u/*}] \
+#   [list absorb_output  {core_u/state_reg_reg*} {core_u/out_*}] \
+#   [list finalize_tag   "$P/state_reg_reg* core_u/key_reg*" {core_u/tag_reg*}] \
+#   [list authenticate   {core_u/tag_reg* tag_in_reg* tag_in_valid_reg} {core_u/*}] \
+#   [list to_harness     {core_u/*} {signature_reg* drive_state* cmd_* in_* tag_in* beats_left*}] \
+# ]
+# set cat_json {}
+# foreach cat $categories {
+#   lassign $cat cname from_pats to_pats
+#   set from_cells [seq_cells $from_pats]
+#   set to_cells [seq_cells $to_pats]
+#   if {[llength $from_cells] == 0 || [llength $to_cells] == 0} { continue }
+#   set p [get_timing_paths -quiet -delay_type max -max_paths 1 -from $from_cells -to $to_cells]
+#   if {[llength $p] == 0} { continue }
+#   set max_fo 0
+#   foreach n [get_nets -quiet -of_objects $p] {
+#     set fo [get_property FLAT_PIN_COUNT $n]
+#     if {$fo ne {} && $fo > $max_fo} { set max_fo $fo }
+#   }
+#   lappend cat_json [format {"%s": {"slack": %s, "start": %s, "end": %s, "levels": %s, "logic_ns": %s, "route_ns": %s, "skew_ns": %s, "max_net_pins": %s}} \
+#     $cname [get_property SLACK $p] \
+#     [jstr [get_property NAME [get_property STARTPOINT_PIN $p]]] \
+#     [jstr [get_property NAME [get_property ENDPOINT_PIN $p]]] \
+#     [get_property LOGIC_LEVELS $p] [get_property DATAPATH_LOGIC_DELAY $p] \
+#     [get_property DATAPATH_NET_DELAY $p] [get_property SKEW $p] $max_fo]
+#   report_timing -from $from_cells -to $to_cells -max_paths 1 -input_pins \
+#     -file [file join $out_dir "category_paths.txt"] -append
+# }
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+# set pass [expr {$wns >= 0.0 && $whs >= 0.0 && ($wpws eq "null" || $wpws >= 0.0) && $unrouted == 0 && $drc_errs == 0}]
+# set fh [open [file join $out_dir result.json] w]
+# puts $fh "{"
+# puts $fh "  \"variant_dir\": [jstr $variant_dir],"
+# puts $fh "  \"period_ns\": $period,"
+# puts $fh "  \"strategy\": [jstr $strategy],"
+# puts $fh "  \"vivado\": [jstr [version -short]],"
+# puts $fh "  \"part\": [jstr $part],"
+# puts $fh "  \"wns_ns\": $wns, \"tns_ns\": $tns, \"whs_ns\": $whs, \"wpws_ns\": $wpws,"
+# puts $fh "  \"route_error_nets\": $unrouted, \"drc_errors\": $drc_errs, \"drc_critical_warnings\": $drc_crit,"
+# puts $fh "  \"luts_total\": $luts, \"ffs_total\": $ffs, \"luts_core\": $core_luts, \"ffs_core\": $core_ffs,"
+# puts $fh "  \"pass\": [expr {$pass ? "true" : "false"}],"
+# puts $fh "  \"categories\": {\n    [join $cat_json ",\n    "]\n  },"
+# puts $fh "  \"paths\": \[\n    [join $path_json ",\n    "]\n  \]"
+# puts $fh "}"
+# close $fh
+# puts "RESULT period=$period wns=$wns whs=$whs wpws=$wpws pass=$pass"
+RESULT period=5.800 wns=-0.681 whs=0.106 wpws=2.400 pass=0
+INFO: [Common 17-206] Exiting Vivado at Tue Oct 27 18:11:58 2026...

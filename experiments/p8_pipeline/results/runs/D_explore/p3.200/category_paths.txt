@@ -1,0 +1,1238 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Tue Oct 27 17:40:24 2026
+| Host         : KroixLaptop running 64-bit major release  (build 9200)
+| Command      : report_timing -from {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -to {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -max_paths 1 -input_pins -file C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/D_explore/p3.200/category_paths.txt -append
+| Design       : ascon_bench_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Physopt postRoute
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -0.606ns  (required time - arrival time)
+  Source:                 in_keep_reg[2]_replica/C
+                            (rising edge-triggered cell FDSE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Destination:            core_u/out_keep_reg_reg[0]/CE
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Path Group:             sys_clk_pin
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            3.200ns  (sys_clk_pin rise@3.200ns - sys_clk_pin rise@0.000ns)
+  Data Path Delay:        3.520ns  (logic 0.952ns (27.044%)  route 2.568ns (72.956%))
+  Logic Levels:           4  (LUT2=1 LUT6=3)
+  Clock Path Skew:        -0.045ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.161ns = ( 8.361 - 3.200 ) 
+    Source Clock Delay      (SCD):    5.477ns
+    Clock Pessimism Removal (CPR):    0.271ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock sys_clk_pin rise edge)
+                                                      0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           2.025     3.506    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.096     3.602 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.140     3.742    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.838 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.638     5.477    CLK100MHZ_IBUF_BUFG
+    SLICE_X41Y58         FDSE                                         r  in_keep_reg[2]_replica/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y58         FDSE (Prop_fdse_C_Q)         0.456     5.933 r  in_keep_reg[2]_replica/Q
+                         net (fo=1, routed)           0.407     6.340    core_u/in_keep_reg_n_0_[2]_repN_alias
+    SLICE_X41Y58                                                      r  core_u/out_keep_reg[2]_i_1/I0
+    SLICE_X41Y58         LUT2 (Prop_lut2_I0_O)        0.124     6.464 r  core_u/out_keep_reg[2]_i_1/O
+                         net (fo=2, routed)           0.315     6.778    core_u/out_keep_reg[2]_i_1_n_0
+    SLICE_X40Y56                                                      r  core_u/FSM_onehot_controller_state[16]_i_9/I0
+    SLICE_X40Y56         LUT6 (Prop_lut6_I0_O)        0.124     6.902 r  core_u/FSM_onehot_controller_state[16]_i_9/O
+                         net (fo=6, routed)           0.526     7.428    core_u/FSM_onehot_controller_state[16]_i_9_n_0
+    SLICE_X40Y54                                                      r  core_u/FSM_onehot_controller_state[16]_i_7/I5
+    SLICE_X40Y54         LUT6 (Prop_lut6_I5_O)        0.124     7.552 r  core_u/FSM_onehot_controller_state[16]_i_7/O
+                         net (fo=2, routed)           0.816     8.369    core_u/FSM_onehot_controller_state[16]_i_7_n_0
+    SLICE_X41Y56                                                      r  core_u/out_keep_reg[15]_i_1/I2
+    SLICE_X41Y56         LUT6 (Prop_lut6_I2_O)        0.124     8.493 r  core_u/out_keep_reg[15]_i_1/O
+                         net (fo=18, routed)          0.504     8.997    core_u/out_keep_reg[15]_i_1_n_0
+    SLICE_X44Y57         FDRE                                         r  core_u/out_keep_reg_reg[0]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock sys_clk_pin rise edge)
+                                                      3.200     3.200 r  
+    E3                                                0.000     3.200 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     3.200    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.411     4.611 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.920     6.531    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.091     6.622 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.133     6.755    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.846 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.514     8.361    core_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X44Y57         FDRE                                         r  core_u/out_keep_reg_reg[0]/C
+                         clock pessimism              0.271     8.632    
+                         clock uncertainty           -0.035     8.596    
+    SLICE_X44Y57         FDRE (Setup_fdre_C_CE)      -0.205     8.391    core_u/out_keep_reg_reg[0]
+  -------------------------------------------------------------------
+                         required time                          8.391    
+                         arrival time                          -8.997    
+  -------------------------------------------------------------------
+                         slack                                 -0.606    
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Tue Oct 27 17:40:24 2026
+| Host         : KroixLaptop running 64-bit major release  (build 9200)
+| Command      : report_timing -from {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -to {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -max_paths 1 -input_pins -file C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/D_explore/p3.200/category_paths.txt -append
+| Design       : ascon_bench_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Physopt postRoute
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -0.623ns  (required time - arrival time)
+  Source:                 core_u/FSM_onehot_controller_state_reg[6]/C
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Destination:            core_u/state_reg_reg[195]/CE
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Path Group:             sys_clk_pin
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            3.200ns  (sys_clk_pin rise@3.200ns - sys_clk_pin rise@0.000ns)
+  Data Path Delay:        3.458ns  (logic 0.704ns (20.361%)  route 2.754ns (79.639%))
+  Logic Levels:           2  (LUT2=1 LUT6=1)
+  Clock Path Skew:        -0.125ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.152ns = ( 8.352 - 3.200 ) 
+    Source Clock Delay      (SCD):    5.476ns
+    Clock Pessimism Removal (CPR):    0.199ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock sys_clk_pin rise edge)
+                                                      0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           2.025     3.506    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.096     3.602 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.140     3.742    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.838 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.637     5.476    core_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X41Y59         FDRE                                         r  core_u/FSM_onehot_controller_state_reg[6]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y59         FDRE (Prop_fdre_C_Q)         0.456     5.932 r  core_u/FSM_onehot_controller_state_reg[6]/Q
+                         net (fo=312, routed)         1.058     6.989    core_u/FSM_onehot_controller_state_reg_n_0_[6]
+    SLICE_X43Y48                                                      r  core_u/out_last_reg_i_1/I1
+    SLICE_X43Y48         LUT2 (Prop_lut2_I1_O)        0.124     7.113 r  core_u/out_last_reg_i_1/O
+                         net (fo=3, routed)           0.823     7.937    core_u/permutation_u/msg_last_reg
+    SLICE_X42Y46                                                      r  core_u/permutation_u/state_reg[255]_i_1__0/I3
+    SLICE_X42Y46         LUT6 (Prop_lut6_I3_O)        0.124     8.061 r  core_u/permutation_u/state_reg[255]_i_1__0/O
+                         net (fo=128, routed)         0.873     8.933    core_u/permutation_u_n_1
+    SLICE_X53Y50         FDRE                                         r  core_u/state_reg_reg[195]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock sys_clk_pin rise edge)
+                                                      3.200     3.200 r  
+    E3                                                0.000     3.200 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     3.200    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.411     4.611 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.920     6.531    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.091     6.622 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.133     6.755    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.846 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.505     8.352    core_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X53Y50         FDRE                                         r  core_u/state_reg_reg[195]/C
+                         clock pessimism              0.199     8.551    
+                         clock uncertainty           -0.035     8.515    
+    SLICE_X53Y50         FDRE (Setup_fdre_C_CE)      -0.205     8.310    core_u/state_reg_reg[195]
+  -------------------------------------------------------------------
+                         required time                          8.310    
+                         arrival time                          -8.933    
+  -------------------------------------------------------------------
+                         slack                                 -0.623    
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Tue Oct 27 17:40:25 2026
+| Host         : KroixLaptop running 64-bit major release  (build 9200)
+| Command      : report_timing -from {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -to {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -max_paths 1 -input_pins -file C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/D_explore/p3.200/category_paths.txt -append
+| Design       : ascon_bench_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Physopt postRoute
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -0.177ns  (required time - arrival time)
+  Source:                 core_u/FSM_onehot_controller_state_reg[15]/C
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Destination:            core_u/permutation_u/round_constant[-1111111108]/CE
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Path Group:             sys_clk_pin
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            3.200ns  (sys_clk_pin rise@3.200ns - sys_clk_pin rise@0.000ns)
+  Data Path Delay:        2.842ns  (logic 0.704ns (24.769%)  route 2.138ns (75.231%))
+  Logic Levels:           2  (LUT4=1 LUT6=1)
+  Clock Path Skew:        -0.294ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.159ns = ( 8.359 - 3.200 ) 
+    Source Clock Delay      (SCD):    5.652ns
+    Clock Pessimism Removal (CPR):    0.199ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock sys_clk_pin rise edge)
+                                                      0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           2.025     3.506    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.096     3.602 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.140     3.742    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.838 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.813     5.652    core_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X41Y47         FDRE                                         r  core_u/FSM_onehot_controller_state_reg[15]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y47         FDRE (Prop_fdre_C_Q)         0.456     6.108 r  core_u/FSM_onehot_controller_state_reg[15]/Q
+                         net (fo=2, routed)           0.766     6.874    core_u/permutation_u/Q[14]
+    SLICE_X40Y55                                                      r  core_u/permutation_u/round_constant[-1111111108]_i_4/I3
+    SLICE_X40Y55         LUT6 (Prop_lut6_I3_O)        0.124     6.998 f  core_u/permutation_u/round_constant[-1111111108]_i_4/O
+                         net (fo=10, routed)          0.630     7.628    core_u/permutation_u/round_constant[-1111111108]_i_4_n_0
+    SLICE_X44Y56                                                      f  core_u/permutation_u/round_constant[-1111111108]_i_1/I3
+    SLICE_X44Y56         LUT4 (Prop_lut4_I3_O)        0.124     7.752 r  core_u/permutation_u/round_constant[-1111111108]_i_1/O
+                         net (fo=8, routed)           0.742     8.494    core_u/permutation_u/CEC
+    SLICE_X47Y58         FDRE                                         r  core_u/permutation_u/round_constant[-1111111108]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock sys_clk_pin rise edge)
+                                                      3.200     3.200 r  
+    E3                                                0.000     3.200 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     3.200    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.411     4.611 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.920     6.531    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.091     6.622 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.133     6.755    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.846 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.512     8.359    core_u/permutation_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X47Y58         FDRE                                         r  core_u/permutation_u/round_constant[-1111111108]/C
+                         clock pessimism              0.199     8.558    
+                         clock uncertainty           -0.035     8.522    
+    SLICE_X47Y58         FDRE (Setup_fdre_C_CE)      -0.205     8.317    core_u/permutation_u/round_constant[-1111111108]
+  -------------------------------------------------------------------
+                         required time                          8.317    
+                         arrival time                          -8.494    
+  -------------------------------------------------------------------
+                         slack                                 -0.177    
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Tue Oct 27 17:40:25 2026
+| Host         : KroixLaptop running 64-bit major release  (build 9200)
+| Command      : report_timing -from {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -to {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -max_paths 1 -input_pins -file C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/D_explore/p3.200/category_paths.txt -append
+| Design       : ascon_bench_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Physopt postRoute
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -0.637ns  (required time - arrival time)
+  Source:                 core_u/FSM_onehot_controller_state_reg[6]/C
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Destination:            core_u/out_keep_reg_reg[0]/CE
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Path Group:             sys_clk_pin
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            3.200ns  (sys_clk_pin rise@3.200ns - sys_clk_pin rise@0.000ns)
+  Data Path Delay:        3.552ns  (logic 0.952ns (26.798%)  route 2.600ns (73.202%))
+  Logic Levels:           4  (LUT2=1 LUT6=3)
+  Clock Path Skew:        -0.044ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.161ns = ( 8.361 - 3.200 ) 
+    Source Clock Delay      (SCD):    5.476ns
+    Clock Pessimism Removal (CPR):    0.271ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock sys_clk_pin rise edge)
+                                                      0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           2.025     3.506    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.096     3.602 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.140     3.742    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.838 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.637     5.476    core_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X41Y59         FDRE                                         r  core_u/FSM_onehot_controller_state_reg[6]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y59         FDRE (Prop_fdre_C_Q)         0.456     5.932 r  core_u/FSM_onehot_controller_state_reg[6]/Q
+                         net (fo=312, routed)         0.439     6.371    core_u/FSM_onehot_controller_state_reg_n_0_[6]
+    SLICE_X41Y58                                                      r  core_u/out_keep_reg[2]_i_1/I1
+    SLICE_X41Y58         LUT2 (Prop_lut2_I1_O)        0.124     6.495 r  core_u/out_keep_reg[2]_i_1/O
+                         net (fo=2, routed)           0.315     6.810    core_u/out_keep_reg[2]_i_1_n_0
+    SLICE_X40Y56                                                      r  core_u/FSM_onehot_controller_state[16]_i_9/I0
+    SLICE_X40Y56         LUT6 (Prop_lut6_I0_O)        0.124     6.934 r  core_u/FSM_onehot_controller_state[16]_i_9/O
+                         net (fo=6, routed)           0.526     7.460    core_u/FSM_onehot_controller_state[16]_i_9_n_0
+    SLICE_X40Y54                                                      r  core_u/FSM_onehot_controller_state[16]_i_7/I5
+    SLICE_X40Y54         LUT6 (Prop_lut6_I5_O)        0.124     7.584 r  core_u/FSM_onehot_controller_state[16]_i_7/O
+                         net (fo=2, routed)           0.816     8.400    core_u/FSM_onehot_controller_state[16]_i_7_n_0
+    SLICE_X41Y56                                                      r  core_u/out_keep_reg[15]_i_1/I2
+    SLICE_X41Y56         LUT6 (Prop_lut6_I2_O)        0.124     8.524 r  core_u/out_keep_reg[15]_i_1/O
+                         net (fo=18, routed)          0.504     9.028    core_u/out_keep_reg[15]_i_1_n_0
+    SLICE_X44Y57         FDRE                                         r  core_u/out_keep_reg_reg[0]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock sys_clk_pin rise edge)
+                                                      3.200     3.200 r  
+    E3                                                0.000     3.200 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     3.200    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.411     4.611 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.920     6.531    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.091     6.622 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.133     6.755    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.846 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.514     8.361    core_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X44Y57         FDRE                                         r  core_u/out_keep_reg_reg[0]/C
+                         clock pessimism              0.271     8.632    
+                         clock uncertainty           -0.035     8.596    
+    SLICE_X44Y57         FDRE (Setup_fdre_C_CE)      -0.205     8.391    core_u/out_keep_reg_reg[0]
+  -------------------------------------------------------------------
+                         required time                          8.391    
+                         arrival time                          -9.028    
+  -------------------------------------------------------------------
+                         slack                                 -0.637    
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Tue Oct 27 17:40:25 2026
+| Host         : KroixLaptop running 64-bit major release  (build 9200)
+| Command      : report_timing -from {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -to {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -max_paths 1 -input_pins -file C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/D_explore/p3.200/category_paths.txt -append
+| Design       : ascon_bench_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Physopt postRoute
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -0.091ns  (required time - arrival time)
+  Source:                 core_u/permutation_u/state_reg_reg[308]/C
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Destination:            core_u/permutation_u/sbox_reg_reg[308]/D
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Path Group:             sys_clk_pin
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            3.200ns  (sys_clk_pin rise@3.200ns - sys_clk_pin rise@0.000ns)
+  Data Path Delay:        2.724ns  (logic 0.608ns (22.318%)  route 2.116ns (77.682%))
+  Logic Levels:           1  (LUT4=1)
+  Clock Path Skew:        -0.294ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.157ns = ( 8.357 - 3.200 ) 
+    Source Clock Delay      (SCD):    5.650ns
+    Clock Pessimism Removal (CPR):    0.199ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock sys_clk_pin rise edge)
+                                                      0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           2.025     3.506    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.096     3.602 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.140     3.742    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.838 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.811     5.650    core_u/permutation_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X40Y41         FDRE                                         r  core_u/permutation_u/state_reg_reg[308]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X40Y41         FDRE (Prop_fdre_C_Q)         0.456     6.106 r  core_u/permutation_u/state_reg_reg[308]/Q
+                         net (fo=7, routed)           1.186     7.292    core_u/permutation_u/perm_state_out[308]
+    SLICE_X50Y44                                                      r  core_u/permutation_u/sbox_reg[308]_i_1/I2
+    SLICE_X50Y44         LUT4 (Prop_lut4_I2_O)        0.152     7.444 r  core_u/permutation_u/sbox_reg[308]_i_1/O
+                         net (fo=1, routed)           0.930     8.374    core_u/permutation_u/value34_out[52]
+    SLICE_X50Y57         FDRE                                         r  core_u/permutation_u/sbox_reg_reg[308]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock sys_clk_pin rise edge)
+                                                      3.200     3.200 r  
+    E3                                                0.000     3.200 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     3.200    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.411     4.611 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.920     6.531    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.091     6.622 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.133     6.755    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.846 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.510     8.357    core_u/permutation_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X50Y57         FDRE                                         r  core_u/permutation_u/sbox_reg_reg[308]/C
+                         clock pessimism              0.199     8.556    
+                         clock uncertainty           -0.035     8.520    
+    SLICE_X50Y57         FDRE (Setup_fdre_C_D)       -0.237     8.283    core_u/permutation_u/sbox_reg_reg[308]
+  -------------------------------------------------------------------
+                         required time                          8.283    
+                         arrival time                          -8.374    
+  -------------------------------------------------------------------
+                         slack                                 -0.091    
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Tue Oct 27 17:40:25 2026
+| Host         : KroixLaptop running 64-bit major release  (build 9200)
+| Command      : report_timing -from {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -to {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -max_paths 1 -input_pins -file C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/D_explore/p3.200/category_paths.txt -append
+| Design       : ascon_bench_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Physopt postRoute
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.013ns  (required time - arrival time)
+  Source:                 core_u/permutation_u/sbox_reg_reg[60]/C
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Destination:            core_u/permutation_u/state_reg_reg[60]/D
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Path Group:             sys_clk_pin
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            3.200ns  (sys_clk_pin rise@3.200ns - sys_clk_pin rise@0.000ns)
+  Data Path Delay:        2.887ns  (logic 0.580ns (20.087%)  route 2.307ns (79.913%))
+  Logic Levels:           1  (LUT5=1)
+  Clock Path Skew:        -0.296ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.163ns = ( 8.363 - 3.200 ) 
+    Source Clock Delay      (SCD):    5.658ns
+    Clock Pessimism Removal (CPR):    0.199ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock sys_clk_pin rise edge)
+                                                      0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           2.025     3.506    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.096     3.602 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.140     3.742    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.838 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.819     5.658    core_u/permutation_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X25Y48         FDRE                                         r  core_u/permutation_u/sbox_reg_reg[60]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X25Y48         FDRE (Prop_fdre_C_Q)         0.456     6.114 r  core_u/permutation_u/sbox_reg_reg[60]/Q
+                         net (fo=3, routed)           2.307     8.421    core_u/permutation_u/rotate_right_640_in[32]
+    SLICE_X43Y51                                                      r  core_u/permutation_u/state_reg[60]_i_1/I2
+    SLICE_X43Y51         LUT5 (Prop_lut5_I2_O)        0.124     8.545 r  core_u/permutation_u/state_reg[60]_i_1/O
+                         net (fo=1, routed)           0.000     8.545    core_u/permutation_u/state_reg[60]_i_1_n_0
+    SLICE_X43Y51         FDRE                                         r  core_u/permutation_u/state_reg_reg[60]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock sys_clk_pin rise edge)
+                                                      3.200     3.200 r  
+    E3                                                0.000     3.200 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     3.200    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.411     4.611 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.920     6.531    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.091     6.622 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.133     6.755    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.846 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.516     8.363    core_u/permutation_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X43Y51         FDRE                                         r  core_u/permutation_u/state_reg_reg[60]/C
+                         clock pessimism              0.199     8.562    
+                         clock uncertainty           -0.035     8.526    
+    SLICE_X43Y51         FDRE (Setup_fdre_C_D)        0.032     8.558    core_u/permutation_u/state_reg_reg[60]
+  -------------------------------------------------------------------
+                         required time                          8.558    
+                         arrival time                          -8.545    
+  -------------------------------------------------------------------
+                         slack                                  0.013    
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Tue Oct 27 17:40:26 2026
+| Host         : KroixLaptop running 64-bit major release  (build 9200)
+| Command      : report_timing -from {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -to {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -max_paths 1 -input_pins -file C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/D_explore/p3.200/category_paths.txt -append
+| Design       : ascon_bench_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Physopt postRoute
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -0.326ns  (required time - arrival time)
+  Source:                 core_u/permutation_u/round_number_reg_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Destination:            core_u/permutation_u/sbox_reg_reg[158]/R
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Path Group:             sys_clk_pin
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            3.200ns  (sys_clk_pin rise@3.200ns - sys_clk_pin rise@0.000ns)
+  Data Path Delay:        3.120ns  (logic 0.704ns (22.561%)  route 2.416ns (77.439%))
+  Logic Levels:           2  (LUT4=2)
+  Clock Path Skew:        0.059ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.331ns = ( 8.531 - 3.200 ) 
+    Source Clock Delay      (SCD):    5.472ns
+    Clock Pessimism Removal (CPR):    0.199ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock sys_clk_pin rise edge)
+                                                      0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           2.025     3.506    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.096     3.602 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.140     3.742    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.838 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.633     5.472    core_u/permutation_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X49Y58         FDRE                                         r  core_u/permutation_u/round_number_reg_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X49Y58         FDRE (Prop_fdre_C_Q)         0.456     5.928 r  core_u/permutation_u/round_number_reg_reg[1]/Q
+                         net (fo=9, routed)           0.714     6.642    core_u/permutation_u/round_number_reg_reg[1]
+    SLICE_X44Y57                                                      r  core_u/permutation_u/round_constant[-1111111108]_i_3/I1
+    SLICE_X44Y57         LUT4 (Prop_lut4_I1_O)        0.124     6.766 f  core_u/permutation_u/round_constant[-1111111108]_i_3/O
+                         net (fo=7, routed)           0.633     7.399    core_u/permutation_u/round_constant[-1111111108]_i_3_n_0
+    SLICE_X51Y56                                                      f  core_u/permutation_u/sbox_reg[319]_i_1/I2
+    SLICE_X51Y56         LUT4 (Prop_lut4_I2_O)        0.124     7.523 r  core_u/permutation_u/sbox_reg[319]_i_1/O
+                         net (fo=128, routed)         1.069     8.592    core_u/permutation_u/sbox_reg[319]_i_1_n_0
+    SLICE_X36Y45         FDRE                                         r  core_u/permutation_u/sbox_reg_reg[158]/R
+  -------------------------------------------------------------------    -------------------
+
+                         (clock sys_clk_pin rise edge)
+                                                      3.200     3.200 r  
+    E3                                                0.000     3.200 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     3.200    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.411     4.611 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.920     6.531    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.091     6.622 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.133     6.755    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.846 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.685     8.531    core_u/permutation_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X36Y45         FDRE                                         r  core_u/permutation_u/sbox_reg_reg[158]/C
+                         clock pessimism              0.199     8.730    
+                         clock uncertainty           -0.035     8.695    
+    SLICE_X36Y45         FDRE (Setup_fdre_C_R)       -0.429     8.266    core_u/permutation_u/sbox_reg_reg[158]
+  -------------------------------------------------------------------
+                         required time                          8.266    
+                         arrival time                          -8.592    
+  -------------------------------------------------------------------
+                         slack                                 -0.326    
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Tue Oct 27 17:40:26 2026
+| Host         : KroixLaptop running 64-bit major release  (build 9200)
+| Command      : report_timing -from {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -to {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -max_paths 1 -input_pins -file C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/D_explore/p3.200/category_paths.txt -append
+| Design       : ascon_bench_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Physopt postRoute
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.248ns  (required time - arrival time)
+  Source:                 core_u/state_reg_reg[113]/C
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Destination:            core_u/permutation_u/state_reg_reg[113]/D
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Path Group:             sys_clk_pin
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            3.200ns  (sys_clk_pin rise@3.200ns - sys_clk_pin rise@0.000ns)
+  Data Path Delay:        2.565ns  (logic 0.580ns (22.610%)  route 1.985ns (77.390%))
+  Logic Levels:           1  (LUT5=1)
+  Clock Path Skew:        -0.284ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.161ns = ( 8.361 - 3.200 ) 
+    Source Clock Delay      (SCD):    5.644ns
+    Clock Pessimism Removal (CPR):    0.199ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock sys_clk_pin rise edge)
+                                                      0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           2.025     3.506    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.096     3.602 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.140     3.742    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.838 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.805     5.644    core_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X48Y40         FDRE                                         r  core_u/state_reg_reg[113]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X48Y40         FDRE (Prop_fdre_C_Q)         0.456     6.100 r  core_u/state_reg_reg[113]/Q
+                         net (fo=3, routed)           1.299     7.399    core_u/permutation_u/state_reg_reg[319]_1[113]
+    SLICE_X55Y45                                                      r  core_u/permutation_u/state_reg[113]_i_1/I0
+    SLICE_X55Y45         LUT5 (Prop_lut5_I0_O)        0.124     7.523 r  core_u/permutation_u/state_reg[113]_i_1/O
+                         net (fo=1, routed)           0.686     8.209    core_u/permutation_u/state_reg[113]_i_1_n_0
+    SLICE_X47Y50         FDRE                                         r  core_u/permutation_u/state_reg_reg[113]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock sys_clk_pin rise edge)
+                                                      3.200     3.200 r  
+    E3                                                0.000     3.200 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     3.200    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.411     4.611 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.920     6.531    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.091     6.622 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.133     6.755    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.846 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.514     8.361    core_u/permutation_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X47Y50         FDRE                                         r  core_u/permutation_u/state_reg_reg[113]/C
+                         clock pessimism              0.199     8.560    
+                         clock uncertainty           -0.035     8.524    
+    SLICE_X47Y50         FDRE (Setup_fdre_C_D)       -0.067     8.457    core_u/permutation_u/state_reg_reg[113]
+  -------------------------------------------------------------------
+                         required time                          8.457    
+                         arrival time                          -8.209    
+  -------------------------------------------------------------------
+                         slack                                  0.248    
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Tue Oct 27 17:40:26 2026
+| Host         : KroixLaptop running 64-bit major release  (build 9200)
+| Command      : report_timing -from {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -to {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -max_paths 1 -input_pins -file C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/D_explore/p3.200/category_paths.txt -append
+| Design       : ascon_bench_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Physopt postRoute
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.047ns  (required time - arrival time)
+  Source:                 core_u/permutation_u/state_reg_reg[136]/C
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Destination:            core_u/state_reg_reg[136]/D
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Path Group:             sys_clk_pin
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            3.200ns  (sys_clk_pin rise@3.200ns - sys_clk_pin rise@0.000ns)
+  Data Path Delay:        3.140ns  (logic 0.766ns (24.393%)  route 2.374ns (75.607%))
+  Logic Levels:           2  (LUT6=2)
+  Clock Path Skew:        0.053ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.325ns = ( 8.525 - 3.200 ) 
+    Source Clock Delay      (SCD):    5.472ns
+    Clock Pessimism Removal (CPR):    0.199ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock sys_clk_pin rise edge)
+                                                      0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           2.025     3.506    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.096     3.602 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.140     3.742    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.838 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.633     5.472    core_u/permutation_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X50Y50         FDRE                                         r  core_u/permutation_u/state_reg_reg[136]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X50Y50         FDRE (Prop_fdre_C_Q)         0.518     5.990 r  core_u/permutation_u/state_reg_reg[136]/Q
+                         net (fo=6, routed)           1.431     7.421    core_u/permutation_u/perm_state_out[136]
+    SLICE_X48Y49                                                      r  core_u/permutation_u/state_reg[136]_i_2/I0
+    SLICE_X48Y49         LUT6 (Prop_lut6_I0_O)        0.124     7.545 r  core_u/permutation_u/state_reg[136]_i_2/O
+                         net (fo=1, routed)           0.611     8.156    core_u/permutation_u/state_reg[136]_i_2_n_0
+    SLICE_X48Y49                                                      r  core_u/permutation_u/state_reg[136]_i_1__0/I3
+    SLICE_X48Y49         LUT6 (Prop_lut6_I3_O)        0.124     8.280 r  core_u/permutation_u/state_reg[136]_i_1__0/O
+                         net (fo=1, routed)           0.332     8.612    core_u/permutation_u_n_197
+    SLICE_X46Y48         FDRE                                         r  core_u/state_reg_reg[136]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock sys_clk_pin rise edge)
+                                                      3.200     3.200 r  
+    E3                                                0.000     3.200 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     3.200    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.411     4.611 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.920     6.531    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.091     6.622 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.133     6.755    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.846 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.679     8.525    core_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X46Y48         FDRE                                         r  core_u/state_reg_reg[136]/C
+                         clock pessimism              0.199     8.724    
+                         clock uncertainty           -0.035     8.689    
+    SLICE_X46Y48         FDRE (Setup_fdre_C_D)       -0.030     8.659    core_u/state_reg_reg[136]
+  -------------------------------------------------------------------
+                         required time                          8.659    
+                         arrival time                          -8.612    
+  -------------------------------------------------------------------
+                         slack                                  0.047    
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Tue Oct 27 17:40:26 2026
+| Host         : KroixLaptop running 64-bit major release  (build 9200)
+| Command      : report_timing -from {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -to {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -max_paths 1 -input_pins -file C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/D_explore/p3.200/category_paths.txt -append
+| Design       : ascon_bench_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Physopt postRoute
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -0.229ns  (required time - arrival time)
+  Source:                 core_u/permutation_u/done_reg_reg/C
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Destination:            core_u/state_reg_reg[195]/CE
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Path Group:             sys_clk_pin
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            3.200ns  (sys_clk_pin rise@3.200ns - sys_clk_pin rise@0.000ns)
+  Data Path Delay:        3.063ns  (logic 0.704ns (22.987%)  route 2.359ns (77.013%))
+  Logic Levels:           2  (LUT6=2)
+  Clock Path Skew:        -0.126ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.152ns = ( 8.352 - 3.200 ) 
+    Source Clock Delay      (SCD):    5.477ns
+    Clock Pessimism Removal (CPR):    0.199ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock sys_clk_pin rise edge)
+                                                      0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           2.025     3.506    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.096     3.602 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.140     3.742    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.838 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.638     5.477    core_u/permutation_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X39Y58         FDRE                                         r  core_u/permutation_u/done_reg_reg/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X39Y58         FDRE (Prop_fdre_C_Q)         0.456     5.933 r  core_u/permutation_u/done_reg_reg/Q
+                         net (fo=16, routed)          1.026     6.959    core_u/permutation_u/perm_done
+    SLICE_X39Y47                                                      r  core_u/permutation_u/state_reg[319]_i_3_rewire/I4
+    SLICE_X39Y47         LUT6 (Prop_lut6_I4_O)        0.124     7.083 r  core_u/permutation_u/state_reg[319]_i_3_rewire/O
+                         net (fo=2, routed)           0.460     7.543    core_u/permutation_u/state_reg[319]_i_3_n_0
+    SLICE_X42Y46                                                      r  core_u/permutation_u/state_reg[255]_i_1__0/I0
+    SLICE_X42Y46         LUT6 (Prop_lut6_I0_O)        0.124     7.667 r  core_u/permutation_u/state_reg[255]_i_1__0/O
+                         net (fo=128, routed)         0.873     8.539    core_u/permutation_u_n_1
+    SLICE_X53Y50         FDRE                                         r  core_u/state_reg_reg[195]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock sys_clk_pin rise edge)
+                                                      3.200     3.200 r  
+    E3                                                0.000     3.200 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     3.200    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.411     4.611 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.920     6.531    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.091     6.622 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.133     6.755    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.846 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.505     8.352    core_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X53Y50         FDRE                                         r  core_u/state_reg_reg[195]/C
+                         clock pessimism              0.199     8.551    
+                         clock uncertainty           -0.035     8.515    
+    SLICE_X53Y50         FDRE (Setup_fdre_C_CE)      -0.205     8.310    core_u/state_reg_reg[195]
+  -------------------------------------------------------------------
+                         required time                          8.310    
+                         arrival time                          -8.539    
+  -------------------------------------------------------------------
+                         slack                                 -0.229    
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Tue Oct 27 17:40:27 2026
+| Host         : KroixLaptop running 64-bit major release  (build 9200)
+| Command      : report_timing -from {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -to {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -max_paths 1 -input_pins -file C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/D_explore/p3.200/category_paths.txt -append
+| Design       : ascon_bench_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Physopt postRoute
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.539ns  (required time - arrival time)
+  Source:                 core_u/state_reg_reg[109]/C
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Destination:            core_u/out_data_reg_reg[109]/D
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Path Group:             sys_clk_pin
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            3.200ns  (sys_clk_pin rise@3.200ns - sys_clk_pin rise@0.000ns)
+  Data Path Delay:        2.456ns  (logic 0.642ns (26.144%)  route 1.814ns (73.856%))
+  Logic Levels:           1  (LUT4=1)
+  Clock Path Skew:        -0.123ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.314ns = ( 8.514 - 3.200 ) 
+    Source Clock Delay      (SCD):    5.645ns
+    Clock Pessimism Removal (CPR):    0.207ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock sys_clk_pin rise edge)
+                                                      0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           2.025     3.506    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.096     3.602 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.140     3.742    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.838 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.806     5.645    core_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X50Y47         FDRE                                         r  core_u/state_reg_reg[109]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X50Y47         FDRE (Prop_fdre_C_Q)         0.518     6.163 r  core_u/state_reg_reg[109]/Q
+                         net (fo=3, routed)           1.162     7.325    core_u/state_reg_reg_n_0_[109]
+    SLICE_X55Y46                                                      r  core_u/out_data_reg[109]_i_1/I3
+    SLICE_X55Y46         LUT4 (Prop_lut4_I3_O)        0.124     7.449 r  core_u/out_data_reg[109]_i_1/O
+                         net (fo=1, routed)           0.652     8.100    core_u/out_data_reg[109]_i_1_n_0
+    SLICE_X54Y42         FDRE                                         r  core_u/out_data_reg_reg[109]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock sys_clk_pin rise edge)
+                                                      3.200     3.200 r  
+    E3                                                0.000     3.200 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     3.200    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.411     4.611 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.920     6.531    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.091     6.622 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.133     6.755    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.846 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.668     8.514    core_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X54Y42         FDRE                                         r  core_u/out_data_reg_reg[109]/C
+                         clock pessimism              0.207     8.722    
+                         clock uncertainty           -0.035     8.686    
+    SLICE_X54Y42         FDRE (Setup_fdre_C_D)       -0.047     8.639    core_u/out_data_reg_reg[109]
+  -------------------------------------------------------------------
+                         required time                          8.639    
+                         arrival time                          -8.100    
+  -------------------------------------------------------------------
+                         slack                                  0.539    
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Tue Oct 27 17:40:27 2026
+| Host         : KroixLaptop running 64-bit major release  (build 9200)
+| Command      : report_timing -from {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -to {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -max_paths 1 -input_pins -file C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/D_explore/p3.200/category_paths.txt -append
+| Design       : ascon_bench_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Physopt postRoute
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -0.129ns  (required time - arrival time)
+  Source:                 core_u/key_reg_reg[93]/C
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Destination:            core_u/tag_reg_reg[93]/D
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Path Group:             sys_clk_pin
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            3.200ns  (sys_clk_pin rise@3.200ns - sys_clk_pin rise@0.000ns)
+  Data Path Delay:        2.742ns  (logic 0.746ns (27.205%)  route 1.996ns (72.795%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        -0.291ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.166ns = ( 8.366 - 3.200 ) 
+    Source Clock Delay      (SCD):    5.656ns
+    Clock Pessimism Removal (CPR):    0.199ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock sys_clk_pin rise edge)
+                                                      0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           2.025     3.506    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.096     3.602 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.140     3.742    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.838 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.817     5.656    core_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X27Y42         FDRE                                         r  core_u/key_reg_reg[93]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X27Y42         FDRE (Prop_fdre_C_Q)         0.419     6.075 r  core_u/key_reg_reg[93]/Q
+                         net (fo=3, routed)           1.424     7.499    core_u/permutation_u/tag_reg_reg[127][93]
+    SLICE_X31Y57                                                      r  core_u/permutation_u/tag_reg[93]_i_1/I0
+    SLICE_X31Y57         LUT3 (Prop_lut3_I0_O)        0.327     7.826 r  core_u/permutation_u/tag_reg[93]_i_1/O
+                         net (fo=1, routed)           0.572     8.398    core_u/permutation_u_n_369
+    SLICE_X31Y57         FDRE                                         r  core_u/tag_reg_reg[93]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock sys_clk_pin rise edge)
+                                                      3.200     3.200 r  
+    E3                                                0.000     3.200 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     3.200    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.411     4.611 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.920     6.531    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.091     6.622 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.133     6.755    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.846 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.519     8.366    core_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X31Y57         FDRE                                         r  core_u/tag_reg_reg[93]/C
+                         clock pessimism              0.199     8.565    
+                         clock uncertainty           -0.035     8.529    
+    SLICE_X31Y57         FDRE (Setup_fdre_C_D)       -0.260     8.269    core_u/tag_reg_reg[93]
+  -------------------------------------------------------------------
+                         required time                          8.269    
+                         arrival time                          -8.398    
+  -------------------------------------------------------------------
+                         slack                                 -0.129    
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Tue Oct 27 17:40:27 2026
+| Host         : KroixLaptop running 64-bit major release  (build 9200)
+| Command      : report_timing -from {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -to {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -max_paths 1 -input_pins -file C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/D_explore/p3.200/category_paths.txt -append
+| Design       : ascon_bench_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Physopt postRoute
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -0.558ns  (required time - arrival time)
+  Source:                 core_u/tag_reg_reg[75]/C
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Destination:            core_u/auth_ok_reg_reg/D
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Path Group:             sys_clk_pin
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            3.200ns  (sys_clk_pin rise@3.200ns - sys_clk_pin rise@0.000ns)
+  Data Path Delay:        3.774ns  (logic 1.090ns (28.881%)  route 2.684ns (71.119%))
+  Logic Levels:           4  (LUT4=1 LUT5=2 LUT6=1)
+  Clock Path Skew:        -0.025ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.167ns = ( 8.367 - 3.200 ) 
+    Source Clock Delay      (SCD):    5.480ns
+    Clock Pessimism Removal (CPR):    0.288ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock sys_clk_pin rise edge)
+                                                      0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           2.025     3.506    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.096     3.602 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.140     3.742    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.838 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.641     5.480    core_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X33Y55         FDRE                                         r  core_u/tag_reg_reg[75]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X33Y55         FDRE (Prop_fdre_C_Q)         0.419     5.899 r  core_u/tag_reg_reg[75]/Q
+                         net (fo=2, routed)           0.603     6.502    core_u/tag_out[75]
+    SLICE_X30Y55                                                      r  core_u/commit_reg_i_41/I2
+    SLICE_X30Y55         LUT4 (Prop_lut4_I2_O)        0.299     6.801 f  core_u/commit_reg_i_41/O
+                         net (fo=1, routed)           0.958     7.758    core_u/commit_reg_i_41_n_0
+    SLICE_X31Y54                                                      f  core_u/commit_reg_i_4_rewire/I0
+    SLICE_X31Y54         LUT5 (Prop_lut5_I0_O)        0.124     7.882 f  core_u/commit_reg_i_4_rewire/O
+                         net (fo=1, routed)           0.799     8.682    core_u/commit_reg_i_4_n_0
+    SLICE_X31Y53                                                      f  core_u/commit_reg_i_2/I1
+    SLICE_X31Y53         LUT6 (Prop_lut6_I1_O)        0.124     8.806 f  core_u/commit_reg_i_2/O
+                         net (fo=3, routed)           0.324     9.130    core_u/commit_reg_i_2_n_0
+    SLICE_X30Y54                                                      f  core_u/auth_ok_reg_i_1/I0
+    SLICE_X30Y54         LUT5 (Prop_lut5_I0_O)        0.124     9.254 r  core_u/auth_ok_reg_i_1/O
+                         net (fo=1, routed)           0.000     9.254    core_u/auth_ok_reg_i_1_n_0
+    SLICE_X30Y54         FDRE                                         r  core_u/auth_ok_reg_reg/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock sys_clk_pin rise edge)
+                                                      3.200     3.200 r  
+    E3                                                0.000     3.200 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     3.200    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.411     4.611 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.920     6.531    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.091     6.622 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.133     6.755    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.846 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.520     8.367    core_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X30Y54         FDRE                                         r  core_u/auth_ok_reg_reg/C
+                         clock pessimism              0.288     8.655    
+                         clock uncertainty           -0.035     8.619    
+    SLICE_X30Y54         FDRE (Setup_fdre_C_D)        0.077     8.696    core_u/auth_ok_reg_reg
+  -------------------------------------------------------------------
+                         required time                          8.696    
+                         arrival time                          -9.254    
+  -------------------------------------------------------------------
+                         slack                                 -0.558    
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Tue Oct 27 17:40:27 2026
+| Host         : KroixLaptop running 64-bit major release  (build 9200)
+| Command      : report_timing -from {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -to {{core_u/FSM_onehot_controller_state_reg[6]/C --> core_u/state_reg_reg[243]/CE}} -max_paths 1 -input_pins -file C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-p8-pipeline/experiments/p8_pipeline/results/runs/D_explore/p3.200/category_paths.txt -append
+| Design       : ascon_bench_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Physopt postRoute
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -0.579ns  (required time - arrival time)
+  Source:                 core_u/FSM_onehot_controller_state_reg[5]_replica/C
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Destination:            in_last_reg/D
+                            (rising edge-triggered cell FDRE clocked by sys_clk_pin  {rise@0.000ns fall@1.600ns period=3.200ns})
+  Path Group:             sys_clk_pin
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            3.200ns  (sys_clk_pin rise@3.200ns - sys_clk_pin rise@0.000ns)
+  Data Path Delay:        3.363ns  (logic 0.952ns (28.310%)  route 2.411ns (71.690%))
+  Logic Levels:           4  (LUT2=1 LUT6=3)
+  Clock Path Skew:        -0.350ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.941ns = ( 8.141 - 3.200 ) 
+    Source Clock Delay      (SCD):    5.471ns
+    Clock Pessimism Removal (CPR):    0.180ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock sys_clk_pin rise edge)
+                                                      0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           2.025     3.506    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.096     3.602 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           0.140     3.742    CLK100MHZ_IBUF_BUFG_repN
+    BUFGCTRL_X0Y16                                                    r  CLK100MHZ_IBUF_BUFG_inst/I
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.838 r  CLK100MHZ_IBUF_BUFG_inst/O
+                         net (fo=1797, routed)        1.632     5.471    core_u/CLK100MHZ_IBUF_BUFG
+    SLICE_X43Y61         FDRE                                         r  core_u/FSM_onehot_controller_state_reg[5]_replica/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X43Y61         FDRE (Prop_fdre_C_Q)         0.456     5.927 r  core_u/FSM_onehot_controller_state_reg[5]_replica/Q
+                         net (fo=19, routed)          0.491     6.418    core_u/FSM_onehot_controller_state_reg_n_0_[5]_repN
+    SLICE_X41Y61                                                      r  core_u/signature[0]_i_2/I0
+    SLICE_X41Y61         LUT2 (Prop_lut2_I0_O)        0.124     6.542 r  core_u/signature[0]_i_2/O
+                         net (fo=4, routed)           0.454     6.996    core_u/in_ready
+    SLICE_X41Y57                                                      r  core_u/in_keep[15]_i_4/I1
+    SLICE_X41Y57         LUT6 (Prop_lut6_I1_O)        0.124     7.120 r  core_u/in_keep[15]_i_4/O
+                         net (fo=2, routed)           0.458     7.578    core_u/in_keep[15]_i_4_n_0
+    SLICE_X36Y57                                                      r  core_u/in_keep[15]_i_1/I3
+    SLICE_X36Y57         LUT6 (Prop_lut6_I3_O)        0.124     7.702 r  core_u/in_keep[15]_i_1/O
+                         net (fo=18, routed)          0.675     8.377    core_u/in_last_reg
+    SLICE_X39Y53                                                      r  core_u/in_last_i_1/I4
+    SLICE_X39Y53         LUT6 (Prop_lut6_I4_O)        0.124     8.501 r  core_u/in_last_i_1/O
+                         net (fo=1, routed)           0.332     8.834    core_u_n_135
+    SLICE_X38Y55         FDRE                                         r  in_last_reg/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock sys_clk_pin rise edge)
+                                                      3.200     3.200 r  
+    E3                                                0.000     3.200 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     3.200    CLK100MHZ
+    E3                                                                r  CLK100MHZ_IBUF_inst/I
+    E3                   IBUF (Prop_ibuf_I_O)         1.411     4.611 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.920     6.531    CLK100MHZ_IBUF
+    BUFGCTRL_X0Y17                                                    r  CLK100MHZ_IBUF_BUFG_inst_replica/I
+    BUFGCTRL_X0Y17       BUFG (Prop_bufg_I_O)         0.091     6.622 r  CLK100MHZ_IBUF_BUFG_inst_replica/O
+                         net (fo=8, routed)           1.518     8.141    CLK100MHZ_IBUF_BUFG_repN
+    SLICE_X38Y55         FDRE                                         r  in_last_reg/C
+                         clock pessimism              0.180     8.321    
+                         clock uncertainty           -0.035     8.285    
+    SLICE_X38Y55         FDRE (Setup_fdre_C_D)       -0.031     8.254    in_last_reg
+  -------------------------------------------------------------------
+                         required time                          8.254    
+                         arrival time                          -8.834    
+  -------------------------------------------------------------------
+                         slack                                 -0.579    
+
+
+
+

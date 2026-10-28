@@ -332,3 +332,7 @@ the XDC to the pins used by this demonstration and followed Digilent's Nexys A7
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+## Dependent p8 pipeline experiment
+
+See [the experiment report](experiments/p8_pipeline/README.md) for the 12/20/28-clock study, controller fixes and architecture diagrams. The [updated combined Word/PDF research report](https://github.com/kroix-ovo/ascon-aead128-vhdl/tree/ascon-fold-multicore/paper) includes both this experiment and folded multicore results. The paper files in this older baseline branch are historical.
