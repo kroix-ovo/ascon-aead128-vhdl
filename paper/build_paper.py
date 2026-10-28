@@ -15,6 +15,8 @@ from gpt2_report_sections import add_experiment, add_appendix, add_latency_resea
 from behavior_report_sections import add_behavior_results
 from weight_stream_report_sections import add_weight_stream_results
 from fold_report_sections import add_fold_results
+from pipeline_report_sections import add_pipeline_results
+from multicore_report_sections import add_multicore_results
 from figure_support import add_figure
 
 
@@ -260,9 +262,12 @@ def build():
         "baseline. All recovered bytes match and authentication passes. The folded "
         "core routes at 100 MHz with unconstrained external I/O; a board-integrated "
         "copy also meets 100 MHz in one run. Earlier physical captures validate only "
-        "the buffered design. The folded core has not been programmed or measured "
-        "on hardware. Section XIV separates these evidence scopes and documents "
-        "the later AD padding and decryption tag output fixes.",
+        "the buffered design. Later multicore board tests pass a 3,072-byte fixture for "
+        "one, two and four folded cores; full-file physical transfer remains unmeasured. "
+        "A separate dependent-round pipeline experiment finds that controller fixes "
+        "improve the unchanged 12-clock design from 70.8 to 49.8 ns per block, while "
+        "two- and three-stage round splits increase elapsed latency. Sections XIV through "
+        "XVI distinguish simulation, routed timing, modeled memory and physical fixture evidence.",
         indent=False,
     )
 
@@ -423,7 +428,9 @@ def build():
     add_behavior_results(doc, add_heading, add_body, add_caption)
     add_weight_stream_results(doc, add_heading, add_body, add_caption)
     add_fold_results(doc, add_heading, add_body, add_caption)
-    section_heading = add_heading(doc, "XV. Limitations and next work")
+    add_pipeline_results(doc, add_heading, add_body, add_caption)
+    add_multicore_results(doc, add_heading, add_body, add_caption)
+    section_heading = add_heading(doc, "XVII. Limitations and next work")
     section_heading.paragraph_format.page_break_before = True
     add_body(
         doc,
@@ -431,12 +438,13 @@ def build():
         "electromagnetic side-channel analysis, and it does not detect injected faults. "
         "Kandi et al. describe threshold and redundancy-based hardware options that could "
         "be studied in subsequent work [3]. Sections XIII and XIV measure the implemented unrolling "
-        "and buffering tradeoff, including folded absorption. Independent lanes, memory transport and lossless compression "
-        "remain separate experiments requiring additional interfaces and components. The external quarantine buffer is also a "
+        "and buffering tradeoff, including folded absorption. End-to-end benefits from "
+        "memory transport and lossless compression require additional system measurements. Independent lanes "
+        "are evaluated in Section XVI; the pipeline control experiment is in Section XV. The external quarantine buffer is also a "
         "required part of safe decryption, not an optional application feature.",
     )
 
-    add_heading(doc, "XVI. Findings")
+    add_heading(doc, "XVIII. Findings")
     add_body(
         doc,
         "For this adapter, eliminating controller handoffs halves the buffered "
@@ -448,6 +456,17 @@ def build():
         "and authenticated compute integration remain unmeasured. Both the AD "
         "empty-terminator defect and legacy decryption tag exposure are fixed in "
         "this branch, with focused regressions and negative controls.",
+    )
+
+    add_body(
+        doc,
+        "The dependent p8 experiment identifies a different bottleneck: controller fixes "
+        "reduce routed-period-derived block latency from 70.8 to 49.8 ns at the same "
+        "12 clocks, while round splitting adds latency. Multicore simulation achieves "
+        "approximately 2.000 and 3.001 times one-core throughput for two and four cores "
+        "under ideal service. The later physical tests validate only the 3,072-byte "
+        "fixture, with board clocks and cycle counts reported separately from full-file "
+        "simulation and modeled memory bandwidth.",
     )
 
     add_heading(doc, "References")
@@ -470,6 +489,8 @@ def build():
         "[16] K. Jones, Associated data padding and decryption tag output fixes, October 21, 2026. Repository docs/ad_padding_fix.md; docs/evidence/ad_padding_fix_20261021/; docs/evidence/tag_output_gate_20261021/.",
         "[17] AMD, Vivado Design Suite User Guide Design Analysis and Closure Techniques, UG906, Category 1 Timing, 2026.1. https://docs.amd.com/r/en-US/ug906-vivado-design-analysis/Category-1-Timing",
         "[18] W. Hua, M. Umar, Z. Zhang and G. E. Suh, GuardNN Secure Accelerator Architecture for Privacy-Preserving Deep Learning, DAC 2022, doi: 10.1145/3489517.3530439. https://arxiv.org/html/2008.11632v2.",
+        "[19] K. Jones, Dependent p8 pipelining experiment, October 27, 2026. experiments/p8_pipeline/README.md, results/provenance.json, results/sweeps/ and results/sim/. https://github.com/kroix-ovo/ascon-aead128-vhdl/tree/ascon-p8-pipeline/experiments/p8_pipeline",
+        "[20] K. Jones, Folded Ascon multicore study and physical fixture, October 2026. docs/multicore_study.md; docs/evidence/multicore_20261022/; docs/evidence/multicore_board_20261027/. https://github.com/kroix-ovo/ascon-aead128-vhdl/tree/ascon-fold-multicore",
     ]
     for ref in references:
         p = doc.add_paragraph()

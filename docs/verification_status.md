@@ -1,5 +1,22 @@
 # Verification status
 
+## Physical multicore update October 27 2026
+
+The connected Nexys A7-100T passed ten cases twice for each of 1, 2 and 4 folded
+cores. Hardware ILA captures match all simulated case cycle counts exactly.
+The common board harness runs at 90 MHz for one/two cores and 75 MHz for four.
+Its 3,072-byte fixture gathers four 64-byte tensor slices per layer from all
+twelve layers of the validated trained adapter. Checks cover exact ciphertext,
+tags and recovered fixture bytes, shared-input gaps, sink backpressure, bad
+tags, ciphertext tampering, chunk identity, abort, reset and recovery.
+
+[Raw captures, source hashes and routed reports](evidence/multicore_board_20261027/report.md)
+record the physical results. The complete 2,397,696-byte adapter and checkpoint
+reconstruction remain simulation evidence. DDR2 was not used, and physical
+full-file throughput or 1.5 ms adapter latency has not been established.
+
+The dated sections below retain their historical verification scope.
+
 ## Folded absorption update October 21 2026
 
 Branch `ascon-weight-stream-fold-absorb` adds the opt-in `G_FOLDED_ABSORB` core. The complete adapter takes 449,581 cycles per direction, about 4.50 ms at simulated 100 MHz, with exact authenticated recovery. Its steady interval is three clocks per full block. Saved core-only timing meets 100 MHz; a board-integrated copy also met 100 MHz in one run. No folded hardware programming or physical full-file measurement was performed.

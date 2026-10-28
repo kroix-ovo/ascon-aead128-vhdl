@@ -623,7 +623,11 @@ entity ascon_aead128_fold is
     auth_ok_o        : out std_logic;
     commit_o         : out std_logic;
     discard_o        : out std_logic;
-    error_o          : out std_logic
+    error_o          : out std_logic;
+    -- Observation only: cycles waiting to absorb, not normal round clocks.
+    input_starved_o  : out std_logic := '0';
+    output_blocked_o : out std_logic := '0';
+    tail_missed_o    : out std_logic := '0'
   );
 end entity;
 
@@ -799,6 +803,11 @@ begin
   head  <= iq(0);
   hv    <= ic > 0;
   space <= oc < G_OUTPUT_FIFO_DEPTH;
+  input_starved_o <= '1' when (fsm = F_MSG_ABS or fsm = F_AD_ABS) and not hv else '0';
+  output_blocked_o <= '1' when fsm = F_MSG_ABS and hv and
+    head.kind = '1' and head.empty = '0' and not space else '0';
+  tail_missed_o <= '1' when fsm = F_MSG_P8 and grp = 2 and msg_last = '0' and
+    (not hv or not space) else '0';
 
   -- Three cascaded rounds.  lane2 ends a 3-round group; lane1 ends the
   -- 2-round p8 tail, where the absorb logic is attached.

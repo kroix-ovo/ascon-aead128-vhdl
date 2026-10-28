@@ -1,0 +1,1235 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Thu Oct 22 01:09:19 2026
+| Host         : KroixLaptop running 64-bit major release  (build 9200)
+| Command      : report_timing -from [all_registers] -to [all_registers] -delay_type max -max_paths 20 -file C:/Users/Symok/.codex/worktrees/ascon-fold-multicore/ascon-aead128-vhdl-main/build/multicore-final-timing-n1/boundary/internal_setup_paths.txt
+| Design       : ascon_multicore_timing
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.004ns  (required time - arrival time)
+  Source:                 multicore/lanes[0].core/s_reg_reg[36]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            multicore/lanes[0].core/s_reg_reg[40]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.976ns  (logic 2.199ns (22.042%)  route 7.777ns (77.958%))
+  Logic Levels:           7  (LUT3=1 LUT4=1 LUT5=3 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.973     0.973    multicore/lanes[0].core/clk_i
+    SLICE_X58Y73         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[36]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X58Y73         FDRE (Prop_fdre_C_Q)         0.518     1.491 r  multicore/lanes[0].core/s_reg_reg[36]/Q
+                         net (fo=7, routed)           1.699     3.190    multicore/lanes[0].core/s_reg_reg_n_0_[36]
+    SLICE_X37Y83         LUT4 (Prop_lut4_I1_O)        0.150     3.340 r  multicore/lanes[0].core/oq[1][data][126]_i_10/O
+                         net (fo=6, routed)           1.454     4.794    multicore/lanes[0].core/oq[1][data][126]_i_10_n_0
+    SLICE_X54Y80         LUT6 (Prop_lut6_I4_O)        0.326     5.120 r  multicore/lanes[0].core/oq[1][data][59]_i_6/O
+                         net (fo=4, routed)           1.057     6.177    multicore/lanes[0].core/oq[1][data][59]_i_6_n_0
+    SLICE_X40Y82         LUT5 (Prop_lut5_I3_O)        0.124     6.301 r  multicore/lanes[0].core/oq[1][data][59]_i_3/O
+                         net (fo=4, routed)           0.969     7.270    multicore/lanes[0].core/oq[1][data][59]_i_3_n_0
+    SLICE_X41Y83         LUT3 (Prop_lut3_I0_O)        0.152     7.422 r  multicore/lanes[0].core/oq[1][data][59]_i_2/O
+                         net (fo=7, routed)           1.236     8.658    multicore/lanes[0].core/oq[1][data][59]_i_2_n_0
+    SLICE_X49Y85         LUT5 (Prop_lut5_I2_O)        0.352     9.010 r  multicore/lanes[0].core/s_reg[31]_i_4/O
+                         net (fo=3, routed)           1.363    10.372    multicore/lanes[0].core/s_reg[31]_i_4_n_0
+    SLICE_X53Y72         LUT5 (Prop_lut5_I2_O)        0.332    10.704 r  multicore/lanes[0].core/s_reg[40]_i_3/O
+                         net (fo=1, routed)           0.000    10.704    multicore/lanes[0].core/s_reg[40]_i_3_n_0
+    SLICE_X53Y72         MUXF7 (Prop_muxf7_I1_O)      0.245    10.949 r  multicore/lanes[0].core/s_reg_reg[40]_i_1/O
+                         net (fo=1, routed)           0.000    10.949    multicore/lanes[0].core/p_1_in[40]
+    SLICE_X53Y72         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[40]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.924    10.924    multicore/lanes[0].core/clk_i
+    SLICE_X53Y72         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[40]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X53Y72         FDRE (Setup_fdre_C_D)        0.064    10.953    multicore/lanes[0].core/s_reg_reg[40]
+  -------------------------------------------------------------------
+                         required time                         10.953    
+                         arrival time                         -10.949    
+  -------------------------------------------------------------------
+                         slack                                  0.004    
+
+Slack (MET) :             0.047ns  (required time - arrival time)
+  Source:                 multicore/lanes[0].core/s_reg_reg[44]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            multicore/lanes[0].core/s_reg_reg[48]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.933ns  (logic 1.942ns (19.551%)  route 7.991ns (80.449%))
+  Logic Levels:           7  (LUT3=1 LUT4=1 LUT5=3 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.973     0.973    multicore/lanes[0].core/clk_i
+    SLICE_X58Y73         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[44]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X58Y73         FDRE (Prop_fdre_C_Q)         0.518     1.491 r  multicore/lanes[0].core/s_reg_reg[44]/Q
+                         net (fo=7, routed)           1.737     3.228    multicore/lanes[0].core/s_reg_reg_n_0_[44]
+    SLICE_X32Y83         LUT4 (Prop_lut4_I1_O)        0.124     3.352 r  multicore/lanes[0].core/oq[1][data][92]_i_9/O
+                         net (fo=6, routed)           1.310     4.662    multicore/lanes[0].core/oq[1][data][92]_i_9_n_0
+    SLICE_X48Y76         LUT6 (Prop_lut6_I0_O)        0.124     4.786 r  multicore/lanes[0].core/s_reg[316]_i_9/O
+                         net (fo=7, routed)           1.183     5.969    multicore/lanes[0].core/s_reg[316]_i_9_n_0
+    SLICE_X48Y80         LUT5 (Prop_lut5_I2_O)        0.152     6.121 r  multicore/lanes[0].core/s_reg[57]_i_24/O
+                         net (fo=3, routed)           0.804     6.925    multicore/lanes[0].core/s_reg[57]_i_24_n_0
+    SLICE_X43Y81         LUT3 (Prop_lut3_I0_O)        0.326     7.251 r  multicore/lanes[0].core/s_reg[316]_i_13/O
+                         net (fo=6, routed)           1.771     9.022    multicore/lanes[0].core/s_reg[316]_i_13_n_0
+    SLICE_X65Y82         LUT5 (Prop_lut5_I4_O)        0.154     9.176 r  multicore/lanes[0].core/s_reg[48]_i_5/O
+                         net (fo=3, routed)           1.186    10.362    multicore/lanes[0].core/s_reg[48]_i_5_n_0
+    SLICE_X59Y75         LUT5 (Prop_lut5_I2_O)        0.327    10.689 r  multicore/lanes[0].core/s_reg[48]_i_3/O
+                         net (fo=1, routed)           0.000    10.689    multicore/lanes[0].core/s_reg[48]_i_3_n_0
+    SLICE_X59Y75         MUXF7 (Prop_muxf7_I1_O)      0.217    10.906 r  multicore/lanes[0].core/s_reg_reg[48]_i_1/O
+                         net (fo=1, routed)           0.000    10.906    multicore/lanes[0].core/p_1_in[48]
+    SLICE_X59Y75         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[48]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.924    10.924    multicore/lanes[0].core/clk_i
+    SLICE_X59Y75         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[48]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X59Y75         FDRE (Setup_fdre_C_D)        0.064    10.953    multicore/lanes[0].core/s_reg_reg[48]
+  -------------------------------------------------------------------
+                         required time                         10.953    
+                         arrival time                         -10.906    
+  -------------------------------------------------------------------
+                         slack                                  0.047    
+
+Slack (MET) :             0.077ns  (required time - arrival time)
+  Source:                 multicore/lanes[0].core/s_reg_reg[88]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            multicore/lanes[0].core/s_reg_reg[28]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.903ns  (logic 2.203ns (22.247%)  route 7.700ns (77.753%))
+  Logic Levels:           7  (LUT3=1 LUT4=1 LUT5=2 LUT6=2 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.973     0.973    multicore/lanes[0].core/clk_i
+    SLICE_X54Y89         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[88]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X54Y89         FDRE (Prop_fdre_C_Q)         0.518     1.491 r  multicore/lanes[0].core/s_reg_reg[88]/Q
+                         net (fo=11, routed)          2.010     3.501    multicore/lanes[0].core/state_word029_in[24]
+    SLICE_X35Y75         LUT5 (Prop_lut5_I3_O)        0.124     3.625 r  multicore/lanes[0].core/oq[1][data][127]_i_20/O
+                         net (fo=3, routed)           1.000     4.624    multicore/lanes[0].core/oq[1][data][127]_i_20_n_0
+    SLICE_X43Y77         LUT6 (Prop_lut6_I3_O)        0.124     4.748 r  multicore/lanes[0].core/oq[1][data][113]_i_9/O
+                         net (fo=4, routed)           0.819     5.567    multicore/lanes[0].core/oq[1][data][113]_i_9_n_0
+    SLICE_X43Y76         LUT4 (Prop_lut4_I2_O)        0.152     5.719 r  multicore/lanes[0].core/oq[1][data][60]_i_6/O
+                         net (fo=12, routed)          1.431     7.150    multicore/lanes[0].core/oq[1][data][60]_i_6_n_0
+    SLICE_X46Y82         LUT3 (Prop_lut3_I1_O)        0.352     7.502 r  multicore/lanes[0].core/s_reg[303]_i_4/O
+                         net (fo=7, routed)           1.182     8.684    multicore/lanes[0].core/s_reg[303]_i_4_n_0
+    SLICE_X56Y83         LUT5 (Prop_lut5_I3_O)        0.361     9.045 r  multicore/lanes[0].core/s_reg[47]_i_6/O
+                         net (fo=3, routed)           1.258    10.304    multicore/lanes[0].core/s_reg[47]_i_6_n_0
+    SLICE_X53Y72         LUT6 (Prop_lut6_I2_O)        0.355    10.659 r  multicore/lanes[0].core/s_reg[28]_i_3/O
+                         net (fo=1, routed)           0.000    10.659    multicore/lanes[0].core/s_reg[28]_i_3_n_0
+    SLICE_X53Y72         MUXF7 (Prop_muxf7_I1_O)      0.217    10.876 r  multicore/lanes[0].core/s_reg_reg[28]_i_1/O
+                         net (fo=1, routed)           0.000    10.876    multicore/lanes[0].core/p_1_in[28]
+    SLICE_X53Y72         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[28]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.924    10.924    multicore/lanes[0].core/clk_i
+    SLICE_X53Y72         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[28]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X53Y72         FDRE (Setup_fdre_C_D)        0.064    10.953    multicore/lanes[0].core/s_reg_reg[28]
+  -------------------------------------------------------------------
+                         required time                         10.953    
+                         arrival time                         -10.876    
+  -------------------------------------------------------------------
+                         slack                                  0.077    
+
+Slack (MET) :             0.078ns  (required time - arrival time)
+  Source:                 multicore/lanes[0].core/s_reg_reg[47]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            multicore/lanes[0].core/s_reg_reg[232]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.951ns  (logic 2.576ns (25.887%)  route 7.375ns (74.113%))
+  Logic Levels:           7  (LUT3=2 LUT5=4 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.973     0.973    multicore/lanes[0].core/clk_i
+    SLICE_X55Y72         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[47]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X55Y72         FDRE (Prop_fdre_C_Q)         0.456     1.429 r  multicore/lanes[0].core/s_reg_reg[47]/Q
+                         net (fo=9, routed)           1.584     3.013    multicore/lanes[0].core/s_reg_reg_n_0_[47]
+    SLICE_X40Y81         LUT5 (Prop_lut5_I2_O)        0.152     3.165 r  multicore/lanes[0].core/oq[1][data][117]_i_12/O
+                         net (fo=4, routed)           1.009     4.174    multicore/lanes[0].core/oq[1][data][117]_i_12_n_0
+    SLICE_X40Y80         LUT3 (Prop_lut3_I0_O)        0.354     4.528 r  multicore/lanes[0].core/oq[1][data][117]_i_5/O
+                         net (fo=9, routed)           1.191     5.719    multicore/lanes[0].core/oq[1][data][117]_i_5_n_0
+    SLICE_X40Y84         LUT5 (Prop_lut5_I1_O)        0.354     6.073 r  multicore/lanes[0].core/oq[1][data][50]_i_3/O
+                         net (fo=5, routed)           1.037     7.110    multicore/lanes[0].core/oq[1][data][50]_i_3_n_0
+    SLICE_X43Y83         LUT3 (Prop_lut3_I0_O)        0.354     7.464 r  multicore/lanes[0].core/oq[1][data][50]_i_2/O
+                         net (fo=6, routed)           1.390     8.854    multicore/lanes[0].core/oq[1][data][50]_i_2_n_0
+    SLICE_X49Y87         LUT5 (Prop_lut5_I3_O)        0.360     9.214 r  multicore/lanes[0].core/s_reg[242]_i_6/O
+                         net (fo=3, routed)           1.164    10.378    multicore/lanes[0].core/s_reg[242]_i_6_n_0
+    SLICE_X56Y86         LUT5 (Prop_lut5_I2_O)        0.332    10.710 r  multicore/lanes[0].core/s_reg[232]_i_3/O
+                         net (fo=1, routed)           0.000    10.710    multicore/lanes[0].core/s_reg[232]_i_3_n_0
+    SLICE_X56Y86         MUXF7 (Prop_muxf7_I1_O)      0.214    10.924 r  multicore/lanes[0].core/s_reg_reg[232]_i_1/O
+                         net (fo=1, routed)           0.000    10.924    multicore/lanes[0].core/p_1_in[232]
+    SLICE_X56Y86         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[232]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.924    10.924    multicore/lanes[0].core/clk_i
+    SLICE_X56Y86         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[232]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X56Y86         FDRE (Setup_fdre_C_D)        0.113    11.002    multicore/lanes[0].core/s_reg_reg[232]
+  -------------------------------------------------------------------
+                         required time                         11.002    
+                         arrival time                         -10.924    
+  -------------------------------------------------------------------
+                         slack                                  0.078    
+
+Slack (MET) :             0.086ns  (required time - arrival time)
+  Source:                 multicore/lanes[0].core/s_reg_reg[47]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            multicore/lanes[0].core/s_reg_reg[225]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.894ns  (logic 2.579ns (26.068%)  route 7.315ns (73.932%))
+  Logic Levels:           7  (LUT3=2 LUT5=4 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.973     0.973    multicore/lanes[0].core/clk_i
+    SLICE_X55Y72         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[47]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X55Y72         FDRE (Prop_fdre_C_Q)         0.456     1.429 r  multicore/lanes[0].core/s_reg_reg[47]/Q
+                         net (fo=9, routed)           1.584     3.013    multicore/lanes[0].core/s_reg_reg_n_0_[47]
+    SLICE_X40Y81         LUT5 (Prop_lut5_I2_O)        0.152     3.165 r  multicore/lanes[0].core/oq[1][data][117]_i_12/O
+                         net (fo=4, routed)           1.009     4.174    multicore/lanes[0].core/oq[1][data][117]_i_12_n_0
+    SLICE_X40Y80         LUT3 (Prop_lut3_I0_O)        0.354     4.528 r  multicore/lanes[0].core/oq[1][data][117]_i_5/O
+                         net (fo=9, routed)           1.191     5.719    multicore/lanes[0].core/oq[1][data][117]_i_5_n_0
+    SLICE_X40Y84         LUT5 (Prop_lut5_I1_O)        0.354     6.073 r  multicore/lanes[0].core/oq[1][data][50]_i_3/O
+                         net (fo=5, routed)           1.037     7.110    multicore/lanes[0].core/oq[1][data][50]_i_3_n_0
+    SLICE_X43Y83         LUT3 (Prop_lut3_I0_O)        0.354     7.464 r  multicore/lanes[0].core/oq[1][data][50]_i_2/O
+                         net (fo=6, routed)           1.390     8.854    multicore/lanes[0].core/oq[1][data][50]_i_2_n_0
+    SLICE_X49Y87         LUT5 (Prop_lut5_I3_O)        0.360     9.214 r  multicore/lanes[0].core/s_reg[242]_i_6/O
+                         net (fo=3, routed)           1.103    10.318    multicore/lanes[0].core/s_reg[242]_i_6_n_0
+    SLICE_X57Y80         LUT5 (Prop_lut5_I4_O)        0.332    10.650 r  multicore/lanes[0].core/s_reg[225]_i_3/O
+                         net (fo=1, routed)           0.000    10.650    multicore/lanes[0].core/s_reg[225]_i_3_n_0
+    SLICE_X57Y80         MUXF7 (Prop_muxf7_I1_O)      0.217    10.867 r  multicore/lanes[0].core/s_reg_reg[225]_i_1/O
+                         net (fo=1, routed)           0.000    10.867    multicore/lanes[0].core/p_1_in[225]
+    SLICE_X57Y80         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[225]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.924    10.924    multicore/lanes[0].core/clk_i
+    SLICE_X57Y80         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[225]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X57Y80         FDRE (Setup_fdre_C_D)        0.064    10.953    multicore/lanes[0].core/s_reg_reg[225]
+  -------------------------------------------------------------------
+                         required time                         10.953    
+                         arrival time                         -10.867    
+  -------------------------------------------------------------------
+                         slack                                  0.086    
+
+Slack (MET) :             0.088ns  (required time - arrival time)
+  Source:                 multicore/lanes[0].core/s_reg_reg[245]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            multicore/lanes[0].core/s_reg_reg[191]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.941ns  (logic 1.644ns (16.538%)  route 8.297ns (83.462%))
+  Logic Levels:           7  (LUT3=1 LUT4=3 LUT5=1 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.973     0.973    multicore/lanes[0].core/clk_i
+    SLICE_X63Y83         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[245]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X63Y83         FDRE (Prop_fdre_C_Q)         0.456     1.429 r  multicore/lanes[0].core/s_reg_reg[245]/Q
+                         net (fo=12, routed)          2.051     3.480    multicore/lanes[0].core/state_word222_in[53]
+    SLICE_X33Y80         LUT4 (Prop_lut4_I0_O)        0.124     3.604 r  multicore/lanes[0].core/oq[1][data][101]_i_8/O
+                         net (fo=4, routed)           0.809     4.414    multicore/lanes[0].core/oq[1][data][101]_i_8_n_0
+    SLICE_X31Y77         LUT6 (Prop_lut6_I1_O)        0.124     4.538 r  multicore/lanes[0].core/s_reg[57]_i_39/O
+                         net (fo=6, routed)           1.115     5.652    multicore/lanes[0].core/s_reg[57]_i_39_n_0
+    SLICE_X37Y80         LUT4 (Prop_lut4_I1_O)        0.152     5.804 r  multicore/lanes[0].core/s_reg[291]_i_6/O
+                         net (fo=4, routed)           1.519     7.323    multicore/lanes[0].core/s_reg[291]_i_6_n_0
+    SLICE_X48Y83         LUT3 (Prop_lut3_I0_O)        0.326     7.649 r  multicore/lanes[0].core/s_reg[261]_i_4/O
+                         net (fo=6, routed)           1.585     9.234    multicore/lanes[0].core/s_reg[261]_i_4_n_0
+    SLICE_X65Y81         LUT4 (Prop_lut4_I0_O)        0.124     9.358 r  multicore/lanes[0].core/s_reg[191]_i_5/O
+                         net (fo=3, routed)           1.218    10.576    multicore/lanes[0].core/s_reg[191]_i_5_n_0
+    SLICE_X54Y84         LUT5 (Prop_lut5_I1_O)        0.124    10.700 r  multicore/lanes[0].core/s_reg[191]_i_3/O
+                         net (fo=1, routed)           0.000    10.700    multicore/lanes[0].core/s_reg[191]_i_3_n_0
+    SLICE_X54Y84         MUXF7 (Prop_muxf7_I1_O)      0.214    10.914 r  multicore/lanes[0].core/s_reg_reg[191]_i_1/O
+                         net (fo=1, routed)           0.000    10.914    multicore/lanes[0].core/p_1_in[191]
+    SLICE_X54Y84         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[191]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.924    10.924    multicore/lanes[0].core/clk_i
+    SLICE_X54Y84         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[191]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X54Y84         FDRE (Setup_fdre_C_D)        0.113    11.002    multicore/lanes[0].core/s_reg_reg[191]
+  -------------------------------------------------------------------
+                         required time                         11.002    
+                         arrival time                         -10.914    
+  -------------------------------------------------------------------
+                         slack                                  0.088    
+
+Slack (MET) :             0.096ns  (required time - arrival time)
+  Source:                 multicore/lanes[0].core/s_reg_reg[219]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            multicore/lanes[0].core/s_reg_reg[16]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.884ns  (logic 2.173ns (21.985%)  route 7.711ns (78.015%))
+  Logic Levels:           7  (LUT3=2 LUT5=4 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.973     0.973    multicore/lanes[0].core/clk_i
+    SLICE_X62Y79         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[219]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X62Y79         FDRE (Prop_fdre_C_Q)         0.518     1.491 r  multicore/lanes[0].core/s_reg_reg[219]/Q
+                         net (fo=12, routed)          2.161     3.652    multicore/lanes[0].core/state_word222_in[27]
+    SLICE_X40Y75         LUT5 (Prop_lut5_I0_O)        0.124     3.776 r  multicore/lanes[0].core/oq[1][data][116]_i_17/O
+                         net (fo=3, routed)           1.026     4.801    multicore/lanes[0].core/oq[1][data][116]_i_17_n_0
+    SLICE_X36Y78         LUT3 (Prop_lut3_I2_O)        0.124     4.925 r  multicore/lanes[0].core/s_reg[267]_i_5/O
+                         net (fo=6, routed)           1.114     6.039    multicore/lanes[0].core/s_reg[267]_i_5_n_0
+    SLICE_X36Y81         LUT5 (Prop_lut5_I1_O)        0.152     6.191 r  multicore/lanes[0].core/s_reg[23]_i_33/O
+                         net (fo=3, routed)           0.860     7.051    multicore/lanes[0].core/s_reg[23]_i_33_n_0
+    SLICE_X43Y81         LUT3 (Prop_lut3_I1_O)        0.326     7.377 r  multicore/lanes[0].core/s_reg[314]_i_15/O
+                         net (fo=6, routed)           1.376     8.753    multicore/lanes[0].core/s_reg[314]_i_15_n_0
+    SLICE_X55Y82         LUT5 (Prop_lut5_I4_O)        0.352     9.105 r  multicore/lanes[0].core/s_reg[35]_i_4/O
+                         net (fo=3, routed)           1.175    10.280    multicore/lanes[0].core/s_reg[35]_i_4_n_0
+    SLICE_X53Y73         LUT5 (Prop_lut5_I2_O)        0.332    10.612 r  multicore/lanes[0].core/s_reg[16]_i_3/O
+                         net (fo=1, routed)           0.000    10.612    multicore/lanes[0].core/s_reg[16]_i_3_n_0
+    SLICE_X53Y73         MUXF7 (Prop_muxf7_I1_O)      0.245    10.857 r  multicore/lanes[0].core/s_reg_reg[16]_i_1/O
+                         net (fo=1, routed)           0.000    10.857    multicore/lanes[0].core/p_1_in[16]
+    SLICE_X53Y73         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[16]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.924    10.924    multicore/lanes[0].core/clk_i
+    SLICE_X53Y73         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[16]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X53Y73         FDRE (Setup_fdre_C_D)        0.064    10.953    multicore/lanes[0].core/s_reg_reg[16]
+  -------------------------------------------------------------------
+                         required time                         10.953    
+                         arrival time                         -10.857    
+  -------------------------------------------------------------------
+                         slack                                  0.096    
+
+Slack (MET) :             0.113ns  (required time - arrival time)
+  Source:                 multicore/lanes[0].core/s_reg_reg[297]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            multicore/lanes[0].core/s_reg_reg[89]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.867ns  (logic 1.908ns (19.337%)  route 7.959ns (80.663%))
+  Logic Levels:           7  (LUT4=2 LUT5=2 LUT6=2 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.973     0.973    multicore/lanes[0].core/clk_i
+    SLICE_X61Y85         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[297]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y85         FDRE (Prop_fdre_C_Q)         0.456     1.429 r  multicore/lanes[0].core/s_reg_reg[297]/Q
+                         net (fo=11, routed)          1.812     3.241    multicore/lanes[0].core/state_word121_in[41]
+    SLICE_X35Y77         LUT4 (Prop_lut4_I2_O)        0.152     3.393 r  multicore/lanes[0].core/oq[1][data][123]_i_10/O
+                         net (fo=2, routed)           1.011     4.403    multicore/lanes[0].core/oq[1][data][123]_i_10_n_0
+    SLICE_X36Y78         LUT6 (Prop_lut6_I0_O)        0.326     4.729 r  multicore/lanes[0].core/oq[1][data][89]_i_4/O
+                         net (fo=4, routed)           1.193     5.922    multicore/lanes[0].core/oq[1][data][89]_i_4_n_0
+    SLICE_X44Y79         LUT4 (Prop_lut4_I0_O)        0.124     6.046 r  multicore/lanes[0].core/oq[1][data][89]_i_3/O
+                         net (fo=3, routed)           0.900     6.946    multicore/lanes[0].core/oq[1][data][89]_i_3_n_0
+    SLICE_X41Y82         LUT6 (Prop_lut6_I4_O)        0.124     7.070 r  multicore/lanes[0].core/oq[1][data][64]_i_2/O
+                         net (fo=8, routed)           1.887     8.957    multicore/lanes[0].core/oq[1][data][64]_i_2_n_0
+    SLICE_X64Y81         LUT5 (Prop_lut5_I4_O)        0.154     9.111 r  multicore/lanes[0].core/s_reg[89]_i_5/O
+                         net (fo=3, routed)           1.157    10.268    multicore/lanes[0].core/s_reg[89]_i_5_n_0
+    SLICE_X57Y86         LUT5 (Prop_lut5_I3_O)        0.327    10.595 r  multicore/lanes[0].core/s_reg[89]_i_3/O
+                         net (fo=1, routed)           0.000    10.595    multicore/lanes[0].core/s_reg[89]_i_3_n_0
+    SLICE_X57Y86         MUXF7 (Prop_muxf7_I1_O)      0.245    10.840 r  multicore/lanes[0].core/s_reg_reg[89]_i_1/O
+                         net (fo=1, routed)           0.000    10.840    multicore/lanes[0].core/p_1_in[89]
+    SLICE_X57Y86         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[89]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.924    10.924    multicore/lanes[0].core/clk_i
+    SLICE_X57Y86         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[89]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X57Y86         FDRE (Setup_fdre_C_D)        0.064    10.953    multicore/lanes[0].core/s_reg_reg[89]
+  -------------------------------------------------------------------
+                         required time                         10.953    
+                         arrival time                         -10.840    
+  -------------------------------------------------------------------
+                         slack                                  0.113    
+
+Slack (MET) :             0.117ns  (required time - arrival time)
+  Source:                 multicore/lanes[0].core/s_reg_reg[280]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            multicore/lanes[0].core/s_reg_reg[30]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.863ns  (logic 2.375ns (24.080%)  route 7.488ns (75.920%))
+  Logic Levels:           7  (LUT3=1 LUT4=2 LUT5=1 LUT6=2 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.973     0.973    multicore/lanes[0].core/clk_i
+    SLICE_X61Y84         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[280]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y84         FDRE (Prop_fdre_C_Q)         0.456     1.429 r  multicore/lanes[0].core/s_reg_reg[280]/Q
+                         net (fo=12, routed)          1.809     3.238    multicore/lanes[0].core/state_word121_in[24]
+    SLICE_X43Y75         LUT4 (Prop_lut4_I3_O)        0.152     3.390 r  multicore/lanes[0].core/s_reg[18]_i_27/O
+                         net (fo=5, routed)           1.047     4.438    multicore/lanes[0].core/s_reg[18]_i_27_n_0
+    SLICE_X37Y79         LUT6 (Prop_lut6_I0_O)        0.326     4.764 r  multicore/lanes[0].core/oq[1][data][114]_i_5/O
+                         net (fo=4, routed)           1.143     5.906    multicore/lanes[0].core/oq[1][data][114]_i_5_n_0
+    SLICE_X37Y82         LUT5 (Prop_lut5_I2_O)        0.152     6.058 r  multicore/lanes[0].core/s_reg[18]_i_24/O
+                         net (fo=3, routed)           1.137     7.196    multicore/lanes[0].core/s_reg[18]_i_24_n_0
+    SLICE_X43Y80         LUT3 (Prop_lut3_I1_O)        0.358     7.554 r  multicore/lanes[0].core/s_reg[309]_i_9/O
+                         net (fo=6, routed)           1.557     9.110    multicore/lanes[0].core/s_reg[309]_i_9_n_0
+    SLICE_X54Y79         LUT4 (Prop_lut4_I0_O)        0.355     9.465 r  multicore/lanes[0].core/s_reg[309]_i_5/O
+                         net (fo=4, routed)           0.795    10.260    multicore/lanes[0].core/s_reg[309]_i_5_n_0
+    SLICE_X52Y74         LUT6 (Prop_lut6_I4_O)        0.331    10.591 r  multicore/lanes[0].core/s_reg[30]_i_3/O
+                         net (fo=1, routed)           0.000    10.591    multicore/lanes[0].core/s_reg[30]_i_3_n_0
+    SLICE_X52Y74         MUXF7 (Prop_muxf7_I1_O)      0.245    10.836 r  multicore/lanes[0].core/s_reg_reg[30]_i_1/O
+                         net (fo=1, routed)           0.000    10.836    multicore/lanes[0].core/p_1_in[30]
+    SLICE_X52Y74         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[30]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.924    10.924    multicore/lanes[0].core/clk_i
+    SLICE_X52Y74         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[30]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X52Y74         FDRE (Setup_fdre_C_D)        0.064    10.953    multicore/lanes[0].core/s_reg_reg[30]
+  -------------------------------------------------------------------
+                         required time                         10.953    
+                         arrival time                         -10.836    
+  -------------------------------------------------------------------
+                         slack                                  0.117    
+
+Slack (MET) :             0.131ns  (required time - arrival time)
+  Source:                 multicore/lanes[0].core/s_reg_reg[36]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            multicore/lanes[0].core/s_reg_reg[33]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.849ns  (logic 2.434ns (24.712%)  route 7.415ns (75.288%))
+  Logic Levels:           7  (LUT3=1 LUT4=2 LUT5=1 LUT6=2 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.973     0.973    multicore/lanes[0].core/clk_i
+    SLICE_X58Y73         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[36]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X58Y73         FDRE (Prop_fdre_C_Q)         0.518     1.491 r  multicore/lanes[0].core/s_reg_reg[36]/Q
+                         net (fo=7, routed)           1.699     3.190    multicore/lanes[0].core/s_reg_reg_n_0_[36]
+    SLICE_X37Y83         LUT4 (Prop_lut4_I1_O)        0.150     3.340 r  multicore/lanes[0].core/oq[1][data][126]_i_10/O
+                         net (fo=6, routed)           1.106     4.446    multicore/lanes[0].core/oq[1][data][126]_i_10_n_0
+    SLICE_X39Y76         LUT6 (Prop_lut6_I0_O)        0.326     4.772 r  multicore/lanes[0].core/s_reg[23]_i_15/O
+                         net (fo=6, routed)           1.077     5.849    multicore/lanes[0].core/s_reg[23]_i_15_n_0
+    SLICE_X39Y76         LUT4 (Prop_lut4_I1_O)        0.152     6.001 r  multicore/lanes[0].core/s_reg[308]_i_8/O
+                         net (fo=5, routed)           1.239     7.240    multicore/lanes[0].core/s_reg[308]_i_8_n_0
+    SLICE_X47Y81         LUT3 (Prop_lut3_I2_O)        0.360     7.600 r  multicore/lanes[0].core/s_reg[308]_i_4/O
+                         net (fo=5, routed)           1.179     8.780    multicore/lanes[0].core/s_reg[308]_i_4_n_0
+    SLICE_X55Y83         LUT5 (Prop_lut5_I3_O)        0.356     9.136 r  multicore/lanes[0].core/s_reg[52]_i_5/O
+                         net (fo=3, routed)           1.115    10.250    multicore/lanes[0].core/s_reg[52]_i_5_n_0
+    SLICE_X55Y74         LUT6 (Prop_lut6_I2_O)        0.327    10.577 r  multicore/lanes[0].core/s_reg[33]_i_3/O
+                         net (fo=1, routed)           0.000    10.577    multicore/lanes[0].core/s_reg[33]_i_3_n_0
+    SLICE_X55Y74         MUXF7 (Prop_muxf7_I1_O)      0.245    10.822 r  multicore/lanes[0].core/s_reg_reg[33]_i_1/O
+                         net (fo=1, routed)           0.000    10.822    multicore/lanes[0].core/p_1_in[33]
+    SLICE_X55Y74         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[33]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.924    10.924    multicore/lanes[0].core/clk_i
+    SLICE_X55Y74         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[33]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X55Y74         FDRE (Setup_fdre_C_D)        0.064    10.953    multicore/lanes[0].core/s_reg_reg[33]
+  -------------------------------------------------------------------
+                         required time                         10.953    
+                         arrival time                         -10.822    
+  -------------------------------------------------------------------
+                         slack                                  0.131    
+
+Slack (MET) :             0.135ns  (required time - arrival time)
+  Source:                 multicore/lanes[0].core/s_reg_reg[93]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            multicore/lanes[0].core/s_reg_reg[219]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.894ns  (logic 2.188ns (22.115%)  route 7.706ns (77.885%))
+  Logic Levels:           7  (LUT3=1 LUT5=4 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.973     0.973    multicore/lanes[0].core/clk_i
+    SLICE_X62Y88         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[93]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X62Y88         FDRE (Prop_fdre_C_Q)         0.518     1.491 r  multicore/lanes[0].core/s_reg_reg[93]/Q
+                         net (fo=13, routed)          2.063     3.554    multicore/lanes[0].core/state_word029_in[29]
+    SLICE_X41Y75         LUT5 (Prop_lut5_I1_O)        0.152     3.706 r  multicore/lanes[0].core/s_reg[314]_i_17/O
+                         net (fo=3, routed)           1.033     4.739    multicore/lanes[0].core/s_reg[314]_i_17_n_0
+    SLICE_X41Y77         LUT6 (Prop_lut6_I0_O)        0.326     5.065 r  multicore/lanes[0].core/s_reg[314]_i_8/O
+                         net (fo=6, routed)           0.790     5.855    multicore/lanes[0].core/s_reg[314]_i_8_n_0
+    SLICE_X44Y80         LUT5 (Prop_lut5_I4_O)        0.124     5.979 r  multicore/lanes[0].core/oq[1][data][46]_i_3/O
+                         net (fo=5, routed)           1.201     7.180    multicore/lanes[0].core/oq[1][data][46]_i_3_n_0
+    SLICE_X46Y80         LUT3 (Prop_lut3_I0_O)        0.150     7.330 r  multicore/lanes[0].core/oq[1][data][37]_i_2/O
+                         net (fo=6, routed)           1.177     8.507    multicore/lanes[0].core/oq[1][data][37]_i_2_n_0
+    SLICE_X50Y83         LUT5 (Prop_lut5_I3_O)        0.356     8.863 r  multicore/lanes[0].core/s_reg[229]_i_7/O
+                         net (fo=3, routed)           1.442    10.305    multicore/lanes[0].core/s_reg[229]_i_7_n_0
+    SLICE_X62Y79         LUT5 (Prop_lut5_I2_O)        0.348    10.653 r  multicore/lanes[0].core/s_reg[219]_i_3/O
+                         net (fo=1, routed)           0.000    10.653    multicore/lanes[0].core/s_reg[219]_i_3_n_0
+    SLICE_X62Y79         MUXF7 (Prop_muxf7_I1_O)      0.214    10.867 r  multicore/lanes[0].core/s_reg_reg[219]_i_1/O
+                         net (fo=1, routed)           0.000    10.867    multicore/lanes[0].core/p_1_in[219]
+    SLICE_X62Y79         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[219]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.924    10.924    multicore/lanes[0].core/clk_i
+    SLICE_X62Y79         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[219]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X62Y79         FDRE (Setup_fdre_C_D)        0.113    11.002    multicore/lanes[0].core/s_reg_reg[219]
+  -------------------------------------------------------------------
+                         required time                         11.002    
+                         arrival time                         -10.867    
+  -------------------------------------------------------------------
+                         slack                                  0.135    
+
+Slack (MET) :             0.144ns  (required time - arrival time)
+  Source:                 multicore/lanes[0].core/s_reg_reg[36]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            multicore/lanes[0].core/s_reg_reg[31]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.803ns  (logic 1.954ns (19.933%)  route 7.849ns (80.067%))
+  Logic Levels:           6  (LUT3=1 LUT4=1 LUT5=2 LUT6=2)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.973     0.973    multicore/lanes[0].core/clk_i
+    SLICE_X58Y73         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[36]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X58Y73         FDRE (Prop_fdre_C_Q)         0.518     1.491 r  multicore/lanes[0].core/s_reg_reg[36]/Q
+                         net (fo=7, routed)           1.699     3.190    multicore/lanes[0].core/s_reg_reg_n_0_[36]
+    SLICE_X37Y83         LUT4 (Prop_lut4_I1_O)        0.150     3.340 r  multicore/lanes[0].core/oq[1][data][126]_i_10/O
+                         net (fo=6, routed)           1.454     4.794    multicore/lanes[0].core/oq[1][data][126]_i_10_n_0
+    SLICE_X54Y80         LUT6 (Prop_lut6_I4_O)        0.326     5.120 r  multicore/lanes[0].core/oq[1][data][59]_i_6/O
+                         net (fo=4, routed)           1.057     6.177    multicore/lanes[0].core/oq[1][data][59]_i_6_n_0
+    SLICE_X40Y82         LUT5 (Prop_lut5_I3_O)        0.124     6.301 r  multicore/lanes[0].core/oq[1][data][59]_i_3/O
+                         net (fo=4, routed)           0.969     7.270    multicore/lanes[0].core/oq[1][data][59]_i_3_n_0
+    SLICE_X41Y83         LUT3 (Prop_lut3_I0_O)        0.152     7.422 r  multicore/lanes[0].core/oq[1][data][59]_i_2/O
+                         net (fo=7, routed)           1.236     8.658    multicore/lanes[0].core/oq[1][data][59]_i_2_n_0
+    SLICE_X49Y85         LUT5 (Prop_lut5_I2_O)        0.352     9.010 r  multicore/lanes[0].core/s_reg[31]_i_4/O
+                         net (fo=3, routed)           1.434    10.444    multicore/lanes[0].core/s_reg[31]_i_4_n_0
+    SLICE_X52Y72         LUT6 (Prop_lut6_I3_O)        0.332    10.776 r  multicore/lanes[0].core/s_reg[31]_i_1/O
+                         net (fo=1, routed)           0.000    10.776    multicore/lanes[0].core/p_1_in[31]
+    SLICE_X52Y72         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[31]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.924    10.924    multicore/lanes[0].core/clk_i
+    SLICE_X52Y72         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[31]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X52Y72         FDRE (Setup_fdre_C_D)        0.031    10.920    multicore/lanes[0].core/s_reg_reg[31]
+  -------------------------------------------------------------------
+                         required time                         10.920    
+                         arrival time                         -10.776    
+  -------------------------------------------------------------------
+                         slack                                  0.144    
+
+Slack (MET) :             0.155ns  (required time - arrival time)
+  Source:                 multicore/lanes[0].core/s_reg_reg[280]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            multicore/lanes[0].core/s_reg_reg[279]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.825ns  (logic 2.347ns (23.889%)  route 7.478ns (76.111%))
+  Logic Levels:           7  (LUT3=1 LUT4=2 LUT5=2 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.973     0.973    multicore/lanes[0].core/clk_i
+    SLICE_X61Y84         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[280]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y84         FDRE (Prop_fdre_C_Q)         0.456     1.429 r  multicore/lanes[0].core/s_reg_reg[280]/Q
+                         net (fo=12, routed)          1.809     3.238    multicore/lanes[0].core/state_word121_in[24]
+    SLICE_X43Y75         LUT4 (Prop_lut4_I3_O)        0.152     3.390 r  multicore/lanes[0].core/s_reg[18]_i_27/O
+                         net (fo=5, routed)           1.047     4.438    multicore/lanes[0].core/s_reg[18]_i_27_n_0
+    SLICE_X37Y79         LUT6 (Prop_lut6_I0_O)        0.326     4.764 r  multicore/lanes[0].core/oq[1][data][114]_i_5/O
+                         net (fo=4, routed)           1.143     5.906    multicore/lanes[0].core/oq[1][data][114]_i_5_n_0
+    SLICE_X37Y82         LUT5 (Prop_lut5_I2_O)        0.152     6.058 r  multicore/lanes[0].core/s_reg[18]_i_24/O
+                         net (fo=3, routed)           1.137     7.196    multicore/lanes[0].core/s_reg[18]_i_24_n_0
+    SLICE_X43Y80         LUT3 (Prop_lut3_I1_O)        0.358     7.554 r  multicore/lanes[0].core/s_reg[309]_i_9/O
+                         net (fo=6, routed)           1.557     9.110    multicore/lanes[0].core/s_reg[309]_i_9_n_0
+    SLICE_X54Y79         LUT4 (Prop_lut4_I0_O)        0.355     9.465 r  multicore/lanes[0].core/s_reg[309]_i_5/O
+                         net (fo=4, routed)           0.784    10.250    multicore/lanes[0].core/s_reg[309]_i_5_n_0
+    SLICE_X55Y88         LUT5 (Prop_lut5_I4_O)        0.331    10.581 r  multicore/lanes[0].core/s_reg[279]_i_3/O
+                         net (fo=1, routed)           0.000    10.581    multicore/lanes[0].core/s_reg[279]_i_3_n_0
+    SLICE_X55Y88         MUXF7 (Prop_muxf7_I1_O)      0.217    10.798 r  multicore/lanes[0].core/s_reg_reg[279]_i_1/O
+                         net (fo=1, routed)           0.000    10.798    multicore/lanes[0].core/p_1_in[279]
+    SLICE_X55Y88         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[279]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.924    10.924    multicore/lanes[0].core/clk_i
+    SLICE_X55Y88         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[279]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X55Y88         FDRE (Setup_fdre_C_D)        0.064    10.953    multicore/lanes[0].core/s_reg_reg[279]
+  -------------------------------------------------------------------
+                         required time                         10.953    
+                         arrival time                         -10.798    
+  -------------------------------------------------------------------
+                         slack                                  0.155    
+
+Slack (MET) :             0.156ns  (required time - arrival time)
+  Source:                 multicore/lanes[0].core/s_reg_reg[252]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            multicore/lanes[0].core/s_reg_reg[156]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.824ns  (logic 2.212ns (22.515%)  route 7.612ns (77.485%))
+  Logic Levels:           7  (LUT3=1 LUT4=2 LUT5=2 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.973     0.973    multicore/lanes[0].core/clk_i
+    SLICE_X56Y83         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[252]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X56Y83         FDRE (Prop_fdre_C_Q)         0.518     1.491 r  multicore/lanes[0].core/s_reg_reg[252]/Q
+                         net (fo=12, routed)          1.761     3.252    multicore/lanes[0].core/state_word222_in[60]
+    SLICE_X32Y85         LUT5 (Prop_lut5_I2_O)        0.124     3.376 r  multicore/lanes[0].core/s_reg[311]_i_12/O
+                         net (fo=4, routed)           1.207     4.583    multicore/lanes[0].core/s_reg[311]_i_12_n_0
+    SLICE_X32Y77         LUT6 (Prop_lut6_I0_O)        0.124     4.707 r  multicore/lanes[0].core/oq[1][data][108]_i_21/O
+                         net (fo=5, routed)           0.921     5.628    multicore/lanes[0].core/oq[1][data][108]_i_21_n_0
+    SLICE_X32Y80         LUT4 (Prop_lut4_I0_O)        0.150     5.778 r  multicore/lanes[0].core/s_reg[297]_i_8/O
+                         net (fo=4, routed)           1.586     7.365    multicore/lanes[0].core/s_reg[297]_i_8_n_0
+    SLICE_X47Y82         LUT3 (Prop_lut3_I0_O)        0.360     7.725 r  multicore/lanes[0].core/s_reg[290]_i_4/O
+                         net (fo=6, routed)           1.173     8.897    multicore/lanes[0].core/s_reg[290]_i_4_n_0
+    SLICE_X54Y81         LUT4 (Prop_lut4_I0_O)        0.364     9.261 r  multicore/lanes[0].core/s_reg[162]_i_5/O
+                         net (fo=3, routed)           0.964    10.225    multicore/lanes[0].core/s_reg[162]_i_5_n_0
+    SLICE_X55Y75         LUT5 (Prop_lut5_I2_O)        0.355    10.580 r  multicore/lanes[0].core/s_reg[156]_i_3/O
+                         net (fo=1, routed)           0.000    10.580    multicore/lanes[0].core/s_reg[156]_i_3_n_0
+    SLICE_X55Y75         MUXF7 (Prop_muxf7_I1_O)      0.217    10.797 r  multicore/lanes[0].core/s_reg_reg[156]_i_1/O
+                         net (fo=1, routed)           0.000    10.797    multicore/lanes[0].core/p_1_in[156]
+    SLICE_X55Y75         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[156]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.924    10.924    multicore/lanes[0].core/clk_i
+    SLICE_X55Y75         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[156]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X55Y75         FDRE (Setup_fdre_C_D)        0.064    10.953    multicore/lanes[0].core/s_reg_reg[156]
+  -------------------------------------------------------------------
+                         required time                         10.953    
+                         arrival time                         -10.797    
+  -------------------------------------------------------------------
+                         slack                                  0.156    
+
+Slack (MET) :             0.174ns  (required time - arrival time)
+  Source:                 multicore/lanes[0].core/s_reg_reg[243]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            multicore/lanes[0].core/s_reg_reg[283]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.806ns  (logic 2.377ns (24.239%)  route 7.429ns (75.761%))
+  Logic Levels:           7  (LUT3=1 LUT4=2 LUT5=2 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.973     0.973    multicore/lanes[0].core/clk_i
+    SLICE_X57Y88         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[243]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X57Y88         FDRE (Prop_fdre_C_Q)         0.456     1.429 r  multicore/lanes[0].core/s_reg_reg[243]/Q
+                         net (fo=10, routed)          1.473     2.902    multicore/lanes[0].core/state_word222_in[51]
+    SLICE_X34Y85         LUT4 (Prop_lut4_I0_O)        0.150     3.052 r  multicore/lanes[0].core/oq[0][data][118]_i_14/O
+                         net (fo=7, routed)           1.051     4.103    multicore/lanes[0].core/oq[0][data][118]_i_14_n_0
+    SLICE_X37Y75         LUT6 (Prop_lut6_I4_O)        0.328     4.431 r  multicore/lanes[0].core/oq[1][data][44]_i_4/O
+                         net (fo=4, routed)           1.363     5.794    multicore/lanes[0].core/oq[1][data][44]_i_4_n_0
+    SLICE_X35Y84         LUT5 (Prop_lut5_I2_O)        0.152     5.946 r  multicore/lanes[0].core/s_reg[44]_i_30/O
+                         net (fo=3, routed)           1.152     7.098    multicore/lanes[0].core/s_reg[44]_i_30_n_0
+    SLICE_X43Y80         LUT3 (Prop_lut3_I2_O)        0.360     7.458 r  multicore/lanes[0].core/s_reg[306]_i_9/O
+                         net (fo=6, routed)           1.527     8.985    multicore/lanes[0].core/s_reg[306]_i_9_n_0
+    SLICE_X56Y81         LUT4 (Prop_lut4_I0_O)        0.358     9.343 r  multicore/lanes[0].core/s_reg[306]_i_5/O
+                         net (fo=3, routed)           0.864    10.206    multicore/lanes[0].core/s_reg[306]_i_5_n_0
+    SLICE_X61Y75         LUT5 (Prop_lut5_I3_O)        0.328    10.534 r  multicore/lanes[0].core/s_reg[283]_i_3/O
+                         net (fo=1, routed)           0.000    10.534    multicore/lanes[0].core/s_reg[283]_i_3_n_0
+    SLICE_X61Y75         MUXF7 (Prop_muxf7_I1_O)      0.245    10.779 r  multicore/lanes[0].core/s_reg_reg[283]_i_1/O
+                         net (fo=1, routed)           0.000    10.779    multicore/lanes[0].core/p_1_in[283]
+    SLICE_X61Y75         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[283]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.924    10.924    multicore/lanes[0].core/clk_i
+    SLICE_X61Y75         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[283]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X61Y75         FDRE (Setup_fdre_C_D)        0.064    10.953    multicore/lanes[0].core/s_reg_reg[283]
+  -------------------------------------------------------------------
+                         required time                         10.953    
+                         arrival time                         -10.779    
+  -------------------------------------------------------------------
+                         slack                                  0.174    
+
+Slack (MET) :             0.180ns  (required time - arrival time)
+  Source:                 multicore/lanes[0].core/s_reg_reg[243]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            multicore/lanes[0].core/s_reg_reg[276]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.849ns  (logic 2.379ns (24.156%)  route 7.470ns (75.844%))
+  Logic Levels:           7  (LUT3=1 LUT4=2 LUT5=2 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.973     0.973    multicore/lanes[0].core/clk_i
+    SLICE_X57Y88         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[243]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X57Y88         FDRE (Prop_fdre_C_Q)         0.456     1.429 r  multicore/lanes[0].core/s_reg_reg[243]/Q
+                         net (fo=10, routed)          1.473     2.902    multicore/lanes[0].core/state_word222_in[51]
+    SLICE_X34Y85         LUT4 (Prop_lut4_I0_O)        0.150     3.052 r  multicore/lanes[0].core/oq[0][data][118]_i_14/O
+                         net (fo=7, routed)           1.051     4.103    multicore/lanes[0].core/oq[0][data][118]_i_14_n_0
+    SLICE_X37Y75         LUT6 (Prop_lut6_I4_O)        0.328     4.431 r  multicore/lanes[0].core/oq[1][data][44]_i_4/O
+                         net (fo=4, routed)           1.363     5.794    multicore/lanes[0].core/oq[1][data][44]_i_4_n_0
+    SLICE_X35Y84         LUT5 (Prop_lut5_I2_O)        0.152     5.946 r  multicore/lanes[0].core/s_reg[44]_i_30/O
+                         net (fo=3, routed)           1.152     7.098    multicore/lanes[0].core/s_reg[44]_i_30_n_0
+    SLICE_X43Y80         LUT3 (Prop_lut3_I2_O)        0.360     7.458 r  multicore/lanes[0].core/s_reg[306]_i_9/O
+                         net (fo=6, routed)           1.527     8.985    multicore/lanes[0].core/s_reg[306]_i_9_n_0
+    SLICE_X56Y81         LUT4 (Prop_lut4_I0_O)        0.358     9.343 r  multicore/lanes[0].core/s_reg[306]_i_5/O
+                         net (fo=3, routed)           0.904    10.247    multicore/lanes[0].core/s_reg[306]_i_5_n_0
+    SLICE_X56Y86         LUT5 (Prop_lut5_I2_O)        0.328    10.575 r  multicore/lanes[0].core/s_reg[276]_i_3/O
+                         net (fo=1, routed)           0.000    10.575    multicore/lanes[0].core/s_reg[276]_i_3_n_0
+    SLICE_X56Y86         MUXF7 (Prop_muxf7_I1_O)      0.247    10.822 r  multicore/lanes[0].core/s_reg_reg[276]_i_1/O
+                         net (fo=1, routed)           0.000    10.822    multicore/lanes[0].core/p_1_in[276]
+    SLICE_X56Y86         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[276]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.924    10.924    multicore/lanes[0].core/clk_i
+    SLICE_X56Y86         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[276]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X56Y86         FDRE (Setup_fdre_C_D)        0.113    11.002    multicore/lanes[0].core/s_reg_reg[276]
+  -------------------------------------------------------------------
+                         required time                         11.002    
+                         arrival time                         -10.822    
+  -------------------------------------------------------------------
+                         slack                                  0.180    
+
+Slack (MET) :             0.193ns  (required time - arrival time)
+  Source:                 multicore/lanes[0].core/s_reg_reg[280]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            multicore/lanes[0].core/s_reg_reg[309]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.836ns  (logic 2.344ns (23.832%)  route 7.492ns (76.168%))
+  Logic Levels:           7  (LUT3=1 LUT4=2 LUT5=2 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.973     0.973    multicore/lanes[0].core/clk_i
+    SLICE_X61Y84         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[280]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y84         FDRE (Prop_fdre_C_Q)         0.456     1.429 r  multicore/lanes[0].core/s_reg_reg[280]/Q
+                         net (fo=12, routed)          1.809     3.238    multicore/lanes[0].core/state_word121_in[24]
+    SLICE_X43Y75         LUT4 (Prop_lut4_I3_O)        0.152     3.390 r  multicore/lanes[0].core/s_reg[18]_i_27/O
+                         net (fo=5, routed)           1.047     4.438    multicore/lanes[0].core/s_reg[18]_i_27_n_0
+    SLICE_X37Y79         LUT6 (Prop_lut6_I0_O)        0.326     4.764 r  multicore/lanes[0].core/oq[1][data][114]_i_5/O
+                         net (fo=4, routed)           1.143     5.906    multicore/lanes[0].core/oq[1][data][114]_i_5_n_0
+    SLICE_X37Y82         LUT5 (Prop_lut5_I2_O)        0.152     6.058 r  multicore/lanes[0].core/s_reg[18]_i_24/O
+                         net (fo=3, routed)           1.137     7.196    multicore/lanes[0].core/s_reg[18]_i_24_n_0
+    SLICE_X43Y80         LUT3 (Prop_lut3_I1_O)        0.358     7.554 r  multicore/lanes[0].core/s_reg[309]_i_9/O
+                         net (fo=6, routed)           1.557     9.110    multicore/lanes[0].core/s_reg[309]_i_9_n_0
+    SLICE_X54Y79         LUT4 (Prop_lut4_I0_O)        0.355     9.465 r  multicore/lanes[0].core/s_reg[309]_i_5/O
+                         net (fo=4, routed)           0.798    10.264    multicore/lanes[0].core/s_reg[309]_i_5_n_0
+    SLICE_X54Y88         LUT5 (Prop_lut5_I3_O)        0.331    10.595 r  multicore/lanes[0].core/s_reg[309]_i_3/O
+                         net (fo=1, routed)           0.000    10.595    multicore/lanes[0].core/s_reg[309]_i_3_n_0
+    SLICE_X54Y88         MUXF7 (Prop_muxf7_I1_O)      0.214    10.809 r  multicore/lanes[0].core/s_reg_reg[309]_i_1/O
+                         net (fo=1, routed)           0.000    10.809    multicore/lanes[0].core/p_1_in[309]
+    SLICE_X54Y88         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[309]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.924    10.924    multicore/lanes[0].core/clk_i
+    SLICE_X54Y88         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[309]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X54Y88         FDRE (Setup_fdre_C_D)        0.113    11.002    multicore/lanes[0].core/s_reg_reg[309]
+  -------------------------------------------------------------------
+                         required time                         11.002    
+                         arrival time                         -10.809    
+  -------------------------------------------------------------------
+                         slack                                  0.193    
+
+Slack (MET) :             0.199ns  (required time - arrival time)
+  Source:                 multicore/lanes[0].core/s_reg_reg[88]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            multicore/lanes[0].core/s_reg_reg[5]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.781ns  (logic 1.937ns (19.804%)  route 7.844ns (80.196%))
+  Logic Levels:           7  (LUT4=1 LUT5=3 LUT6=2 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.973     0.973    multicore/lanes[0].core/clk_i
+    SLICE_X54Y89         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[88]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X54Y89         FDRE (Prop_fdre_C_Q)         0.518     1.491 r  multicore/lanes[0].core/s_reg_reg[88]/Q
+                         net (fo=11, routed)          2.010     3.501    multicore/lanes[0].core/state_word029_in[24]
+    SLICE_X35Y75         LUT5 (Prop_lut5_I3_O)        0.124     3.625 r  multicore/lanes[0].core/oq[1][data][127]_i_20/O
+                         net (fo=3, routed)           1.000     4.624    multicore/lanes[0].core/oq[1][data][127]_i_20_n_0
+    SLICE_X43Y77         LUT6 (Prop_lut6_I3_O)        0.124     4.748 r  multicore/lanes[0].core/oq[1][data][113]_i_9/O
+                         net (fo=4, routed)           0.819     5.567    multicore/lanes[0].core/oq[1][data][113]_i_9_n_0
+    SLICE_X43Y76         LUT4 (Prop_lut4_I2_O)        0.152     5.719 r  multicore/lanes[0].core/oq[1][data][60]_i_6/O
+                         net (fo=12, routed)          1.497     7.217    multicore/lanes[0].core/oq[1][data][60]_i_6_n_0
+    SLICE_X48Y79         LUT5 (Prop_lut5_I0_O)        0.326     7.543 r  multicore/lanes[0].core/oq[1][data][5]_i_2/O
+                         net (fo=7, routed)           1.296     8.838    multicore/lanes[0].core/oq[1][data][5]_i_2_n_0
+    SLICE_X62Y72         LUT5 (Prop_lut5_I4_O)        0.117     8.955 r  multicore/lanes[0].core/s_reg[5]_i_4/O
+                         net (fo=1, routed)           1.222    10.178    multicore/lanes[0].core/s_reg[5]_i_4_n_0
+    SLICE_X59Y75         LUT6 (Prop_lut6_I0_O)        0.331    10.509 r  multicore/lanes[0].core/s_reg[5]_i_3/O
+                         net (fo=1, routed)           0.000    10.509    multicore/lanes[0].core/s_reg[5]_i_3_n_0
+    SLICE_X59Y75         MUXF7 (Prop_muxf7_I1_O)      0.245    10.754 r  multicore/lanes[0].core/s_reg_reg[5]_i_1/O
+                         net (fo=1, routed)           0.000    10.754    multicore/lanes[0].core/p_1_in[5]
+    SLICE_X59Y75         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[5]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.924    10.924    multicore/lanes[0].core/clk_i
+    SLICE_X59Y75         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[5]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X59Y75         FDRE (Setup_fdre_C_D)        0.064    10.953    multicore/lanes[0].core/s_reg_reg[5]
+  -------------------------------------------------------------------
+                         required time                         10.953    
+                         arrival time                         -10.754    
+  -------------------------------------------------------------------
+                         slack                                  0.199    
+
+Slack (MET) :             0.200ns  (required time - arrival time)
+  Source:                 multicore/lanes[0].core/s_reg_reg[37]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            multicore/lanes[0].core/s_reg_reg[236]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.829ns  (logic 1.911ns (19.442%)  route 7.918ns (80.558%))
+  Logic Levels:           7  (LUT3=1 LUT5=4 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.973     0.973    multicore/lanes[0].core/clk_i
+    SLICE_X52Y73         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[37]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X52Y73         FDRE (Prop_fdre_C_Q)         0.456     1.429 r  multicore/lanes[0].core/s_reg_reg[37]/Q
+                         net (fo=10, routed)          1.796     3.225    multicore/lanes[0].core/s_reg_reg_n_0_[37]
+    SLICE_X31Y82         LUT5 (Prop_lut5_I4_O)        0.150     3.375 r  multicore/lanes[0].core/s_reg[288]_i_12/O
+                         net (fo=5, routed)           1.453     4.828    multicore/lanes[0].core/s_reg[288]_i_12_n_0
+    SLICE_X42Y73         LUT6 (Prop_lut6_I2_O)        0.332     5.160 r  multicore/lanes[0].core/oq[1][data][98]_i_9/O
+                         net (fo=2, routed)           0.781     5.940    multicore/lanes[0].core/oq[1][data][98]_i_9_n_0
+    SLICE_X45Y73         LUT5 (Prop_lut5_I2_O)        0.124     6.064 r  multicore/lanes[0].core/oq[1][data][54]_i_3/O
+                         net (fo=4, routed)           1.068     7.133    multicore/lanes[0].core/oq[1][data][54]_i_3_n_0
+    SLICE_X45Y82         LUT3 (Prop_lut3_I0_O)        0.124     7.257 r  multicore/lanes[0].core/oq[1][data][54]_i_2/O
+                         net (fo=7, routed)           1.239     8.496    multicore/lanes[0].core/oq[1][data][54]_i_2_n_0
+    SLICE_X46Y86         LUT5 (Prop_lut5_I3_O)        0.156     8.652 r  multicore/lanes[0].core/s_reg[246]_i_6/O
+                         net (fo=3, routed)           1.581    10.233    multicore/lanes[0].core/s_reg[246]_i_6_n_0
+    SLICE_X62Y82         LUT5 (Prop_lut5_I2_O)        0.355    10.588 r  multicore/lanes[0].core/s_reg[236]_i_3/O
+                         net (fo=1, routed)           0.000    10.588    multicore/lanes[0].core/s_reg[236]_i_3_n_0
+    SLICE_X62Y82         MUXF7 (Prop_muxf7_I1_O)      0.214    10.802 r  multicore/lanes[0].core/s_reg_reg[236]_i_1/O
+                         net (fo=1, routed)           0.000    10.802    multicore/lanes[0].core/p_1_in[236]
+    SLICE_X62Y82         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[236]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.924    10.924    multicore/lanes[0].core/clk_i
+    SLICE_X62Y82         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[236]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X62Y82         FDRE (Setup_fdre_C_D)        0.113    11.002    multicore/lanes[0].core/s_reg_reg[236]
+  -------------------------------------------------------------------
+                         required time                         11.002    
+                         arrival time                         -10.802    
+  -------------------------------------------------------------------
+                         slack                                  0.200    
+
+Slack (MET) :             0.206ns  (required time - arrival time)
+  Source:                 multicore/lanes[0].core/s_reg_reg[44]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            multicore/lanes[0].core/s_reg_reg[39]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.823ns  (logic 1.972ns (20.075%)  route 7.851ns (79.925%))
+  Logic Levels:           7  (LUT3=1 LUT4=1 LUT5=3 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.973     0.973    multicore/lanes[0].core/clk_i
+    SLICE_X58Y73         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[44]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X58Y73         FDRE (Prop_fdre_C_Q)         0.518     1.491 r  multicore/lanes[0].core/s_reg_reg[44]/Q
+                         net (fo=7, routed)           1.737     3.228    multicore/lanes[0].core/s_reg_reg_n_0_[44]
+    SLICE_X32Y83         LUT4 (Prop_lut4_I1_O)        0.124     3.352 r  multicore/lanes[0].core/oq[1][data][92]_i_9/O
+                         net (fo=6, routed)           1.310     4.662    multicore/lanes[0].core/oq[1][data][92]_i_9_n_0
+    SLICE_X48Y76         LUT6 (Prop_lut6_I0_O)        0.124     4.786 r  multicore/lanes[0].core/s_reg[316]_i_9/O
+                         net (fo=7, routed)           1.183     5.969    multicore/lanes[0].core/s_reg[316]_i_9_n_0
+    SLICE_X48Y80         LUT5 (Prop_lut5_I2_O)        0.152     6.121 r  multicore/lanes[0].core/s_reg[57]_i_24/O
+                         net (fo=3, routed)           0.804     6.925    multicore/lanes[0].core/s_reg[57]_i_24_n_0
+    SLICE_X43Y81         LUT3 (Prop_lut3_I0_O)        0.326     7.251 r  multicore/lanes[0].core/s_reg[316]_i_13/O
+                         net (fo=6, routed)           1.771     9.022    multicore/lanes[0].core/s_reg[316]_i_13_n_0
+    SLICE_X65Y82         LUT5 (Prop_lut5_I4_O)        0.154     9.176 r  multicore/lanes[0].core/s_reg[48]_i_5/O
+                         net (fo=3, routed)           1.046    10.222    multicore/lanes[0].core/s_reg[48]_i_5_n_0
+    SLICE_X54Y74         LUT5 (Prop_lut5_I4_O)        0.327    10.549 r  multicore/lanes[0].core/s_reg[39]_i_3/O
+                         net (fo=1, routed)           0.000    10.549    multicore/lanes[0].core/s_reg[39]_i_3_n_0
+    SLICE_X54Y74         MUXF7 (Prop_muxf7_I1_O)      0.247    10.796 r  multicore/lanes[0].core/s_reg_reg[39]_i_1/O
+                         net (fo=1, routed)           0.000    10.796    multicore/lanes[0].core/p_1_in[39]
+    SLICE_X54Y74         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[39]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=3872, unset)         0.924    10.924    multicore/lanes[0].core/clk_i
+    SLICE_X54Y74         FDRE                                         r  multicore/lanes[0].core/s_reg_reg[39]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X54Y74         FDRE (Setup_fdre_C_D)        0.113    11.002    multicore/lanes[0].core/s_reg_reg[39]
+  -------------------------------------------------------------------
+                         required time                         11.002    
+                         arrival time                         -10.796    
+  -------------------------------------------------------------------
+                         slack                                  0.206    
+
+
+
+

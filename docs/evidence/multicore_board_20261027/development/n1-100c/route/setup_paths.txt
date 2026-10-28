@@ -1,0 +1,737 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Tue Oct 27 13:20:15 2026
+| Host         : KroixLaptop running 64-bit major release  (build 9200)
+| Command      : report_timing -delay_type max -max_paths 10 -path_type full_clock_expanded -file C:/Users/Symok/ascon-mc-board/n1-100c/route/setup_paths.txt
+| Design       : ascon_multicore_board_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.000ns  (required time - arrival time)
+  Source:                 test_u/dut/lanes[0].core/s_reg_reg[213]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            test_u/dut/lanes[0].core/s_reg_reg[250]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        9.954ns  (logic 2.137ns (21.469%)  route 7.817ns (78.531%))
+  Logic Levels:           7  (LUT3=2 LUT4=1 LUT5=3 MUXF7=1)
+  Clock Path Skew:        -0.034ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.360ns = ( 8.640 - 10.000 ) 
+    Source Clock Delay      (SCD):    -0.741ns
+    Clock Pessimism Removal (CPR):    0.586ns
+  Clock Uncertainty:      0.077ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.136ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=6008, routed)        1.799    -0.741    test_u/dut/lanes[0].core/clk_i
+    SLICE_X64Y158        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[213]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X64Y158        FDRE (Prop_fdre_C_Q)         0.456    -0.285 r  test_u/dut/lanes[0].core/s_reg_reg[213]/Q
+                         net (fo=14, routed)          1.727     1.442    test_u/dut/lanes[0].core/state_word222_in[21]
+    SLICE_X61Y175        LUT5 (Prop_lut5_I3_O)        0.152     1.594 r  test_u/dut/lanes[0].core/s_reg[71]_i_62/O
+                         net (fo=3, routed)           1.236     2.830    test_u/dut/lanes[0].core/s_reg[71]_i_62_n_0
+    SLICE_X48Y172        LUT3 (Prop_lut3_I2_O)        0.332     3.162 r  test_u/dut/lanes[0].core/oq[1][data][100]_i_5/O
+                         net (fo=7, routed)           1.193     4.354    test_u/dut/lanes[0].core/oq[1][data][100]_i_5_n_0
+    SLICE_X43Y171        LUT4 (Prop_lut4_I0_O)        0.152     4.506 r  test_u/dut/lanes[0].core/s_reg[133]_i_5/O
+                         net (fo=5, routed)           1.173     5.680    test_u/dut/lanes[0].core/s_reg[133]_i_5_n_0
+    SLICE_X50Y171        LUT3 (Prop_lut3_I2_O)        0.348     6.028 r  test_u/dut/lanes[0].core/s_reg[250]_i_9/O
+                         net (fo=5, routed)           1.127     7.155    test_u/dut/lanes[0].core/s_reg[250]_i_9_n_0
+    SLICE_X50Y165        LUT5 (Prop_lut5_I0_O)        0.328     7.483 r  test_u/dut/lanes[0].core/s_reg[250]_i_6/O
+                         net (fo=3, routed)           1.361     8.844    test_u/dut/lanes[0].core/s_reg[250]_i_6_n_0
+    SLICE_X65Y168        LUT5 (Prop_lut5_I1_O)        0.124     8.968 r  test_u/dut/lanes[0].core/s_reg[250]_i_3/O
+                         net (fo=1, routed)           0.000     8.968    test_u/dut/lanes[0].core/s_reg[250]_i_3_n_0
+    SLICE_X65Y168        MUXF7 (Prop_muxf7_I1_O)      0.245     9.213 r  test_u/dut/lanes[0].core/s_reg_reg[250]_i_1/O
+                         net (fo=1, routed)           0.000     9.213    test_u/dut/lanes[0].core/p_1_in[250]
+    SLICE_X65Y168        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[250]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r  
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=6008, routed)        1.660     8.640    test_u/dut/lanes[0].core/clk_i
+    SLICE_X65Y168        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[250]/C
+                         clock pessimism              0.586     9.225    
+                         clock uncertainty           -0.077     9.149    
+    SLICE_X65Y168        FDRE (Setup_fdre_C_D)        0.064     9.213    test_u/dut/lanes[0].core/s_reg_reg[250]
+  -------------------------------------------------------------------
+                         required time                          9.213    
+                         arrival time                          -9.213    
+  -------------------------------------------------------------------
+                         slack                                  0.000    
+
+Slack (MET) :             0.012ns  (required time - arrival time)
+  Source:                 test_u/dut/lanes[0].core/s_reg_reg[213]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            test_u/dut/lanes[0].core/s_reg_reg[78]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        9.860ns  (logic 2.109ns (21.390%)  route 7.751ns (78.610%))
+  Logic Levels:           7  (LUT3=2 LUT4=1 LUT5=2 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.115ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.353ns = ( 8.647 - 10.000 ) 
+    Source Clock Delay      (SCD):    -0.741ns
+    Clock Pessimism Removal (CPR):    0.497ns
+  Clock Uncertainty:      0.077ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.136ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=6008, routed)        1.799    -0.741    test_u/dut/lanes[0].core/clk_i
+    SLICE_X64Y158        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[213]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X64Y158        FDRE (Prop_fdre_C_Q)         0.456    -0.285 r  test_u/dut/lanes[0].core/s_reg_reg[213]/Q
+                         net (fo=14, routed)          1.727     1.442    test_u/dut/lanes[0].core/state_word222_in[21]
+    SLICE_X61Y175        LUT5 (Prop_lut5_I3_O)        0.152     1.594 r  test_u/dut/lanes[0].core/s_reg[71]_i_62/O
+                         net (fo=3, routed)           1.236     2.830    test_u/dut/lanes[0].core/s_reg[71]_i_62_n_0
+    SLICE_X48Y172        LUT3 (Prop_lut3_I2_O)        0.332     3.162 r  test_u/dut/lanes[0].core/oq[1][data][100]_i_5/O
+                         net (fo=7, routed)           1.193     4.354    test_u/dut/lanes[0].core/oq[1][data][100]_i_5_n_0
+    SLICE_X43Y171        LUT4 (Prop_lut4_I0_O)        0.152     4.506 r  test_u/dut/lanes[0].core/s_reg[133]_i_5/O
+                         net (fo=5, routed)           1.173     5.680    test_u/dut/lanes[0].core/s_reg[133]_i_5_n_0
+    SLICE_X50Y171        LUT3 (Prop_lut3_I2_O)        0.348     6.028 r  test_u/dut/lanes[0].core/s_reg[250]_i_9/O
+                         net (fo=5, routed)           1.274     7.302    test_u/dut/lanes[0].core/s_reg[250]_i_9_n_0
+    SLICE_X51Y165        LUT6 (Prop_lut6_I3_O)        0.328     7.630 r  test_u/dut/lanes[0].core/s_reg[100]_i_4/O
+                         net (fo=3, routed)           1.148     8.778    test_u/dut/lanes[0].core/s_reg[100]_i_4_n_0
+    SLICE_X51Y160        LUT5 (Prop_lut5_I2_O)        0.124     8.902 r  test_u/dut/lanes[0].core/s_reg[78]_i_3/O
+                         net (fo=1, routed)           0.000     8.902    test_u/dut/lanes[0].core/s_reg[78]_i_3_n_0
+    SLICE_X51Y160        MUXF7 (Prop_muxf7_I1_O)      0.217     9.119 r  test_u/dut/lanes[0].core/s_reg_reg[78]_i_1/O
+                         net (fo=1, routed)           0.000     9.119    test_u/dut/lanes[0].core/p_1_in[78]
+    SLICE_X51Y160        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[78]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r  
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=6008, routed)        1.667     8.647    test_u/dut/lanes[0].core/clk_i
+    SLICE_X51Y160        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[78]/C
+                         clock pessimism              0.497     9.144    
+                         clock uncertainty           -0.077     9.068    
+    SLICE_X51Y160        FDRE (Setup_fdre_C_D)        0.064     9.132    test_u/dut/lanes[0].core/s_reg_reg[78]
+  -------------------------------------------------------------------
+                         required time                          9.132    
+                         arrival time                          -9.119    
+  -------------------------------------------------------------------
+                         slack                                  0.012    
+
+Slack (MET) :             0.132ns  (required time - arrival time)
+  Source:                 test_u/dut/lanes[0].core/s_reg_reg[148]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            test_u/dut/lanes[0].core/s_reg_reg[20]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        9.804ns  (logic 2.116ns (21.582%)  route 7.688ns (78.418%))
+  Logic Levels:           7  (LUT3=1 LUT5=4 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.051ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.366ns = ( 8.634 - 10.000 ) 
+    Source Clock Delay      (SCD):    -0.747ns
+    Clock Pessimism Removal (CPR):    0.569ns
+  Clock Uncertainty:      0.077ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.136ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=6008, routed)        1.793    -0.747    test_u/dut/lanes[0].core/clk_i
+    SLICE_X64Y165        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[148]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X64Y165        FDRE (Prop_fdre_C_Q)         0.456    -0.291 r  test_u/dut/lanes[0].core/s_reg_reg[148]/Q
+                         net (fo=6, routed)           1.773     1.483    test_u/dut/lanes[0].core/s_reg_reg_n_0_[148]
+    SLICE_X51Y172        LUT5 (Prop_lut5_I0_O)        0.152     1.635 r  test_u/dut/lanes[0].core/oq[1][data][92]_i_7/O
+                         net (fo=2, routed)           1.299     2.934    test_u/dut/lanes[0].core/oq[1][data][92]_i_7_n_0
+    SLICE_X61Y170        LUT6 (Prop_lut6_I4_O)        0.326     3.260 r  test_u/dut/lanes[0].core/oq[1][data][92]_i_3/O
+                         net (fo=7, routed)           1.051     4.311    test_u/dut/lanes[0].core/oq[1][data][92]_i_3_n_0
+    SLICE_X58Y171        LUT5 (Prop_lut5_I2_O)        0.124     4.435 r  test_u/dut/lanes[0].core/oq[1][data][48]_i_3/O
+                         net (fo=5, routed)           1.186     5.620    test_u/dut/lanes[0].core/oq[1][data][48]_i_3_n_0
+    SLICE_X50Y170        LUT3 (Prop_lut3_I1_O)        0.153     5.773 r  test_u/dut/lanes[0].core/oq[1][data][39]_i_2/O
+                         net (fo=6, routed)           1.353     7.127    test_u/dut/lanes[0].core/oq[1][data][39]_i_2_n_0
+    SLICE_X52Y161        LUT5 (Prop_lut5_I2_O)        0.356     7.483 r  test_u/dut/lanes[0].core/s_reg[39]_i_5/O
+                         net (fo=3, routed)           1.026     8.509    test_u/dut/lanes[0].core/s_reg[39]_i_5_n_0
+    SLICE_X52Y167        LUT5 (Prop_lut5_I2_O)        0.332     8.841 r  test_u/dut/lanes[0].core/s_reg[20]_i_3/O
+                         net (fo=1, routed)           0.000     8.841    test_u/dut/lanes[0].core/s_reg[20]_i_3_n_0
+    SLICE_X52Y167        MUXF7 (Prop_muxf7_I1_O)      0.217     9.058 r  test_u/dut/lanes[0].core/s_reg_reg[20]_i_1/O
+                         net (fo=1, routed)           0.000     9.058    test_u/dut/lanes[0].core/p_1_in[20]
+    SLICE_X52Y167        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[20]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r  
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=6008, routed)        1.654     8.634    test_u/dut/lanes[0].core/clk_i
+    SLICE_X52Y167        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[20]/C
+                         clock pessimism              0.569     9.202    
+                         clock uncertainty           -0.077     9.126    
+    SLICE_X52Y167        FDRE (Setup_fdre_C_D)        0.064     9.190    test_u/dut/lanes[0].core/s_reg_reg[20]
+  -------------------------------------------------------------------
+                         required time                          9.190    
+                         arrival time                          -9.058    
+  -------------------------------------------------------------------
+                         slack                                  0.132    
+
+Slack (MET) :             0.140ns  (required time - arrival time)
+  Source:                 test_u/dut/lanes[0].core/s_reg_reg[148]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            test_u/dut/lanes[0].core/s_reg_reg[48]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        9.735ns  (logic 2.127ns (21.850%)  route 7.608ns (78.151%))
+  Logic Levels:           7  (LUT3=1 LUT5=4 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.112ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.356ns = ( 8.644 - 10.000 ) 
+    Source Clock Delay      (SCD):    -0.747ns
+    Clock Pessimism Removal (CPR):    0.497ns
+  Clock Uncertainty:      0.077ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.136ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=6008, routed)        1.793    -0.747    test_u/dut/lanes[0].core/clk_i
+    SLICE_X64Y165        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[148]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X64Y165        FDRE (Prop_fdre_C_Q)         0.456    -0.291 r  test_u/dut/lanes[0].core/s_reg_reg[148]/Q
+                         net (fo=6, routed)           1.773     1.483    test_u/dut/lanes[0].core/s_reg_reg_n_0_[148]
+    SLICE_X51Y172        LUT5 (Prop_lut5_I0_O)        0.152     1.635 r  test_u/dut/lanes[0].core/oq[1][data][92]_i_7/O
+                         net (fo=2, routed)           1.299     2.934    test_u/dut/lanes[0].core/oq[1][data][92]_i_7_n_0
+    SLICE_X61Y170        LUT6 (Prop_lut6_I4_O)        0.326     3.260 r  test_u/dut/lanes[0].core/oq[1][data][92]_i_3/O
+                         net (fo=7, routed)           1.051     4.311    test_u/dut/lanes[0].core/oq[1][data][92]_i_3_n_0
+    SLICE_X58Y171        LUT5 (Prop_lut5_I2_O)        0.124     4.435 r  test_u/dut/lanes[0].core/oq[1][data][48]_i_3/O
+                         net (fo=5, routed)           1.225     5.660    test_u/dut/lanes[0].core/oq[1][data][48]_i_3_n_0
+    SLICE_X53Y169        LUT3 (Prop_lut3_I0_O)        0.152     5.812 r  test_u/dut/lanes[0].core/oq[1][data][48]_i_2/O
+                         net (fo=6, routed)           1.129     6.941    test_u/dut/lanes[0].core/oq[1][data][48]_i_2_n_0
+    SLICE_X58Y168        LUT5 (Prop_lut5_I1_O)        0.352     7.293 r  test_u/dut/lanes[0].core/s_reg[48]_i_6/O
+                         net (fo=3, routed)           1.130     8.423    test_u/dut/lanes[0].core/s_reg[48]_i_6_n_0
+    SLICE_X47Y166        LUT5 (Prop_lut5_I2_O)        0.348     8.771 r  test_u/dut/lanes[0].core/s_reg[48]_i_3/O
+                         net (fo=1, routed)           0.000     8.771    test_u/dut/lanes[0].core/s_reg[48]_i_3_n_0
+    SLICE_X47Y166        MUXF7 (Prop_muxf7_I1_O)      0.217     8.988 r  test_u/dut/lanes[0].core/s_reg_reg[48]_i_1/O
+                         net (fo=1, routed)           0.000     8.988    test_u/dut/lanes[0].core/p_1_in[48]
+    SLICE_X47Y166        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[48]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r  
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=6008, routed)        1.664     8.644    test_u/dut/lanes[0].core/clk_i
+    SLICE_X47Y166        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[48]/C
+                         clock pessimism              0.497     9.141    
+                         clock uncertainty           -0.077     9.065    
+    SLICE_X47Y166        FDRE (Setup_fdre_C_D)        0.064     9.129    test_u/dut/lanes[0].core/s_reg_reg[48]
+  -------------------------------------------------------------------
+                         required time                          9.129    
+                         arrival time                          -8.988    
+  -------------------------------------------------------------------
+                         slack                                  0.140    
+
+Slack (MET) :             0.145ns  (required time - arrival time)
+  Source:                 test_u/dut/lanes[0].core/s_reg_reg[88]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            test_u/dut/lanes[0].core/s_reg_reg[149]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        9.728ns  (logic 2.428ns (24.959%)  route 7.300ns (75.041%))
+  Logic Levels:           7  (LUT3=1 LUT4=2 LUT5=2 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.114ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.354ns = ( 8.646 - 10.000 ) 
+    Source Clock Delay      (SCD):    -0.743ns
+    Clock Pessimism Removal (CPR):    0.497ns
+  Clock Uncertainty:      0.077ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.136ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=6008, routed)        1.797    -0.743    test_u/dut/lanes[0].core/clk_i
+    SLICE_X50Y160        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[88]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X50Y160        FDRE (Prop_fdre_C_Q)         0.518    -0.225 r  test_u/dut/lanes[0].core/s_reg_reg[88]/Q
+                         net (fo=15, routed)          1.728     1.503    test_u/dut/lanes[0].core/state_word029_in[24]
+    SLICE_X60Y178        LUT4 (Prop_lut4_I3_O)        0.150     1.653 r  test_u/dut/lanes[0].core/oq[1][data][116]_i_19/O
+                         net (fo=4, routed)           1.273     2.926    test_u/dut/lanes[0].core/oq[1][data][116]_i_19_n_0
+    SLICE_X46Y172        LUT6 (Prop_lut6_I4_O)        0.328     3.254 r  test_u/dut/lanes[0].core/oq[1][data][116]_i_6/O
+                         net (fo=7, routed)           1.076     4.331    test_u/dut/lanes[0].core/oq[1][data][116]_i_6_n_0
+    SLICE_X46Y170        LUT5 (Prop_lut5_I0_O)        0.152     4.483 r  test_u/dut/lanes[0].core/s_reg[306]_i_11/O
+                         net (fo=3, routed)           1.164     5.647    test_u/dut/lanes[0].core/s_reg[306]_i_11_n_0
+    SLICE_X59Y169        LUT3 (Prop_lut3_I1_O)        0.374     6.021 r  test_u/dut/lanes[0].core/s_reg[306]_i_8/O
+                         net (fo=6, routed)           1.200     7.221    test_u/dut/lanes[0].core/s_reg[306]_i_8_n_0
+    SLICE_X57Y164        LUT4 (Prop_lut4_I1_O)        0.362     7.583 r  test_u/dut/lanes[0].core/s_reg[155]_i_5/O
+                         net (fo=3, routed)           0.858     8.441    test_u/dut/lanes[0].core/s_reg[155]_i_5_n_0
+    SLICE_X65Y162        LUT5 (Prop_lut5_I4_O)        0.327     8.768 r  test_u/dut/lanes[0].core/s_reg[149]_i_3/O
+                         net (fo=1, routed)           0.000     8.768    test_u/dut/lanes[0].core/s_reg[149]_i_3_n_0
+    SLICE_X65Y162        MUXF7 (Prop_muxf7_I1_O)      0.217     8.985 r  test_u/dut/lanes[0].core/s_reg_reg[149]_i_1/O
+                         net (fo=1, routed)           0.000     8.985    test_u/dut/lanes[0].core/p_1_in[149]
+    SLICE_X65Y162        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[149]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r  
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=6008, routed)        1.666     8.646    test_u/dut/lanes[0].core/clk_i
+    SLICE_X65Y162        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[149]/C
+                         clock pessimism              0.497     9.143    
+                         clock uncertainty           -0.077     9.067    
+    SLICE_X65Y162        FDRE (Setup_fdre_C_D)        0.064     9.131    test_u/dut/lanes[0].core/s_reg_reg[149]
+  -------------------------------------------------------------------
+                         required time                          9.131    
+                         arrival time                          -8.985    
+  -------------------------------------------------------------------
+                         slack                                  0.145    
+
+Slack (MET) :             0.161ns  (required time - arrival time)
+  Source:                 test_u/dut/lanes[0].core/s_reg_reg[213]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            test_u/dut/lanes[0].core/s_reg_reg[56]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        9.713ns  (logic 2.370ns (24.401%)  route 7.343ns (75.599%))
+  Logic Levels:           7  (LUT3=2 LUT4=1 LUT5=3 MUXF7=1)
+  Clock Path Skew:        -0.114ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.352ns = ( 8.648 - 10.000 ) 
+    Source Clock Delay      (SCD):    -0.741ns
+    Clock Pessimism Removal (CPR):    0.497ns
+  Clock Uncertainty:      0.077ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.136ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=6008, routed)        1.799    -0.741    test_u/dut/lanes[0].core/clk_i
+    SLICE_X64Y158        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[213]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X64Y158        FDRE (Prop_fdre_C_Q)         0.456    -0.285 r  test_u/dut/lanes[0].core/s_reg_reg[213]/Q
+                         net (fo=14, routed)          1.727     1.442    test_u/dut/lanes[0].core/state_word222_in[21]
+    SLICE_X61Y175        LUT5 (Prop_lut5_I3_O)        0.152     1.594 r  test_u/dut/lanes[0].core/s_reg[71]_i_62/O
+                         net (fo=3, routed)           1.236     2.830    test_u/dut/lanes[0].core/s_reg[71]_i_62_n_0
+    SLICE_X48Y172        LUT3 (Prop_lut3_I2_O)        0.332     3.162 r  test_u/dut/lanes[0].core/oq[1][data][100]_i_5/O
+                         net (fo=7, routed)           1.193     4.354    test_u/dut/lanes[0].core/oq[1][data][100]_i_5_n_0
+    SLICE_X43Y171        LUT4 (Prop_lut4_I0_O)        0.152     4.506 r  test_u/dut/lanes[0].core/s_reg[133]_i_5/O
+                         net (fo=5, routed)           1.173     5.680    test_u/dut/lanes[0].core/s_reg[133]_i_5_n_0
+    SLICE_X50Y171        LUT3 (Prop_lut3_I2_O)        0.348     6.028 r  test_u/dut/lanes[0].core/s_reg[250]_i_9/O
+                         net (fo=5, routed)           1.086     7.114    test_u/dut/lanes[0].core/s_reg[250]_i_9_n_0
+    SLICE_X52Y165        LUT5 (Prop_lut5_I0_O)        0.353     7.467 r  test_u/dut/lanes[0].core/s_reg[56]_i_7/O
+                         net (fo=3, routed)           0.928     8.395    test_u/dut/lanes[0].core/s_reg[56]_i_7_n_0
+    SLICE_X41Y167        LUT5 (Prop_lut5_I4_O)        0.332     8.727 r  test_u/dut/lanes[0].core/s_reg[56]_i_3/O
+                         net (fo=1, routed)           0.000     8.727    test_u/dut/lanes[0].core/s_reg[56]_i_3_n_0
+    SLICE_X41Y167        MUXF7 (Prop_muxf7_I1_O)      0.245     8.972 r  test_u/dut/lanes[0].core/s_reg_reg[56]_i_1/O
+                         net (fo=1, routed)           0.000     8.972    test_u/dut/lanes[0].core/p_1_in[56]
+    SLICE_X41Y167        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[56]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r  
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=6008, routed)        1.668     8.648    test_u/dut/lanes[0].core/clk_i
+    SLICE_X41Y167        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[56]/C
+                         clock pessimism              0.497     9.145    
+                         clock uncertainty           -0.077     9.069    
+    SLICE_X41Y167        FDRE (Setup_fdre_C_D)        0.064     9.133    test_u/dut/lanes[0].core/s_reg_reg[56]
+  -------------------------------------------------------------------
+                         required time                          9.133    
+                         arrival time                          -8.972    
+  -------------------------------------------------------------------
+                         slack                                  0.161    
+
+Slack (MET) :             0.163ns  (required time - arrival time)
+  Source:                 test_u/dut/lanes[0].core/s_reg_reg[317]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            test_u/dut/lanes[0].core/s_reg_reg[253]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        9.852ns  (logic 2.442ns (24.788%)  route 7.410ns (75.212%))
+  Logic Levels:           7  (LUT3=2 LUT5=4 MUXF7=1)
+  Clock Path Skew:        -0.022ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.354ns = ( 8.646 - 10.000 ) 
+    Source Clock Delay      (SCD):    -0.747ns
+    Clock Pessimism Removal (CPR):    0.586ns
+  Clock Uncertainty:      0.077ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.136ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=6008, routed)        1.793    -0.747    test_u/dut/lanes[0].core/clk_i
+    SLICE_X60Y162        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[317]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X60Y162        FDRE (Prop_fdre_C_Q)         0.518    -0.229 r  test_u/dut/lanes[0].core/s_reg_reg[317]/Q
+                         net (fo=12, routed)          1.578     1.349    test_u/dut/lanes[0].core/state_word121_in[61]
+    SLICE_X55Y178        LUT5 (Prop_lut5_I0_O)        0.124     1.473 r  test_u/dut/lanes[0].core/oq[1][data][111]_i_12/O
+                         net (fo=4, routed)           1.421     2.893    test_u/dut/lanes[0].core/oq[1][data][111]_i_12_n_0
+    SLICE_X51Y173        LUT3 (Prop_lut3_I2_O)        0.152     3.045 r  test_u/dut/lanes[0].core/s_reg[317]_i_11/O
+                         net (fo=5, routed)           0.981     4.026    test_u/dut/lanes[0].core/s_reg[317]_i_11_n_0
+    SLICE_X52Y173        LUT5 (Prop_lut5_I1_O)        0.362     4.388 r  test_u/dut/lanes[0].core/oq[1][data][61]_i_4/O
+                         net (fo=4, routed)           1.206     5.594    test_u/dut/lanes[0].core/oq[1][data][61]_i_4_n_0
+    SLICE_X50Y169        LUT3 (Prop_lut3_I1_O)        0.356     5.950 r  test_u/dut/lanes[0].core/oq[1][data][61]_i_2/O
+                         net (fo=7, routed)           1.056     7.006    test_u/dut/lanes[0].core/oq[1][data][61]_i_2_n_0
+    SLICE_X59Y166        LUT5 (Prop_lut5_I2_O)        0.357     7.363 r  test_u/dut/lanes[0].core/s_reg[253]_i_8/O
+                         net (fo=3, routed)           1.169     8.532    test_u/dut/lanes[0].core/s_reg[253]_i_8_n_0
+    SLICE_X60Y157        LUT5 (Prop_lut5_I4_O)        0.326     8.858 r  test_u/dut/lanes[0].core/s_reg[253]_i_3/O
+                         net (fo=1, routed)           0.000     8.858    test_u/dut/lanes[0].core/s_reg[253]_i_3_n_0
+    SLICE_X60Y157        MUXF7 (Prop_muxf7_I1_O)      0.247     9.105 r  test_u/dut/lanes[0].core/s_reg_reg[253]_i_1/O
+                         net (fo=1, routed)           0.000     9.105    test_u/dut/lanes[0].core/p_1_in[253]
+    SLICE_X60Y157        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[253]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r  
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=6008, routed)        1.666     8.646    test_u/dut/lanes[0].core/clk_i
+    SLICE_X60Y157        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[253]/C
+                         clock pessimism              0.586     9.231    
+                         clock uncertainty           -0.077     9.155    
+    SLICE_X60Y157        FDRE (Setup_fdre_C_D)        0.113     9.268    test_u/dut/lanes[0].core/s_reg_reg[253]
+  -------------------------------------------------------------------
+                         required time                          9.268    
+                         arrival time                          -9.105    
+  -------------------------------------------------------------------
+                         slack                                  0.163    
+
+Slack (MET) :             0.188ns  (required time - arrival time)
+  Source:                 test_u/dut/lanes[0].core/s_reg_reg[88]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            test_u/dut/lanes[0].core/s_reg_reg[214]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        9.680ns  (logic 2.415ns (24.949%)  route 7.265ns (75.051%))
+  Logic Levels:           7  (LUT3=1 LUT4=1 LUT5=3 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.120ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.360ns = ( 8.640 - 10.000 ) 
+    Source Clock Delay      (SCD):    -0.743ns
+    Clock Pessimism Removal (CPR):    0.497ns
+  Clock Uncertainty:      0.077ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.136ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=6008, routed)        1.797    -0.743    test_u/dut/lanes[0].core/clk_i
+    SLICE_X50Y160        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[88]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X50Y160        FDRE (Prop_fdre_C_Q)         0.518    -0.225 r  test_u/dut/lanes[0].core/s_reg_reg[88]/Q
+                         net (fo=15, routed)          1.728     1.503    test_u/dut/lanes[0].core/state_word029_in[24]
+    SLICE_X60Y178        LUT4 (Prop_lut4_I3_O)        0.150     1.653 r  test_u/dut/lanes[0].core/oq[1][data][116]_i_19/O
+                         net (fo=4, routed)           1.195     2.848    test_u/dut/lanes[0].core/oq[1][data][116]_i_19_n_0
+    SLICE_X48Y176        LUT6 (Prop_lut6_I1_O)        0.328     3.176 r  test_u/dut/lanes[0].core/oq[1][data][116]_i_22/O
+                         net (fo=5, routed)           1.020     4.196    test_u/dut/lanes[0].core/oq[1][data][116]_i_22_n_0
+    SLICE_X48Y176        LUT5 (Prop_lut5_I0_O)        0.152     4.348 r  test_u/dut/lanes[0].core/s_reg[241]_i_19/O
+                         net (fo=4, routed)           1.050     5.398    test_u/dut/lanes[0].core/s_reg[241]_i_19_n_0
+    SLICE_X49Y168        LUT3 (Prop_lut3_I2_O)        0.358     5.756 r  test_u/dut/lanes[0].core/s_reg[311]_i_12/O
+                         net (fo=6, routed)           1.185     6.941    test_u/dut/lanes[0].core/s_reg[311]_i_12_n_0
+    SLICE_X58Y167        LUT5 (Prop_lut5_I4_O)        0.361     7.302 r  test_u/dut/lanes[0].core/s_reg[224]_i_6/O
+                         net (fo=3, routed)           1.087     8.389    test_u/dut/lanes[0].core/s_reg[224]_i_6_n_0
+    SLICE_X52Y160        LUT5 (Prop_lut5_I2_O)        0.331     8.720 r  test_u/dut/lanes[0].core/s_reg[214]_i_3/O
+                         net (fo=1, routed)           0.000     8.720    test_u/dut/lanes[0].core/s_reg[214]_i_3_n_0
+    SLICE_X52Y160        MUXF7 (Prop_muxf7_I1_O)      0.217     8.937 r  test_u/dut/lanes[0].core/s_reg_reg[214]_i_1/O
+                         net (fo=1, routed)           0.000     8.937    test_u/dut/lanes[0].core/p_1_in[214]
+    SLICE_X52Y160        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[214]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r  
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=6008, routed)        1.660     8.640    test_u/dut/lanes[0].core/clk_i
+    SLICE_X52Y160        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[214]/C
+                         clock pessimism              0.497     9.137    
+                         clock uncertainty           -0.077     9.061    
+    SLICE_X52Y160        FDRE (Setup_fdre_C_D)        0.064     9.125    test_u/dut/lanes[0].core/s_reg_reg[214]
+  -------------------------------------------------------------------
+                         required time                          9.125    
+                         arrival time                          -8.937    
+  -------------------------------------------------------------------
+                         slack                                  0.188    
+
+Slack (MET) :             0.198ns  (required time - arrival time)
+  Source:                 test_u/dut/lanes[0].core/s_reg_reg[88]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            test_u/dut/lanes[0].core/s_reg_reg[154]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        9.717ns  (logic 2.458ns (25.297%)  route 7.259ns (74.703%))
+  Logic Levels:           7  (LUT3=1 LUT4=2 LUT5=2 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.122ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.362ns = ( 8.638 - 10.000 ) 
+    Source Clock Delay      (SCD):    -0.743ns
+    Clock Pessimism Removal (CPR):    0.497ns
+  Clock Uncertainty:      0.077ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.136ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=6008, routed)        1.797    -0.743    test_u/dut/lanes[0].core/clk_i
+    SLICE_X50Y160        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[88]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X50Y160        FDRE (Prop_fdre_C_Q)         0.518    -0.225 r  test_u/dut/lanes[0].core/s_reg_reg[88]/Q
+                         net (fo=15, routed)          1.728     1.503    test_u/dut/lanes[0].core/state_word029_in[24]
+    SLICE_X60Y178        LUT4 (Prop_lut4_I3_O)        0.150     1.653 r  test_u/dut/lanes[0].core/oq[1][data][116]_i_19/O
+                         net (fo=4, routed)           1.273     2.926    test_u/dut/lanes[0].core/oq[1][data][116]_i_19_n_0
+    SLICE_X46Y172        LUT6 (Prop_lut6_I4_O)        0.328     3.254 r  test_u/dut/lanes[0].core/oq[1][data][116]_i_6/O
+                         net (fo=7, routed)           1.076     4.331    test_u/dut/lanes[0].core/oq[1][data][116]_i_6_n_0
+    SLICE_X46Y170        LUT5 (Prop_lut5_I0_O)        0.152     4.483 r  test_u/dut/lanes[0].core/s_reg[306]_i_11/O
+                         net (fo=3, routed)           1.164     5.647    test_u/dut/lanes[0].core/s_reg[306]_i_11_n_0
+    SLICE_X59Y169        LUT3 (Prop_lut3_I1_O)        0.374     6.021 r  test_u/dut/lanes[0].core/s_reg[306]_i_8/O
+                         net (fo=6, routed)           1.200     7.221    test_u/dut/lanes[0].core/s_reg[306]_i_8_n_0
+    SLICE_X57Y164        LUT4 (Prop_lut4_I1_O)        0.362     7.583 r  test_u/dut/lanes[0].core/s_reg[155]_i_5/O
+                         net (fo=3, routed)           0.817     8.400    test_u/dut/lanes[0].core/s_reg[155]_i_5_n_0
+    SLICE_X56Y164        LUT5 (Prop_lut5_I2_O)        0.327     8.727 r  test_u/dut/lanes[0].core/s_reg[154]_i_3/O
+                         net (fo=1, routed)           0.000     8.727    test_u/dut/lanes[0].core/s_reg[154]_i_3_n_0
+    SLICE_X56Y164        MUXF7 (Prop_muxf7_I1_O)      0.247     8.974 r  test_u/dut/lanes[0].core/s_reg_reg[154]_i_1/O
+                         net (fo=1, routed)           0.000     8.974    test_u/dut/lanes[0].core/p_1_in[154]
+    SLICE_X56Y164        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[154]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r  
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=6008, routed)        1.658     8.638    test_u/dut/lanes[0].core/clk_i
+    SLICE_X56Y164        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[154]/C
+                         clock pessimism              0.497     9.135    
+                         clock uncertainty           -0.077     9.059    
+    SLICE_X56Y164        FDRE (Setup_fdre_C_D)        0.113     9.172    test_u/dut/lanes[0].core/s_reg_reg[154]
+  -------------------------------------------------------------------
+                         required time                          9.172    
+                         arrival time                          -8.974    
+  -------------------------------------------------------------------
+                         slack                                  0.198    
+
+Slack (MET) :             0.239ns  (required time - arrival time)
+  Source:                 test_u/dut/lanes[0].core/s_reg_reg[213]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            test_u/dut/lanes[0].core/s_reg_reg[203]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        9.699ns  (logic 2.109ns (21.745%)  route 7.590ns (78.255%))
+  Logic Levels:           7  (LUT3=2 LUT4=1 LUT5=3 MUXF7=1)
+  Clock Path Skew:        -0.050ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.359ns = ( 8.641 - 10.000 ) 
+    Source Clock Delay      (SCD):    -0.741ns
+    Clock Pessimism Removal (CPR):    0.569ns
+  Clock Uncertainty:      0.077ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.136ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=6008, routed)        1.799    -0.741    test_u/dut/lanes[0].core/clk_i
+    SLICE_X64Y158        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[213]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X64Y158        FDRE (Prop_fdre_C_Q)         0.456    -0.285 r  test_u/dut/lanes[0].core/s_reg_reg[213]/Q
+                         net (fo=14, routed)          1.727     1.442    test_u/dut/lanes[0].core/state_word222_in[21]
+    SLICE_X61Y175        LUT5 (Prop_lut5_I3_O)        0.152     1.594 r  test_u/dut/lanes[0].core/s_reg[71]_i_62/O
+                         net (fo=3, routed)           1.236     2.830    test_u/dut/lanes[0].core/s_reg[71]_i_62_n_0
+    SLICE_X48Y172        LUT3 (Prop_lut3_I2_O)        0.332     3.162 r  test_u/dut/lanes[0].core/oq[1][data][100]_i_5/O
+                         net (fo=7, routed)           1.193     4.354    test_u/dut/lanes[0].core/oq[1][data][100]_i_5_n_0
+    SLICE_X43Y171        LUT4 (Prop_lut4_I0_O)        0.152     4.506 r  test_u/dut/lanes[0].core/s_reg[133]_i_5/O
+                         net (fo=5, routed)           1.173     5.680    test_u/dut/lanes[0].core/s_reg[133]_i_5_n_0
+    SLICE_X50Y171        LUT3 (Prop_lut3_I2_O)        0.348     6.028 r  test_u/dut/lanes[0].core/s_reg[250]_i_9/O
+                         net (fo=5, routed)           1.127     7.155    test_u/dut/lanes[0].core/s_reg[250]_i_9_n_0
+    SLICE_X50Y165        LUT5 (Prop_lut5_I0_O)        0.328     7.483 r  test_u/dut/lanes[0].core/s_reg[250]_i_6/O
+                         net (fo=3, routed)           1.134     8.617    test_u/dut/lanes[0].core/s_reg[250]_i_6_n_0
+    SLICE_X55Y158        LUT5 (Prop_lut5_I2_O)        0.124     8.741 r  test_u/dut/lanes[0].core/s_reg[203]_i_3/O
+                         net (fo=1, routed)           0.000     8.741    test_u/dut/lanes[0].core/s_reg[203]_i_3_n_0
+    SLICE_X55Y158        MUXF7 (Prop_muxf7_I1_O)      0.217     8.958 r  test_u/dut/lanes[0].core/s_reg_reg[203]_i_1/O
+                         net (fo=1, routed)           0.000     8.958    test_u/dut/lanes[0].core/p_1_in[203]
+    SLICE_X55Y158        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[203]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r  
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=6008, routed)        1.661     8.641    test_u/dut/lanes[0].core/clk_i
+    SLICE_X55Y158        FDRE                                         r  test_u/dut/lanes[0].core/s_reg_reg[203]/C
+                         clock pessimism              0.569     9.209    
+                         clock uncertainty           -0.077     9.133    
+    SLICE_X55Y158        FDRE (Setup_fdre_C_D)        0.064     9.197    test_u/dut/lanes[0].core/s_reg_reg[203]
+  -------------------------------------------------------------------
+                         required time                          9.197    
+                         arrival time                          -8.958    
+  -------------------------------------------------------------------
+                         slack                                  0.239    
+
+
+
+

@@ -11,11 +11,13 @@ import math
 import os
 from pathlib import Path
 import re
+import shutil
 import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = ['ascon_pkg.vhd', 'ascon_permutation.vhd', 'ascon_aead128_core.vhd']
+GIT = 'git.exe' if os.name != 'nt' and shutil.which('git.exe') else 'git'
 
 
 def sha(data):
@@ -35,6 +37,7 @@ def main():
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--variants', nargs='+', choices=['baseline','u3','u3-buffered','u3-fold'], default=['baseline','u3','u3-buffered'])
     p.add_argument('--nonce-base', type=int, default=0x53545245414D0000)
+    p.add_argument('--baseline-ref', default='origin/main', help='Pin the historical baseline source')
     args = p.parse_args()
     out = args.output.resolve()
     out.mkdir(parents=True, exist_ok=False)
@@ -51,7 +54,7 @@ def main():
     assert offset == len(payload)
     (out/'tensor_manifest.json').write_text(json.dumps(manifest,indent=2))
     (out/'slice_1KiB.bin').write_bytes(payload[:1024])
-    receipt = dict(base_sha=subprocess.check_output(['git','rev-parse','origin/main'],cwd=ROOT,text=True).strip(),
+    receipt = dict(base_sha=subprocess.check_output([GIT,'rev-parse',args.baseline_ref],cwd=ROOT,text=True).strip(),
         payload=dict(path=str(weight),bytes=len(payload),format='float32-le',sha256=sha(payload),
                      tensor_manifest_sha256=sha(args.manifest.read_bytes())),variants=[])
     for variant,rpc,buffered in [('baseline',1,False),('u3',3,False),('u3-buffered',3,True),('u3-fold',3,True)]:
@@ -59,7 +62,7 @@ def main():
         folded = variant=='u3-fold'  # G_FOLDED_ABSORB single-state-register core
         src=out/variant/'source';src.mkdir(parents=True)
         for n in SOURCES:
-            data = subprocess.check_output(['git','show','origin/main:rtl/'+n],cwd=ROOT) if variant=='baseline' else (ROOT/'rtl'/n).read_bytes()
+            data = subprocess.check_output([GIT,'show',args.baseline_ref+':rtl/'+n],cwd=ROOT) if variant=='baseline' else (ROOT/'rtl'/n).read_bytes()
             (src/n).write_bytes(data)
         bench=(ROOT/'verification/vhdl/tb_weight_file.vhd').read_text()
         if variant=='baseline':

@@ -1,5 +1,28 @@
 # Ascon-AEAD128 in VHDL
 
+## Physical multicore tests October 27 2026
+
+The 1-, 2-, and 4-core systems passed ten on-board cases twice each, with
+JTAG-captured cycle counts matching simulation exactly. The common test harness
+ran at 90 MHz for one/two cores and 75 MHz for four cores. It checks 3,072 bytes
+selected from all twelve layers of the trained adapter against the Python oracle,
+including encryption, decryption, stalls, tampering, abort and reset recovery.
+See [the physical test report and raw evidence](docs/evidence/multicore_board_20261027/report.md).
+Full-adapter transfer, DDR2 integration and physical full-file latency remain unmeasured.
+
+## Multicore study October 22 2026
+
+Branch `codex/ascon-fold-multicore` adds an experimental 1/2/4-core wrapper around
+the folded engine. Twelve authenticated layer chunks share separate 128-bit
+input and output buses with beat-level arbitration and full-file commit.
+Always-ready encryption takes 450,013, 225,008, and 149,968 cycles respectively
+with boundary queues bypassed. These are behavioral simulation results.
+See [the throughput and timing study](docs/multicore_study.md) and
+[the chunk format and interface](docs/multicore_format.md) for configuration,
+verification, routed timing, and the separate unverified memory-bandwidth model.
+That study covered simulation and routing. The October 27 tests above add bounded
+physical multicore evidence; physical full-file throughput remains unmeasured.
+
 ## Folded absorption update October 21 2026
 
 Branch `ascon-weight-stream-fold-absorb` adds the opt-in `G_FOLDED_ABSORB` core. The complete adapter takes 449,581 cycles per direction, about 4.50 ms at simulated 100 MHz, with exact authenticated recovery. Its steady interval is three clocks per full block. Saved core-only timing meets 100 MHz; a board-integrated copy also met 100 MHz in one run. No folded hardware programming or physical full-file measurement was performed.
@@ -21,8 +44,8 @@ are not byte-compatible with this core.
 I have passed all 1,089 official known-answer vectors in both encryption and
 decryption with GHDL and Vivado XSim. Vivado 2023.2 also completed synthesis,
 placement, routing, timing analysis, power estimation, and bitstream
-generation for the Nexys A7 100T. Physical FPGA programming and board-level
-demonstration testing remain pending. The [verification status](docs/verification_status.md)
+generation for the Nexys A7 100T. The physical multicore fixture tests are recorded
+above. The [verification status](docs/verification_status.md)
 records the completed evidence and the remaining hardware work.
 
 ## Repository layout
@@ -354,3 +377,7 @@ with buffering, versus 1,798,305 for the unchanged one-round core at a simulated
 100 MHz (approximately 2x throughput). Both pass authenticated exact recovery.
 See [the adapter simulation evidence and reproduction command](paper/evidence/adapter_100mhz_20261021/README.md)
 and Section XIII of the [research report](paper/VHDL_Implementation_of_NIST_Ascon_AEAD128_on_a_Nexys_A7_FPGA.pdf).
+
+## Pipeline and multicore research update
+
+The [research report](paper/VHDL_Implementation_of_NIST_Ascon_AEAD128_on_a_Nexys_A7_FPGA.pdf) includes the dependent p8 pipeline experiment, controller fixes, multicore simulation and the bounded physical-board fixture, with architecture diagrams. See [the pipeline experiment](https://github.com/kroix-ovo/ascon-aead128-vhdl/tree/ascon-p8-pipeline/experiments/p8_pipeline), [the multicore study](docs/multicore_study.md) and [physical fixture evidence](docs/evidence/multicore_board_20261027/report.md).
