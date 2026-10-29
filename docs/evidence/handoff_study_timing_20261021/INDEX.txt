@@ -1,0 +1,13 @@
+Handoff study: routed timing / unroll factors, core-only OOC, Vivado 2023.2, xc7a100tcsg324-1. 2026-10-21.
+Not committed. Builds/checkpoints live in build/handoff_vivado/<run>/ (gitignored).
+source_sha256.txt            commit + RTL hashes (raw and LF-normalised) used by every run
+all_runs_summary.txt         one line per run: config, target period, WNS/WHS, period-WNS, LUT/FF, model cycles/block
+all_runs_implementation.json raw per-run results
+candidate_r3b1_100mhz/       G_ROUNDS_PER_CYCLE=3, buffering on, 10 ns: full timing/util/high-fanout/design-analysis reports,
+                             path classes, per-endpoint slack histogram, LUT-input anatomy of the worst path,
+                             route_stream_repro/ = rerun of the committed vivado/route_stream.tcl (3 1 0 10)
+fmax_paths/                  path-class breakdowns of tight-constraint runs
+io_constraints/              candidate with set_input/output_delay 0/0, 3/3, 5/5 ns and unbuffered 3-round 3/3 ns
+tail_harness/                synthetic harness: 3-round group vs 2-round p8 tail + absorb XOR/decrypt select (timing only)
+variants/                    experimental permutation (static lane guards, short group first) + XSim equivalence check
+scripts/                     tcl/sh/py used; job files list every run's arguments (key:value; '=' and ',' are split by vivado.bat)

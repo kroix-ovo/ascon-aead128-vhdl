@@ -1,0 +1,396 @@
+ECHO is off.
+ECHO is off.
+
+****** Vivado v2023.2 (64-bit)
+  **** SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+  **** IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+  **** SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source {C:\Users\Symok\ascon-mc-board\n1-monitor\source\retime_multicore_board.tcl}
+# set checkpoint [file normalize [lindex $argv 0]]
+# set out [file normalize [lindex $argv 1]]
+# set cores [lindex $argv 2]
+# set divider [lindex $argv 3]
+# file mkdir $out
+# set_param general.maxThreads 2
+# open_checkpoint $checkpoint
+Command: open_checkpoint C:/Users/Symok/ascon-mc-board/n1-monitor/route/routed.dcp
+
+Starting open_checkpoint Task
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.062 . Memory (MB): peak = 307.242 ; gain = 7.363
+INFO: [Device 21-403] Loading part xc7a100tcsg324-1
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.114 . Memory (MB): peak = 920.359 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 829 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2023.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Read ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.044 . Memory (MB): peak = 1036.734 ; gain = 2.035
+INFO: [Timing 38-478] Restoring timing data from binary archive.
+INFO: [Timing 38-479] Binary timing data restore complete.
+INFO: [Project 1-856] Restoring constraints from binary archive.
+INFO: [Project 1-853] Binary constraint restore complete.
+INFO: [Designutils 20-5722] Start Reading Physical Databases.
+Reading placement.
+Read Netlist Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.027 . Memory (MB): peak = 1656.699 ; gain = 0.000
+Reading placer database...
+Read Device Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 1656.699 ; gain = 0.000
+Read PlaceDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.585 . Memory (MB): peak = 1656.699 ; gain = 0.000
+Read PulsedLatchDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1656.699 ; gain = 0.000
+Reading routing.
+Read RouteStorage: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.352 . Memory (MB): peak = 1659.047 ; gain = 2.348
+Read Physdb Files: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.991 . Memory (MB): peak = 1659.047 ; gain = 2.348
+Restored from archive | CPU: 1.000000 secs | Memory: 0.000000 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1659.047 ; gain = 7.312
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1659.047 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 210 instances were transformed.
+  CFGLUT5 => CFGLUT5 (SRL16E, SRLC32E): 204 instances
+  RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 6 instances
+
+The system cannot find the path specified.
+INFO: [Project 1-604] Checkpoint was created with Vivado v2023.2 (64-bit) build 4029153
+open_checkpoint: Time (s): cpu = 00:00:25 ; elapsed = 00:00:28 . Memory (MB): peak = 1667.137 ; gain = 1372.312
+# if {[get_property PART [current_design]] ne "xc7a100tcsg324-1"} {error "Unexpected FPGA part"}
+# set mmcm [get_cells -hier -filter {REF_NAME =~ MMCME2*}]
+# if {[llength $mmcm]!=1} {error "Expected one MMCM"}
+# set old [get_property CLKOUT0_DIVIDE_F $mmcm]
+# if {$divider<=$old} {error "Only lower-clock attempts are permitted"}
+# set_property CLKOUT0_DIVIDE_F $divider $mmcm
+# update_timing
+INFO: [Timing 38-2] Deriving generated clocks
+# set output_clock [get_clocks -of_objects [get_pins $mmcm/CLKOUT0]]
+# set period [get_property PERIOD $output_clock]
+# if {abs($period-$divider/0.9)>0.002} {error "Generated clock failed to update"}
+# route_design -unroute
+Command: route_design -unroute
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Route 35-163] All nets in the design were unrouted.
+INFO: [Common 17-83] Releasing license: Implementation
+3 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+route_design completed successfully
+# place_design
+Command: place_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Common 17-83] Releasing license: Implementation
+Running DRC as a precondition to command place_design
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+INFO: [Place 30-611] Multithreading enabled for place_design using a maximum of 2 CPUs
+
+Starting Placer Task
+
+Phase 1 Placer Initialization
+
+Phase 1.1 Placer Initialization Netlist Sorting
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 1849.359 ; gain = 0.000
+Phase 1.1 Placer Initialization Netlist Sorting | Checksum: 16e15fb53
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.090 . Memory (MB): peak = 1849.359 ; gain = 0.000
+
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: 16e15fb53
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.812 . Memory (MB): peak = 1849.359 ; gain = 0.000
+
+Phase 1.3 Build Placer Netlist Model
+Phase 1.3 Build Placer Netlist Model | Checksum: 1748087f3
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:05 . Memory (MB): peak = 1849.359 ; gain = 0.000
+
+Phase 1.4 Constrain Clocks/Macros
+Phase 1.4 Constrain Clocks/Macros | Checksum: 1748087f3
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:05 . Memory (MB): peak = 1849.359 ; gain = 0.000
+Phase 1 Placer Initialization | Checksum: 1748087f3
+
+Time (s): cpu = 00:00:07 ; elapsed = 00:00:05 . Memory (MB): peak = 1849.359 ; gain = 0.000
+
+Phase 2 Final Placement Cleanup
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.007 . Memory (MB): peak = 1849.359 ; gain = 0.000
+
+Time (s): cpu = 00:00:07 ; elapsed = 00:00:05 . Memory (MB): peak = 1849.359 ; gain = 0.000
+INFO: [Place 30-281] No place-able instance is found; design doesn't contain any instance or all instances are placed
+Ending Placer Task | Checksum: 16e15fb53
+
+Time (s): cpu = 00:00:07 ; elapsed = 00:00:05 . Memory (MB): peak = 1849.359 ; gain = 0.000
+7 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+place_design completed successfully
+place_design: Time (s): cpu = 00:00:11 ; elapsed = 00:00:07 . Memory (MB): peak = 1849.359 ; gain = 50.855
+# route_design
+Command: route_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a100t'
+Running DRC as a precondition to command route_design
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+
+Starting Routing Task
+INFO: [Route 35-254] Multithreading enabled for route_design using a maximum of 8 CPUs
+
+Phase 1 Build RT Design
+Checksum: PlaceDB: f03ea719 ConstDB: 0 ShapeSum: 7dd7543a RouteDB: 0
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Post Restoration Checksum: NetGraph: e1b4388 | NumContArr: 14889fc9 | Constraints: c2a8fa9d | Timing: c2a8fa9d
+Phase 1 Build RT Design | Checksum: 1a7f5d88b
+
+Time (s): cpu = 00:00:45 ; elapsed = 00:00:39 . Memory (MB): peak = 1933.293 ; gain = 83.934
+
+Phase 2 Router Initialization
+
+Phase 2.1 Fix Topology Constraints
+Phase 2.1 Fix Topology Constraints | Checksum: 1a7f5d88b
+
+Time (s): cpu = 00:00:45 ; elapsed = 00:00:39 . Memory (MB): peak = 1933.293 ; gain = 83.934
+
+Phase 2.2 Pre Route Cleanup
+Phase 2.2 Pre Route Cleanup | Checksum: 1a7f5d88b
+
+Time (s): cpu = 00:00:45 ; elapsed = 00:00:39 . Memory (MB): peak = 1933.293 ; gain = 83.934
+ Number of Nodes with overlaps = 0
+
+Phase 2.3 Update Timing
+Phase 2.3 Update Timing | Checksum: 20a0e0ddc
+
+Time (s): cpu = 00:00:53 ; elapsed = 00:00:44 . Memory (MB): peak = 2011.469 ; gain = 162.109
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=1.775  | TNS=0.000  | WHS=-0.242 | THS=-196.308|
+
+
+Phase 2.4 Update Timing for Bus Skew
+
+Phase 2.4.1 Update Timing
+Phase 2.4.1 Update Timing | Checksum: 25abfd412
+
+Time (s): cpu = 00:00:57 ; elapsed = 00:00:46 . Memory (MB): peak = 2016.914 ; gain = 167.555
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=1.775  | TNS=0.000  | WHS=N/A    | THS=N/A    |
+
+Phase 2.4 Update Timing for Bus Skew | Checksum: 2aed1a197
+
+Time (s): cpu = 00:00:57 ; elapsed = 00:00:46 . Memory (MB): peak = 2033.016 ; gain = 183.656
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 0 %
+  Global Horizontal Routing Utilization  = 0 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 12627
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 12627
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+Phase 2 Router Initialization | Checksum: 231bcf305
+
+Time (s): cpu = 00:00:58 ; elapsed = 00:00:47 . Memory (MB): peak = 2080.219 ; gain = 230.859
+
+Phase 3 Initial Routing
+
+Phase 3.1 Global Routing
+Phase 3.1 Global Routing | Checksum: 231bcf305
+
+Time (s): cpu = 00:00:58 ; elapsed = 00:00:47 . Memory (MB): peak = 2080.219 ; gain = 230.859
+
+Phase 3.2 Initial Net Routing
+Phase 3.2 Initial Net Routing | Checksum: 1445bc1f1
+
+Time (s): cpu = 00:01:03 ; elapsed = 00:00:48 . Memory (MB): peak = 2080.219 ; gain = 230.859
+Phase 3 Initial Routing | Checksum: 1445bc1f1
+
+Time (s): cpu = 00:01:03 ; elapsed = 00:00:48 . Memory (MB): peak = 2080.219 ; gain = 230.859
+
+Phase 4 Rip-up And Reroute
+
+Phase 4.1 Global Iteration 0
+ Number of Nodes with overlaps = 5782
+ Number of Nodes with overlaps = 2613
+ Number of Nodes with overlaps = 1633
+ Number of Nodes with overlaps = 1055
+ Number of Nodes with overlaps = 680
+ Number of Nodes with overlaps = 295
+ Number of Nodes with overlaps = 215
+ Number of Nodes with overlaps = 112
+ Number of Nodes with overlaps = 54
+ Number of Nodes with overlaps = 20
+ Number of Nodes with overlaps = 11
+ Number of Nodes with overlaps = 2
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.857  | TNS=0.000  | WHS=N/A    | THS=N/A    |
+
+Phase 4.1 Global Iteration 0 | Checksum: 2aac32da6
+
+Time (s): cpu = 00:03:28 ; elapsed = 00:01:25 . Memory (MB): peak = 2080.219 ; gain = 230.859
+Phase 4 Rip-up And Reroute | Checksum: 2aac32da6
+
+Time (s): cpu = 00:03:28 ; elapsed = 00:01:25 . Memory (MB): peak = 2080.219 ; gain = 230.859
+
+Phase 5 Delay and Skew Optimization
+
+Phase 5.1 Delay CleanUp
+
+Phase 5.1.1 Update Timing
+Phase 5.1.1 Update Timing | Checksum: 34e4be3c5
+
+Time (s): cpu = 00:03:29 ; elapsed = 00:01:26 . Memory (MB): peak = 2080.219 ; gain = 230.859
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.962  | TNS=0.000  | WHS=N/A    | THS=N/A    |
+
+Phase 5.1 Delay CleanUp | Checksum: 310240625
+
+Time (s): cpu = 00:03:29 ; elapsed = 00:01:26 . Memory (MB): peak = 2080.219 ; gain = 230.859
+
+Phase 5.2 Clock Skew Optimization
+Phase 5.2 Clock Skew Optimization | Checksum: 310240625
+
+Time (s): cpu = 00:03:29 ; elapsed = 00:01:26 . Memory (MB): peak = 2080.219 ; gain = 230.859
+Phase 5 Delay and Skew Optimization | Checksum: 310240625
+
+Time (s): cpu = 00:03:29 ; elapsed = 00:01:26 . Memory (MB): peak = 2080.219 ; gain = 230.859
+
+Phase 6 Post Hold Fix
+
+Phase 6.1 Hold Fix Iter
+
+Phase 6.1.1 Update Timing
+Phase 6.1.1 Update Timing | Checksum: 368867112
+
+Time (s): cpu = 00:03:30 ; elapsed = 00:01:27 . Memory (MB): peak = 2080.219 ; gain = 230.859
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.962  | TNS=0.000  | WHS=0.038  | THS=0.000  |
+
+Phase 6.1 Hold Fix Iter | Checksum: 2a9269420
+
+Time (s): cpu = 00:03:30 ; elapsed = 00:01:27 . Memory (MB): peak = 2080.219 ; gain = 230.859
+Phase 6 Post Hold Fix | Checksum: 2a9269420
+
+Time (s): cpu = 00:03:31 ; elapsed = 00:01:27 . Memory (MB): peak = 2080.219 ; gain = 230.859
+
+Phase 7 Route finalize
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 3.42704 %
+  Global Horizontal Routing Utilization  = 3.85742 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 0
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 0
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+Phase 7 Route finalize | Checksum: 2a9269420
+
+Time (s): cpu = 00:03:31 ; elapsed = 00:01:27 . Memory (MB): peak = 2080.219 ; gain = 230.859
+
+Phase 8 Verifying routed nets
+
+ Verification completed successfully
+Phase 8 Verifying routed nets | Checksum: 2a9269420
+
+Time (s): cpu = 00:03:31 ; elapsed = 00:01:27 . Memory (MB): peak = 2080.219 ; gain = 230.859
+
+Phase 9 Depositing Routes
+Phase 9 Depositing Routes | Checksum: 2704e20d0
+
+Time (s): cpu = 00:03:32 ; elapsed = 00:01:28 . Memory (MB): peak = 2080.219 ; gain = 230.859
+
+Phase 10 Post Router Timing
+INFO: [Route 35-57] Estimated Timing Summary | WNS=0.962  | TNS=0.000  | WHS=0.038  | THS=0.000  |
+
+INFO: [Route 35-327] The final timing numbers are based on the router estimated timing analysis. For a complete and accurate timing signoff, please run report_timing_summary.
+Phase 10 Post Router Timing | Checksum: 2704e20d0
+
+Time (s): cpu = 00:03:33 ; elapsed = 00:01:28 . Memory (MB): peak = 2080.219 ; gain = 230.859
+INFO: [Route 35-16] Router Completed Successfully
+
+Phase 11 Post-Route Event Processing
+Phase 11 Post-Route Event Processing | Checksum: 18c9f67c7
+
+Time (s): cpu = 00:03:34 ; elapsed = 00:01:29 . Memory (MB): peak = 2080.219 ; gain = 230.859
+Ending Routing Task | Checksum: 18c9f67c7
+
+Time (s): cpu = 00:03:34 ; elapsed = 00:01:29 . Memory (MB): peak = 2080.219 ; gain = 230.859
+
+Routing Is Done.
+INFO: [Common 17-83] Releasing license: Implementation
+15 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+route_design completed successfully
+route_design: Time (s): cpu = 00:03:36 ; elapsed = 00:01:30 . Memory (MB): peak = 2080.219 ; gain = 230.859
+# report_utilization -file [file join $out utilization.txt]
+# report_timing_summary -delay_type min_max -report_unconstrained -file [file join $out timing.txt]
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
+WARNING: [Timing 38-436] There are set_bus_skew constraint(s) in this design. Please run report_bus_skew to ensure that bus skew requirements are met.
+# report_timing -delay_type max -max_paths 10 -path_type full_clock_expanded -file [file join $out setup_paths.txt]
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
+INFO: [Timing 38-78] ReportTimingParams: -max_paths 10 -nworst 1 -delay_type max -sort_by slack.
+# check_timing -verbose -file [file join $out timing_checks.txt]
+# report_route_status -file [file join $out route_status.txt]
+# report_drc -file [file join $out drc.txt]
+Command: report_drc -file C:/Users/Symok/ascon-mc-board/n1-monitor/route-divider-10/drc.txt
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2023.2/data/ip'.
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Vivado_Tcl 2-168] The results of DRC are in file C:/Users/Symok/ascon-mc-board/n1-monitor/route-divider-10/drc.txt.
+report_drc completed successfully
+# report_clocks -file [file join $out clocks.txt]
+# write_xdc -force [file join $out implemented.xdc]
+# write_checkpoint -force [file join $out routed.dcp]
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.053 . Memory (MB): peak = 2105.707 ; gain = 0.996
+Wrote PlaceDB: Time (s): cpu = 00:00:02 ; elapsed = 00:00:01 . Memory (MB): peak = 2105.707 ; gain = 0.996
+Wrote PulsedLatchDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2105.707 ; gain = 0.000
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Wrote RouteStorage: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.208 . Memory (MB): peak = 2105.707 ; gain = 0.000
+Wrote Netlist Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.025 . Memory (MB): peak = 2105.707 ; gain = 0.000
+Wrote Device Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.008 . Memory (MB): peak = 2105.707 ; gain = 0.000
+Write Physdb Complete: Time (s): cpu = 00:00:03 ; elapsed = 00:00:01 . Memory (MB): peak = 2105.707 ; gain = 0.996
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Symok/ascon-mc-board/n1-monitor/route-divider-10/routed.dcp' has been generated.
+# write_debug_probes -force [file join $out selftest.ltx]
+# set setup [get_property SLACK [get_timing_paths -delay_type max -max_paths 1]]
+# set hold [get_property SLACK [get_timing_paths -delay_type min -max_paths 1]]
+# set f [open [file join $out implementation.json] w]
+# puts $f [format {{"cores":%d,"mmcm_divider":%d,"clock_mhz":%.9f,"setup_slack_ns":%s,"hold_slack_ns":%s}} $cores $divider [expr {900.0/$divider}] $setup $hold]
+# close $f
+# set f [open [file join $out clock_change.txt] w]
+# puts $f "Checkpoint=$checkpoint MMCM=$mmcm divider=$old->$divider period=$period ns"
+# close $f
+# if {$setup<0 || $hold<0} {error "Board timing failed; no bitstream generated"}
+# write_bitstream -force [file join $out selftest.bit]
+Command: write_bitstream -force C:/Users/Symok/ascon-mc-board/n1-monitor/route-divider-10/selftest.bit
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a100t'
+Running DRC as a precondition to command write_bitstream
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
+INFO: [DRC 23-27] Running DRC with 2 threads
+WARNING: [DRC PDCN-1569] LUT equation term check: Used physical LUT pin 'A2' of cell dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_switch/temp_curid[31]_i_1 (pin dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_switch/temp_curid[31]_i_1/I1) is not included in the LUT equation: 'O5=(A1*A4)+(A1*(~A4)*(~A3))+((~A1))'. If this cell is a user instantiated LUT in the design, please remove connectivity to the pin or change the equation and/or INIT string of the LUT to prevent this issue. If the cell is inferred or IP created LUT, please regenerate the IP and/or resynthesize the design to attempt to correct the issue.
+WARNING: [DRC PDCN-1569] LUT equation term check: Used physical LUT pin 'A3' of cell dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.id_state[0]_i_1 (pin dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.id_state[0]_i_1/I0) is not included in the LUT equation: 'O6=(A6+~A6)*((A1))'. If this cell is a user instantiated LUT in the design, please remove connectivity to the pin or change the equation and/or INIT string of the LUT to prevent this issue. If the cell is inferred or IP created LUT, please regenerate the IP and/or resynthesize the design to attempt to correct the issue.
+WARNING: [DRC PDCN-1569] LUT equation term check: Used physical LUT pin 'A5' of cell dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_switch/temp_curid[31]_i_1 (pin dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_switch/temp_curid[31]_i_1/I0) is not included in the LUT equation: 'O5=(A1*A4)+(A1*(~A4)*(~A3))+((~A1))'. If this cell is a user instantiated LUT in the design, please remove connectivity to the pin or change the equation and/or INIT string of the LUT to prevent this issue. If the cell is inferred or IP created LUT, please regenerate the IP and/or resynthesize the design to attempt to correct the issue.
+WARNING: [DRC RTSTAT-10] No routable loads: 25 net(s) have no routable loads. The problem bus(es) and/or net(s) are dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_inst/TMS, dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/aempty_fwft_i, dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_CTL/ctl_reg[2:0], dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD1/ctl_reg_en_2[1], dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_CTL/ctl_reg_en_2[1], dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_switch/m_bscan_capture[0], dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_switch/m_bscan_drck[0], dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_switch/m_bscan_runtest[0], dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.rd_rst_reg[0], dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.wr_rst_reg[2], dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.wr_rst_reg[2], dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwhf.whf/overflow, dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwhf.whf/overflow, dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i, dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_i... and (the first 15 of 23 listed).
+INFO: [Vivado 12-3199] DRC finished with 0 Errors, 4 Warnings
+INFO: [Vivado 12-3200] Please refer to the DRC report (report_drc) for more information.
+INFO: [Designutils 20-2272] Running write_bitstream with 2 threads.
+Loading data files...
+Loading site data...
+Loading route data...
+Processing options...
+Creating bitmap...
+Creating bitstream...
+Writing bitstream C:/Users/Symok/ascon-mc-board/n1-monitor/route-divider-10/selftest.bit...
+INFO: [Vivado 12-1842] Bitgen Completed Successfully.
+INFO: [Project 1-1876] WebTalk data collection is mandatory when using a ULT device. To see the specific WebTalk data collected for your design, open the usage_statistics_webtalk.html or usage_statistics_webtalk.xml file in the implementation directory.
+INFO: [Common 17-83] Releasing license: Implementation
+9 Infos, 4 Warnings, 0 Critical Warnings and 0 Errors encountered.
+write_bitstream completed successfully
+write_bitstream: Time (s): cpu = 00:00:23 ; elapsed = 00:00:19 . Memory (MB): peak = 2571.125 ; gain = 465.418
+INFO: [Common 17-206] Exiting Vivado at Tue Oct 27 13:55:37 2026...

@@ -1,0 +1,820 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Wed Oct 21 15:24:25 2026
+| Host         : KroixLaptop running 64-bit major release  (build 9200)
+| Command      : report_timing -delay_type max -max_paths 10 -path_type full_clock_expanded -file C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-weight-stream-handoff/build/handoff_fold/board/route_div12/setup_paths.txt
+| Design       : ascon_weight_board_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.785ns  (required time - arrival time)
+  Source:                 selftest_u/core_u/fold_g.fold_u/s_reg_reg[37]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@6.000ns period=12.000ns})
+  Destination:            selftest_u/core_u/fold_g.fold_u/s_reg_reg[275]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@6.000ns period=12.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            12.000ns  (raw_clk rise@12.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        11.156ns  (logic 2.203ns (19.748%)  route 8.953ns (80.252%))
+  Logic Levels:           7  (LUT4=3 LUT5=2 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.048ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.523ns = ( 10.477 - 12.000 ) 
+    Source Clock Delay      (SCD):    -0.916ns
+    Clock Pessimism Removal (CPR):    0.559ns
+  Clock Uncertainty:      0.076ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.134ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=5187, routed)        1.624    -0.916    selftest_u/core_u/fold_g.fold_u/clk_i
+    SLICE_X54Y57         FDRE                                         r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[37]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X54Y57         FDRE (Prop_fdre_C_Q)         0.518    -0.398 r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[37]/Q
+                         net (fo=8, routed)           1.932     1.534    selftest_u/core_u/fold_g.fold_u/s_reg_reg_n_0_[37]
+    SLICE_X60Y77         LUT4 (Prop_lut4_I0_O)        0.152     1.686 r  selftest_u/core_u/fold_g.fold_u/s_reg[216]_i_23/O
+                         net (fo=13, routed)          1.367     3.053    selftest_u/core_u/fold_g.fold_u/s_reg[216]_i_23_n_0
+    SLICE_X65Y69         LUT5 (Prop_lut5_I1_O)        0.348     3.401 r  selftest_u/core_u/fold_g.fold_u/oq[1][data][60]_i_5/O
+                         net (fo=7, routed)           1.532     4.933    selftest_u/core_u/fold_g.fold_u/oq[1][data][60]_i_5_n_0
+    SLICE_X60Y77         LUT4 (Prop_lut4_I0_O)        0.153     5.086 r  selftest_u/core_u/fold_g.fold_u/s_reg[252]_i_7/O
+                         net (fo=7, routed)           1.134     6.220    selftest_u/core_u/fold_g.fold_u/s_reg[252]_i_7_n_0
+    SLICE_X68Y74         LUT6 (Prop_lut6_I4_O)        0.331     6.551 r  selftest_u/core_u/fold_g.fold_u/s_reg[235]_i_9/O
+                         net (fo=4, routed)           1.682     8.232    selftest_u/core_u/fold_g.fold_u/s_reg[235]_i_9_n_0
+    SLICE_X47Y77         LUT4 (Prop_lut4_I0_O)        0.152     8.384 r  selftest_u/core_u/fold_g.fold_u/s_reg[316]_i_7/O
+                         net (fo=3, routed)           1.307     9.691    selftest_u/core_u/fold_g.fold_u/s_reg[316]_i_7_n_0
+    SLICE_X57Y67         LUT5 (Prop_lut5_I2_O)        0.332    10.023 r  selftest_u/core_u/fold_g.fold_u/s_reg[275]_i_3/O
+                         net (fo=1, routed)           0.000    10.023    selftest_u/core_u/fold_g.fold_u/s_reg[275]_i_3_n_0
+    SLICE_X57Y67         MUXF7 (Prop_muxf7_I1_O)      0.217    10.240 r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[275]_i_1/O
+                         net (fo=1, routed)           0.000    10.240    selftest_u/core_u/fold_g.fold_u/s_reg_reg[275]_i_1_n_0
+    SLICE_X57Y67         FDRE                                         r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[275]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   12.000    12.000 r  
+    E3                                                0.000    12.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    12.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    13.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    14.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     7.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     8.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     8.979 r  clock_u/O
+                         net (fo=5187, routed)        1.497    10.477    selftest_u/core_u/fold_g.fold_u/clk_i
+    SLICE_X57Y67         FDRE                                         r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[275]/C
+                         clock pessimism              0.559    11.036    
+                         clock uncertainty           -0.076    10.961    
+    SLICE_X57Y67         FDRE (Setup_fdre_C_D)        0.064    11.025    selftest_u/core_u/fold_g.fold_u/s_reg_reg[275]
+  -------------------------------------------------------------------
+                         required time                         11.025    
+                         arrival time                         -10.240    
+  -------------------------------------------------------------------
+                         slack                                  0.785    
+
+Slack (MET) :             0.831ns  (required time - arrival time)
+  Source:                 selftest_u/core_u/fold_g.fold_u/s_reg_reg[37]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@6.000ns period=12.000ns})
+  Destination:            selftest_u/core_u/fold_g.fold_u/s_reg_reg[309]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@6.000ns period=12.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            12.000ns  (raw_clk rise@12.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        11.110ns  (logic 2.231ns (20.081%)  route 8.879ns (79.919%))
+  Logic Levels:           7  (LUT4=3 LUT5=2 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.048ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.523ns = ( 10.477 - 12.000 ) 
+    Source Clock Delay      (SCD):    -0.916ns
+    Clock Pessimism Removal (CPR):    0.559ns
+  Clock Uncertainty:      0.076ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.134ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=5187, routed)        1.624    -0.916    selftest_u/core_u/fold_g.fold_u/clk_i
+    SLICE_X54Y57         FDRE                                         r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[37]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X54Y57         FDRE (Prop_fdre_C_Q)         0.518    -0.398 r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[37]/Q
+                         net (fo=8, routed)           1.932     1.534    selftest_u/core_u/fold_g.fold_u/s_reg_reg_n_0_[37]
+    SLICE_X60Y77         LUT4 (Prop_lut4_I0_O)        0.152     1.686 r  selftest_u/core_u/fold_g.fold_u/s_reg[216]_i_23/O
+                         net (fo=13, routed)          1.367     3.053    selftest_u/core_u/fold_g.fold_u/s_reg[216]_i_23_n_0
+    SLICE_X65Y69         LUT5 (Prop_lut5_I1_O)        0.348     3.401 r  selftest_u/core_u/fold_g.fold_u/oq[1][data][60]_i_5/O
+                         net (fo=7, routed)           1.532     4.933    selftest_u/core_u/fold_g.fold_u/oq[1][data][60]_i_5_n_0
+    SLICE_X60Y77         LUT4 (Prop_lut4_I0_O)        0.153     5.086 r  selftest_u/core_u/fold_g.fold_u/s_reg[252]_i_7/O
+                         net (fo=7, routed)           1.134     6.220    selftest_u/core_u/fold_g.fold_u/s_reg[252]_i_7_n_0
+    SLICE_X68Y74         LUT6 (Prop_lut6_I4_O)        0.331     6.551 r  selftest_u/core_u/fold_g.fold_u/s_reg[235]_i_9/O
+                         net (fo=4, routed)           1.682     8.232    selftest_u/core_u/fold_g.fold_u/s_reg[235]_i_9_n_0
+    SLICE_X47Y77         LUT4 (Prop_lut4_I0_O)        0.152     8.384 r  selftest_u/core_u/fold_g.fold_u/s_reg[316]_i_7/O
+                         net (fo=3, routed)           1.233     9.617    selftest_u/core_u/fold_g.fold_u/s_reg[316]_i_7_n_0
+    SLICE_X57Y67         LUT5 (Prop_lut5_I2_O)        0.332     9.949 r  selftest_u/core_u/fold_g.fold_u/s_reg[309]_i_3/O
+                         net (fo=1, routed)           0.000     9.949    selftest_u/core_u/fold_g.fold_u/s_reg[309]_i_3_n_0
+    SLICE_X57Y67         MUXF7 (Prop_muxf7_I1_O)      0.245    10.194 r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[309]_i_1/O
+                         net (fo=1, routed)           0.000    10.194    selftest_u/core_u/fold_g.fold_u/s_reg_reg[309]_i_1_n_0
+    SLICE_X57Y67         FDRE                                         r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[309]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   12.000    12.000 r  
+    E3                                                0.000    12.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    12.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    13.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    14.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     7.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     8.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     8.979 r  clock_u/O
+                         net (fo=5187, routed)        1.497    10.477    selftest_u/core_u/fold_g.fold_u/clk_i
+    SLICE_X57Y67         FDRE                                         r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[309]/C
+                         clock pessimism              0.559    11.036    
+                         clock uncertainty           -0.076    10.961    
+    SLICE_X57Y67         FDRE (Setup_fdre_C_D)        0.064    11.025    selftest_u/core_u/fold_g.fold_u/s_reg_reg[309]
+  -------------------------------------------------------------------
+                         required time                         11.025    
+                         arrival time                         -10.194    
+  -------------------------------------------------------------------
+                         slack                                  0.831    
+
+Slack (MET) :             0.990ns  (required time - arrival time)
+  Source:                 selftest_u/core_u/fold_g.fold_u/s_reg_reg[8]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@6.000ns period=12.000ns})
+  Destination:            selftest_u/core_u/fold_g.fold_u/s_reg_reg[5]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@6.000ns period=12.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            12.000ns  (raw_clk rise@12.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        10.842ns  (logic 2.368ns (21.840%)  route 8.474ns (78.160%))
+  Logic Levels:           6  (LUT3=2 LUT4=1 LUT5=2 LUT6=1)
+  Clock Path Skew:        -0.121ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.517ns = ( 10.483 - 12.000 ) 
+    Source Clock Delay      (SCD):    -0.909ns
+    Clock Pessimism Removal (CPR):    0.487ns
+  Clock Uncertainty:      0.076ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.134ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=5187, routed)        1.631    -0.909    selftest_u/core_u/fold_g.fold_u/clk_i
+    SLICE_X51Y58         FDRE                                         r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[8]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X51Y58         FDRE (Prop_fdre_C_Q)         0.456    -0.453 r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[8]/Q
+                         net (fo=17, routed)          2.029     1.577    selftest_u/core_u/fold_g.fold_u/s_reg_reg_n_0_[8]
+    SLICE_X75Y71         LUT5 (Prop_lut5_I3_O)        0.152     1.729 r  selftest_u/core_u/fold_g.fold_u/s_reg[312]_i_17/O
+                         net (fo=4, routed)           1.016     2.744    selftest_u/core_u/fold_g.fold_u/s_reg[312]_i_17_n_0
+    SLICE_X67Y73         LUT3 (Prop_lut3_I2_O)        0.352     3.096 r  selftest_u/core_u/fold_g.fold_u/s_reg[312]_i_9/O
+                         net (fo=7, routed)           1.264     4.360    selftest_u/core_u/fold_g.fold_u/s_reg[312]_i_9_n_0
+    SLICE_X60Y76         LUT4 (Prop_lut4_I1_O)        0.348     4.708 r  selftest_u/core_u/fold_g.fold_u/oq[1][data][33]_i_3/O
+                         net (fo=5, routed)           1.366     6.074    selftest_u/core_u/fold_g.fold_u/oq[1][data][33]_i_3_n_0
+    SLICE_X62Y65         LUT3 (Prop_lut3_I2_O)        0.352     6.426 r  selftest_u/core_u/fold_g.fold_u/oq[1][data][33]_i_2/O
+                         net (fo=7, routed)           1.524     7.950    selftest_u/core_u/fold_g.fold_u/oq[1][data][33]_i_2_n_0
+    SLICE_X50Y76         LUT5 (Prop_lut5_I2_O)        0.353     8.303 r  selftest_u/core_u/fold_g.fold_u/s_reg[33]_i_3/O
+                         net (fo=3, routed)           1.276     9.579    selftest_u/core_u/fold_g.fold_u/s_reg[33]_i_3_n_0
+    SLICE_X55Y57         LUT6 (Prop_lut6_I3_O)        0.355     9.934 r  selftest_u/core_u/fold_g.fold_u/s_reg[5]_i_1/O
+                         net (fo=1, routed)           0.000     9.934    selftest_u/core_u/fold_g.fold_u/s_reg[5]_i_1_n_0
+    SLICE_X55Y57         FDRE                                         r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[5]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   12.000    12.000 r  
+    E3                                                0.000    12.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    12.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    13.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    14.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     7.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     8.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     8.979 r  clock_u/O
+                         net (fo=5187, routed)        1.503    10.483    selftest_u/core_u/fold_g.fold_u/clk_i
+    SLICE_X55Y57         FDRE                                         r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[5]/C
+                         clock pessimism              0.487    10.970    
+                         clock uncertainty           -0.076    10.895    
+    SLICE_X55Y57         FDRE (Setup_fdre_C_D)        0.029    10.924    selftest_u/core_u/fold_g.fold_u/s_reg_reg[5]
+  -------------------------------------------------------------------
+                         required time                         10.924    
+                         arrival time                          -9.934    
+  -------------------------------------------------------------------
+                         slack                                  0.990    
+
+Slack (MET) :             1.159ns  (required time - arrival time)
+  Source:                 selftest_u/core_u/fold_g.fold_u/s_reg_reg[37]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@6.000ns period=12.000ns})
+  Destination:            selftest_u/core_u/fold_g.fold_u/s_reg_reg[316]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@6.000ns period=12.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            12.000ns  (raw_clk rise@12.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        10.824ns  (logic 2.200ns (20.326%)  route 8.624ns (79.674%))
+  Logic Levels:           7  (LUT4=3 LUT5=1 LUT6=2 MUXF7=1)
+  Clock Path Skew:        -0.055ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.530ns = ( 10.470 - 12.000 ) 
+    Source Clock Delay      (SCD):    -0.916ns
+    Clock Pessimism Removal (CPR):    0.559ns
+  Clock Uncertainty:      0.076ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.134ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=5187, routed)        1.624    -0.916    selftest_u/core_u/fold_g.fold_u/clk_i
+    SLICE_X54Y57         FDRE                                         r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[37]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X54Y57         FDRE (Prop_fdre_C_Q)         0.518    -0.398 r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[37]/Q
+                         net (fo=8, routed)           1.932     1.534    selftest_u/core_u/fold_g.fold_u/s_reg_reg_n_0_[37]
+    SLICE_X60Y77         LUT4 (Prop_lut4_I0_O)        0.152     1.686 r  selftest_u/core_u/fold_g.fold_u/s_reg[216]_i_23/O
+                         net (fo=13, routed)          1.367     3.053    selftest_u/core_u/fold_g.fold_u/s_reg[216]_i_23_n_0
+    SLICE_X65Y69         LUT5 (Prop_lut5_I1_O)        0.348     3.401 r  selftest_u/core_u/fold_g.fold_u/oq[1][data][60]_i_5/O
+                         net (fo=7, routed)           1.532     4.933    selftest_u/core_u/fold_g.fold_u/oq[1][data][60]_i_5_n_0
+    SLICE_X60Y77         LUT4 (Prop_lut4_I0_O)        0.153     5.086 r  selftest_u/core_u/fold_g.fold_u/s_reg[252]_i_7/O
+                         net (fo=7, routed)           1.134     6.220    selftest_u/core_u/fold_g.fold_u/s_reg[252]_i_7_n_0
+    SLICE_X68Y74         LUT6 (Prop_lut6_I4_O)        0.331     6.551 r  selftest_u/core_u/fold_g.fold_u/s_reg[235]_i_9/O
+                         net (fo=4, routed)           1.682     8.232    selftest_u/core_u/fold_g.fold_u/s_reg[235]_i_9_n_0
+    SLICE_X47Y77         LUT4 (Prop_lut4_I0_O)        0.152     8.384 r  selftest_u/core_u/fold_g.fold_u/s_reg[316]_i_7/O
+                         net (fo=3, routed)           0.978     9.362    selftest_u/core_u/fold_g.fold_u/s_reg[316]_i_7_n_0
+    SLICE_X56Y73         LUT6 (Prop_lut6_I4_O)        0.332     9.694 r  selftest_u/core_u/fold_g.fold_u/s_reg[316]_i_3/O
+                         net (fo=1, routed)           0.000     9.694    selftest_u/core_u/fold_g.fold_u/s_reg[316]_i_3_n_0
+    SLICE_X56Y73         MUXF7 (Prop_muxf7_I1_O)      0.214     9.908 r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[316]_i_1/O
+                         net (fo=1, routed)           0.000     9.908    selftest_u/core_u/fold_g.fold_u/s_reg_reg[316]_i_1_n_0
+    SLICE_X56Y73         FDRE                                         r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[316]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   12.000    12.000 r  
+    E3                                                0.000    12.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    12.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    13.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    14.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     7.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     8.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     8.979 r  clock_u/O
+                         net (fo=5187, routed)        1.490    10.470    selftest_u/core_u/fold_g.fold_u/clk_i
+    SLICE_X56Y73         FDRE                                         r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[316]/C
+                         clock pessimism              0.559    11.029    
+                         clock uncertainty           -0.076    10.954    
+    SLICE_X56Y73         FDRE (Setup_fdre_C_D)        0.113    11.067    selftest_u/core_u/fold_g.fold_u/s_reg_reg[316]
+  -------------------------------------------------------------------
+                         required time                         11.067    
+                         arrival time                          -9.908    
+  -------------------------------------------------------------------
+                         slack                                  1.159    
+
+Slack (MET) :             1.194ns  (required time - arrival time)
+  Source:                 selftest_u/core_u/fold_g.fold_u/s_reg_reg[8]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@6.000ns period=12.000ns})
+  Destination:            selftest_u/core_u/fold_g.fold_u/s_reg_reg[14]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@6.000ns period=12.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            12.000ns  (raw_clk rise@12.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        10.690ns  (logic 2.368ns (22.151%)  route 8.322ns (77.849%))
+  Logic Levels:           6  (LUT3=2 LUT4=1 LUT5=2 LUT6=1)
+  Clock Path Skew:        -0.121ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.517ns = ( 10.483 - 12.000 ) 
+    Source Clock Delay      (SCD):    -0.909ns
+    Clock Pessimism Removal (CPR):    0.487ns
+  Clock Uncertainty:      0.076ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.134ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=5187, routed)        1.631    -0.909    selftest_u/core_u/fold_g.fold_u/clk_i
+    SLICE_X51Y58         FDRE                                         r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[8]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X51Y58         FDRE (Prop_fdre_C_Q)         0.456    -0.453 r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[8]/Q
+                         net (fo=17, routed)          2.029     1.577    selftest_u/core_u/fold_g.fold_u/s_reg_reg_n_0_[8]
+    SLICE_X75Y71         LUT5 (Prop_lut5_I3_O)        0.152     1.729 r  selftest_u/core_u/fold_g.fold_u/s_reg[312]_i_17/O
+                         net (fo=4, routed)           1.016     2.744    selftest_u/core_u/fold_g.fold_u/s_reg[312]_i_17_n_0
+    SLICE_X67Y73         LUT3 (Prop_lut3_I2_O)        0.352     3.096 r  selftest_u/core_u/fold_g.fold_u/s_reg[312]_i_9/O
+                         net (fo=7, routed)           1.264     4.360    selftest_u/core_u/fold_g.fold_u/s_reg[312]_i_9_n_0
+    SLICE_X60Y76         LUT4 (Prop_lut4_I1_O)        0.348     4.708 r  selftest_u/core_u/fold_g.fold_u/oq[1][data][33]_i_3/O
+                         net (fo=5, routed)           1.366     6.074    selftest_u/core_u/fold_g.fold_u/oq[1][data][33]_i_3_n_0
+    SLICE_X62Y65         LUT3 (Prop_lut3_I2_O)        0.352     6.426 r  selftest_u/core_u/fold_g.fold_u/oq[1][data][33]_i_2/O
+                         net (fo=7, routed)           1.524     7.950    selftest_u/core_u/fold_g.fold_u/oq[1][data][33]_i_2_n_0
+    SLICE_X50Y76         LUT5 (Prop_lut5_I2_O)        0.353     8.303 r  selftest_u/core_u/fold_g.fold_u/s_reg[33]_i_3/O
+                         net (fo=3, routed)           1.124     9.427    selftest_u/core_u/fold_g.fold_u/s_reg[33]_i_3_n_0
+    SLICE_X56Y59         LUT6 (Prop_lut6_I3_O)        0.355     9.782 r  selftest_u/core_u/fold_g.fold_u/s_reg[14]_i_1/O
+                         net (fo=1, routed)           0.000     9.782    selftest_u/core_u/fold_g.fold_u/s_reg[14]_i_1_n_0
+    SLICE_X56Y59         FDRE                                         r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[14]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   12.000    12.000 r  
+    E3                                                0.000    12.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    12.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    13.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    14.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     7.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     8.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     8.979 r  clock_u/O
+                         net (fo=5187, routed)        1.503    10.483    selftest_u/core_u/fold_g.fold_u/clk_i
+    SLICE_X56Y59         FDRE                                         r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[14]/C
+                         clock pessimism              0.487    10.970    
+                         clock uncertainty           -0.076    10.895    
+    SLICE_X56Y59         FDRE (Setup_fdre_C_D)        0.081    10.976    selftest_u/core_u/fold_g.fold_u/s_reg_reg[14]
+  -------------------------------------------------------------------
+                         required time                         10.976    
+                         arrival time                          -9.782    
+  -------------------------------------------------------------------
+                         slack                                  1.194    
+
+Slack (MET) :             1.203ns  (required time - arrival time)
+  Source:                 selftest_u/core_u/fold_g.fold_u/s_reg_reg[60]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@6.000ns period=12.000ns})
+  Destination:            selftest_u/core_u/fold_g.fold_u/s_reg_reg[268]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@6.000ns period=12.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            12.000ns  (raw_clk rise@12.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        10.716ns  (logic 2.380ns (22.210%)  route 8.336ns (77.790%))
+  Logic Levels:           7  (LUT3=1 LUT4=3 LUT5=2 MUXF7=1)
+  Clock Path Skew:        -0.118ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.516ns = ( 10.484 - 12.000 ) 
+    Source Clock Delay      (SCD):    -0.911ns
+    Clock Pessimism Removal (CPR):    0.487ns
+  Clock Uncertainty:      0.076ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.134ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=5187, routed)        1.629    -0.911    selftest_u/core_u/fold_g.fold_u/clk_i
+    SLICE_X48Y63         FDRE                                         r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[60]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X48Y63         FDRE (Prop_fdre_C_Q)         0.456    -0.455 r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[60]/Q
+                         net (fo=18, routed)          2.133     1.678    selftest_u/core_u/fold_g.fold_u/s_reg_reg_n_0_[60]
+    SLICE_X70Y75         LUT4 (Prop_lut4_I0_O)        0.152     1.830 r  selftest_u/core_u/fold_g.fold_u/s_reg[245]_i_11/O
+                         net (fo=3, routed)           0.982     2.812    selftest_u/core_u/fold_g.fold_u/s_reg[245]_i_11_n_0
+    SLICE_X68Y78         LUT5 (Prop_lut5_I1_O)        0.348     3.160 r  selftest_u/core_u/fold_g.fold_u/s_reg[245]_i_9/O
+                         net (fo=7, routed)           1.236     4.397    selftest_u/core_u/fold_g.fold_u/s_reg[245]_i_9_n_0
+    SLICE_X59Y80         LUT4 (Prop_lut4_I1_O)        0.152     4.549 r  selftest_u/core_u/fold_g.fold_u/s_reg[309]_i_7/O
+                         net (fo=5, routed)           1.470     6.019    selftest_u/core_u/fold_g.fold_u/s_reg[309]_i_7_n_0
+    SLICE_X58Y67         LUT3 (Prop_lut3_I0_O)        0.354     6.373 r  selftest_u/core_u/fold_g.fold_u/s_reg[309]_i_4/O
+                         net (fo=6, routed)           1.284     7.657    selftest_u/core_u/fold_g.fold_u/s_reg[309]_i_4_n_0
+    SLICE_X52Y78         LUT4 (Prop_lut4_I2_O)        0.377     8.034 r  selftest_u/core_u/fold_g.fold_u/s_reg[309]_i_6/O
+                         net (fo=3, routed)           1.231     9.264    selftest_u/core_u/fold_g.fold_u/s_reg[309]_i_6_n_0
+    SLICE_X58Y64         LUT5 (Prop_lut5_I2_O)        0.327     9.591 r  selftest_u/core_u/fold_g.fold_u/s_reg[268]_i_3/O
+                         net (fo=1, routed)           0.000     9.591    selftest_u/core_u/fold_g.fold_u/s_reg[268]_i_3_n_0
+    SLICE_X58Y64         MUXF7 (Prop_muxf7_I1_O)      0.214     9.805 r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[268]_i_1/O
+                         net (fo=1, routed)           0.000     9.805    selftest_u/core_u/fold_g.fold_u/s_reg_reg[268]_i_1_n_0
+    SLICE_X58Y64         FDRE                                         r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[268]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   12.000    12.000 r  
+    E3                                                0.000    12.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    12.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    13.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    14.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     7.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     8.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     8.979 r  clock_u/O
+                         net (fo=5187, routed)        1.504    10.484    selftest_u/core_u/fold_g.fold_u/clk_i
+    SLICE_X58Y64         FDRE                                         r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[268]/C
+                         clock pessimism              0.487    10.971    
+                         clock uncertainty           -0.076    10.896    
+    SLICE_X58Y64         FDRE (Setup_fdre_C_D)        0.113    11.009    selftest_u/core_u/fold_g.fold_u/s_reg_reg[268]
+  -------------------------------------------------------------------
+                         required time                         11.009    
+                         arrival time                          -9.805    
+  -------------------------------------------------------------------
+                         slack                                  1.203    
+
+Slack (MET) :             1.222ns  (required time - arrival time)
+  Source:                 selftest_u/core_u/fold_g.fold_u/s_reg_reg[84]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@6.000ns period=12.000ns})
+  Destination:            selftest_u/core_u/fold_g.fold_u/s_reg_reg[319]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@6.000ns period=12.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            12.000ns  (raw_clk rise@12.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        10.724ns  (logic 2.308ns (21.521%)  route 8.416ns (78.479%))
+  Logic Levels:           7  (LUT3=2 LUT4=1 LUT5=2 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.042ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.520ns = ( 10.480 - 12.000 ) 
+    Source Clock Delay      (SCD):    -0.919ns
+    Clock Pessimism Removal (CPR):    0.559ns
+  Clock Uncertainty:      0.076ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.134ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=5187, routed)        1.621    -0.919    selftest_u/core_u/fold_g.fold_u/clk_i
+    SLICE_X43Y71         FDRE                                         r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[84]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X43Y71         FDRE (Prop_fdre_C_Q)         0.456    -0.463 r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[84]/Q
+                         net (fo=14, routed)          2.143     1.681    selftest_u/core_u/fold_g.fold_u/state_word029_in[20]
+    SLICE_X72Y75         LUT5 (Prop_lut5_I1_O)        0.152     1.833 r  selftest_u/core_u/fold_g.fold_u/s_reg[272]_i_13/O
+                         net (fo=3, routed)           1.016     2.848    selftest_u/core_u/fold_g.fold_u/s_reg[272]_i_13_n_0
+    SLICE_X68Y72         LUT3 (Prop_lut3_I2_O)        0.355     3.203 r  selftest_u/core_u/fold_g.fold_u/s_reg[227]_i_19/O
+                         net (fo=9, routed)           1.200     4.403    selftest_u/core_u/fold_g.fold_u/s_reg[227]_i_19_n_0
+    SLICE_X55Y73         LUT4 (Prop_lut4_I2_O)        0.321     4.724 r  selftest_u/core_u/fold_g.fold_u/oq[1][data][70]_i_3/O
+                         net (fo=3, routed)           1.228     5.952    selftest_u/core_u/fold_g.fold_u/oq[1][data][70]_i_3_n_0
+    SLICE_X68Y71         LUT5 (Prop_lut5_I3_O)        0.326     6.278 f  selftest_u/core_u/fold_g.fold_u/s_reg[95]_i_6/O
+                         net (fo=6, routed)           1.371     7.650    selftest_u/core_u/fold_g.fold_u/s_reg[95]_i_6_n_0
+    SLICE_X59Y61         LUT3 (Prop_lut3_I2_O)        0.149     7.799 r  selftest_u/core_u/fold_g.fold_u/s_reg[319]_i_14/O
+                         net (fo=1, routed)           1.458     9.257    selftest_u/core_u/fold_g.fold_u/s_reg[319]_i_14_n_0
+    SLICE_X51Y80         LUT6 (Prop_lut6_I2_O)        0.332     9.589 r  selftest_u/core_u/fold_g.fold_u/s_reg[319]_i_8/O
+                         net (fo=1, routed)           0.000     9.589    selftest_u/core_u/fold_g.fold_u/s_reg[319]_i_8_n_0
+    SLICE_X51Y80         MUXF7 (Prop_muxf7_I1_O)      0.217     9.806 r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[319]_i_3/O
+                         net (fo=1, routed)           0.000     9.806    selftest_u/core_u/fold_g.fold_u/s_reg_reg[319]_i_3_n_0
+    SLICE_X51Y80         FDRE                                         r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[319]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   12.000    12.000 r  
+    E3                                                0.000    12.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    12.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    13.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    14.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     7.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     8.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     8.979 r  clock_u/O
+                         net (fo=5187, routed)        1.500    10.480    selftest_u/core_u/fold_g.fold_u/clk_i
+    SLICE_X51Y80         FDRE                                         r  selftest_u/core_u/fold_g.fold_u/s_reg_reg[319]/C
+                         clock pessimism              0.559    11.039    
+                         clock uncertainty           -0.076    10.964    
+    SLICE_X51Y80         FDRE (Setup_fdre_C_D)        0.064    11.028    selftest_u/core_u/fold_g.fold_u/s_reg_reg[319]
+  -------------------------------------------------------------------
+                         required time                         11.028    
+                         arrival time                          -9.806    
+  -------------------------------------------------------------------
+                         slack                                  1.222    
+
+Slack (MET) :             1.231ns  (required time - arrival time)
+  Source:                 selftest_u/fixture_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@6.000ns period=12.000ns})
+  Destination:            selftest_u/cycle_latch_reg[0]/CE
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@6.000ns period=12.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            12.000ns  (raw_clk rise@12.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        10.560ns  (logic 3.242ns (30.701%)  route 7.318ns (69.299%))
+  Logic Levels:           16  (CARRY4=11 LUT5=1 LUT6=4)
+  Clock Path Skew:        0.036ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.350ns = ( 10.650 - 12.000 ) 
+    Source Clock Delay      (SCD):    -0.898ns
+    Clock Pessimism Removal (CPR):    0.487ns
+  Clock Uncertainty:      0.076ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.134ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=5187, routed)        1.642    -0.898    selftest_u/clk_i
+    SLICE_X30Y50         FDRE                                         r  selftest_u/fixture_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X30Y50         FDRE (Prop_fdre_C_Q)         0.518    -0.380 r  selftest_u/fixture_reg[1]/Q
+                         net (fo=417, routed)         1.976     1.596    selftest_u/fixture_reg[1]
+    SLICE_X54Y60         LUT5 (Prop_lut5_I1_O)        0.156     1.752 r  selftest_u/g0_b7_1/O
+                         net (fo=4, routed)           0.989     2.741    selftest_u/g0_b7_1_n_0
+    SLICE_X52Y60         LUT6 (Prop_lut6_I0_O)        0.355     3.096 r  selftest_u/failure_i_684/O
+                         net (fo=1, routed)           0.000     3.096    selftest_u/failure_i_684_n_0
+    SLICE_X52Y60         CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.398     3.494 r  selftest_u/failure_reg_i_629/CO[3]
+                         net (fo=1, routed)           0.000     3.494    selftest_u/failure_reg_i_629_n_0
+    SLICE_X52Y61         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     3.608 r  selftest_u/failure_reg_i_569/CO[3]
+                         net (fo=1, routed)           0.000     3.608    selftest_u/failure_reg_i_569_n_0
+    SLICE_X52Y62         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     3.722 r  selftest_u/failure_reg_i_513/CO[3]
+                         net (fo=1, routed)           0.000     3.722    selftest_u/failure_reg_i_513_n_0
+    SLICE_X52Y63         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     3.836 r  selftest_u/failure_reg_i_450/CO[3]
+                         net (fo=1, routed)           0.000     3.836    selftest_u/failure_reg_i_450_n_0
+    SLICE_X52Y64         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     3.950 r  selftest_u/failure_reg_i_390/CO[3]
+                         net (fo=1, routed)           0.000     3.950    selftest_u/failure_reg_i_390_n_0
+    SLICE_X52Y65         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     4.064 r  selftest_u/failure_reg_i_328/CO[3]
+                         net (fo=1, routed)           0.000     4.064    selftest_u/failure_reg_i_328_n_0
+    SLICE_X52Y66         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     4.178 r  selftest_u/failure_reg_i_267/CO[3]
+                         net (fo=1, routed)           0.000     4.178    selftest_u/failure_reg_i_267_n_0
+    SLICE_X52Y67         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     4.292 r  selftest_u/failure_reg_i_205/CO[3]
+                         net (fo=1, routed)           0.000     4.292    selftest_u/failure_reg_i_205_n_0
+    SLICE_X52Y68         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     4.406 r  selftest_u/failure_reg_i_130/CO[3]
+                         net (fo=1, routed)           0.000     4.406    selftest_u/failure_reg_i_130_n_0
+    SLICE_X52Y69         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     4.520 r  selftest_u/failure_reg_i_70/CO[3]
+                         net (fo=1, routed)           0.000     4.520    selftest_u/failure_reg_i_70_n_0
+    SLICE_X52Y70         CARRY4 (Prop_carry4_CI_CO[2])
+                                                      0.228     4.748 r  selftest_u/failure_reg_i_32/CO[2]
+                         net (fo=1, routed)           1.196     5.944    selftest_u/mismatch23_out
+    SLICE_X32Y79         LUT6 (Prop_lut6_I3_O)        0.313     6.257 r  selftest_u/failure_i_14/O
+                         net (fo=1, routed)           0.676     6.934    selftest_u/failure_i_14_n_0
+    SLICE_X32Y70         LUT6 (Prop_lut6_I3_O)        0.124     7.058 r  selftest_u/failure_i_3/O
+                         net (fo=6, routed)           1.140     8.198    selftest_u/failure_i_3_n_0
+    SLICE_X38Y58         LUT6 (Prop_lut6_I2_O)        0.124     8.322 r  selftest_u/cycle_latch[31]_i_1/O
+                         net (fo=32, routed)          1.340     9.662    selftest_u/cycle_latch[31]_i_1_n_0
+    SLICE_X50Y36         FDRE                                         r  selftest_u/cycle_latch_reg[0]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   12.000    12.000 r  
+    E3                                                0.000    12.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    12.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    13.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    14.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     7.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     8.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     8.979 r  clock_u/O
+                         net (fo=5187, routed)        1.671    10.650    selftest_u/clk_i
+    SLICE_X50Y36         FDRE                                         r  selftest_u/cycle_latch_reg[0]/C
+                         clock pessimism              0.487    11.138    
+                         clock uncertainty           -0.076    11.062    
+    SLICE_X50Y36         FDRE (Setup_fdre_C_CE)      -0.169    10.893    selftest_u/cycle_latch_reg[0]
+  -------------------------------------------------------------------
+                         required time                         10.893    
+                         arrival time                          -9.662    
+  -------------------------------------------------------------------
+                         slack                                  1.231    
+
+Slack (MET) :             1.231ns  (required time - arrival time)
+  Source:                 selftest_u/fixture_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@6.000ns period=12.000ns})
+  Destination:            selftest_u/cycle_latch_reg[1]/CE
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@6.000ns period=12.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            12.000ns  (raw_clk rise@12.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        10.560ns  (logic 3.242ns (30.701%)  route 7.318ns (69.299%))
+  Logic Levels:           16  (CARRY4=11 LUT5=1 LUT6=4)
+  Clock Path Skew:        0.036ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.350ns = ( 10.650 - 12.000 ) 
+    Source Clock Delay      (SCD):    -0.898ns
+    Clock Pessimism Removal (CPR):    0.487ns
+  Clock Uncertainty:      0.076ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.134ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=5187, routed)        1.642    -0.898    selftest_u/clk_i
+    SLICE_X30Y50         FDRE                                         r  selftest_u/fixture_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X30Y50         FDRE (Prop_fdre_C_Q)         0.518    -0.380 r  selftest_u/fixture_reg[1]/Q
+                         net (fo=417, routed)         1.976     1.596    selftest_u/fixture_reg[1]
+    SLICE_X54Y60         LUT5 (Prop_lut5_I1_O)        0.156     1.752 r  selftest_u/g0_b7_1/O
+                         net (fo=4, routed)           0.989     2.741    selftest_u/g0_b7_1_n_0
+    SLICE_X52Y60         LUT6 (Prop_lut6_I0_O)        0.355     3.096 r  selftest_u/failure_i_684/O
+                         net (fo=1, routed)           0.000     3.096    selftest_u/failure_i_684_n_0
+    SLICE_X52Y60         CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.398     3.494 r  selftest_u/failure_reg_i_629/CO[3]
+                         net (fo=1, routed)           0.000     3.494    selftest_u/failure_reg_i_629_n_0
+    SLICE_X52Y61         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     3.608 r  selftest_u/failure_reg_i_569/CO[3]
+                         net (fo=1, routed)           0.000     3.608    selftest_u/failure_reg_i_569_n_0
+    SLICE_X52Y62         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     3.722 r  selftest_u/failure_reg_i_513/CO[3]
+                         net (fo=1, routed)           0.000     3.722    selftest_u/failure_reg_i_513_n_0
+    SLICE_X52Y63         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     3.836 r  selftest_u/failure_reg_i_450/CO[3]
+                         net (fo=1, routed)           0.000     3.836    selftest_u/failure_reg_i_450_n_0
+    SLICE_X52Y64         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     3.950 r  selftest_u/failure_reg_i_390/CO[3]
+                         net (fo=1, routed)           0.000     3.950    selftest_u/failure_reg_i_390_n_0
+    SLICE_X52Y65         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     4.064 r  selftest_u/failure_reg_i_328/CO[3]
+                         net (fo=1, routed)           0.000     4.064    selftest_u/failure_reg_i_328_n_0
+    SLICE_X52Y66         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     4.178 r  selftest_u/failure_reg_i_267/CO[3]
+                         net (fo=1, routed)           0.000     4.178    selftest_u/failure_reg_i_267_n_0
+    SLICE_X52Y67         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     4.292 r  selftest_u/failure_reg_i_205/CO[3]
+                         net (fo=1, routed)           0.000     4.292    selftest_u/failure_reg_i_205_n_0
+    SLICE_X52Y68         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     4.406 r  selftest_u/failure_reg_i_130/CO[3]
+                         net (fo=1, routed)           0.000     4.406    selftest_u/failure_reg_i_130_n_0
+    SLICE_X52Y69         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     4.520 r  selftest_u/failure_reg_i_70/CO[3]
+                         net (fo=1, routed)           0.000     4.520    selftest_u/failure_reg_i_70_n_0
+    SLICE_X52Y70         CARRY4 (Prop_carry4_CI_CO[2])
+                                                      0.228     4.748 r  selftest_u/failure_reg_i_32/CO[2]
+                         net (fo=1, routed)           1.196     5.944    selftest_u/mismatch23_out
+    SLICE_X32Y79         LUT6 (Prop_lut6_I3_O)        0.313     6.257 r  selftest_u/failure_i_14/O
+                         net (fo=1, routed)           0.676     6.934    selftest_u/failure_i_14_n_0
+    SLICE_X32Y70         LUT6 (Prop_lut6_I3_O)        0.124     7.058 r  selftest_u/failure_i_3/O
+                         net (fo=6, routed)           1.140     8.198    selftest_u/failure_i_3_n_0
+    SLICE_X38Y58         LUT6 (Prop_lut6_I2_O)        0.124     8.322 r  selftest_u/cycle_latch[31]_i_1/O
+                         net (fo=32, routed)          1.340     9.662    selftest_u/cycle_latch[31]_i_1_n_0
+    SLICE_X50Y36         FDRE                                         r  selftest_u/cycle_latch_reg[1]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   12.000    12.000 r  
+    E3                                                0.000    12.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    12.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    13.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    14.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     7.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     8.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     8.979 r  clock_u/O
+                         net (fo=5187, routed)        1.671    10.650    selftest_u/clk_i
+    SLICE_X50Y36         FDRE                                         r  selftest_u/cycle_latch_reg[1]/C
+                         clock pessimism              0.487    11.138    
+                         clock uncertainty           -0.076    11.062    
+    SLICE_X50Y36         FDRE (Setup_fdre_C_CE)      -0.169    10.893    selftest_u/cycle_latch_reg[1]
+  -------------------------------------------------------------------
+                         required time                         10.893    
+                         arrival time                          -9.662    
+  -------------------------------------------------------------------
+                         slack                                  1.231    
+
+Slack (MET) :             1.231ns  (required time - arrival time)
+  Source:                 selftest_u/fixture_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@6.000ns period=12.000ns})
+  Destination:            selftest_u/cycle_latch_reg[2]/CE
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@6.000ns period=12.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            12.000ns  (raw_clk rise@12.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        10.560ns  (logic 3.242ns (30.701%)  route 7.318ns (69.299%))
+  Logic Levels:           16  (CARRY4=11 LUT5=1 LUT6=4)
+  Clock Path Skew:        0.036ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.350ns = ( 10.650 - 12.000 ) 
+    Source Clock Delay      (SCD):    -0.898ns
+    Clock Pessimism Removal (CPR):    0.487ns
+  Clock Uncertainty:      0.076ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.134ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=5187, routed)        1.642    -0.898    selftest_u/clk_i
+    SLICE_X30Y50         FDRE                                         r  selftest_u/fixture_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X30Y50         FDRE (Prop_fdre_C_Q)         0.518    -0.380 r  selftest_u/fixture_reg[1]/Q
+                         net (fo=417, routed)         1.976     1.596    selftest_u/fixture_reg[1]
+    SLICE_X54Y60         LUT5 (Prop_lut5_I1_O)        0.156     1.752 r  selftest_u/g0_b7_1/O
+                         net (fo=4, routed)           0.989     2.741    selftest_u/g0_b7_1_n_0
+    SLICE_X52Y60         LUT6 (Prop_lut6_I0_O)        0.355     3.096 r  selftest_u/failure_i_684/O
+                         net (fo=1, routed)           0.000     3.096    selftest_u/failure_i_684_n_0
+    SLICE_X52Y60         CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.398     3.494 r  selftest_u/failure_reg_i_629/CO[3]
+                         net (fo=1, routed)           0.000     3.494    selftest_u/failure_reg_i_629_n_0
+    SLICE_X52Y61         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     3.608 r  selftest_u/failure_reg_i_569/CO[3]
+                         net (fo=1, routed)           0.000     3.608    selftest_u/failure_reg_i_569_n_0
+    SLICE_X52Y62         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     3.722 r  selftest_u/failure_reg_i_513/CO[3]
+                         net (fo=1, routed)           0.000     3.722    selftest_u/failure_reg_i_513_n_0
+    SLICE_X52Y63         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     3.836 r  selftest_u/failure_reg_i_450/CO[3]
+                         net (fo=1, routed)           0.000     3.836    selftest_u/failure_reg_i_450_n_0
+    SLICE_X52Y64         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     3.950 r  selftest_u/failure_reg_i_390/CO[3]
+                         net (fo=1, routed)           0.000     3.950    selftest_u/failure_reg_i_390_n_0
+    SLICE_X52Y65         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     4.064 r  selftest_u/failure_reg_i_328/CO[3]
+                         net (fo=1, routed)           0.000     4.064    selftest_u/failure_reg_i_328_n_0
+    SLICE_X52Y66         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     4.178 r  selftest_u/failure_reg_i_267/CO[3]
+                         net (fo=1, routed)           0.000     4.178    selftest_u/failure_reg_i_267_n_0
+    SLICE_X52Y67         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     4.292 r  selftest_u/failure_reg_i_205/CO[3]
+                         net (fo=1, routed)           0.000     4.292    selftest_u/failure_reg_i_205_n_0
+    SLICE_X52Y68         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     4.406 r  selftest_u/failure_reg_i_130/CO[3]
+                         net (fo=1, routed)           0.000     4.406    selftest_u/failure_reg_i_130_n_0
+    SLICE_X52Y69         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     4.520 r  selftest_u/failure_reg_i_70/CO[3]
+                         net (fo=1, routed)           0.000     4.520    selftest_u/failure_reg_i_70_n_0
+    SLICE_X52Y70         CARRY4 (Prop_carry4_CI_CO[2])
+                                                      0.228     4.748 r  selftest_u/failure_reg_i_32/CO[2]
+                         net (fo=1, routed)           1.196     5.944    selftest_u/mismatch23_out
+    SLICE_X32Y79         LUT6 (Prop_lut6_I3_O)        0.313     6.257 r  selftest_u/failure_i_14/O
+                         net (fo=1, routed)           0.676     6.934    selftest_u/failure_i_14_n_0
+    SLICE_X32Y70         LUT6 (Prop_lut6_I3_O)        0.124     7.058 r  selftest_u/failure_i_3/O
+                         net (fo=6, routed)           1.140     8.198    selftest_u/failure_i_3_n_0
+    SLICE_X38Y58         LUT6 (Prop_lut6_I2_O)        0.124     8.322 r  selftest_u/cycle_latch[31]_i_1/O
+                         net (fo=32, routed)          1.340     9.662    selftest_u/cycle_latch[31]_i_1_n_0
+    SLICE_X50Y36         FDRE                                         r  selftest_u/cycle_latch_reg[2]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   12.000    12.000 r  
+    E3                                                0.000    12.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    12.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    13.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    14.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     7.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     8.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     8.979 r  clock_u/O
+                         net (fo=5187, routed)        1.671    10.650    selftest_u/clk_i
+    SLICE_X50Y36         FDRE                                         r  selftest_u/cycle_latch_reg[2]/C
+                         clock pessimism              0.487    11.138    
+                         clock uncertainty           -0.076    11.062    
+    SLICE_X50Y36         FDRE (Setup_fdre_C_CE)      -0.169    10.893    selftest_u/cycle_latch_reg[2]
+  -------------------------------------------------------------------
+                         required time                         10.893    
+                         arrival time                          -9.662    
+  -------------------------------------------------------------------
+                         slack                                  1.231    
+
+
+
+

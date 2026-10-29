@@ -1,0 +1,52 @@
+Pre-fix test_ascon on buffered configs (unmodified test_ascon.py; same 3 failures for u3-buffered and u3-fold)
+### buf_ascon_pre
+                                                        ** test_ascon.malformed_streams_report_error                  FAIL          51.00           0.00      30628.51  **
+                                                        ** test_ascon.wrong_phase_and_held_extra_beats_are_rejected   FAIL          61.00           0.00      38078.96  **
+                                                        ** test_ascon.reset_clears_each_major_controller_phase        FAIL         291.00           0.01      51942.40  **
+                                                        ** TESTS=10 PASS=7 FAIL=3 SKIP=0                                         61547.00           1.34      45984.29  **
+### fold_ascon_pre
+                                                        ** test_ascon.malformed_streams_report_error                  FAIL          51.00           0.00      19570.86  **
+                                                        ** test_ascon.wrong_phase_and_held_extra_beats_are_rejected   FAIL          61.00           0.01      11233.43  **
+                                                        ** test_ascon.reset_clears_each_major_controller_phase        FAIL         231.00           0.01      30020.58  **
+                                                        ** TESTS=10 PASS=7 FAIL=3 SKIP=0                                         39617.00           2.10      18900.76  **
+### buf_ascon_pre
+                                                        Traceback (most recent call last):
+                                                          File "/home/kroix/ascon_fold_scratch/cocotb/buf_ascon_pre/verification/cocotb/test_ascon.py", line 263, in malformed_streams_report_error
+                                                            assert status["error"] and not status["discard"]
+                                                        AssertionError: assert (False)
+ 52252.00ns WARNING  cocotb.regression                  test_ascon.malformed_streams_report_error failed
+ 52252.00ns INFO     cocotb.regression                  running test_ascon.wrong_phase_and_held_extra_beats_are_rejected (4/10)
+                                                            Reject AD after the payload phase opens, including a beat held early.
+ 52313.00ns WARNING  ..nd_held_extra_beats_are_rejected assert False
+                                                        Traceback (most recent call last):
+                                                          File "/home/kroix/ascon_fold_scratch/cocotb/buf_ascon_pre/verification/cocotb/test_ascon.py", line 288, in wrong_phase_and_held_extra_beats_are_rejected
+                                                            assert status["error"]
+                                                        AssertionError: assert False
+ 52313.00ns WARNING  cocotb.regression                  test_ascon.wrong_phase_and_held_extra_beats_are_rejected failed
+ 52313.00ns INFO     cocotb.regression                  running test_ascon.outputs_remain_stable_during_backpressure (5/10)
+ 52613.00ns INFO     cocotb.regression                  test_ascon.outputs_remain_stable_during_backpressure passed
+ 52613.00ns INFO     cocotb.regression                  running test_ascon.reset_aborts_an_active_transaction (6/10)
+ 52664.00ns INFO     cocotb.regression                  test_ascon.reset_aborts_an_active_transaction passed
+ 52664.00ns INFO     cocotb.regression                  running test_ascon.reset_clears_each_major_controller_phase (7/10)
+                                                            Reset initialization, AD, output, finalization, and tag-wait storage.
+ 52955.00ns WARNING  ..ears_each_major_controller_phase assert not 1
+                                                         +  where 1 = int(Logic('1'))
+                                                         +    where Logic('1') = LogicObject(ascon_aead128_core.in_ready_o).value
+                                                         +      where LogicObject(ascon_aead128_core.in_ready_o) = HierarchyObject(ascon_aead128_core).in_ready_o
+                                                        Traceback (most recent call last):
+                                                          File "/home/kroix/ascon_fold_scratch/cocotb/buf_ascon_pre/verification/cocotb/test_ascon.py", line 391, in reset_clears_each_major_controller_phase
+                                                            assert not int(dut.in_ready_o.value)
+                                                        AssertionError: assert not 1
+                                                         +  where 1 = int(Logic('1'))
+                                                         +    where Logic('1') = LogicObject(ascon_aead128_core.in_ready_o).value
+                                                         +      where LogicObject(ascon_aead128_core.in_ready_o) = HierarchyObject(ascon_aead128_core).in_ready_o
+ 52955.00ns WARNING  cocotb.regression                  test_ascon.reset_clears_each_major_controller_phase failed
+ 52955.00ns INFO     cocotb.regression                  running test_ascon.delayed_tag_and_authentication_timing (8/10)
+                                                            The core may wait for a tag; auth_valid is asserted only on acceptance.
+ 53396.00ns INFO     cocotb.regression                  test_ascon.delayed_tag_and_authentication_timing passed
+ 53396.00ns INFO     cocotb.regression                  running test_ascon.changed_authenticated_inputs_are_rejected (9/10)
+                                                            A tag from one transaction must not authenticate changed inputs.
+ 55516.00ns INFO     cocotb.regression                  test_ascon.changed_authenticated_inputs_are_rejected passed
+ 55516.00ns INFO     cocotb.regression                  running test_ascon.deterministic_randomized_differential_cases (10/10)
+                                                            Exercise longer messages that are outside the official 0..32 KAT grid.
+ 61547.00ns INFO     cocotb.regression                  test_ascon.deterministic_randomized_differential_cases passed

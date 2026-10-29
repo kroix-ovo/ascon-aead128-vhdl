@@ -1,0 +1,627 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Wed Oct 21 17:47:51 2026
+| Host         : KroixLaptop running 64-bit major release  (build 9200)
+| Command      : report_timing -delay_type max -max_paths 10 -path_type full_clock_expanded -file C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-weight-stream-handoff/build/padfix/vivado/buf_p10/setup_paths.txt
+| Design       : ascon_aead128_core
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.287ns  (required time - arrival time)
+  Source:                 buffered_g.engine_u/permutation_u/state_reg_reg[272]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            buffered_g.engine_u/permutation_u/state_reg_reg[252]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.706ns  (logic 1.928ns (19.865%)  route 7.778ns (80.135%))
+  Logic Levels:           7  (LUT3=1 LUT5=6)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=1687, unset)         0.973     0.973    buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X41Y78         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[272]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y78         FDRE (Prop_fdre_C_Q)         0.419     1.392 r  buffered_g.engine_u/permutation_u/state_reg_reg[272]/Q
+                         net (fo=8, routed)           1.106     2.498    buffered_g.engine_u/permutation_u/perm_state_out[272]
+    SLICE_X47Y73         LUT5 (Prop_lut5_I1_O)        0.327     2.825 r  buffered_g.engine_u/permutation_u/state_reg[61]_i_11/O
+                         net (fo=3, routed)           1.315     4.139    buffered_g.engine_u/permutation_u/value104_out[16]
+    SLICE_X60Y73         LUT5 (Prop_lut5_I2_O)        0.332     4.471 r  buffered_g.engine_u/permutation_u/state_reg[52]_i_8/O
+                         net (fo=5, routed)           0.908     5.379    buffered_g.engine_u/permutation_u/state_reg[52]_i_8_n_0
+    SLICE_X68Y70         LUT5 (Prop_lut5_I3_O)        0.124     5.503 r  buffered_g.engine_u/permutation_u/state_reg[119]_i_6/O
+                         net (fo=3, routed)           1.295     6.799    buffered_g.engine_u/permutation_u/ARG85_out[52]
+    SLICE_X45Y65         LUT5 (Prop_lut5_I2_O)        0.124     6.923 r  buffered_g.engine_u/permutation_u/state_reg[77]_i_3/O
+                         net (fo=6, routed)           1.411     8.333    buffered_g.engine_u/permutation_u/state_word0[13]
+    SLICE_X45Y76         LUT5 (Prop_lut5_I4_O)        0.152     8.485 r  buffered_g.engine_u/permutation_u/state_reg[252]_i_5/O
+                         net (fo=3, routed)           1.051     9.536    buffered_g.engine_u/permutation_u/ARG70_out[13]
+    SLICE_X59Y76         LUT5 (Prop_lut5_I2_O)        0.326     9.862 r  buffered_g.engine_u/permutation_u/state_reg[252]_i_2/O
+                         net (fo=1, routed)           0.693    10.555    buffered_g.engine_u/permutation_u/state_reg[252]_i_2_n_0
+    SLICE_X60Y79         LUT3 (Prop_lut3_I0_O)        0.124    10.679 r  buffered_g.engine_u/permutation_u/state_reg[252]_i_1/O
+                         net (fo=1, routed)           0.000    10.679    buffered_g.engine_u/permutation_u/p_1_in[252]
+    SLICE_X60Y79         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[252]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=1687, unset)         0.924    10.924    buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X60Y79         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[252]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X60Y79         FDRE (Setup_fdre_C_D)        0.077    10.966    buffered_g.engine_u/permutation_u/state_reg_reg[252]
+  -------------------------------------------------------------------
+                         required time                         10.966    
+                         arrival time                         -10.679    
+  -------------------------------------------------------------------
+                         slack                                  0.287    
+
+Slack (MET) :             0.307ns  (required time - arrival time)
+  Source:                 buffered_g.engine_u/permutation_u/state_reg_reg[275]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            buffered_g.engine_u/permutation_u/state_reg_reg[29]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.690ns  (logic 2.233ns (23.045%)  route 7.457ns (76.955%))
+  Logic Levels:           7  (LUT3=1 LUT4=1 LUT5=5)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=1687, unset)         0.973     0.973    buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X38Y76         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[275]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X38Y76         FDRE (Prop_fdre_C_Q)         0.478     1.451 r  buffered_g.engine_u/permutation_u/state_reg_reg[275]/Q
+                         net (fo=8, routed)           1.431     2.882    buffered_g.engine_u/permutation_u/perm_state_out[275]
+    SLICE_X43Y67         LUT5 (Prop_lut5_I1_O)        0.323     3.205 r  buffered_g.engine_u/permutation_u/state_reg[55]_i_13/O
+                         net (fo=3, routed)           1.124     4.329    buffered_g.engine_u/permutation_u/value104_out[19]
+    SLICE_X53Y70         LUT5 (Prop_lut5_I2_O)        0.332     4.661 r  buffered_g.engine_u/permutation_u/state_reg[55]_i_10/O
+                         net (fo=5, routed)           1.204     5.865    buffered_g.engine_u/permutation_u/state_reg[55]_i_10_n_0
+    SLICE_X61Y71         LUT4 (Prop_lut4_I0_O)        0.152     6.017 r  buffered_g.engine_u/permutation_u/state_reg[311]_i_6/O
+                         net (fo=3, routed)           0.841     6.858    buffered_g.engine_u/permutation_u/ARG101_out[55]
+    SLICE_X56Y70         LUT5 (Prop_lut5_I0_O)        0.326     7.184 r  buffered_g.engine_u/permutation_u/state_reg[304]_i_5/O
+                         net (fo=6, routed)           1.029     8.213    buffered_g.engine_u/permutation_u/state_word[48]
+    SLICE_X56Y75         LUT5 (Prop_lut5_I1_O)        0.150     8.363 r  buffered_g.engine_u/permutation_u/state_reg[48]_i_4/O
+                         net (fo=3, routed)           1.015     9.378    buffered_g.engine_u/permutation_u/ARG58_out[48]
+    SLICE_X58Y79         LUT5 (Prop_lut5_I0_O)        0.348     9.726 r  buffered_g.engine_u/permutation_u/state_reg[29]_i_2/O
+                         net (fo=1, routed)           0.812    10.539    buffered_g.engine_u/permutation_u/state_reg[29]_i_2_n_0
+    SLICE_X62Y79         LUT3 (Prop_lut3_I0_O)        0.124    10.663 r  buffered_g.engine_u/permutation_u/state_reg[29]_i_1/O
+                         net (fo=1, routed)           0.000    10.663    buffered_g.engine_u/permutation_u/p_1_in[29]
+    SLICE_X62Y79         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[29]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=1687, unset)         0.924    10.924    buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X62Y79         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[29]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X62Y79         FDRE (Setup_fdre_C_D)        0.081    10.970    buffered_g.engine_u/permutation_u/state_reg_reg[29]
+  -------------------------------------------------------------------
+                         required time                         10.970    
+                         arrival time                         -10.663    
+  -------------------------------------------------------------------
+                         slack                                  0.307    
+
+Slack (MET) :             0.335ns  (required time - arrival time)
+  Source:                 buffered_g.engine_u/permutation_u/state_reg_reg[238]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            buffered_g.engine_u/permutation_u/state_reg_reg[109]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.662ns  (logic 1.748ns (18.091%)  route 7.914ns (81.909%))
+  Logic Levels:           7  (LUT3=1 LUT4=1 LUT5=5)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=1687, unset)         0.973     0.973    buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X60Y73         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[238]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X60Y73         FDRE (Prop_fdre_C_Q)         0.478     1.451 r  buffered_g.engine_u/permutation_u/state_reg_reg[238]/Q
+                         net (fo=10, routed)          1.447     2.898    buffered_g.engine_u/permutation_u/perm_state_out[238]
+    SLICE_X57Y63         LUT5 (Prop_lut5_I0_O)        0.296     3.194 r  buffered_g.engine_u/permutation_u/state_reg[113]_i_9/O
+                         net (fo=3, routed)           0.930     4.124    buffered_g.engine_u/permutation_u/value111_out[46]
+    SLICE_X49Y65         LUT5 (Prop_lut5_I1_O)        0.124     4.248 r  buffered_g.engine_u/permutation_u/state_reg[110]_i_8/O
+                         net (fo=6, routed)           1.372     5.620    buffered_g.engine_u/permutation_u/state_word017_in[46]
+    SLICE_X59Y65         LUT4 (Prop_lut4_I3_O)        0.152     5.772 r  buffered_g.engine_u/permutation_u/state_reg[174]_i_5/O
+                         net (fo=3, routed)           0.985     6.756    buffered_g.engine_u/permutation_u/p_92_in[46]
+    SLICE_X61Y69         LUT5 (Prop_lut5_I0_O)        0.326     7.082 r  buffered_g.engine_u/permutation_u/state_reg[173]_i_4/O
+                         net (fo=5, routed)           1.243     8.326    buffered_g.engine_u/permutation_u/state_reg[173]_i_4_n_0
+    SLICE_X51Y74         LUT5 (Prop_lut5_I2_O)        0.124     8.450 r  buffered_g.engine_u/permutation_u/state_reg[112]_i_3/O
+                         net (fo=3, routed)           0.989     9.438    buffered_g.engine_u/permutation_u/ARG62_out[45]
+    SLICE_X41Y78         LUT5 (Prop_lut5_I1_O)        0.124     9.562 r  buffered_g.engine_u/permutation_u/state_reg[109]_i_2/O
+                         net (fo=1, routed)           0.949    10.511    buffered_g.engine_u/permutation_u/state_reg[109]_i_2_n_0
+    SLICE_X46Y74         LUT3 (Prop_lut3_I0_O)        0.124    10.635 r  buffered_g.engine_u/permutation_u/state_reg[109]_i_1/O
+                         net (fo=1, routed)           0.000    10.635    buffered_g.engine_u/permutation_u/p_1_in[109]
+    SLICE_X46Y74         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[109]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=1687, unset)         0.924    10.924    buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X46Y74         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[109]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X46Y74         FDRE (Setup_fdre_C_D)        0.081    10.970    buffered_g.engine_u/permutation_u/state_reg_reg[109]
+  -------------------------------------------------------------------
+                         required time                         10.970    
+                         arrival time                         -10.635    
+  -------------------------------------------------------------------
+                         slack                                  0.335    
+
+Slack (MET) :             0.394ns  (required time - arrival time)
+  Source:                 buffered_g.engine_u/permutation_u/state_reg_reg[169]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            buffered_g.engine_u/permutation_u/state_reg_reg[19]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.603ns  (logic 1.938ns (20.182%)  route 7.665ns (79.818%))
+  Logic Levels:           7  (LUT3=1 LUT5=6)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=1687, unset)         0.973     0.973    buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X67Y70         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[169]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X67Y70         FDRE (Prop_fdre_C_Q)         0.419     1.392 r  buffered_g.engine_u/permutation_u/state_reg_reg[169]/Q
+                         net (fo=7, routed)           1.565     2.957    buffered_g.engine_u/permutation_u/perm_state_out[169]
+    SLICE_X54Y68         LUT5 (Prop_lut5_I3_O)        0.325     3.282 r  buffered_g.engine_u/permutation_u/state_reg[41]_i_7/O
+                         net (fo=3, routed)           1.027     4.309    buffered_g.engine_u/permutation_u/value104_out[41]
+    SLICE_X47Y67         LUT5 (Prop_lut5_I2_O)        0.348     4.657 r  buffered_g.engine_u/permutation_u/state_reg[13]_i_4/O
+                         net (fo=5, routed)           1.010     5.667    buffered_g.engine_u/permutation_u/state_reg[13]_i_4_n_0
+    SLICE_X42Y65         LUT5 (Prop_lut5_I3_O)        0.124     5.791 r  buffered_g.engine_u/permutation_u/state_reg[102]_i_5/O
+                         net (fo=3, routed)           0.781     6.572    buffered_g.engine_u/permutation_u/ARG85_out[13]
+    SLICE_X54Y67         LUT5 (Prop_lut5_I2_O)        0.124     6.696 r  buffered_g.engine_u/permutation_u/state_reg[102]_i_4/O
+                         net (fo=6, routed)           1.414     8.110    buffered_g.engine_u/permutation_u/state_word0[38]
+    SLICE_X54Y78         LUT5 (Prop_lut5_I4_O)        0.146     8.256 r  buffered_g.engine_u/permutation_u/state_reg[38]_i_3/O
+                         net (fo=3, routed)           1.110     9.366    buffered_g.engine_u/permutation_u/ARG58_out[38]
+    SLICE_X41Y78         LUT5 (Prop_lut5_I0_O)        0.328     9.694 r  buffered_g.engine_u/permutation_u/state_reg[19]_i_2/O
+                         net (fo=1, routed)           0.757    10.452    buffered_g.engine_u/permutation_u/state_reg[19]_i_2_n_0
+    SLICE_X46Y79         LUT3 (Prop_lut3_I0_O)        0.124    10.576 r  buffered_g.engine_u/permutation_u/state_reg[19]_i_1/O
+                         net (fo=1, routed)           0.000    10.576    buffered_g.engine_u/permutation_u/p_1_in[19]
+    SLICE_X46Y79         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[19]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=1687, unset)         0.924    10.924    buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X46Y79         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[19]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X46Y79         FDRE (Setup_fdre_C_D)        0.081    10.970    buffered_g.engine_u/permutation_u/state_reg_reg[19]
+  -------------------------------------------------------------------
+                         required time                         10.970    
+                         arrival time                         -10.576    
+  -------------------------------------------------------------------
+                         slack                                  0.394    
+
+Slack (MET) :             0.410ns  (required time - arrival time)
+  Source:                 buffered_g.engine_u/permutation_u/state_reg_reg[264]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            buffered_g.engine_u/permutation_u/state_reg_reg[215]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.583ns  (logic 1.692ns (17.656%)  route 7.891ns (82.344%))
+  Logic Levels:           7  (LUT3=1 LUT4=1 LUT5=5)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=1687, unset)         0.973     0.973    buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X52Y79         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[264]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X52Y79         FDRE (Prop_fdre_C_Q)         0.419     1.392 r  buffered_g.engine_u/permutation_u/state_reg_reg[264]/Q
+                         net (fo=9, routed)           1.654     3.046    buffered_g.engine_u/permutation_u/perm_state_out[264]
+    SLICE_X41Y73         LUT5 (Prop_lut5_I4_O)        0.327     3.373 r  buffered_g.engine_u/permutation_u/state_reg[97]_i_7/O
+                         net (fo=3, routed)           0.891     4.263    buffered_g.engine_u/permutation_u/value111_out[8]
+    SLICE_X54Y71         LUT5 (Prop_lut5_I2_O)        0.326     4.589 r  buffered_g.engine_u/permutation_u/state_reg[97]_i_6/O
+                         net (fo=6, routed)           1.115     5.704    buffered_g.engine_u/permutation_u/state_word017_in[33]
+    SLICE_X59Y64         LUT4 (Prop_lut4_I1_O)        0.124     5.828 r  buffered_g.engine_u/permutation_u/state_reg[312]_i_7/O
+                         net (fo=3, routed)           0.767     6.595    buffered_g.engine_u/permutation_u/ARG101_out[33]
+    SLICE_X56Y64         LUT5 (Prop_lut5_I1_O)        0.124     6.719 r  buffered_g.engine_u/permutation_u/state_reg[289]_i_4/O
+                         net (fo=6, routed)           1.683     8.402    buffered_g.engine_u/permutation_u/state_word[33]
+    SLICE_X58Y80         LUT5 (Prop_lut5_I2_O)        0.124     8.526 r  buffered_g.engine_u/permutation_u/state_reg[225]_i_3/O
+                         net (fo=3, routed)           1.036     9.562    buffered_g.engine_u/permutation_u/ARG70_out[33]
+    SLICE_X46Y76         LUT5 (Prop_lut5_I0_O)        0.124     9.686 r  buffered_g.engine_u/permutation_u/state_reg[215]_i_2/O
+                         net (fo=1, routed)           0.746    10.432    buffered_g.engine_u/permutation_u/state_reg[215]_i_2_n_0
+    SLICE_X46Y79         LUT3 (Prop_lut3_I0_O)        0.124    10.556 r  buffered_g.engine_u/permutation_u/state_reg[215]_i_1/O
+                         net (fo=1, routed)           0.000    10.556    buffered_g.engine_u/permutation_u/p_1_in[215]
+    SLICE_X46Y79         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[215]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=1687, unset)         0.924    10.924    buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X46Y79         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[215]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X46Y79         FDRE (Setup_fdre_C_D)        0.077    10.966    buffered_g.engine_u/permutation_u/state_reg_reg[215]
+  -------------------------------------------------------------------
+                         required time                         10.966    
+                         arrival time                         -10.556    
+  -------------------------------------------------------------------
+                         slack                                  0.410    
+
+Slack (MET) :             0.471ns  (required time - arrival time)
+  Source:                 buffered_g.engine_u/permutation_u/state_reg_reg[272]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            buffered_g.engine_u/permutation_u/state_reg_reg[301]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.563ns  (logic 1.960ns (20.496%)  route 7.603ns (79.504%))
+  Logic Levels:           7  (LUT3=1 LUT4=2 LUT5=4)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=1687, unset)         0.973     0.973    buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X41Y78         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[272]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y78         FDRE (Prop_fdre_C_Q)         0.419     1.392 r  buffered_g.engine_u/permutation_u/state_reg_reg[272]/Q
+                         net (fo=8, routed)           1.106     2.498    buffered_g.engine_u/permutation_u/perm_state_out[272]
+    SLICE_X47Y73         LUT5 (Prop_lut5_I1_O)        0.327     2.825 r  buffered_g.engine_u/permutation_u/state_reg[61]_i_11/O
+                         net (fo=3, routed)           1.315     4.139    buffered_g.engine_u/permutation_u/value104_out[16]
+    SLICE_X60Y73         LUT5 (Prop_lut5_I2_O)        0.332     4.471 r  buffered_g.engine_u/permutation_u/state_reg[52]_i_8/O
+                         net (fo=5, routed)           1.102     5.574    buffered_g.engine_u/permutation_u/state_reg[52]_i_8_n_0
+    SLICE_X68Y70         LUT4 (Prop_lut4_I0_O)        0.124     5.698 r  buffered_g.engine_u/permutation_u/state_reg[308]_i_6/O
+                         net (fo=3, routed)           1.277     6.975    buffered_g.engine_u/permutation_u/ARG101_out[52]
+    SLICE_X53Y70         LUT5 (Prop_lut5_I0_O)        0.124     7.099 r  buffered_g.engine_u/permutation_u/state_reg[301]_i_5/O
+                         net (fo=6, routed)           1.259     8.358    buffered_g.engine_u/permutation_u/state_word[45]
+    SLICE_X51Y74         LUT4 (Prop_lut4_I2_O)        0.152     8.510 r  buffered_g.engine_u/permutation_u/state_reg[301]_i_3/O
+                         net (fo=3, routed)           0.798     9.308    buffered_g.engine_u/permutation_u/ARG75_out[45]
+    SLICE_X48Y76         LUT5 (Prop_lut5_I1_O)        0.332     9.640 r  buffered_g.engine_u/permutation_u/state_reg[301]_i_2/O
+                         net (fo=1, routed)           0.746    10.386    buffered_g.engine_u/permutation_u/state_reg[301]_i_2_n_0
+    SLICE_X46Y79         LUT3 (Prop_lut3_I0_O)        0.150    10.536 r  buffered_g.engine_u/permutation_u/state_reg[301]_i_1/O
+                         net (fo=1, routed)           0.000    10.536    buffered_g.engine_u/permutation_u/p_1_in[301]
+    SLICE_X46Y79         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[301]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=1687, unset)         0.924    10.924    buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X46Y79         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[301]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X46Y79         FDRE (Setup_fdre_C_D)        0.118    11.007    buffered_g.engine_u/permutation_u/state_reg_reg[301]
+  -------------------------------------------------------------------
+                         required time                         11.007    
+                         arrival time                         -10.536    
+  -------------------------------------------------------------------
+                         slack                                  0.471    
+
+Slack (MET) :             0.477ns  (required time - arrival time)
+  Source:                 buffered_g.engine_u/permutation_u/state_reg_reg[234]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            buffered_g.engine_u/permutation_u/state_reg_reg[207]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.470ns  (logic 1.517ns (16.019%)  route 7.953ns (83.981%))
+  Logic Levels:           7  (LUT3=1 LUT5=6)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=1687, unset)         0.973     0.973    buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X58Y76         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[234]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X58Y76         FDRE (Prop_fdre_C_Q)         0.478     1.451 r  buffered_g.engine_u/permutation_u/state_reg_reg[234]/Q
+                         net (fo=10, routed)          1.257     2.708    buffered_g.engine_u/permutation_u/perm_state_out[234]
+    SLICE_X50Y68         LUT5 (Prop_lut5_I1_O)        0.295     3.003 r  buffered_g.engine_u/permutation_u/state_reg[234]_i_7/O
+                         net (fo=3, routed)           1.154     4.157    buffered_g.engine_u/permutation_u/value120_out[42]
+    SLICE_X61Y68         LUT5 (Prop_lut5_I1_O)        0.124     4.281 r  buffered_g.engine_u/permutation_u/state_reg[234]_i_6/O
+                         net (fo=6, routed)           0.994     5.274    buffered_g.engine_u/permutation_u/state_word210_in[42]
+    SLICE_X58Y66         LUT5 (Prop_lut5_I1_O)        0.124     5.398 r  buffered_g.engine_u/permutation_u/state_reg[234]_i_5/O
+                         net (fo=3, routed)           1.195     6.593    buffered_g.engine_u/permutation_u/ARG94_out[42]
+    SLICE_X62Y68         LUT5 (Prop_lut5_I0_O)        0.124     6.717 r  buffered_g.engine_u/permutation_u/state_reg[224]_i_4/O
+                         net (fo=6, routed)           1.524     8.242    buffered_g.engine_u/permutation_u/state_word2[32]
+    SLICE_X60Y77         LUT5 (Prop_lut5_I1_O)        0.124     8.366 r  buffered_g.engine_u/permutation_u/state_reg[224]_i_3/O
+                         net (fo=3, routed)           1.179     9.544    buffered_g.engine_u/permutation_u/ARG70_out[32]
+    SLICE_X44Y77         LUT5 (Prop_lut5_I2_O)        0.124     9.668 r  buffered_g.engine_u/permutation_u/state_reg[207]_i_2/O
+                         net (fo=1, routed)           0.651    10.319    buffered_g.engine_u/permutation_u/state_reg[207]_i_2_n_0
+    SLICE_X40Y77         LUT3 (Prop_lut3_I0_O)        0.124    10.443 r  buffered_g.engine_u/permutation_u/state_reg[207]_i_1/O
+                         net (fo=1, routed)           0.000    10.443    buffered_g.engine_u/permutation_u/p_1_in[207]
+    SLICE_X40Y77         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[207]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=1687, unset)         0.924    10.924    buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X40Y77         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[207]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X40Y77         FDRE (Setup_fdre_C_D)        0.031    10.920    buffered_g.engine_u/permutation_u/state_reg_reg[207]
+  -------------------------------------------------------------------
+                         required time                         10.920    
+                         arrival time                         -10.443    
+  -------------------------------------------------------------------
+                         slack                                  0.477    
+
+Slack (MET) :             0.484ns  (required time - arrival time)
+  Source:                 buffered_g.engine_u/permutation_u/state_reg_reg[242]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            buffered_g.engine_u/permutation_u/state_reg_reg[206]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.464ns  (logic 1.850ns (19.548%)  route 7.614ns (80.452%))
+  Logic Levels:           7  (LUT3=1 LUT5=6)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=1687, unset)         0.973     0.973    buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X60Y76         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[242]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X60Y76         FDRE (Prop_fdre_C_Q)         0.518     1.491 r  buffered_g.engine_u/permutation_u/state_reg_reg[242]/Q
+                         net (fo=10, routed)          1.218     2.709    buffered_g.engine_u/permutation_u/perm_state_out[242]
+    SLICE_X65Y71         LUT5 (Prop_lut5_I0_O)        0.124     2.833 r  buffered_g.engine_u/permutation_u/state_reg[117]_i_9/O
+                         net (fo=3, routed)           1.355     4.188    buffered_g.engine_u/permutation_u/value111_out[50]
+    SLICE_X53Y69         LUT5 (Prop_lut5_I1_O)        0.124     4.312 r  buffered_g.engine_u/permutation_u/state_reg[114]_i_8/O
+                         net (fo=6, routed)           1.031     5.344    buffered_g.engine_u/permutation_u/state_word017_in[50]
+    SLICE_X63Y68         LUT5 (Prop_lut5_I4_O)        0.150     5.494 r  buffered_g.engine_u/permutation_u/state_reg[50]_i_7/O
+                         net (fo=3, routed)           0.984     6.478    buffered_g.engine_u/permutation_u/ARG78_out[50]
+    SLICE_X57Y70         LUT5 (Prop_lut5_I0_O)        0.332     6.810 r  buffered_g.engine_u/permutation_u/state_reg[31]_i_4/O
+                         net (fo=5, routed)           1.429     8.239    buffered_g.engine_u/permutation_u/state_reg[31]_i_4_n_0
+    SLICE_X58Y78         LUT5 (Prop_lut5_I0_O)        0.150     8.389 r  buffered_g.engine_u/permutation_u/state_reg[223]_i_3/O
+                         net (fo=3, routed)           1.021     9.411    buffered_g.engine_u/permutation_u/ARG70_out[31]
+    SLICE_X40Y78         LUT5 (Prop_lut5_I2_O)        0.328     9.739 r  buffered_g.engine_u/permutation_u/state_reg[206]_i_2/O
+                         net (fo=1, routed)           0.574    10.313    buffered_g.engine_u/permutation_u/state_reg[206]_i_2_n_0
+    SLICE_X41Y77         LUT3 (Prop_lut3_I0_O)        0.124    10.437 r  buffered_g.engine_u/permutation_u/state_reg[206]_i_1/O
+                         net (fo=1, routed)           0.000    10.437    buffered_g.engine_u/permutation_u/p_1_in[206]
+    SLICE_X41Y77         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[206]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=1687, unset)         0.924    10.924    buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X41Y77         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[206]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X41Y77         FDRE (Setup_fdre_C_D)        0.032    10.921    buffered_g.engine_u/permutation_u/state_reg_reg[206]
+  -------------------------------------------------------------------
+                         required time                         10.921    
+                         arrival time                         -10.437    
+  -------------------------------------------------------------------
+                         slack                                  0.484    
+
+Slack (MET) :             0.485ns  (required time - arrival time)
+  Source:                 buffered_g.engine_u/permutation_u/state_reg_reg[272]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            buffered_g.engine_u/permutation_u/state_reg_reg[205]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.460ns  (logic 1.928ns (20.382%)  route 7.532ns (79.618%))
+  Logic Levels:           7  (LUT3=1 LUT5=6)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=1687, unset)         0.973     0.973    buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X41Y78         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[272]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y78         FDRE (Prop_fdre_C_Q)         0.419     1.392 r  buffered_g.engine_u/permutation_u/state_reg_reg[272]/Q
+                         net (fo=8, routed)           1.106     2.498    buffered_g.engine_u/permutation_u/perm_state_out[272]
+    SLICE_X47Y73         LUT5 (Prop_lut5_I1_O)        0.327     2.825 r  buffered_g.engine_u/permutation_u/state_reg[61]_i_11/O
+                         net (fo=3, routed)           1.315     4.139    buffered_g.engine_u/permutation_u/value104_out[16]
+    SLICE_X60Y73         LUT5 (Prop_lut5_I2_O)        0.332     4.471 r  buffered_g.engine_u/permutation_u/state_reg[52]_i_8/O
+                         net (fo=5, routed)           0.908     5.379    buffered_g.engine_u/permutation_u/state_reg[52]_i_8_n_0
+    SLICE_X68Y70         LUT5 (Prop_lut5_I3_O)        0.124     5.503 r  buffered_g.engine_u/permutation_u/state_reg[119]_i_6/O
+                         net (fo=3, routed)           1.295     6.799    buffered_g.engine_u/permutation_u/ARG85_out[52]
+    SLICE_X45Y65         LUT5 (Prop_lut5_I2_O)        0.124     6.923 r  buffered_g.engine_u/permutation_u/state_reg[77]_i_3/O
+                         net (fo=6, routed)           1.411     8.333    buffered_g.engine_u/permutation_u/state_word0[13]
+    SLICE_X45Y76         LUT5 (Prop_lut5_I4_O)        0.152     8.485 r  buffered_g.engine_u/permutation_u/state_reg[252]_i_5/O
+                         net (fo=3, routed)           0.800     9.286    buffered_g.engine_u/permutation_u/ARG70_out[13]
+    SLICE_X39Y76         LUT5 (Prop_lut5_I1_O)        0.326     9.612 r  buffered_g.engine_u/permutation_u/state_reg[205]_i_2/O
+                         net (fo=1, routed)           0.697    10.309    buffered_g.engine_u/permutation_u/state_reg[205]_i_2_n_0
+    SLICE_X39Y75         LUT3 (Prop_lut3_I0_O)        0.124    10.433 r  buffered_g.engine_u/permutation_u/state_reg[205]_i_1/O
+                         net (fo=1, routed)           0.000    10.433    buffered_g.engine_u/permutation_u/p_1_in[205]
+    SLICE_X39Y75         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[205]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=1687, unset)         0.924    10.924    buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X39Y75         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[205]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X39Y75         FDRE (Setup_fdre_C_D)        0.029    10.918    buffered_g.engine_u/permutation_u/state_reg_reg[205]
+  -------------------------------------------------------------------
+                         required time                         10.918    
+                         arrival time                         -10.433    
+  -------------------------------------------------------------------
+                         slack                                  0.485    
+
+Slack (MET) :             0.486ns  (required time - arrival time)
+  Source:                 buffered_g.engine_u/permutation_u/state_reg_reg[318]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            buffered_g.engine_u/permutation_u/state_reg_reg[187]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.507ns  (logic 1.692ns (17.797%)  route 7.815ns (82.203%))
+  Logic Levels:           7  (LUT3=1 LUT4=1 LUT5=4 LUT6=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=1687, unset)         0.973     0.973    buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X57Y81         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[318]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X57Y81         FDRE (Prop_fdre_C_Q)         0.419     1.392 r  buffered_g.engine_u/permutation_u/state_reg_reg[318]/Q
+                         net (fo=9, routed)           1.252     2.644    buffered_g.engine_u/permutation_u/perm_state_out[318]
+    SLICE_X55Y73         LUT5 (Prop_lut5_I4_O)        0.327     2.971 r  buffered_g.engine_u/permutation_u/state_reg[126]_i_12/O
+                         net (fo=3, routed)           1.378     4.348    buffered_g.engine_u/permutation_u/value111_out[62]
+    SLICE_X44Y63         LUT5 (Prop_lut5_I0_O)        0.326     4.674 r  buffered_g.engine_u/permutation_u/state_reg[65]_i_4/O
+                         net (fo=6, routed)           0.730     5.404    buffered_g.engine_u/permutation_u/state_word017_in[1]
+    SLICE_X39Y65         LUT6 (Prop_lut6_I5_O)        0.124     5.528 r  buffered_g.engine_u/permutation_u/state_reg[187]_i_7/O
+                         net (fo=3, routed)           1.563     7.092    buffered_g.engine_u/permutation_u/p_92_in[1]
+    SLICE_X64Y72         LUT5 (Prop_lut5_I2_O)        0.124     7.216 r  buffered_g.engine_u/permutation_u/state_reg[187]_i_5/O
+                         net (fo=5, routed)           0.896     8.112    buffered_g.engine_u/permutation_u/state_reg[187]_i_5_n_0
+    SLICE_X60Y74         LUT4 (Prop_lut4_I2_O)        0.124     8.236 r  buffered_g.engine_u/permutation_u/state_reg[187]_i_3/O
+                         net (fo=3, routed)           1.012     9.248    buffered_g.engine_u/permutation_u/p_69_in[59]
+    SLICE_X56Y80         LUT5 (Prop_lut5_I1_O)        0.124     9.372 r  buffered_g.engine_u/permutation_u/state_reg[187]_i_2/O
+                         net (fo=1, routed)           0.985    10.356    buffered_g.engine_u/permutation_u/state_reg[187]_i_2_n_0
+    SLICE_X60Y74         LUT3 (Prop_lut3_I0_O)        0.124    10.480 r  buffered_g.engine_u/permutation_u/state_reg[187]_i_1/O
+                         net (fo=1, routed)           0.000    10.480    buffered_g.engine_u/permutation_u/p_1_in[187]
+    SLICE_X60Y74         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[187]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=1687, unset)         0.924    10.924    buffered_g.engine_u/permutation_u/clk_i
+    SLICE_X60Y74         FDRE                                         r  buffered_g.engine_u/permutation_u/state_reg_reg[187]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X60Y74         FDRE (Setup_fdre_C_D)        0.077    10.966    buffered_g.engine_u/permutation_u/state_reg_reg[187]
+  -------------------------------------------------------------------
+                         required time                         10.966    
+                         arrival time                         -10.480    
+  -------------------------------------------------------------------
+                         slack                                  0.486    
+
+
+
+

@@ -1,0 +1,37 @@
+ECHO is off.
+ECHO is off.
+
+****** Vivado v2023.2 (64-bit)
+  **** SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+  **** IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+  **** SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source {C:\Users\Symok\ascon-mc-board\n4-monitor\source\build_multicore_board.tcl}
+# set root [file normalize [lindex $argv 0]]
+# set out [file normalize [lindex $argv 1]]
+# set cores [lindex $argv 2]
+# set divider [lindex $argv 3]
+# set directive [lindex $argv 4]
+# if {$directive eq ""} {set directive Default}
+# file mkdir $out
+# set_param general.maxThreads 1
+# create_project -in_memory -part xc7a100tcsg324-1
+create_project: Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 475.664 ; gain = 181.605
+# foreach name {ascon_pkg ascon_permutation ascon_aead128_core ascon_elastic_stage ascon_multicore multicore_board_vectors ascon_multicore_selftest} {
+#   read_vhdl -vhdl2008 [file join $root rtl $name.vhd]
+# }
+# read_verilog [file join $root rtl ascon_multicore_board_top.v]
+# synth_design -directive $directive -top ascon_multicore_board_top -part xc7a100tcsg324-1 -flatten_hierarchy none \
+#   -generic [list CORES=$cores CLOCK_DIVIDE=$divider]
+Command: synth_design -directive RuntimeOptimized -top ascon_multicore_board_top -part xc7a100tcsg324-1 -flatten_hierarchy none -generic {CORES=4 CLOCK_DIVIDE=10}
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+couldn't read file "C:/Users/Symok/ascon-mc-board/n4-monitor/route/.Xil/Vivado-17952-KroixLaptop/realtime\ascon_multicore_board_top.tcl": No error
+INFO: [Common 17-83] Releasing license: Synthesis
+2 Infos, 0 Warnings, 0 Critical Warnings and 1 Errors encountered.
+synth_design failed
+ERROR: [Common 17-69] Command failed: Vivado Synthesis failed
+INFO: [Common 17-206] Exiting Vivado at Tue Oct 27 13:42:11 2026...

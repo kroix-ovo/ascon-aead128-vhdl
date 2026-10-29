@@ -1,0 +1,64 @@
+loading VPI module '/home/kroix/.cache/ascon-publication-ci-20261013/lib/python3.10/site-packages/cocotb/libs/libcocotbvpi_ghdl.so'
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:93   in _embed_init_python              Using Python 3.10.14 interpreter at /home/kroix/.cache/ascon-publication-ci-20261013/bin/python
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:79   in gpi_print_registered_impl       VPI registered
+VPI module loaded!
+     0.00ns INFO     cocotb                             Running on GHDL version 1.0.0 (Ubuntu 1.0.0+dfsg-6) [Dunoon edition]
+     0.00ns WARNING  gpi                                vpi_iterate returned NULL for type vpiInstance for object NULL
+     0.00ns INFO     cocotb                             Seeding Python random module with 1792642899
+     0.00ns INFO     cocotb                             Initialized cocotb v2.0.1 from /home/kroix/.cache/ascon-publication-ci-20261013/lib/python3.10/site-packages/cocotb
+     0.00ns INFO     cocotb                             Running tests
+     0.00ns INFO     cocotb.regression                  running test_ascon.official_and_boundary_vectors (1/12)
+450441.00ns INFO     cocotb.regression                  test_ascon.official_and_boundary_vectors passed
+450441.00ns INFO     cocotb.regression                  running test_ascon.corrupted_tag_discards_plaintext (2/12)
+450861.00ns INFO     cocotb.regression                  test_ascon.corrupted_tag_discards_plaintext passed
+450861.00ns INFO     cocotb.regression                  running test_ascon.malformed_streams_report_error (3/12)
+450952.00ns INFO     cocotb.ascon_aead128_core          buffered core reported the protocol error 4 clock(s) later than the unbuffered one-clock check
+451182.00ns INFO     cocotb.ascon_aead128_core          buffered core reported the protocol error 4 clock(s) later than the unbuffered one-clock check
+451412.00ns INFO     cocotb.ascon_aead128_core          buffered core reported the protocol error 4 clock(s) later than the unbuffered one-clock check
+451561.00ns INFO     cocotb.regression                  test_ascon.malformed_streams_report_error passed
+451561.00ns INFO     cocotb.regression                  running test_ascon.wrong_phase_and_held_extra_beats_are_rejected (4/12)
+                                                            Reject AD after the payload phase opens, including a beat held early.
+451652.00ns INFO     cocotb.ascon_aead128_core          buffered core reported the protocol error 3 clock(s) later than the unbuffered one-clock check
+451942.00ns INFO     cocotb.ascon_aead128_core          buffered core reported the protocol error 9 clock(s) later than the unbuffered one-clock check
+452091.00ns INFO     cocotb.regression                  test_ascon.wrong_phase_and_held_extra_beats_are_rejected passed
+452091.00ns INFO     cocotb.regression                  running test_ascon.outputs_remain_stable_during_backpressure (5/12)
+452351.00ns INFO     cocotb.regression                  test_ascon.outputs_remain_stable_during_backpressure passed
+452351.00ns INFO     cocotb.regression                  running test_ascon.reset_aborts_an_active_transaction (6/12)
+452402.00ns INFO     cocotb.regression                  test_ascon.reset_aborts_an_active_transaction passed
+452402.00ns INFO     cocotb.regression                  running test_ascon.reset_clears_each_major_controller_phase (7/12)
+                                                            Reset initialization, AD, output, finalization, and tag-wait storage.
+457552.00ns INFO     cocotb.regression                  test_ascon.reset_clears_each_major_controller_phase passed
+457552.00ns INFO     cocotb.regression                  running test_ascon.delayed_tag_and_authentication_timing (8/12)
+                                                            The core may wait for a tag; auth_valid is asserted only on acceptance.
+457883.00ns INFO     cocotb.regression                  test_ascon.delayed_tag_and_authentication_timing passed
+457883.00ns INFO     cocotb.regression                  running test_ascon.changed_authenticated_inputs_are_rejected (9/12)
+                                                            A tag from one transaction must not authenticate changed inputs.
+459293.00ns INFO     cocotb.regression                  test_ascon.changed_authenticated_inputs_are_rejected passed
+459293.00ns INFO     cocotb.regression                  running test_ascon.deterministic_randomized_differential_cases (10/12)
+                                                            Exercise longer messages that are outside the official 0..32 KAT grid.
+462894.00ns INFO     cocotb.regression                  test_ascon.deterministic_randomized_differential_cases passed
+462894.00ns INFO     cocotb.regression                  running test_ascon.empty_terminator_after_full_beats_pads_per_sp800_232 (11/12)
+                                                            Full non-last beats followed by an empty last beat must still absorb the
+465344.00ns INFO     cocotb.regression                  test_ascon.empty_terminator_after_full_beats_pads_per_sp800_232 passed
+465344.00ns INFO     cocotb.regression                  running test_ascon.decryption_never_exposes_expected_tag (12/12)
+                                                            tag_out_o must stay zero for the whole decryption.  Earlier controllers
+466224.00ns INFO     cocotb.regression                  test_ascon.decryption_never_exposes_expected_tag passed
+466224.00ns INFO     cocotb.regression                  *************************************************************************************************************************
+                                                        ** TEST                                                             STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        *************************************************************************************************************************
+                                                        ** test_ascon.official_and_boundary_vectors                          PASS      450441.00          19.73      22830.79  **
+                                                        ** test_ascon.corrupted_tag_discards_plaintext                       PASS         420.00           0.02      21895.29  **
+                                                        ** test_ascon.malformed_streams_report_error                         PASS         700.00           0.03      24234.33  **
+                                                        ** test_ascon.wrong_phase_and_held_extra_beats_are_rejected          PASS         530.00           0.03      19276.97  **
+                                                        ** test_ascon.outputs_remain_stable_during_backpressure              PASS         260.00           0.01      35423.71  **
+                                                        ** test_ascon.reset_aborts_an_active_transaction                     PASS          51.00           0.00      25529.24  **
+                                                        ** test_ascon.reset_clears_each_major_controller_phase               PASS        5150.00           0.18      29133.20  **
+                                                        ** test_ascon.delayed_tag_and_authentication_timing                  PASS         331.00           0.01      30408.82  **
+                                                        ** test_ascon.changed_authenticated_inputs_are_rejected              PASS        1410.00           0.07      20503.15  **
+                                                        ** test_ascon.deterministic_randomized_differential_cases            PASS        3601.00           0.18      20131.43  **
+                                                        ** test_ascon.empty_terminator_after_full_beats_pads_per_sp800_232   PASS        2450.00           0.12      20010.29  **
+                                                        ** test_ascon.decryption_never_exposes_expected_tag                  PASS         880.00           0.05      16736.21  **
+                                                        *************************************************************************************************************************
+                                                        ** TESTS=12 PASS=12 FAIL=0 SKIP=0                                              466224.00          20.54      22697.11  **
+                                                        *************************************************************************************************************************
+Verified 12 passing simulator tests: /mnt/c/Users/Symok/.codex/worktrees/ascon-fold-multicore/ascon-aead128-vhdl-main/build/cocotb-ghdl/results.xml

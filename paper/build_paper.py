@@ -13,11 +13,16 @@ from docx.oxml.ns import qn
 from docx.shared import Inches, Pt, RGBColor
 from gpt2_report_sections import add_experiment, add_appendix, add_latency_research
 from behavior_report_sections import add_behavior_results
+from weight_stream_report_sections import add_weight_stream_results
+from fold_report_sections import add_fold_results
+from pipeline_report_sections import add_pipeline_results
+from multicore_report_sections import add_multicore_results
+from figure_support import add_figure
 
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "paper" / "VHDL_Implementation_of_NIST_Ascon_AEAD128_on_a_Nexys_A7_FPGA.docx"
-METRICS = ROOT / "build" / "vivado" / "reports" / "metrics.json"
+METRICS = ROOT / "paper" / "evidence" / "baseline_20260918" / "metrics.json"
 
 
 def load_metrics():
@@ -167,7 +172,7 @@ def build():
             f"{vivado['wns_ns']:.3f} ns worst setup slack. Vivado estimated "
             f"{vivado['total_on_chip_power_w']:.3f} W total on-chip power and "
             "generated the FPGA bitstream. Physical board programming and "
-            "demonstration testing remain pending."
+            "demonstration testing were pending at this baseline stage; Section XIII records the later board tests."
         )
     else:
         implementation_summary = (
@@ -243,20 +248,26 @@ def build():
         doc,
         "This paper describes a VHDL-2008 implementation of the standardized NIST "
         "Ascon-AEAD128 algorithm for a Nexys A7 100T FPGA. The design uses one shared "
-        "320-bit permutation datapath and completes one Ascon round per clock cycle. A "
+        "320-bit permutation datapath with configurable round unrolling and optional input/output queues. A "
         "128-bit streaming interface accepts associated data and payload bytes, including "
         "empty and partial blocks. Encryption returns ciphertext and a tag. Decryption "
-        "returns tentative plaintext and releases it only after tag verification. The "
+        "returns provisional plaintext that an external quarantine releases only after tag verification. The "
         "portable test flow passed all 1,089 official known-answer vectors in both "
         "directions with GHDL and Vivado XSim. Generated Verilog was also checked with "
         "Icarus Verilog and Verilator. Vivado 2023.2 completed synthesis, placement, "
-        f"routing, timing analysis, and bitstream generation. {implementation_summary} "
-        "An application experiment fine-tuned GPT-2 for 40 updates in Ubuntu under "
-        "WSL 2 and exported a 497,904,640-byte FP32 checkpoint. A 1,024-byte weight "
-        "sample was encrypted and authenticated by the same RTL core in XSim in "
-        "801 cycles, or 8.01 microseconds at a simulated 100 MHz clock. Decryption "
-        "recovered the original sample exactly. This result is behavioral simulation "
-        "latency rather than a physical board measurement.",
+        "routing, timing analysis, and bitstream generation. At a simulated 100 MHz, "
+        "the complete 2,397,696-byte FP32 adapter payload encrypts and decrypts in "
+        "449,581 cycles per direction with folded absorption, compared with "
+        "899,153 for the buffered three-round core and 1,798,305 for the one-round "
+        "baseline. All recovered bytes match and authentication passes. The folded "
+        "core routes at 100 MHz with unconstrained external I/O; a board-integrated "
+        "copy also meets 100 MHz in one run. Earlier physical captures validate only "
+        "the buffered design. Later multicore board tests pass a 3,072-byte fixture for "
+        "one, two and four folded cores; full-file physical transfer remains unmeasured. "
+        "A separate dependent-round pipeline experiment finds that controller fixes "
+        "improve the unchanged 12-clock design from 70.8 to 49.8 ns per block, while "
+        "two- and three-stage round splits increase elapsed latency. Sections XIV through "
+        "XVI distinguish simulation, routed timing, modeled memory and physical fixture evidence.",
         indent=False,
     )
 
@@ -314,19 +325,23 @@ def build():
         )
     add_caption(doc, "Fig. 1. Ascon-AEAD128 processing phases, adapted from NIST SP 800-232 [1].")
 
-    doc.add_page_break()
-    add_heading(doc, "III. Hardware architecture")
+    section_heading = add_heading(doc, "III. Original hardware architecture")
+    section_heading.paragraph_format.page_break_before = True
     add_body(
         doc,
-        "The datapath contains five 64-bit state registers and one combinational round. "
-        "A small round counter selects the required constants and returns the updated state "
-        "after 8 or 12 clocks. Reusing one round reduces duplicated logic and keeps the "
-        "relationship between the VHDL and the algorithm visible. The same engine serves "
-        "initialization, associated data, payload processing, and finalization.",
+        "The controller owns a 320-bit transaction state S, organized as five "
+        "64-bit words. It handles byte masks, padding, key additions, domain "
+        "separation and tag comparison. A separate permutation engine owns a "
+        "second 320-bit register P, a combinational round and a round counter "
+        "(Fig. 2). A start request loads S into P. After eight or twelve round "
+        "clocks, the engine raises a registered done signal and the controller "
+        "copies P back into S. The same engine serves initialization, AD, payload "
+        "and finalization. Each call therefore includes a load clock and a "
+        "completion-copy clock in addition to its round clocks. Section XIV "
+        "removes this handoff from the unrolled design.",
     )
-    pic = doc.add_picture(str(ROOT / "paper" / "assets" / "ascon_architecture.png"), width=Inches(7.0))
-    pic.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    add_caption(doc, "Fig. 2. Original block diagram of the implemented architecture.")
+    add_figure(doc, "fig02_original_architecture.png",
+               "Fig. 2. Original one-round architecture. The controller owns S and the permutation engine owns P, both 320 bits. Their registered start/done interface transfers the state between them. Decrypted bytes remain provisional until an external quarantine receives commit.", add_caption)
     add_body(
         doc,
         "The controller accepts a command containing the key, nonce, and direction. "
@@ -348,8 +363,8 @@ def build():
         "the safe release rule explicit, but the system integrator must enforce it.",
     )
 
-    doc.add_page_break()
-    add_heading(doc, "V. Controller and verification")
+    section_heading = add_heading(doc, "V. Original controller and verification")
+    section_heading.paragraph_format.page_break_before = True
     add_body(
         doc,
         "The finite-state machine was made for this streaming architecture. Start states "
@@ -358,9 +373,9 @@ def build():
         "backpressure. Tag states either wait for the encryption tag to be accepted or wait "
         "for a decryption tag to be supplied.",
     )
-    pic = doc.add_picture(str(ROOT / "paper" / "assets" / "ascon_fsm.png"), width=Inches(7.0))
-    pic.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    add_caption(doc, "Fig. 3. Original controller state flow used by the VHDL core.")
+    add_body(doc, "The AD path must distinguish empty AD from an empty beat that terminates earlier full AD blocks. Non-empty AD is padded with 0x01 and zeros to a multiple of the 16-byte rate. An exact boundary therefore requires a separate padding-only block and its p8; genuinely empty AD needs only domain separation [1]. Fig. 3 includes the corrected empty-terminator transition. A full final payload block also needs an empty padded block, but that block is combined with the finalization key before p12 rather than followed by another p8.")
+    add_figure(doc, "fig03_original_fsm.png",
+               "Fig. 3. Original controller after the AD-padding fix. START and WAIT pairs are grouped for readability. The gray edge handles an empty terminator after non-empty AD. Protocol errors in AD WAIT or MSG WAIT enter ZEROIZE; TAG IN compares the tag and pulses commit or discard.", add_caption)
     add_body(
         doc,
         "Verification began with an independent Python model. The model was compared with "
@@ -375,8 +390,8 @@ def build():
     add_result_table(doc, metrics)
     add_caption(doc, "Table I. Verification and implementation status as of September 18, 2026.")
 
-    doc.add_page_break()
-    add_heading(doc, "VI. Vivado flow and FPGA demonstration")
+    section_heading = add_heading(doc, "VI. Vivado flow and FPGA demonstration")
+    section_heading.paragraph_format.page_break_before = True
     add_body(
         doc,
         "The repository contains Tcl scripts for Vivado 2023.2 and an XDC file for the "
@@ -390,7 +405,7 @@ def build():
             + implementation_summary + " The original routed report included a CFGBVS-1 "
             "configuration warning. The repository XDC now sets CFGBVS to VCCO and "
             "CONFIG_VOLTAGE to 3.3 for the Nexys A7 configuration bank. Physical-board "
-            "validation remains pending. The power value is a Vivado estimate rather "
+            "validation was pending at this baseline stage; later results appear in Section XIII. The power value is a Vivado estimate rather "
             "than a board measurement."
             if vivado.get("complete")
             else "XSim execution, synthesis, implementation, timing, and power reporting "
@@ -411,44 +426,54 @@ def build():
     add_experiment(doc, add_heading, add_body, add_caption)
     add_latency_research(doc, add_heading, add_body, add_caption)
     add_behavior_results(doc, add_heading, add_body, add_caption)
-    doc.add_page_break()
-    add_heading(doc, "XIII. Limitations and next work")
+    add_weight_stream_results(doc, add_heading, add_body, add_caption)
+    add_fold_results(doc, add_heading, add_body, add_caption)
+    add_pipeline_results(doc, add_heading, add_body, add_caption)
+    add_multicore_results(doc, add_heading, add_body, add_caption)
+    section_heading = add_heading(doc, "XVII. Limitations and next work")
+    section_heading.paragraph_format.page_break_before = True
     add_body(
         doc,
         "This version is an unprotected cryptographic core. It does not prevent power or "
         "electromagnetic side-channel analysis, and it does not detect injected faults. "
         "Kandi et al. describe threshold and redundancy-based hardware options that could "
-        "be studied after the baseline is stable [3]. A faster unrolled or ping-pong "
-        "architecture is another option, but it would use more logic and make the first "
-        "implementation harder to inspect [4]. The external quarantine buffer is also a "
+        "be studied in subsequent work [3]. Sections XIII and XIV measure the implemented unrolling "
+        "and buffering tradeoff, including folded absorption. End-to-end benefits from "
+        "memory transport and lossless compression require additional system measurements. Independent lanes "
+        "are evaluated in Section XVI; the pipeline control experiment is in Section XV. The external quarantine buffer is also a "
         "required part of safe decryption, not an optional application feature.",
     )
 
-    add_heading(doc, "XIV. Conclusion")
+    add_heading(doc, "XVIII. Findings")
     add_body(
         doc,
-        "The project now has a readable NIST Ascon-AEAD128 RTL core, an explicit streaming "
-        "protocol, an authentication-safe decryption contract, official-vector tests, and "
-        "a completed Vivado synthesis and implementation flow. GHDL and XSim each passed "
-        "all 1,089 official vectors in encryption and decryption. The routed design met "
-        "the 100 MHz constraint, and Vivado generated a bitstream. The remaining work is "
-        "to program the Nexys A7 with the corrected configuration properties and verify "
-        "the four-vector demonstration on physical hardware. The GPT-2 application "
-        "experiment also demonstrated the complete path from GPU fine-tuning to "
-        "exported weight bytes and authenticated VHDL encryption. A 1 KiB sample "
-        "passed encryption and decryption in 801 cycles per direction at the "
-        "testbench clock. Follow-up behavior tests passed all 17 checks, including "
-        "tamper rejection and stalled transfers. Restoring the recovered slice into "
-        "the full GPT-2 model preserved parameters, logits, generated tokens, and "
-        "validation losses exactly. Whole-checkpoint GPT-2 encryption, physical transfer overhead, "
-        "and board-level measurements remain future work.",
+        "For this adapter, eliminating controller handoffs halves the buffered "
+        "three-round core's cycle count without removing rounds. The folded core "
+        "requires 449,581 cycles per direction, matches the reference ciphertext and "
+        "tag, and reconstructs the complete checkpoint exactly. Its three-clock "
+        "full-block interval is supported by simulation; its 100 MHz closure is a "
+        "routed implementation result. Physical full-file transfer, memory bandwidth "
+        "and authenticated compute integration remain unmeasured. Both the AD "
+        "empty-terminator defect and legacy decryption tag exposure are fixed in "
+        "this branch, with focused regressions and negative controls.",
+    )
+
+    add_body(
+        doc,
+        "The dependent p8 experiment identifies a different bottleneck: controller fixes "
+        "reduce routed-period-derived block latency from 70.8 to 49.8 ns at the same "
+        "12 clocks, while round splitting adds latency. Multicore simulation achieves "
+        "approximately 2.000 and 3.001 times one-core throughput for two and four cores "
+        "under ideal service. The later physical tests validate only the 3,072-byte "
+        "fixture, with board clocks and cycle counts reported separately from full-file "
+        "simulation and modeled memory bandwidth.",
     )
 
     add_heading(doc, "References")
     references = [
         "[1] M. S. Turan, K. A. McKay, D. Chang, J. Kang, and J. Kelsey, “Ascon-Based Lightweight Cryptography Standards for Constrained Devices,” NIST SP 800-232, Aug. 2025, doi: 10.6028/NIST.SP.800-232.",
         "[2] Ascon Team, “ascon-c: Reference and optimized implementations of Ascon,” commit 446347f21b209f3921c65ece70027c366cbe1693. [Online]. Available: https://github.com/ascon/ascon-c",
-        "[3] A. Kandi et al., “Hardware Implementation of ASCON,” NIST Lightweight Cryptography Workshop, June 2023.",
+        "[3] A. Kandi et al., “Hardware Implementation of ASCON,” NIST Lightweight Cryptography Workshop, June 2023. https://csrc.nist.gov/csrc/media/Events/2023/lightweight-cryptography-workshop-2023/documents/accepted-papers/07-hardware-implementation-of-ascon.pdf",
         "[4] K. Liu, L. Han, and Z. Quan, “A High Performance Ascon Architecture for Data Encryption and Authentication,” in Proc. 5th Int. Conf. on Cryptography, Network Security and Communication Technology (CNSCT 2026), Haikou, China, Jan. 23–25, 2026, doi: 10.1145/3802927.3802941.",
         "[5] N. T. M. Huong, T. V. Nam, and P. V. Phat, “Application of the Ascon-AEAD128 Algorithm for IoT Data Security,” 11th Int. Conf. on Applying New Technology in Green Buildings, 2026, doi: 10.1109/ATIGB70203.2026.11628316.",
         "[6] Digilent, “Nexys A7-100T Master XDC.” [Online]. Available: https://github.com/Digilent/digilent-xdc",
@@ -458,6 +483,14 @@ def build():
         "[10] PyTorch, “Start Locally.” [Online]. Available: https://pytorch.org/get-started/locally/. Accessed Oct. 6, 2026.",
         "[11] R. Primas, “Hardware Design of Ascon (SP800-232),” ascon-verilog. [Online]. Available: https://github.com/rprimas/ascon-verilog. Accessed Oct. 6, 2026.",
         "[12] OpenTitan, “Ascon: Theory of Operation.” [Online]. Available: https://opentitan.org/book/hw/ip/ascon/doc/theory_of_operation.html. Accessed Oct. 6, 2026.",
+        "[13] C. E. LaForest, “Rules for Ready/Valid Handshakes and Synchronization,” FPGA Design Elements. [Online]. Available: https://fpgacpu.ca/fpga/handshake.html. Accessed Oct. 21, 2026.",
+        "[14] K. Jones, Folded Ascon weight stream study, October 21, 2026. Repository reports/Ascon weight stream bottlenecks.md and docs/evidence/handoff_study_fold_20261021/. https://github.com/kroix-ovo/ascon-aead128-vhdl/tree/ascon-weight-stream-fold-absorb",
+        "[15] T. Itschner, ascon_cipher_verilog, source architecture reference. https://github.com/tristanitschner/ascon_cipher_verilog. No third-party timing result is adopted here.",
+        "[16] K. Jones, Associated data padding and decryption tag output fixes, October 21, 2026. Repository docs/ad_padding_fix.md; docs/evidence/ad_padding_fix_20261021/; docs/evidence/tag_output_gate_20261021/.",
+        "[17] AMD, Vivado Design Suite User Guide Design Analysis and Closure Techniques, UG906, Category 1 Timing, 2026.1. https://docs.amd.com/r/en-US/ug906-vivado-design-analysis/Category-1-Timing",
+        "[18] W. Hua, M. Umar, Z. Zhang and G. E. Suh, GuardNN Secure Accelerator Architecture for Privacy-Preserving Deep Learning, DAC 2022, doi: 10.1145/3489517.3530439. https://arxiv.org/html/2008.11632v2.",
+        "[19] K. Jones, Dependent p8 pipelining experiment, October 27, 2026. experiments/p8_pipeline/README.md, results/provenance.json, results/sweeps/ and results/sim/. https://github.com/kroix-ovo/ascon-aead128-vhdl/tree/ascon-p8-pipeline/experiments/p8_pipeline",
+        "[20] K. Jones, Folded Ascon multicore study and physical fixture, October 2026. docs/multicore_study.md; docs/evidence/multicore_20261022/; docs/evidence/multicore_board_20261027/. https://github.com/kroix-ovo/ascon-aead128-vhdl/tree/ascon-fold-multicore",
     ]
     for ref in references:
         p = doc.add_paragraph()

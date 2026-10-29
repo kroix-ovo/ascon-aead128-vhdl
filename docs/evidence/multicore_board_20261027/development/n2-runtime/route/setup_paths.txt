@@ -1,0 +1,1253 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Tue Oct 27 13:39:23 2026
+| Host         : KroixLaptop running 64-bit major release  (build 9200)
+| Command      : report_timing -delay_type max -max_paths 10 -path_type full_clock_expanded -file C:/Users/Symok/ascon-mc-board/n2-runtime/route/setup_paths.txt
+| Design       : ascon_multicore_board_top
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -4.427ns  (required time - arrival time)
+  Source:                 test_u/cycles_reg[27]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            test_u/pass_o_reg/R
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        13.876ns  (logic 4.609ns (33.216%)  route 9.267ns (66.784%))
+  Logic Levels:           27  (CARRY4=11 LUT2=2 LUT3=1 LUT5=5 LUT6=8)
+  Clock Path Skew:        -0.046ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.344ns = ( 8.656 - 10.000 ) 
+    Source Clock Delay      (SCD):    -0.730ns
+    Clock Pessimism Removal (CPR):    0.568ns
+  Clock Uncertainty:      0.077ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.136ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=7943, routed)        1.810    -0.730    test_u/clk_i
+    SLICE_X42Y44         FDRE                                         r  test_u/cycles_reg[27]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X42Y44         FDRE (Prop_fdre_C_Q)         0.478    -0.252 r  test_u/cycles_reg[27]/Q
+                         net (fo=12, routed)          0.708     0.456    test_u/cycles[27]
+    SLICE_X42Y44         LUT5 (Prop_lut5_I1_O)        0.296     0.752 r  test_u/dut_i_704/O
+                         net (fo=3, routed)           0.603     1.355    test_u/dut_i_704_n_0
+    SLICE_X41Y41         LUT6 (Prop_lut6_I5_O)        0.124     1.479 f  test_u/dut_i_289/O
+                         net (fo=3, routed)           0.501     1.980    test_u/dut_i_289_n_0
+    SLICE_X39Y39         LUT6 (Prop_lut6_I2_O)        0.124     2.104 f  test_u/dut_i_1/O
+                         net (fo=26, routed)          0.512     2.616    test_u/dut/rst_i
+    SLICE_X38Y39         LUT2 (Prop_lut2_I0_O)        0.124     2.740 f  test_u/dut/file_ready_o_INST_0_i_1/O
+                         net (fo=1798, routed)        0.347     3.087    test_u/dut/lanes[1].tx_boundary/rst_i
+    SLICE_X39Y39         LUT3 (Prop_lut3_I2_O)        0.124     3.211 r  test_u/dut/lanes[1].tx_boundary/valid_o_INST_0/O
+                         net (fo=3, routed)           0.624     3.835    test_u/dut/lanes[1].tx_boundary_n_1
+    SLICE_X43Y34         LUT5 (Prop_lut5_I3_O)        0.124     3.959 r  test_u/dut/out_data_o[127]_INST_0_i_1/O
+                         net (fo=167, routed)         0.637     4.596    test_u/dut/osel
+    SLICE_X42Y35         LUT2 (Prop_lut2_I0_O)        0.124     4.720 r  test_u/dut/out_chunk_o[0]_INST_0/O
+                         net (fo=840, routed)         1.540     6.261    test_u/oi[0]
+    SLICE_X48Y29         LUT6 (Prop_lut6_I4_O)        0.124     6.385 r  test_u/g2_b2/O
+                         net (fo=1, routed)           0.792     7.177    test_u/g2_b2_n_0
+    SLICE_X56Y28         LUT5 (Prop_lut5_I0_O)        0.124     7.301 r  test_u/failure_o[2]_i_532/O
+                         net (fo=1, routed)           0.317     7.618    test_u/failure_o[2]_i_532_n_0
+    SLICE_X55Y29         LUT6 (Prop_lut6_I5_O)        0.124     7.742 r  test_u/failure_o[2]_i_477/O
+                         net (fo=1, routed)           0.640     8.382    test_u/failure_o[2]_i_477_n_0
+    SLICE_X52Y30         LUT6 (Prop_lut6_I3_O)        0.124     8.506 r  test_u/failure_o[2]_i_429/O
+                         net (fo=1, routed)           0.000     8.506    test_u/failure_o[2]_i_429_n_0
+    SLICE_X52Y30         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532     9.038 r  test_u/failure_o_reg[2]_i_376/CO[3]
+                         net (fo=1, routed)           0.000     9.038    test_u/failure_o_reg[2]_i_376_n_0
+    SLICE_X52Y31         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.152 r  test_u/failure_o_reg[2]_i_327/CO[3]
+                         net (fo=1, routed)           0.000     9.152    test_u/failure_o_reg[2]_i_327_n_0
+    SLICE_X52Y32         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.266 r  test_u/failure_o_reg[2]_i_283/CO[3]
+                         net (fo=1, routed)           0.000     9.266    test_u/failure_o_reg[2]_i_283_n_0
+    SLICE_X52Y33         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.380 r  test_u/failure_o_reg[2]_i_233/CO[3]
+                         net (fo=1, routed)           0.000     9.380    test_u/failure_o_reg[2]_i_233_n_0
+    SLICE_X52Y34         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.494 r  test_u/failure_o_reg[2]_i_191/CO[3]
+                         net (fo=1, routed)           0.000     9.494    test_u/failure_o_reg[2]_i_191_n_0
+    SLICE_X52Y35         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.608 r  test_u/failure_o_reg[2]_i_141/CO[3]
+                         net (fo=1, routed)           0.000     9.608    test_u/failure_o_reg[2]_i_141_n_0
+    SLICE_X52Y36         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.722 r  test_u/failure_o_reg[2]_i_87/CO[3]
+                         net (fo=1, routed)           0.000     9.722    test_u/failure_o_reg[2]_i_87_n_0
+    SLICE_X52Y37         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.836 r  test_u/failure_o_reg[2]_i_51/CO[3]
+                         net (fo=1, routed)           0.000     9.836    test_u/failure_o_reg[2]_i_51_n_0
+    SLICE_X52Y38         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.950 r  test_u/failure_o_reg[2]_i_29/CO[3]
+                         net (fo=1, routed)           0.000     9.950    test_u/failure_o_reg[2]_i_29_n_0
+    SLICE_X52Y39         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    10.064 r  test_u/failure_o_reg[2]_i_16/CO[3]
+                         net (fo=1, routed)           0.000    10.064    test_u/failure_o_reg[2]_i_16_n_0
+    SLICE_X52Y40         CARRY4 (Prop_carry4_CI_CO[2])
+                                                      0.228    10.292 f  test_u/failure_o_reg[2]_i_10/CO[2]
+                         net (fo=4, routed)           0.494    10.786    test_u/error_code2
+    SLICE_X51Y42         LUT5 (Prop_lut5_I4_O)        0.313    11.099 r  test_u/failure_o[0]_i_18/O
+                         net (fo=1, routed)           0.295    11.393    test_u/failure_o[0]_i_18_n_0
+    SLICE_X51Y44         LUT6 (Prop_lut6_I2_O)        0.124    11.517 r  test_u/failure_o[0]_i_10/O
+                         net (fo=1, routed)           0.450    11.967    test_u/failure_o[0]_i_10_n_0
+    SLICE_X49Y42         LUT6 (Prop_lut6_I4_O)        0.124    12.091 r  test_u/failure_o[0]_i_2/O
+                         net (fo=1, routed)           0.151    12.243    test_u/failure_o[0]_i_2_n_0
+    SLICE_X49Y42         LUT6 (Prop_lut6_I1_O)        0.124    12.367 r  test_u/failure_o[0]_i_1/O
+                         net (fo=4, routed)           0.311    12.678    test_u/failure_o[0]_i_1_n_0
+    SLICE_X48Y41         LUT5 (Prop_lut5_I2_O)        0.124    12.802 r  test_u/pass_o_i_1/O
+                         net (fo=1, routed)           0.344    13.146    test_u/pass_o_i_1_n_0
+    SLICE_X48Y42         FDRE                                         r  test_u/pass_o_reg/R
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r  
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=7943, routed)        1.677     8.656    test_u/clk_i
+    SLICE_X48Y42         FDRE                                         r  test_u/pass_o_reg/C
+                         clock pessimism              0.568     9.224    
+                         clock uncertainty           -0.077     9.148    
+    SLICE_X48Y42         FDRE (Setup_fdre_C_R)       -0.429     8.719    test_u/pass_o_reg
+  -------------------------------------------------------------------
+                         required time                          8.719    
+                         arrival time                         -13.146    
+  -------------------------------------------------------------------
+                         slack                                 -4.427    
+
+Slack (VIOLATED) :        -4.390ns  (required time - arrival time)
+  Source:                 test_u/cycles_reg[27]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            test_u/failure_o_reg[0]/CE
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        14.063ns  (logic 4.609ns (32.775%)  route 9.454ns (67.225%))
+  Logic Levels:           27  (CARRY4=11 LUT2=2 LUT3=1 LUT4=1 LUT5=4 LUT6=8)
+  Clock Path Skew:        -0.046ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.344ns = ( 8.656 - 10.000 ) 
+    Source Clock Delay      (SCD):    -0.730ns
+    Clock Pessimism Removal (CPR):    0.568ns
+  Clock Uncertainty:      0.077ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.136ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=7943, routed)        1.810    -0.730    test_u/clk_i
+    SLICE_X42Y44         FDRE                                         r  test_u/cycles_reg[27]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X42Y44         FDRE (Prop_fdre_C_Q)         0.478    -0.252 r  test_u/cycles_reg[27]/Q
+                         net (fo=12, routed)          0.708     0.456    test_u/cycles[27]
+    SLICE_X42Y44         LUT5 (Prop_lut5_I1_O)        0.296     0.752 r  test_u/dut_i_704/O
+                         net (fo=3, routed)           0.603     1.355    test_u/dut_i_704_n_0
+    SLICE_X41Y41         LUT6 (Prop_lut6_I5_O)        0.124     1.479 f  test_u/dut_i_289/O
+                         net (fo=3, routed)           0.501     1.980    test_u/dut_i_289_n_0
+    SLICE_X39Y39         LUT6 (Prop_lut6_I2_O)        0.124     2.104 f  test_u/dut_i_1/O
+                         net (fo=26, routed)          0.512     2.616    test_u/dut/rst_i
+    SLICE_X38Y39         LUT2 (Prop_lut2_I0_O)        0.124     2.740 f  test_u/dut/file_ready_o_INST_0_i_1/O
+                         net (fo=1798, routed)        0.347     3.087    test_u/dut/lanes[1].tx_boundary/rst_i
+    SLICE_X39Y39         LUT3 (Prop_lut3_I2_O)        0.124     3.211 r  test_u/dut/lanes[1].tx_boundary/valid_o_INST_0/O
+                         net (fo=3, routed)           0.624     3.835    test_u/dut/lanes[1].tx_boundary_n_1
+    SLICE_X43Y34         LUT5 (Prop_lut5_I3_O)        0.124     3.959 r  test_u/dut/out_data_o[127]_INST_0_i_1/O
+                         net (fo=167, routed)         0.637     4.596    test_u/dut/osel
+    SLICE_X42Y35         LUT2 (Prop_lut2_I0_O)        0.124     4.720 r  test_u/dut/out_chunk_o[0]_INST_0/O
+                         net (fo=840, routed)         1.540     6.261    test_u/oi[0]
+    SLICE_X48Y29         LUT6 (Prop_lut6_I4_O)        0.124     6.385 r  test_u/g2_b2/O
+                         net (fo=1, routed)           0.792     7.177    test_u/g2_b2_n_0
+    SLICE_X56Y28         LUT5 (Prop_lut5_I0_O)        0.124     7.301 r  test_u/failure_o[2]_i_532/O
+                         net (fo=1, routed)           0.317     7.618    test_u/failure_o[2]_i_532_n_0
+    SLICE_X55Y29         LUT6 (Prop_lut6_I5_O)        0.124     7.742 r  test_u/failure_o[2]_i_477/O
+                         net (fo=1, routed)           0.640     8.382    test_u/failure_o[2]_i_477_n_0
+    SLICE_X52Y30         LUT6 (Prop_lut6_I3_O)        0.124     8.506 r  test_u/failure_o[2]_i_429/O
+                         net (fo=1, routed)           0.000     8.506    test_u/failure_o[2]_i_429_n_0
+    SLICE_X52Y30         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532     9.038 r  test_u/failure_o_reg[2]_i_376/CO[3]
+                         net (fo=1, routed)           0.000     9.038    test_u/failure_o_reg[2]_i_376_n_0
+    SLICE_X52Y31         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.152 r  test_u/failure_o_reg[2]_i_327/CO[3]
+                         net (fo=1, routed)           0.000     9.152    test_u/failure_o_reg[2]_i_327_n_0
+    SLICE_X52Y32         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.266 r  test_u/failure_o_reg[2]_i_283/CO[3]
+                         net (fo=1, routed)           0.000     9.266    test_u/failure_o_reg[2]_i_283_n_0
+    SLICE_X52Y33         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.380 r  test_u/failure_o_reg[2]_i_233/CO[3]
+                         net (fo=1, routed)           0.000     9.380    test_u/failure_o_reg[2]_i_233_n_0
+    SLICE_X52Y34         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.494 r  test_u/failure_o_reg[2]_i_191/CO[3]
+                         net (fo=1, routed)           0.000     9.494    test_u/failure_o_reg[2]_i_191_n_0
+    SLICE_X52Y35         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.608 r  test_u/failure_o_reg[2]_i_141/CO[3]
+                         net (fo=1, routed)           0.000     9.608    test_u/failure_o_reg[2]_i_141_n_0
+    SLICE_X52Y36         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.722 r  test_u/failure_o_reg[2]_i_87/CO[3]
+                         net (fo=1, routed)           0.000     9.722    test_u/failure_o_reg[2]_i_87_n_0
+    SLICE_X52Y37         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.836 r  test_u/failure_o_reg[2]_i_51/CO[3]
+                         net (fo=1, routed)           0.000     9.836    test_u/failure_o_reg[2]_i_51_n_0
+    SLICE_X52Y38         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.950 r  test_u/failure_o_reg[2]_i_29/CO[3]
+                         net (fo=1, routed)           0.000     9.950    test_u/failure_o_reg[2]_i_29_n_0
+    SLICE_X52Y39         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    10.064 r  test_u/failure_o_reg[2]_i_16/CO[3]
+                         net (fo=1, routed)           0.000    10.064    test_u/failure_o_reg[2]_i_16_n_0
+    SLICE_X52Y40         CARRY4 (Prop_carry4_CI_CO[2])
+                                                      0.228    10.292 f  test_u/failure_o_reg[2]_i_10/CO[2]
+                         net (fo=4, routed)           0.494    10.786    test_u/error_code2
+    SLICE_X51Y42         LUT5 (Prop_lut5_I4_O)        0.313    11.099 r  test_u/failure_o[0]_i_18/O
+                         net (fo=1, routed)           0.295    11.393    test_u/failure_o[0]_i_18_n_0
+    SLICE_X51Y44         LUT6 (Prop_lut6_I2_O)        0.124    11.517 r  test_u/failure_o[0]_i_10/O
+                         net (fo=1, routed)           0.450    11.967    test_u/failure_o[0]_i_10_n_0
+    SLICE_X49Y42         LUT6 (Prop_lut6_I4_O)        0.124    12.091 r  test_u/failure_o[0]_i_2/O
+                         net (fo=1, routed)           0.151    12.243    test_u/failure_o[0]_i_2_n_0
+    SLICE_X49Y42         LUT6 (Prop_lut6_I1_O)        0.124    12.367 r  test_u/failure_o[0]_i_1/O
+                         net (fo=4, routed)           0.467    12.834    test_u/failure_o[0]_i_1_n_0
+    SLICE_X50Y42         LUT4 (Prop_lut4_I2_O)        0.124    12.958 r  test_u/fail_o_i_1/O
+                         net (fo=9, routed)           0.375    13.333    test_u/fail_o_i_1_n_0
+    SLICE_X49Y42         FDRE                                         r  test_u/failure_o_reg[0]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r  
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=7943, routed)        1.677     8.656    test_u/clk_i
+    SLICE_X49Y42         FDRE                                         r  test_u/failure_o_reg[0]/C
+                         clock pessimism              0.568     9.224    
+                         clock uncertainty           -0.077     9.148    
+    SLICE_X49Y42         FDRE (Setup_fdre_C_CE)      -0.205     8.943    test_u/failure_o_reg[0]
+  -------------------------------------------------------------------
+                         required time                          8.943    
+                         arrival time                         -13.333    
+  -------------------------------------------------------------------
+                         slack                                 -4.390    
+
+Slack (VIOLATED) :        -4.390ns  (required time - arrival time)
+  Source:                 test_u/cycles_reg[27]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            test_u/failure_o_reg[2]/CE
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        14.063ns  (logic 4.609ns (32.775%)  route 9.454ns (67.225%))
+  Logic Levels:           27  (CARRY4=11 LUT2=2 LUT3=1 LUT4=1 LUT5=4 LUT6=8)
+  Clock Path Skew:        -0.046ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.344ns = ( 8.656 - 10.000 ) 
+    Source Clock Delay      (SCD):    -0.730ns
+    Clock Pessimism Removal (CPR):    0.568ns
+  Clock Uncertainty:      0.077ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.136ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=7943, routed)        1.810    -0.730    test_u/clk_i
+    SLICE_X42Y44         FDRE                                         r  test_u/cycles_reg[27]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X42Y44         FDRE (Prop_fdre_C_Q)         0.478    -0.252 r  test_u/cycles_reg[27]/Q
+                         net (fo=12, routed)          0.708     0.456    test_u/cycles[27]
+    SLICE_X42Y44         LUT5 (Prop_lut5_I1_O)        0.296     0.752 r  test_u/dut_i_704/O
+                         net (fo=3, routed)           0.603     1.355    test_u/dut_i_704_n_0
+    SLICE_X41Y41         LUT6 (Prop_lut6_I5_O)        0.124     1.479 f  test_u/dut_i_289/O
+                         net (fo=3, routed)           0.501     1.980    test_u/dut_i_289_n_0
+    SLICE_X39Y39         LUT6 (Prop_lut6_I2_O)        0.124     2.104 f  test_u/dut_i_1/O
+                         net (fo=26, routed)          0.512     2.616    test_u/dut/rst_i
+    SLICE_X38Y39         LUT2 (Prop_lut2_I0_O)        0.124     2.740 f  test_u/dut/file_ready_o_INST_0_i_1/O
+                         net (fo=1798, routed)        0.347     3.087    test_u/dut/lanes[1].tx_boundary/rst_i
+    SLICE_X39Y39         LUT3 (Prop_lut3_I2_O)        0.124     3.211 r  test_u/dut/lanes[1].tx_boundary/valid_o_INST_0/O
+                         net (fo=3, routed)           0.624     3.835    test_u/dut/lanes[1].tx_boundary_n_1
+    SLICE_X43Y34         LUT5 (Prop_lut5_I3_O)        0.124     3.959 r  test_u/dut/out_data_o[127]_INST_0_i_1/O
+                         net (fo=167, routed)         0.637     4.596    test_u/dut/osel
+    SLICE_X42Y35         LUT2 (Prop_lut2_I0_O)        0.124     4.720 r  test_u/dut/out_chunk_o[0]_INST_0/O
+                         net (fo=840, routed)         1.540     6.261    test_u/oi[0]
+    SLICE_X48Y29         LUT6 (Prop_lut6_I4_O)        0.124     6.385 r  test_u/g2_b2/O
+                         net (fo=1, routed)           0.792     7.177    test_u/g2_b2_n_0
+    SLICE_X56Y28         LUT5 (Prop_lut5_I0_O)        0.124     7.301 r  test_u/failure_o[2]_i_532/O
+                         net (fo=1, routed)           0.317     7.618    test_u/failure_o[2]_i_532_n_0
+    SLICE_X55Y29         LUT6 (Prop_lut6_I5_O)        0.124     7.742 r  test_u/failure_o[2]_i_477/O
+                         net (fo=1, routed)           0.640     8.382    test_u/failure_o[2]_i_477_n_0
+    SLICE_X52Y30         LUT6 (Prop_lut6_I3_O)        0.124     8.506 r  test_u/failure_o[2]_i_429/O
+                         net (fo=1, routed)           0.000     8.506    test_u/failure_o[2]_i_429_n_0
+    SLICE_X52Y30         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532     9.038 r  test_u/failure_o_reg[2]_i_376/CO[3]
+                         net (fo=1, routed)           0.000     9.038    test_u/failure_o_reg[2]_i_376_n_0
+    SLICE_X52Y31         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.152 r  test_u/failure_o_reg[2]_i_327/CO[3]
+                         net (fo=1, routed)           0.000     9.152    test_u/failure_o_reg[2]_i_327_n_0
+    SLICE_X52Y32         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.266 r  test_u/failure_o_reg[2]_i_283/CO[3]
+                         net (fo=1, routed)           0.000     9.266    test_u/failure_o_reg[2]_i_283_n_0
+    SLICE_X52Y33         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.380 r  test_u/failure_o_reg[2]_i_233/CO[3]
+                         net (fo=1, routed)           0.000     9.380    test_u/failure_o_reg[2]_i_233_n_0
+    SLICE_X52Y34         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.494 r  test_u/failure_o_reg[2]_i_191/CO[3]
+                         net (fo=1, routed)           0.000     9.494    test_u/failure_o_reg[2]_i_191_n_0
+    SLICE_X52Y35         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.608 r  test_u/failure_o_reg[2]_i_141/CO[3]
+                         net (fo=1, routed)           0.000     9.608    test_u/failure_o_reg[2]_i_141_n_0
+    SLICE_X52Y36         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.722 r  test_u/failure_o_reg[2]_i_87/CO[3]
+                         net (fo=1, routed)           0.000     9.722    test_u/failure_o_reg[2]_i_87_n_0
+    SLICE_X52Y37         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.836 r  test_u/failure_o_reg[2]_i_51/CO[3]
+                         net (fo=1, routed)           0.000     9.836    test_u/failure_o_reg[2]_i_51_n_0
+    SLICE_X52Y38         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.950 r  test_u/failure_o_reg[2]_i_29/CO[3]
+                         net (fo=1, routed)           0.000     9.950    test_u/failure_o_reg[2]_i_29_n_0
+    SLICE_X52Y39         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    10.064 r  test_u/failure_o_reg[2]_i_16/CO[3]
+                         net (fo=1, routed)           0.000    10.064    test_u/failure_o_reg[2]_i_16_n_0
+    SLICE_X52Y40         CARRY4 (Prop_carry4_CI_CO[2])
+                                                      0.228    10.292 f  test_u/failure_o_reg[2]_i_10/CO[2]
+                         net (fo=4, routed)           0.494    10.786    test_u/error_code2
+    SLICE_X51Y42         LUT5 (Prop_lut5_I4_O)        0.313    11.099 r  test_u/failure_o[0]_i_18/O
+                         net (fo=1, routed)           0.295    11.393    test_u/failure_o[0]_i_18_n_0
+    SLICE_X51Y44         LUT6 (Prop_lut6_I2_O)        0.124    11.517 r  test_u/failure_o[0]_i_10/O
+                         net (fo=1, routed)           0.450    11.967    test_u/failure_o[0]_i_10_n_0
+    SLICE_X49Y42         LUT6 (Prop_lut6_I4_O)        0.124    12.091 r  test_u/failure_o[0]_i_2/O
+                         net (fo=1, routed)           0.151    12.243    test_u/failure_o[0]_i_2_n_0
+    SLICE_X49Y42         LUT6 (Prop_lut6_I1_O)        0.124    12.367 r  test_u/failure_o[0]_i_1/O
+                         net (fo=4, routed)           0.467    12.834    test_u/failure_o[0]_i_1_n_0
+    SLICE_X50Y42         LUT4 (Prop_lut4_I2_O)        0.124    12.958 r  test_u/fail_o_i_1/O
+                         net (fo=9, routed)           0.375    13.333    test_u/fail_o_i_1_n_0
+    SLICE_X49Y42         FDRE                                         r  test_u/failure_o_reg[2]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r  
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=7943, routed)        1.677     8.656    test_u/clk_i
+    SLICE_X49Y42         FDRE                                         r  test_u/failure_o_reg[2]/C
+                         clock pessimism              0.568     9.224    
+                         clock uncertainty           -0.077     9.148    
+    SLICE_X49Y42         FDRE (Setup_fdre_C_CE)      -0.205     8.943    test_u/failure_o_reg[2]
+  -------------------------------------------------------------------
+                         required time                          8.943    
+                         arrival time                         -13.333    
+  -------------------------------------------------------------------
+                         slack                                 -4.390    
+
+Slack (VIOLATED) :        -4.390ns  (required time - arrival time)
+  Source:                 test_u/cycles_reg[27]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            test_u/failure_o_reg[3]/CE
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        14.063ns  (logic 4.609ns (32.775%)  route 9.454ns (67.225%))
+  Logic Levels:           27  (CARRY4=11 LUT2=2 LUT3=1 LUT4=1 LUT5=4 LUT6=8)
+  Clock Path Skew:        -0.046ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.344ns = ( 8.656 - 10.000 ) 
+    Source Clock Delay      (SCD):    -0.730ns
+    Clock Pessimism Removal (CPR):    0.568ns
+  Clock Uncertainty:      0.077ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.136ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=7943, routed)        1.810    -0.730    test_u/clk_i
+    SLICE_X42Y44         FDRE                                         r  test_u/cycles_reg[27]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X42Y44         FDRE (Prop_fdre_C_Q)         0.478    -0.252 r  test_u/cycles_reg[27]/Q
+                         net (fo=12, routed)          0.708     0.456    test_u/cycles[27]
+    SLICE_X42Y44         LUT5 (Prop_lut5_I1_O)        0.296     0.752 r  test_u/dut_i_704/O
+                         net (fo=3, routed)           0.603     1.355    test_u/dut_i_704_n_0
+    SLICE_X41Y41         LUT6 (Prop_lut6_I5_O)        0.124     1.479 f  test_u/dut_i_289/O
+                         net (fo=3, routed)           0.501     1.980    test_u/dut_i_289_n_0
+    SLICE_X39Y39         LUT6 (Prop_lut6_I2_O)        0.124     2.104 f  test_u/dut_i_1/O
+                         net (fo=26, routed)          0.512     2.616    test_u/dut/rst_i
+    SLICE_X38Y39         LUT2 (Prop_lut2_I0_O)        0.124     2.740 f  test_u/dut/file_ready_o_INST_0_i_1/O
+                         net (fo=1798, routed)        0.347     3.087    test_u/dut/lanes[1].tx_boundary/rst_i
+    SLICE_X39Y39         LUT3 (Prop_lut3_I2_O)        0.124     3.211 r  test_u/dut/lanes[1].tx_boundary/valid_o_INST_0/O
+                         net (fo=3, routed)           0.624     3.835    test_u/dut/lanes[1].tx_boundary_n_1
+    SLICE_X43Y34         LUT5 (Prop_lut5_I3_O)        0.124     3.959 r  test_u/dut/out_data_o[127]_INST_0_i_1/O
+                         net (fo=167, routed)         0.637     4.596    test_u/dut/osel
+    SLICE_X42Y35         LUT2 (Prop_lut2_I0_O)        0.124     4.720 r  test_u/dut/out_chunk_o[0]_INST_0/O
+                         net (fo=840, routed)         1.540     6.261    test_u/oi[0]
+    SLICE_X48Y29         LUT6 (Prop_lut6_I4_O)        0.124     6.385 r  test_u/g2_b2/O
+                         net (fo=1, routed)           0.792     7.177    test_u/g2_b2_n_0
+    SLICE_X56Y28         LUT5 (Prop_lut5_I0_O)        0.124     7.301 r  test_u/failure_o[2]_i_532/O
+                         net (fo=1, routed)           0.317     7.618    test_u/failure_o[2]_i_532_n_0
+    SLICE_X55Y29         LUT6 (Prop_lut6_I5_O)        0.124     7.742 r  test_u/failure_o[2]_i_477/O
+                         net (fo=1, routed)           0.640     8.382    test_u/failure_o[2]_i_477_n_0
+    SLICE_X52Y30         LUT6 (Prop_lut6_I3_O)        0.124     8.506 r  test_u/failure_o[2]_i_429/O
+                         net (fo=1, routed)           0.000     8.506    test_u/failure_o[2]_i_429_n_0
+    SLICE_X52Y30         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532     9.038 r  test_u/failure_o_reg[2]_i_376/CO[3]
+                         net (fo=1, routed)           0.000     9.038    test_u/failure_o_reg[2]_i_376_n_0
+    SLICE_X52Y31         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.152 r  test_u/failure_o_reg[2]_i_327/CO[3]
+                         net (fo=1, routed)           0.000     9.152    test_u/failure_o_reg[2]_i_327_n_0
+    SLICE_X52Y32         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.266 r  test_u/failure_o_reg[2]_i_283/CO[3]
+                         net (fo=1, routed)           0.000     9.266    test_u/failure_o_reg[2]_i_283_n_0
+    SLICE_X52Y33         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.380 r  test_u/failure_o_reg[2]_i_233/CO[3]
+                         net (fo=1, routed)           0.000     9.380    test_u/failure_o_reg[2]_i_233_n_0
+    SLICE_X52Y34         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.494 r  test_u/failure_o_reg[2]_i_191/CO[3]
+                         net (fo=1, routed)           0.000     9.494    test_u/failure_o_reg[2]_i_191_n_0
+    SLICE_X52Y35         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.608 r  test_u/failure_o_reg[2]_i_141/CO[3]
+                         net (fo=1, routed)           0.000     9.608    test_u/failure_o_reg[2]_i_141_n_0
+    SLICE_X52Y36         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.722 r  test_u/failure_o_reg[2]_i_87/CO[3]
+                         net (fo=1, routed)           0.000     9.722    test_u/failure_o_reg[2]_i_87_n_0
+    SLICE_X52Y37         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.836 r  test_u/failure_o_reg[2]_i_51/CO[3]
+                         net (fo=1, routed)           0.000     9.836    test_u/failure_o_reg[2]_i_51_n_0
+    SLICE_X52Y38         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.950 r  test_u/failure_o_reg[2]_i_29/CO[3]
+                         net (fo=1, routed)           0.000     9.950    test_u/failure_o_reg[2]_i_29_n_0
+    SLICE_X52Y39         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    10.064 r  test_u/failure_o_reg[2]_i_16/CO[3]
+                         net (fo=1, routed)           0.000    10.064    test_u/failure_o_reg[2]_i_16_n_0
+    SLICE_X52Y40         CARRY4 (Prop_carry4_CI_CO[2])
+                                                      0.228    10.292 f  test_u/failure_o_reg[2]_i_10/CO[2]
+                         net (fo=4, routed)           0.494    10.786    test_u/error_code2
+    SLICE_X51Y42         LUT5 (Prop_lut5_I4_O)        0.313    11.099 r  test_u/failure_o[0]_i_18/O
+                         net (fo=1, routed)           0.295    11.393    test_u/failure_o[0]_i_18_n_0
+    SLICE_X51Y44         LUT6 (Prop_lut6_I2_O)        0.124    11.517 r  test_u/failure_o[0]_i_10/O
+                         net (fo=1, routed)           0.450    11.967    test_u/failure_o[0]_i_10_n_0
+    SLICE_X49Y42         LUT6 (Prop_lut6_I4_O)        0.124    12.091 r  test_u/failure_o[0]_i_2/O
+                         net (fo=1, routed)           0.151    12.243    test_u/failure_o[0]_i_2_n_0
+    SLICE_X49Y42         LUT6 (Prop_lut6_I1_O)        0.124    12.367 r  test_u/failure_o[0]_i_1/O
+                         net (fo=4, routed)           0.467    12.834    test_u/failure_o[0]_i_1_n_0
+    SLICE_X50Y42         LUT4 (Prop_lut4_I2_O)        0.124    12.958 r  test_u/fail_o_i_1/O
+                         net (fo=9, routed)           0.375    13.333    test_u/fail_o_i_1_n_0
+    SLICE_X49Y42         FDRE                                         r  test_u/failure_o_reg[3]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r  
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=7943, routed)        1.677     8.656    test_u/clk_i
+    SLICE_X49Y42         FDRE                                         r  test_u/failure_o_reg[3]/C
+                         clock pessimism              0.568     9.224    
+                         clock uncertainty           -0.077     9.148    
+    SLICE_X49Y42         FDRE (Setup_fdre_C_CE)      -0.205     8.943    test_u/failure_o_reg[3]
+  -------------------------------------------------------------------
+                         required time                          8.943    
+                         arrival time                         -13.333    
+  -------------------------------------------------------------------
+                         slack                                 -4.390    
+
+Slack (VIOLATED) :        -4.312ns  (required time - arrival time)
+  Source:                 test_u/cycles_reg[27]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            test_u/done_o_reg/CE
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        14.019ns  (logic 4.609ns (32.876%)  route 9.410ns (67.124%))
+  Logic Levels:           27  (CARRY4=11 LUT2=2 LUT3=1 LUT5=5 LUT6=8)
+  Clock Path Skew:        -0.047ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.345ns = ( 8.655 - 10.000 ) 
+    Source Clock Delay      (SCD):    -0.730ns
+    Clock Pessimism Removal (CPR):    0.568ns
+  Clock Uncertainty:      0.077ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.136ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=7943, routed)        1.810    -0.730    test_u/clk_i
+    SLICE_X42Y44         FDRE                                         r  test_u/cycles_reg[27]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X42Y44         FDRE (Prop_fdre_C_Q)         0.478    -0.252 r  test_u/cycles_reg[27]/Q
+                         net (fo=12, routed)          0.708     0.456    test_u/cycles[27]
+    SLICE_X42Y44         LUT5 (Prop_lut5_I1_O)        0.296     0.752 r  test_u/dut_i_704/O
+                         net (fo=3, routed)           0.603     1.355    test_u/dut_i_704_n_0
+    SLICE_X41Y41         LUT6 (Prop_lut6_I5_O)        0.124     1.479 f  test_u/dut_i_289/O
+                         net (fo=3, routed)           0.501     1.980    test_u/dut_i_289_n_0
+    SLICE_X39Y39         LUT6 (Prop_lut6_I2_O)        0.124     2.104 f  test_u/dut_i_1/O
+                         net (fo=26, routed)          0.512     2.616    test_u/dut/rst_i
+    SLICE_X38Y39         LUT2 (Prop_lut2_I0_O)        0.124     2.740 f  test_u/dut/file_ready_o_INST_0_i_1/O
+                         net (fo=1798, routed)        0.347     3.087    test_u/dut/lanes[1].tx_boundary/rst_i
+    SLICE_X39Y39         LUT3 (Prop_lut3_I2_O)        0.124     3.211 r  test_u/dut/lanes[1].tx_boundary/valid_o_INST_0/O
+                         net (fo=3, routed)           0.624     3.835    test_u/dut/lanes[1].tx_boundary_n_1
+    SLICE_X43Y34         LUT5 (Prop_lut5_I3_O)        0.124     3.959 r  test_u/dut/out_data_o[127]_INST_0_i_1/O
+                         net (fo=167, routed)         0.637     4.596    test_u/dut/osel
+    SLICE_X42Y35         LUT2 (Prop_lut2_I0_O)        0.124     4.720 r  test_u/dut/out_chunk_o[0]_INST_0/O
+                         net (fo=840, routed)         1.540     6.261    test_u/oi[0]
+    SLICE_X48Y29         LUT6 (Prop_lut6_I4_O)        0.124     6.385 r  test_u/g2_b2/O
+                         net (fo=1, routed)           0.792     7.177    test_u/g2_b2_n_0
+    SLICE_X56Y28         LUT5 (Prop_lut5_I0_O)        0.124     7.301 r  test_u/failure_o[2]_i_532/O
+                         net (fo=1, routed)           0.317     7.618    test_u/failure_o[2]_i_532_n_0
+    SLICE_X55Y29         LUT6 (Prop_lut6_I5_O)        0.124     7.742 r  test_u/failure_o[2]_i_477/O
+                         net (fo=1, routed)           0.640     8.382    test_u/failure_o[2]_i_477_n_0
+    SLICE_X52Y30         LUT6 (Prop_lut6_I3_O)        0.124     8.506 r  test_u/failure_o[2]_i_429/O
+                         net (fo=1, routed)           0.000     8.506    test_u/failure_o[2]_i_429_n_0
+    SLICE_X52Y30         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532     9.038 r  test_u/failure_o_reg[2]_i_376/CO[3]
+                         net (fo=1, routed)           0.000     9.038    test_u/failure_o_reg[2]_i_376_n_0
+    SLICE_X52Y31         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.152 r  test_u/failure_o_reg[2]_i_327/CO[3]
+                         net (fo=1, routed)           0.000     9.152    test_u/failure_o_reg[2]_i_327_n_0
+    SLICE_X52Y32         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.266 r  test_u/failure_o_reg[2]_i_283/CO[3]
+                         net (fo=1, routed)           0.000     9.266    test_u/failure_o_reg[2]_i_283_n_0
+    SLICE_X52Y33         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.380 r  test_u/failure_o_reg[2]_i_233/CO[3]
+                         net (fo=1, routed)           0.000     9.380    test_u/failure_o_reg[2]_i_233_n_0
+    SLICE_X52Y34         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.494 r  test_u/failure_o_reg[2]_i_191/CO[3]
+                         net (fo=1, routed)           0.000     9.494    test_u/failure_o_reg[2]_i_191_n_0
+    SLICE_X52Y35         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.608 r  test_u/failure_o_reg[2]_i_141/CO[3]
+                         net (fo=1, routed)           0.000     9.608    test_u/failure_o_reg[2]_i_141_n_0
+    SLICE_X52Y36         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.722 r  test_u/failure_o_reg[2]_i_87/CO[3]
+                         net (fo=1, routed)           0.000     9.722    test_u/failure_o_reg[2]_i_87_n_0
+    SLICE_X52Y37         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.836 r  test_u/failure_o_reg[2]_i_51/CO[3]
+                         net (fo=1, routed)           0.000     9.836    test_u/failure_o_reg[2]_i_51_n_0
+    SLICE_X52Y38         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.950 r  test_u/failure_o_reg[2]_i_29/CO[3]
+                         net (fo=1, routed)           0.000     9.950    test_u/failure_o_reg[2]_i_29_n_0
+    SLICE_X52Y39         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    10.064 r  test_u/failure_o_reg[2]_i_16/CO[3]
+                         net (fo=1, routed)           0.000    10.064    test_u/failure_o_reg[2]_i_16_n_0
+    SLICE_X52Y40         CARRY4 (Prop_carry4_CI_CO[2])
+                                                      0.228    10.292 f  test_u/failure_o_reg[2]_i_10/CO[2]
+                         net (fo=4, routed)           0.494    10.786    test_u/error_code2
+    SLICE_X51Y42         LUT5 (Prop_lut5_I4_O)        0.313    11.099 r  test_u/failure_o[0]_i_18/O
+                         net (fo=1, routed)           0.295    11.393    test_u/failure_o[0]_i_18_n_0
+    SLICE_X51Y44         LUT6 (Prop_lut6_I2_O)        0.124    11.517 r  test_u/failure_o[0]_i_10/O
+                         net (fo=1, routed)           0.450    11.967    test_u/failure_o[0]_i_10_n_0
+    SLICE_X49Y42         LUT6 (Prop_lut6_I4_O)        0.124    12.091 r  test_u/failure_o[0]_i_2/O
+                         net (fo=1, routed)           0.151    12.243    test_u/failure_o[0]_i_2_n_0
+    SLICE_X49Y42         LUT6 (Prop_lut6_I1_O)        0.124    12.367 r  test_u/failure_o[0]_i_1/O
+                         net (fo=4, routed)           0.609    12.976    test_u/failure_o[0]_i_1_n_0
+    SLICE_X50Y43         LUT5 (Prop_lut5_I2_O)        0.124    13.100 r  test_u/done_o_i_1/O
+                         net (fo=1, routed)           0.190    13.290    test_u/done_o_i_1_n_0
+    SLICE_X50Y43         FDRE                                         r  test_u/done_o_reg/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r  
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=7943, routed)        1.676     8.655    test_u/clk_i
+    SLICE_X50Y43         FDRE                                         r  test_u/done_o_reg/C
+                         clock pessimism              0.568     9.223    
+                         clock uncertainty           -0.077     9.147    
+    SLICE_X50Y43         FDRE (Setup_fdre_C_CE)      -0.169     8.978    test_u/done_o_reg
+  -------------------------------------------------------------------
+                         required time                          8.978    
+                         arrival time                         -13.290    
+  -------------------------------------------------------------------
+                         slack                                 -4.312    
+
+Slack (VIOLATED) :        -4.257ns  (required time - arrival time)
+  Source:                 test_u/cycles_reg[27]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            test_u/state_reg[2]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        14.164ns  (logic 4.733ns (33.416%)  route 9.431ns (66.584%))
+  Logic Levels:           28  (CARRY4=11 LUT2=2 LUT3=1 LUT4=1 LUT5=4 LUT6=9)
+  Clock Path Skew:        -0.046ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.344ns = ( 8.656 - 10.000 ) 
+    Source Clock Delay      (SCD):    -0.730ns
+    Clock Pessimism Removal (CPR):    0.568ns
+  Clock Uncertainty:      0.077ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.136ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=7943, routed)        1.810    -0.730    test_u/clk_i
+    SLICE_X42Y44         FDRE                                         r  test_u/cycles_reg[27]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X42Y44         FDRE (Prop_fdre_C_Q)         0.478    -0.252 r  test_u/cycles_reg[27]/Q
+                         net (fo=12, routed)          0.708     0.456    test_u/cycles[27]
+    SLICE_X42Y44         LUT5 (Prop_lut5_I1_O)        0.296     0.752 r  test_u/dut_i_704/O
+                         net (fo=3, routed)           0.603     1.355    test_u/dut_i_704_n_0
+    SLICE_X41Y41         LUT6 (Prop_lut6_I5_O)        0.124     1.479 f  test_u/dut_i_289/O
+                         net (fo=3, routed)           0.501     1.980    test_u/dut_i_289_n_0
+    SLICE_X39Y39         LUT6 (Prop_lut6_I2_O)        0.124     2.104 f  test_u/dut_i_1/O
+                         net (fo=26, routed)          0.512     2.616    test_u/dut/rst_i
+    SLICE_X38Y39         LUT2 (Prop_lut2_I0_O)        0.124     2.740 f  test_u/dut/file_ready_o_INST_0_i_1/O
+                         net (fo=1798, routed)        0.347     3.087    test_u/dut/lanes[1].tx_boundary/rst_i
+    SLICE_X39Y39         LUT3 (Prop_lut3_I2_O)        0.124     3.211 r  test_u/dut/lanes[1].tx_boundary/valid_o_INST_0/O
+                         net (fo=3, routed)           0.624     3.835    test_u/dut/lanes[1].tx_boundary_n_1
+    SLICE_X43Y34         LUT5 (Prop_lut5_I3_O)        0.124     3.959 r  test_u/dut/out_data_o[127]_INST_0_i_1/O
+                         net (fo=167, routed)         0.637     4.596    test_u/dut/osel
+    SLICE_X42Y35         LUT2 (Prop_lut2_I0_O)        0.124     4.720 r  test_u/dut/out_chunk_o[0]_INST_0/O
+                         net (fo=840, routed)         1.540     6.261    test_u/oi[0]
+    SLICE_X48Y29         LUT6 (Prop_lut6_I4_O)        0.124     6.385 r  test_u/g2_b2/O
+                         net (fo=1, routed)           0.792     7.177    test_u/g2_b2_n_0
+    SLICE_X56Y28         LUT5 (Prop_lut5_I0_O)        0.124     7.301 r  test_u/failure_o[2]_i_532/O
+                         net (fo=1, routed)           0.317     7.618    test_u/failure_o[2]_i_532_n_0
+    SLICE_X55Y29         LUT6 (Prop_lut6_I5_O)        0.124     7.742 r  test_u/failure_o[2]_i_477/O
+                         net (fo=1, routed)           0.640     8.382    test_u/failure_o[2]_i_477_n_0
+    SLICE_X52Y30         LUT6 (Prop_lut6_I3_O)        0.124     8.506 r  test_u/failure_o[2]_i_429/O
+                         net (fo=1, routed)           0.000     8.506    test_u/failure_o[2]_i_429_n_0
+    SLICE_X52Y30         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532     9.038 r  test_u/failure_o_reg[2]_i_376/CO[3]
+                         net (fo=1, routed)           0.000     9.038    test_u/failure_o_reg[2]_i_376_n_0
+    SLICE_X52Y31         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.152 r  test_u/failure_o_reg[2]_i_327/CO[3]
+                         net (fo=1, routed)           0.000     9.152    test_u/failure_o_reg[2]_i_327_n_0
+    SLICE_X52Y32         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.266 r  test_u/failure_o_reg[2]_i_283/CO[3]
+                         net (fo=1, routed)           0.000     9.266    test_u/failure_o_reg[2]_i_283_n_0
+    SLICE_X52Y33         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.380 r  test_u/failure_o_reg[2]_i_233/CO[3]
+                         net (fo=1, routed)           0.000     9.380    test_u/failure_o_reg[2]_i_233_n_0
+    SLICE_X52Y34         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.494 r  test_u/failure_o_reg[2]_i_191/CO[3]
+                         net (fo=1, routed)           0.000     9.494    test_u/failure_o_reg[2]_i_191_n_0
+    SLICE_X52Y35         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.608 r  test_u/failure_o_reg[2]_i_141/CO[3]
+                         net (fo=1, routed)           0.000     9.608    test_u/failure_o_reg[2]_i_141_n_0
+    SLICE_X52Y36         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.722 r  test_u/failure_o_reg[2]_i_87/CO[3]
+                         net (fo=1, routed)           0.000     9.722    test_u/failure_o_reg[2]_i_87_n_0
+    SLICE_X52Y37         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.836 r  test_u/failure_o_reg[2]_i_51/CO[3]
+                         net (fo=1, routed)           0.000     9.836    test_u/failure_o_reg[2]_i_51_n_0
+    SLICE_X52Y38         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.950 r  test_u/failure_o_reg[2]_i_29/CO[3]
+                         net (fo=1, routed)           0.000     9.950    test_u/failure_o_reg[2]_i_29_n_0
+    SLICE_X52Y39         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    10.064 r  test_u/failure_o_reg[2]_i_16/CO[3]
+                         net (fo=1, routed)           0.000    10.064    test_u/failure_o_reg[2]_i_16_n_0
+    SLICE_X52Y40         CARRY4 (Prop_carry4_CI_CO[2])
+                                                      0.228    10.292 f  test_u/failure_o_reg[2]_i_10/CO[2]
+                         net (fo=4, routed)           0.494    10.786    test_u/error_code2
+    SLICE_X51Y42         LUT5 (Prop_lut5_I4_O)        0.313    11.099 r  test_u/failure_o[0]_i_18/O
+                         net (fo=1, routed)           0.295    11.393    test_u/failure_o[0]_i_18_n_0
+    SLICE_X51Y44         LUT6 (Prop_lut6_I2_O)        0.124    11.517 r  test_u/failure_o[0]_i_10/O
+                         net (fo=1, routed)           0.450    11.967    test_u/failure_o[0]_i_10_n_0
+    SLICE_X49Y42         LUT6 (Prop_lut6_I4_O)        0.124    12.091 r  test_u/failure_o[0]_i_2/O
+                         net (fo=1, routed)           0.151    12.243    test_u/failure_o[0]_i_2_n_0
+    SLICE_X49Y42         LUT6 (Prop_lut6_I1_O)        0.124    12.367 r  test_u/failure_o[0]_i_1/O
+                         net (fo=4, routed)           0.467    12.834    test_u/failure_o[0]_i_1_n_0
+    SLICE_X50Y42         LUT4 (Prop_lut4_I2_O)        0.124    12.958 r  test_u/fail_o_i_1/O
+                         net (fo=9, routed)           0.352    13.310    test_u/fail_o_i_1_n_0
+    SLICE_X47Y42         LUT6 (Prop_lut6_I4_O)        0.124    13.434 r  test_u/state[2]_i_1/O
+                         net (fo=1, routed)           0.000    13.434    test_u/state[2]_i_1_n_0
+    SLICE_X47Y42         FDRE                                         r  test_u/state_reg[2]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r  
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=7943, routed)        1.677     8.656    test_u/clk_i
+    SLICE_X47Y42         FDRE                                         r  test_u/state_reg[2]/C
+                         clock pessimism              0.568     9.224    
+                         clock uncertainty           -0.077     9.148    
+    SLICE_X47Y42         FDRE (Setup_fdre_C_D)        0.029     9.177    test_u/state_reg[2]
+  -------------------------------------------------------------------
+                         required time                          9.177    
+                         arrival time                         -13.434    
+  -------------------------------------------------------------------
+                         slack                                 -4.257    
+
+Slack (VIOLATED) :        -4.254ns  (required time - arrival time)
+  Source:                 test_u/cycles_reg[27]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            test_u/state_reg[1]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        14.162ns  (logic 4.733ns (33.419%)  route 9.429ns (66.581%))
+  Logic Levels:           28  (CARRY4=11 LUT2=2 LUT3=1 LUT4=2 LUT5=4 LUT6=8)
+  Clock Path Skew:        -0.046ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.344ns = ( 8.656 - 10.000 ) 
+    Source Clock Delay      (SCD):    -0.730ns
+    Clock Pessimism Removal (CPR):    0.568ns
+  Clock Uncertainty:      0.077ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.136ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=7943, routed)        1.810    -0.730    test_u/clk_i
+    SLICE_X42Y44         FDRE                                         r  test_u/cycles_reg[27]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X42Y44         FDRE (Prop_fdre_C_Q)         0.478    -0.252 r  test_u/cycles_reg[27]/Q
+                         net (fo=12, routed)          0.708     0.456    test_u/cycles[27]
+    SLICE_X42Y44         LUT5 (Prop_lut5_I1_O)        0.296     0.752 r  test_u/dut_i_704/O
+                         net (fo=3, routed)           0.603     1.355    test_u/dut_i_704_n_0
+    SLICE_X41Y41         LUT6 (Prop_lut6_I5_O)        0.124     1.479 f  test_u/dut_i_289/O
+                         net (fo=3, routed)           0.501     1.980    test_u/dut_i_289_n_0
+    SLICE_X39Y39         LUT6 (Prop_lut6_I2_O)        0.124     2.104 f  test_u/dut_i_1/O
+                         net (fo=26, routed)          0.512     2.616    test_u/dut/rst_i
+    SLICE_X38Y39         LUT2 (Prop_lut2_I0_O)        0.124     2.740 f  test_u/dut/file_ready_o_INST_0_i_1/O
+                         net (fo=1798, routed)        0.347     3.087    test_u/dut/lanes[1].tx_boundary/rst_i
+    SLICE_X39Y39         LUT3 (Prop_lut3_I2_O)        0.124     3.211 r  test_u/dut/lanes[1].tx_boundary/valid_o_INST_0/O
+                         net (fo=3, routed)           0.624     3.835    test_u/dut/lanes[1].tx_boundary_n_1
+    SLICE_X43Y34         LUT5 (Prop_lut5_I3_O)        0.124     3.959 r  test_u/dut/out_data_o[127]_INST_0_i_1/O
+                         net (fo=167, routed)         0.637     4.596    test_u/dut/osel
+    SLICE_X42Y35         LUT2 (Prop_lut2_I0_O)        0.124     4.720 r  test_u/dut/out_chunk_o[0]_INST_0/O
+                         net (fo=840, routed)         1.540     6.261    test_u/oi[0]
+    SLICE_X48Y29         LUT6 (Prop_lut6_I4_O)        0.124     6.385 r  test_u/g2_b2/O
+                         net (fo=1, routed)           0.792     7.177    test_u/g2_b2_n_0
+    SLICE_X56Y28         LUT5 (Prop_lut5_I0_O)        0.124     7.301 r  test_u/failure_o[2]_i_532/O
+                         net (fo=1, routed)           0.317     7.618    test_u/failure_o[2]_i_532_n_0
+    SLICE_X55Y29         LUT6 (Prop_lut6_I5_O)        0.124     7.742 r  test_u/failure_o[2]_i_477/O
+                         net (fo=1, routed)           0.640     8.382    test_u/failure_o[2]_i_477_n_0
+    SLICE_X52Y30         LUT6 (Prop_lut6_I3_O)        0.124     8.506 r  test_u/failure_o[2]_i_429/O
+                         net (fo=1, routed)           0.000     8.506    test_u/failure_o[2]_i_429_n_0
+    SLICE_X52Y30         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532     9.038 r  test_u/failure_o_reg[2]_i_376/CO[3]
+                         net (fo=1, routed)           0.000     9.038    test_u/failure_o_reg[2]_i_376_n_0
+    SLICE_X52Y31         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.152 r  test_u/failure_o_reg[2]_i_327/CO[3]
+                         net (fo=1, routed)           0.000     9.152    test_u/failure_o_reg[2]_i_327_n_0
+    SLICE_X52Y32         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.266 r  test_u/failure_o_reg[2]_i_283/CO[3]
+                         net (fo=1, routed)           0.000     9.266    test_u/failure_o_reg[2]_i_283_n_0
+    SLICE_X52Y33         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.380 r  test_u/failure_o_reg[2]_i_233/CO[3]
+                         net (fo=1, routed)           0.000     9.380    test_u/failure_o_reg[2]_i_233_n_0
+    SLICE_X52Y34         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.494 r  test_u/failure_o_reg[2]_i_191/CO[3]
+                         net (fo=1, routed)           0.000     9.494    test_u/failure_o_reg[2]_i_191_n_0
+    SLICE_X52Y35         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.608 r  test_u/failure_o_reg[2]_i_141/CO[3]
+                         net (fo=1, routed)           0.000     9.608    test_u/failure_o_reg[2]_i_141_n_0
+    SLICE_X52Y36         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.722 r  test_u/failure_o_reg[2]_i_87/CO[3]
+                         net (fo=1, routed)           0.000     9.722    test_u/failure_o_reg[2]_i_87_n_0
+    SLICE_X52Y37         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.836 r  test_u/failure_o_reg[2]_i_51/CO[3]
+                         net (fo=1, routed)           0.000     9.836    test_u/failure_o_reg[2]_i_51_n_0
+    SLICE_X52Y38         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.950 r  test_u/failure_o_reg[2]_i_29/CO[3]
+                         net (fo=1, routed)           0.000     9.950    test_u/failure_o_reg[2]_i_29_n_0
+    SLICE_X52Y39         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    10.064 r  test_u/failure_o_reg[2]_i_16/CO[3]
+                         net (fo=1, routed)           0.000    10.064    test_u/failure_o_reg[2]_i_16_n_0
+    SLICE_X52Y40         CARRY4 (Prop_carry4_CI_CO[2])
+                                                      0.228    10.292 r  test_u/failure_o_reg[2]_i_10/CO[2]
+                         net (fo=4, routed)           0.494    10.786    test_u/error_code2
+    SLICE_X51Y42         LUT5 (Prop_lut5_I4_O)        0.313    11.099 f  test_u/failure_o[0]_i_18/O
+                         net (fo=1, routed)           0.295    11.393    test_u/failure_o[0]_i_18_n_0
+    SLICE_X51Y44         LUT6 (Prop_lut6_I2_O)        0.124    11.517 f  test_u/failure_o[0]_i_10/O
+                         net (fo=1, routed)           0.450    11.967    test_u/failure_o[0]_i_10_n_0
+    SLICE_X49Y42         LUT6 (Prop_lut6_I4_O)        0.124    12.091 f  test_u/failure_o[0]_i_2/O
+                         net (fo=1, routed)           0.151    12.243    test_u/failure_o[0]_i_2_n_0
+    SLICE_X49Y42         LUT6 (Prop_lut6_I1_O)        0.124    12.367 f  test_u/failure_o[0]_i_1/O
+                         net (fo=4, routed)           0.467    12.834    test_u/failure_o[0]_i_1_n_0
+    SLICE_X50Y42         LUT4 (Prop_lut4_I2_O)        0.124    12.958 f  test_u/fail_o_i_1/O
+                         net (fo=9, routed)           0.351    13.309    test_u/fail_o_i_1_n_0
+    SLICE_X49Y41         LUT4 (Prop_lut4_I3_O)        0.124    13.433 r  test_u/state[1]_i_1/O
+                         net (fo=1, routed)           0.000    13.433    test_u/state[1]_i_1_n_0
+    SLICE_X49Y41         FDRE                                         r  test_u/state_reg[1]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r  
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=7943, routed)        1.677     8.656    test_u/clk_i
+    SLICE_X49Y41         FDRE                                         r  test_u/state_reg[1]/C
+                         clock pessimism              0.568     9.224    
+                         clock uncertainty           -0.077     9.148    
+    SLICE_X49Y41         FDRE (Setup_fdre_C_D)        0.031     9.179    test_u/state_reg[1]
+  -------------------------------------------------------------------
+                         required time                          9.179    
+                         arrival time                         -13.433    
+  -------------------------------------------------------------------
+                         slack                                 -4.254    
+
+Slack (VIOLATED) :        -4.252ns  (required time - arrival time)
+  Source:                 test_u/cycles_reg[27]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            test_u/state_reg[0]/D
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        14.161ns  (logic 4.733ns (33.423%)  route 9.428ns (66.577%))
+  Logic Levels:           28  (CARRY4=11 LUT2=2 LUT3=2 LUT4=1 LUT5=4 LUT6=8)
+  Clock Path Skew:        -0.046ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.344ns = ( 8.656 - 10.000 ) 
+    Source Clock Delay      (SCD):    -0.730ns
+    Clock Pessimism Removal (CPR):    0.568ns
+  Clock Uncertainty:      0.077ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.136ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=7943, routed)        1.810    -0.730    test_u/clk_i
+    SLICE_X42Y44         FDRE                                         r  test_u/cycles_reg[27]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X42Y44         FDRE (Prop_fdre_C_Q)         0.478    -0.252 r  test_u/cycles_reg[27]/Q
+                         net (fo=12, routed)          0.708     0.456    test_u/cycles[27]
+    SLICE_X42Y44         LUT5 (Prop_lut5_I1_O)        0.296     0.752 r  test_u/dut_i_704/O
+                         net (fo=3, routed)           0.603     1.355    test_u/dut_i_704_n_0
+    SLICE_X41Y41         LUT6 (Prop_lut6_I5_O)        0.124     1.479 f  test_u/dut_i_289/O
+                         net (fo=3, routed)           0.501     1.980    test_u/dut_i_289_n_0
+    SLICE_X39Y39         LUT6 (Prop_lut6_I2_O)        0.124     2.104 f  test_u/dut_i_1/O
+                         net (fo=26, routed)          0.512     2.616    test_u/dut/rst_i
+    SLICE_X38Y39         LUT2 (Prop_lut2_I0_O)        0.124     2.740 f  test_u/dut/file_ready_o_INST_0_i_1/O
+                         net (fo=1798, routed)        0.347     3.087    test_u/dut/lanes[1].tx_boundary/rst_i
+    SLICE_X39Y39         LUT3 (Prop_lut3_I2_O)        0.124     3.211 r  test_u/dut/lanes[1].tx_boundary/valid_o_INST_0/O
+                         net (fo=3, routed)           0.624     3.835    test_u/dut/lanes[1].tx_boundary_n_1
+    SLICE_X43Y34         LUT5 (Prop_lut5_I3_O)        0.124     3.959 r  test_u/dut/out_data_o[127]_INST_0_i_1/O
+                         net (fo=167, routed)         0.637     4.596    test_u/dut/osel
+    SLICE_X42Y35         LUT2 (Prop_lut2_I0_O)        0.124     4.720 r  test_u/dut/out_chunk_o[0]_INST_0/O
+                         net (fo=840, routed)         1.540     6.261    test_u/oi[0]
+    SLICE_X48Y29         LUT6 (Prop_lut6_I4_O)        0.124     6.385 r  test_u/g2_b2/O
+                         net (fo=1, routed)           0.792     7.177    test_u/g2_b2_n_0
+    SLICE_X56Y28         LUT5 (Prop_lut5_I0_O)        0.124     7.301 r  test_u/failure_o[2]_i_532/O
+                         net (fo=1, routed)           0.317     7.618    test_u/failure_o[2]_i_532_n_0
+    SLICE_X55Y29         LUT6 (Prop_lut6_I5_O)        0.124     7.742 r  test_u/failure_o[2]_i_477/O
+                         net (fo=1, routed)           0.640     8.382    test_u/failure_o[2]_i_477_n_0
+    SLICE_X52Y30         LUT6 (Prop_lut6_I3_O)        0.124     8.506 r  test_u/failure_o[2]_i_429/O
+                         net (fo=1, routed)           0.000     8.506    test_u/failure_o[2]_i_429_n_0
+    SLICE_X52Y30         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532     9.038 r  test_u/failure_o_reg[2]_i_376/CO[3]
+                         net (fo=1, routed)           0.000     9.038    test_u/failure_o_reg[2]_i_376_n_0
+    SLICE_X52Y31         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.152 r  test_u/failure_o_reg[2]_i_327/CO[3]
+                         net (fo=1, routed)           0.000     9.152    test_u/failure_o_reg[2]_i_327_n_0
+    SLICE_X52Y32         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.266 r  test_u/failure_o_reg[2]_i_283/CO[3]
+                         net (fo=1, routed)           0.000     9.266    test_u/failure_o_reg[2]_i_283_n_0
+    SLICE_X52Y33         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.380 r  test_u/failure_o_reg[2]_i_233/CO[3]
+                         net (fo=1, routed)           0.000     9.380    test_u/failure_o_reg[2]_i_233_n_0
+    SLICE_X52Y34         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.494 r  test_u/failure_o_reg[2]_i_191/CO[3]
+                         net (fo=1, routed)           0.000     9.494    test_u/failure_o_reg[2]_i_191_n_0
+    SLICE_X52Y35         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.608 r  test_u/failure_o_reg[2]_i_141/CO[3]
+                         net (fo=1, routed)           0.000     9.608    test_u/failure_o_reg[2]_i_141_n_0
+    SLICE_X52Y36         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.722 r  test_u/failure_o_reg[2]_i_87/CO[3]
+                         net (fo=1, routed)           0.000     9.722    test_u/failure_o_reg[2]_i_87_n_0
+    SLICE_X52Y37         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.836 r  test_u/failure_o_reg[2]_i_51/CO[3]
+                         net (fo=1, routed)           0.000     9.836    test_u/failure_o_reg[2]_i_51_n_0
+    SLICE_X52Y38         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.950 r  test_u/failure_o_reg[2]_i_29/CO[3]
+                         net (fo=1, routed)           0.000     9.950    test_u/failure_o_reg[2]_i_29_n_0
+    SLICE_X52Y39         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    10.064 r  test_u/failure_o_reg[2]_i_16/CO[3]
+                         net (fo=1, routed)           0.000    10.064    test_u/failure_o_reg[2]_i_16_n_0
+    SLICE_X52Y40         CARRY4 (Prop_carry4_CI_CO[2])
+                                                      0.228    10.292 f  test_u/failure_o_reg[2]_i_10/CO[2]
+                         net (fo=4, routed)           0.494    10.786    test_u/error_code2
+    SLICE_X51Y42         LUT5 (Prop_lut5_I4_O)        0.313    11.099 r  test_u/failure_o[0]_i_18/O
+                         net (fo=1, routed)           0.295    11.393    test_u/failure_o[0]_i_18_n_0
+    SLICE_X51Y44         LUT6 (Prop_lut6_I2_O)        0.124    11.517 r  test_u/failure_o[0]_i_10/O
+                         net (fo=1, routed)           0.450    11.967    test_u/failure_o[0]_i_10_n_0
+    SLICE_X49Y42         LUT6 (Prop_lut6_I4_O)        0.124    12.091 r  test_u/failure_o[0]_i_2/O
+                         net (fo=1, routed)           0.151    12.243    test_u/failure_o[0]_i_2_n_0
+    SLICE_X49Y42         LUT6 (Prop_lut6_I1_O)        0.124    12.367 r  test_u/failure_o[0]_i_1/O
+                         net (fo=4, routed)           0.467    12.834    test_u/failure_o[0]_i_1_n_0
+    SLICE_X50Y42         LUT4 (Prop_lut4_I2_O)        0.124    12.958 r  test_u/fail_o_i_1/O
+                         net (fo=9, routed)           0.349    13.307    test_u/fail_o_i_1_n_0
+    SLICE_X47Y42         LUT3 (Prop_lut3_I2_O)        0.124    13.431 r  test_u/state[0]_i_1/O
+                         net (fo=1, routed)           0.000    13.431    test_u/state[0]_i_1_n_0
+    SLICE_X47Y42         FDRE                                         r  test_u/state_reg[0]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r  
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=7943, routed)        1.677     8.656    test_u/clk_i
+    SLICE_X47Y42         FDRE                                         r  test_u/state_reg[0]/C
+                         clock pessimism              0.568     9.224    
+                         clock uncertainty           -0.077     9.148    
+    SLICE_X47Y42         FDRE (Setup_fdre_C_D)        0.031     9.179    test_u/state_reg[0]
+  -------------------------------------------------------------------
+                         required time                          9.179    
+                         arrival time                         -13.431    
+  -------------------------------------------------------------------
+                         slack                                 -4.252    
+
+Slack (VIOLATED) :        -4.207ns  (required time - arrival time)
+  Source:                 test_u/cycles_reg[27]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            test_u/fail_o_reg/CE
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        13.913ns  (logic 4.609ns (33.127%)  route 9.304ns (66.873%))
+  Logic Levels:           27  (CARRY4=11 LUT2=2 LUT3=1 LUT4=1 LUT5=4 LUT6=8)
+  Clock Path Skew:        -0.048ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.346ns = ( 8.654 - 10.000 ) 
+    Source Clock Delay      (SCD):    -0.730ns
+    Clock Pessimism Removal (CPR):    0.568ns
+  Clock Uncertainty:      0.077ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.136ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=7943, routed)        1.810    -0.730    test_u/clk_i
+    SLICE_X42Y44         FDRE                                         r  test_u/cycles_reg[27]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X42Y44         FDRE (Prop_fdre_C_Q)         0.478    -0.252 r  test_u/cycles_reg[27]/Q
+                         net (fo=12, routed)          0.708     0.456    test_u/cycles[27]
+    SLICE_X42Y44         LUT5 (Prop_lut5_I1_O)        0.296     0.752 r  test_u/dut_i_704/O
+                         net (fo=3, routed)           0.603     1.355    test_u/dut_i_704_n_0
+    SLICE_X41Y41         LUT6 (Prop_lut6_I5_O)        0.124     1.479 f  test_u/dut_i_289/O
+                         net (fo=3, routed)           0.501     1.980    test_u/dut_i_289_n_0
+    SLICE_X39Y39         LUT6 (Prop_lut6_I2_O)        0.124     2.104 f  test_u/dut_i_1/O
+                         net (fo=26, routed)          0.512     2.616    test_u/dut/rst_i
+    SLICE_X38Y39         LUT2 (Prop_lut2_I0_O)        0.124     2.740 f  test_u/dut/file_ready_o_INST_0_i_1/O
+                         net (fo=1798, routed)        0.347     3.087    test_u/dut/lanes[1].tx_boundary/rst_i
+    SLICE_X39Y39         LUT3 (Prop_lut3_I2_O)        0.124     3.211 r  test_u/dut/lanes[1].tx_boundary/valid_o_INST_0/O
+                         net (fo=3, routed)           0.624     3.835    test_u/dut/lanes[1].tx_boundary_n_1
+    SLICE_X43Y34         LUT5 (Prop_lut5_I3_O)        0.124     3.959 r  test_u/dut/out_data_o[127]_INST_0_i_1/O
+                         net (fo=167, routed)         0.637     4.596    test_u/dut/osel
+    SLICE_X42Y35         LUT2 (Prop_lut2_I0_O)        0.124     4.720 r  test_u/dut/out_chunk_o[0]_INST_0/O
+                         net (fo=840, routed)         1.540     6.261    test_u/oi[0]
+    SLICE_X48Y29         LUT6 (Prop_lut6_I4_O)        0.124     6.385 r  test_u/g2_b2/O
+                         net (fo=1, routed)           0.792     7.177    test_u/g2_b2_n_0
+    SLICE_X56Y28         LUT5 (Prop_lut5_I0_O)        0.124     7.301 r  test_u/failure_o[2]_i_532/O
+                         net (fo=1, routed)           0.317     7.618    test_u/failure_o[2]_i_532_n_0
+    SLICE_X55Y29         LUT6 (Prop_lut6_I5_O)        0.124     7.742 r  test_u/failure_o[2]_i_477/O
+                         net (fo=1, routed)           0.640     8.382    test_u/failure_o[2]_i_477_n_0
+    SLICE_X52Y30         LUT6 (Prop_lut6_I3_O)        0.124     8.506 r  test_u/failure_o[2]_i_429/O
+                         net (fo=1, routed)           0.000     8.506    test_u/failure_o[2]_i_429_n_0
+    SLICE_X52Y30         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532     9.038 r  test_u/failure_o_reg[2]_i_376/CO[3]
+                         net (fo=1, routed)           0.000     9.038    test_u/failure_o_reg[2]_i_376_n_0
+    SLICE_X52Y31         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.152 r  test_u/failure_o_reg[2]_i_327/CO[3]
+                         net (fo=1, routed)           0.000     9.152    test_u/failure_o_reg[2]_i_327_n_0
+    SLICE_X52Y32         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.266 r  test_u/failure_o_reg[2]_i_283/CO[3]
+                         net (fo=1, routed)           0.000     9.266    test_u/failure_o_reg[2]_i_283_n_0
+    SLICE_X52Y33         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.380 r  test_u/failure_o_reg[2]_i_233/CO[3]
+                         net (fo=1, routed)           0.000     9.380    test_u/failure_o_reg[2]_i_233_n_0
+    SLICE_X52Y34         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.494 r  test_u/failure_o_reg[2]_i_191/CO[3]
+                         net (fo=1, routed)           0.000     9.494    test_u/failure_o_reg[2]_i_191_n_0
+    SLICE_X52Y35         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.608 r  test_u/failure_o_reg[2]_i_141/CO[3]
+                         net (fo=1, routed)           0.000     9.608    test_u/failure_o_reg[2]_i_141_n_0
+    SLICE_X52Y36         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.722 r  test_u/failure_o_reg[2]_i_87/CO[3]
+                         net (fo=1, routed)           0.000     9.722    test_u/failure_o_reg[2]_i_87_n_0
+    SLICE_X52Y37         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.836 r  test_u/failure_o_reg[2]_i_51/CO[3]
+                         net (fo=1, routed)           0.000     9.836    test_u/failure_o_reg[2]_i_51_n_0
+    SLICE_X52Y38         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.950 r  test_u/failure_o_reg[2]_i_29/CO[3]
+                         net (fo=1, routed)           0.000     9.950    test_u/failure_o_reg[2]_i_29_n_0
+    SLICE_X52Y39         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    10.064 r  test_u/failure_o_reg[2]_i_16/CO[3]
+                         net (fo=1, routed)           0.000    10.064    test_u/failure_o_reg[2]_i_16_n_0
+    SLICE_X52Y40         CARRY4 (Prop_carry4_CI_CO[2])
+                                                      0.228    10.292 f  test_u/failure_o_reg[2]_i_10/CO[2]
+                         net (fo=4, routed)           0.494    10.786    test_u/error_code2
+    SLICE_X51Y42         LUT5 (Prop_lut5_I4_O)        0.313    11.099 r  test_u/failure_o[0]_i_18/O
+                         net (fo=1, routed)           0.295    11.393    test_u/failure_o[0]_i_18_n_0
+    SLICE_X51Y44         LUT6 (Prop_lut6_I2_O)        0.124    11.517 r  test_u/failure_o[0]_i_10/O
+                         net (fo=1, routed)           0.450    11.967    test_u/failure_o[0]_i_10_n_0
+    SLICE_X49Y42         LUT6 (Prop_lut6_I4_O)        0.124    12.091 r  test_u/failure_o[0]_i_2/O
+                         net (fo=1, routed)           0.151    12.243    test_u/failure_o[0]_i_2_n_0
+    SLICE_X49Y42         LUT6 (Prop_lut6_I1_O)        0.124    12.367 r  test_u/failure_o[0]_i_1/O
+                         net (fo=4, routed)           0.467    12.834    test_u/failure_o[0]_i_1_n_0
+    SLICE_X50Y42         LUT4 (Prop_lut4_I2_O)        0.124    12.958 r  test_u/fail_o_i_1/O
+                         net (fo=9, routed)           0.226    13.184    test_u/fail_o_i_1_n_0
+    SLICE_X50Y42         FDRE                                         r  test_u/fail_o_reg/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r  
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=7943, routed)        1.675     8.654    test_u/clk_i
+    SLICE_X50Y42         FDRE                                         r  test_u/fail_o_reg/C
+                         clock pessimism              0.568     9.222    
+                         clock uncertainty           -0.077     9.146    
+    SLICE_X50Y42         FDRE (Setup_fdre_C_CE)      -0.169     8.977    test_u/fail_o_reg
+  -------------------------------------------------------------------
+                         required time                          8.977    
+                         arrival time                         -13.184    
+  -------------------------------------------------------------------
+                         slack                                 -4.207    
+
+Slack (VIOLATED) :        -4.207ns  (required time - arrival time)
+  Source:                 test_u/cycles_reg[27]/C
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            test_u/failure_o_reg[1]/CE
+                            (rising edge-triggered cell FDRE clocked by raw_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             raw_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (raw_clk rise@10.000ns - raw_clk rise@0.000ns)
+  Data Path Delay:        13.913ns  (logic 4.609ns (33.127%)  route 9.304ns (66.873%))
+  Logic Levels:           27  (CARRY4=11 LUT2=2 LUT3=1 LUT4=1 LUT5=4 LUT6=8)
+  Clock Path Skew:        -0.048ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.346ns = ( 8.654 - 10.000 ) 
+    Source Clock Delay      (SCD):    -0.730ns
+    Clock Pessimism Removal (CPR):    0.568ns
+  Clock Uncertainty:      0.077ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.136ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock raw_clk rise edge)    0.000     0.000 r  
+    E3                                                0.000     0.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000     0.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.482     1.482 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.233     2.715    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.070    -4.355 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.719    -2.636    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096    -2.540 r  clock_u/O
+                         net (fo=7943, routed)        1.810    -0.730    test_u/clk_i
+    SLICE_X42Y44         FDRE                                         r  test_u/cycles_reg[27]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X42Y44         FDRE (Prop_fdre_C_Q)         0.478    -0.252 r  test_u/cycles_reg[27]/Q
+                         net (fo=12, routed)          0.708     0.456    test_u/cycles[27]
+    SLICE_X42Y44         LUT5 (Prop_lut5_I1_O)        0.296     0.752 r  test_u/dut_i_704/O
+                         net (fo=3, routed)           0.603     1.355    test_u/dut_i_704_n_0
+    SLICE_X41Y41         LUT6 (Prop_lut6_I5_O)        0.124     1.479 f  test_u/dut_i_289/O
+                         net (fo=3, routed)           0.501     1.980    test_u/dut_i_289_n_0
+    SLICE_X39Y39         LUT6 (Prop_lut6_I2_O)        0.124     2.104 f  test_u/dut_i_1/O
+                         net (fo=26, routed)          0.512     2.616    test_u/dut/rst_i
+    SLICE_X38Y39         LUT2 (Prop_lut2_I0_O)        0.124     2.740 f  test_u/dut/file_ready_o_INST_0_i_1/O
+                         net (fo=1798, routed)        0.347     3.087    test_u/dut/lanes[1].tx_boundary/rst_i
+    SLICE_X39Y39         LUT3 (Prop_lut3_I2_O)        0.124     3.211 r  test_u/dut/lanes[1].tx_boundary/valid_o_INST_0/O
+                         net (fo=3, routed)           0.624     3.835    test_u/dut/lanes[1].tx_boundary_n_1
+    SLICE_X43Y34         LUT5 (Prop_lut5_I3_O)        0.124     3.959 r  test_u/dut/out_data_o[127]_INST_0_i_1/O
+                         net (fo=167, routed)         0.637     4.596    test_u/dut/osel
+    SLICE_X42Y35         LUT2 (Prop_lut2_I0_O)        0.124     4.720 r  test_u/dut/out_chunk_o[0]_INST_0/O
+                         net (fo=840, routed)         1.540     6.261    test_u/oi[0]
+    SLICE_X48Y29         LUT6 (Prop_lut6_I4_O)        0.124     6.385 r  test_u/g2_b2/O
+                         net (fo=1, routed)           0.792     7.177    test_u/g2_b2_n_0
+    SLICE_X56Y28         LUT5 (Prop_lut5_I0_O)        0.124     7.301 r  test_u/failure_o[2]_i_532/O
+                         net (fo=1, routed)           0.317     7.618    test_u/failure_o[2]_i_532_n_0
+    SLICE_X55Y29         LUT6 (Prop_lut6_I5_O)        0.124     7.742 r  test_u/failure_o[2]_i_477/O
+                         net (fo=1, routed)           0.640     8.382    test_u/failure_o[2]_i_477_n_0
+    SLICE_X52Y30         LUT6 (Prop_lut6_I3_O)        0.124     8.506 r  test_u/failure_o[2]_i_429/O
+                         net (fo=1, routed)           0.000     8.506    test_u/failure_o[2]_i_429_n_0
+    SLICE_X52Y30         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532     9.038 r  test_u/failure_o_reg[2]_i_376/CO[3]
+                         net (fo=1, routed)           0.000     9.038    test_u/failure_o_reg[2]_i_376_n_0
+    SLICE_X52Y31         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.152 r  test_u/failure_o_reg[2]_i_327/CO[3]
+                         net (fo=1, routed)           0.000     9.152    test_u/failure_o_reg[2]_i_327_n_0
+    SLICE_X52Y32         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.266 r  test_u/failure_o_reg[2]_i_283/CO[3]
+                         net (fo=1, routed)           0.000     9.266    test_u/failure_o_reg[2]_i_283_n_0
+    SLICE_X52Y33         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.380 r  test_u/failure_o_reg[2]_i_233/CO[3]
+                         net (fo=1, routed)           0.000     9.380    test_u/failure_o_reg[2]_i_233_n_0
+    SLICE_X52Y34         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.494 r  test_u/failure_o_reg[2]_i_191/CO[3]
+                         net (fo=1, routed)           0.000     9.494    test_u/failure_o_reg[2]_i_191_n_0
+    SLICE_X52Y35         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.608 r  test_u/failure_o_reg[2]_i_141/CO[3]
+                         net (fo=1, routed)           0.000     9.608    test_u/failure_o_reg[2]_i_141_n_0
+    SLICE_X52Y36         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.722 r  test_u/failure_o_reg[2]_i_87/CO[3]
+                         net (fo=1, routed)           0.000     9.722    test_u/failure_o_reg[2]_i_87_n_0
+    SLICE_X52Y37         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.836 r  test_u/failure_o_reg[2]_i_51/CO[3]
+                         net (fo=1, routed)           0.000     9.836    test_u/failure_o_reg[2]_i_51_n_0
+    SLICE_X52Y38         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     9.950 r  test_u/failure_o_reg[2]_i_29/CO[3]
+                         net (fo=1, routed)           0.000     9.950    test_u/failure_o_reg[2]_i_29_n_0
+    SLICE_X52Y39         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    10.064 r  test_u/failure_o_reg[2]_i_16/CO[3]
+                         net (fo=1, routed)           0.000    10.064    test_u/failure_o_reg[2]_i_16_n_0
+    SLICE_X52Y40         CARRY4 (Prop_carry4_CI_CO[2])
+                                                      0.228    10.292 f  test_u/failure_o_reg[2]_i_10/CO[2]
+                         net (fo=4, routed)           0.494    10.786    test_u/error_code2
+    SLICE_X51Y42         LUT5 (Prop_lut5_I4_O)        0.313    11.099 r  test_u/failure_o[0]_i_18/O
+                         net (fo=1, routed)           0.295    11.393    test_u/failure_o[0]_i_18_n_0
+    SLICE_X51Y44         LUT6 (Prop_lut6_I2_O)        0.124    11.517 r  test_u/failure_o[0]_i_10/O
+                         net (fo=1, routed)           0.450    11.967    test_u/failure_o[0]_i_10_n_0
+    SLICE_X49Y42         LUT6 (Prop_lut6_I4_O)        0.124    12.091 r  test_u/failure_o[0]_i_2/O
+                         net (fo=1, routed)           0.151    12.243    test_u/failure_o[0]_i_2_n_0
+    SLICE_X49Y42         LUT6 (Prop_lut6_I1_O)        0.124    12.367 r  test_u/failure_o[0]_i_1/O
+                         net (fo=4, routed)           0.467    12.834    test_u/failure_o[0]_i_1_n_0
+    SLICE_X50Y42         LUT4 (Prop_lut4_I2_O)        0.124    12.958 r  test_u/fail_o_i_1/O
+                         net (fo=9, routed)           0.226    13.184    test_u/fail_o_i_1_n_0
+    SLICE_X50Y42         FDRE                                         r  test_u/failure_o_reg[1]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock raw_clk rise edge)   10.000    10.000 r  
+    E3                                                0.000    10.000 r  CLK100MHZ (IN)
+                         net (fo=0)                   0.000    10.000    CLK100MHZ
+    E3                   IBUF (Prop_ibuf_I_O)         1.411    11.411 r  CLK100MHZ_IBUF_inst/O
+                         net (fo=1, routed)           1.162    12.573    CLK100MHZ_IBUF
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -7.324     5.249 r  mmcm_u/CLKOUT0
+                         net (fo=1, routed)           1.639     6.888    raw_clk
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.091     6.979 r  clock_u/O
+                         net (fo=7943, routed)        1.675     8.654    test_u/clk_i
+    SLICE_X50Y42         FDRE                                         r  test_u/failure_o_reg[1]/C
+                         clock pessimism              0.568     9.222    
+                         clock uncertainty           -0.077     9.146    
+    SLICE_X50Y42         FDRE (Setup_fdre_C_CE)      -0.169     8.977    test_u/failure_o_reg[1]
+  -------------------------------------------------------------------
+                         required time                          8.977    
+                         arrival time                         -13.184    
+  -------------------------------------------------------------------
+                         slack                                 -4.207    
+
+
+
+

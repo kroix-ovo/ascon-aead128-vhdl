@@ -1,0 +1,45 @@
+Fold study (G_FOLDED_ABSORB) - exact commands. Copies of every script are in ./scripts (originals in build/handoff_fold/scripts).
+WT = C:\Users\Symok\Downloads\ascon-aead128-vhdl-main\worktrees\ascon-weight-stream-handoff   (WSL: /mnt/c/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-weight-stream-handoff)
+B  = $WT/build/handoff_fold/scripts            S = ~/ascon_fold_scratch (WSL-native scratch)
+All WSL scripts are launched from Windows PowerShell as:  wsl -d Ubuntu-22.04 -u kroix -- bash <WSL path of script> [args]
+Simulation: WSL system GHDL 1.0.0 (/usr/bin/ghdl). cocotb 2.0.1 from the read-only venv worktrees/ascon-weight-stream-3rpc/build/linux-venv.
+Public test key bytes(range(16)); every independent encryption message uses its own nonce (ranges below).
+
+0. sync.sh                     mirror WT rtl/ + verification/ + scripts into S/wt (LF), pinned KAT copied read-only from the
+                               3rpc worktree and SHA-checked (bbbc3469...), xsim vectors generated offline.
+1. final_regression.sh         (runs 2-8 in order on the final RTL)
+2. kat_textio.sh <cfg> <R> <buf> <fold>   for u1 1 false false | u3 3 false false | u3-buffered 3 true false | u3-fold 3 true true
+     = ghdl -a --std=08 rtl/ascon_pkg.vhd rtl/ascon_permutation.vhd rtl/ascon_aead128_core.vhd verification/vhdl/tb_ascon_aead128.vhd
+       ghdl --elab-run --std=08 tb_ascon_aead128 -gG_VECTOR_FILE=.../xsim_vectors.txt -gG_ROUNDS_PER_CYCLE=R -gG_BUFFERING_ENABLE=B -gG_FOLDED_ABSORB=F --assert-level=error
+   kat_stats.py                cycle stats + per-case identity vs ~/ascon_handoff_scratch (baseline study)
+3. run_batch.sh 1KiB adapter 5207435946358663000 u1 u3 u3-buffered u3-fold        (run_weight_case.py per variant)
+   run_batch.sh full adapter 5207435946358663100 u3-buffered u3-fold  (KEEP=--keep-dumps)
+   run_batch.sh full llama   5207435946358663200 u3-buffered u3-fold
+   (earlier identical-RTL-path runs: u1 full adapter 5207435946358660100, u1 full llama 5207435946358660200)
+4. run_traffic.py S/runs/traffic 5207435946358664000 ; summarize_traffic.py results.json <baseline traffic_results.json>
+   framing_probe.sh             run_traffic.py ... 5207435946358666000 framing_ad16_split_only,framing_pt16_split_only
+5. cocotb_all.sh                (cocotb_run.sh <name> [ENV=..] -- <run.py args>) - matrix in cocotb_matrix.txt
+   ascon_latency.sh             test_ascon re-run with the final test file (error-latency log lines)
+6. synth_verilog.sh /home/kroix/tools/oss-cad-suite/bin/ghdl   (GHDL synth --out=verilog; translation only)
+   netlist_tests.sh             Icarus 11.0 / Verilator 5.053 cocotb runs on the generated netlists
+7. make_equiv.sh ; make_fold_target.sh     (compileall, model-test, test_adapter_export, run_permutation u1/u3,
+                                weight-file-test, board-selftest, board-demo-test; make vhdl-textio-fold-test)
+8. netlist_identity.sh ; netlist_diff_show.sh   (HEAD vs modified GHDL-synth netlists of u1/u3/u3-buffered/depth-1/1)
+   board_fold_sim.sh            board self-test + demo with G_FOLDED_ABSORB forced in COPIES (build/handoff_fold/board/rtl)
+9. Repository runner chain (Windows PowerShell, WT as cwd; GHDL via wsl inside compare_stream.py):
+   python -I verification/simulate_adapter.py \\wsl$\Ubuntu-22.04\home\kroix\projects\SAGE_Adapter_Experiment\llmc-gpt2\runs\adapter_fp32_200\export\adapter_weights.bin
+       --manifest ...\export\manifest.json --checkpoint ...\adapter_params_00000200.bin
+       --output WT\build\handoff_fold\adapter_sim_final --nonce-base 5207435946358665000 --candidate u3-fold
+   (needs WT\verification\vectors\LWC_AEAD_KAT_128_128.txt: pinned copy, gitignored)
+   superseded first run on v1 RTL: --output ...\adapter_sim --nonce-base 5207435946358662000
+10. Vivado 2023.2 core-only (Windows PowerShell, cwd build\handoff_fold\vivado):
+   C:\Xilinx\Vivado\2023.2\bin\vivado.bat -mode batch -nojournal -log fold_v2_p10\vivado.log -source src_v2\route_stream.tcl
+       -tclargs <abs>\fold_v2_p10 <abs>\src_v2 3 1 0 10 1
+   vivado.bat -mode batch -nojournal -source analyze_fold.tcl -tclargs <abs>\fold_v2_p10\routed.dcp <abs>\fold_v2_p10\ana
+   vivado.bat -mode batch -nojournal -source leg_split.tcl  -tclargs <abs>\fold_v2_p10\routed.dcp <abs>\fold_v2_p10\ana\leg_split.txt
+   (src_v2 = snapshot of rtl/ + vivado/route_stream.tcl; v1 = same with the pre-tag_gate core, superseded)
+11. Board-integrated (optional; no bitstream): build\handoff_fold\board\run_board.ps1 12 and 10
+   (route_weight_board_nobit.tcl = vivado/route_weight_board.tcl minus write_bitstream; sources build\handoff_fold\board\src_snapshot;
+    cwd = WT\build because the debug-hub temp path must be < 146 characters - first attempt failed on that, see route_div12_failed_pathlen)
+12. collect_sim_evidence.sh, write_tool_versions.sh, source_sha.sh (this directory; never overwrites)
+13. fold_cycle_model.py traffic_results.json weight_file_runs.json  -> cycle_model_check.txt

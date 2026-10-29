@@ -1,0 +1,20 @@
+counts: state=320 rate=128 cap=192 rc=22 ctl=15 iq=301 head=151 oq=290 cnt=4 key=128 stat=116
+ALL                                          slack=  0.024 levels= 7 datapath= 9.956 logic= 2.141 route= 7.815 start=fold_g.fold_u/s_reg_reg[58]/C end=fold_g.fold_u/s_reg_reg[236]/D
+state -> state (rounds; R3 or tail leg)      slack=  0.024 levels= 7 datapath= 9.956 logic= 2.141 route= 7.815 start=fold_g.fold_u/s_reg_reg[58]/C end=fold_g.fold_u/s_reg_reg[236]/D
+state -> rate bits of state                  slack=  0.203 levels= 7 datapath= 9.826 logic= 2.614 route= 7.212 start=fold_g.fold_u/s_reg_reg[40]/C end=fold_g.fold_u/s_reg_reg[39]/D
+state -> capacity bits of state              slack=  0.024 levels= 7 datapath= 9.956 logic= 2.141 route= 7.815 start=fold_g.fold_u/s_reg_reg[58]/C end=fold_g.fold_u/s_reg_reg[236]/D
+rc regs -> state (round constants)           slack=  0.752 levels= 7 datapath= 9.228 logic= 1.843 route= 7.385 start=fold_g.fold_u/rc0_reg[6]/C end=fold_g.fold_u/s_reg_reg[194]/D
+ctl/flags -> state (leg select, operands)    slack=  1.613 levels= 3 datapath= 8.367 logic= 1.175 route= 7.192 start=fold_g.fold_u/fsm_reg[0]_rep/C end=fold_g.fold_u/s_reg_reg[158]/D
+queue head -> state (absorb operand)         slack=  1.434 levels= 4 datapath= 8.545 logic= 1.403 route= 7.142 start=fold_g.fold_u/iq_reg[0][err]/C end=fold_g.fold_u/s_reg_reg[158]/D
+queue counts -> state (absorb gating)        slack=  1.533 levels= 5 datapath= 8.178 logic= 1.442 route= 6.736 start=fold_g.fold_u/ic_reg[0]/C end=fold_g.fold_u/s_reg_reg[86]/CE
+key -> state (key XOR terms)                 slack=  5.368 levels= 3 datapath= 4.661 logic= 1.184 route= 3.477 start=fold_g.fold_u/key_reg_reg[90]/C end=fold_g.fold_u/s_reg_reg[218]/D
+state -> output queue (ciphertext/plaintext tap) slack=  1.436 levels= 6 datapath= 8.557 logic= 1.890 route= 6.667 start=fold_g.fold_u/s_reg_reg[40]/C end=fold_g.fold_u/oq_reg[0][data][37]/D
+queue head -> output queue                   slack=  1.812 levels= 4 datapath= 7.899 logic= 1.320 route= 6.579 start=fold_g.fold_u/iq_reg[0][err]/C end=fold_g.fold_u/oq_reg[0][data][86]/CE
+any -> input queue                           slack=  0.776 levels= 2 datapath= 8.616 logic= 0.766 route= 7.850 start=fold_g.fold_u/fsm_reg[1]/C end=fold_g.fold_u/iq_reg[0][x][29]/R
+any -> ctl/flags                             slack=  2.978 levels= 2 datapath= 6.509 logic= 0.766 route= 5.743 start=fold_g.fold_u/fsm_reg[1]/C end=fold_g.fold_u/closed_reg/R
+any -> queue counts                          slack=  2.761 levels= 2 datapath= 6.726 logic= 0.766 route= 5.960 start=fold_g.fold_u/fsm_reg[1]/C end=fold_g.fold_u/oc_reg[0]/R
+any -> rc regs                               slack=  2.308 levels= 5 datapath= 7.179 logic= 1.558 route= 5.621 start=fold_g.fold_u/fsm_reg[0]_rep/C end=fold_g.fold_u/rc2_reg[0]/R
+state/key -> status (tag compare)            slack=  1.780 levels=12 datapath= 8.165 logic= 2.637 route= 5.528 start=fold_g.fold_u/s_reg_reg[218]/C end=fold_g.fold_u/auth_ok_reg_reg/D
+input ports -> any                           UNCONSTRAINED levels=2 datapath=6.488 start=rst_i end=fold_g.fold_u/iq_reg[0][x][29]/R
+any -> output ports                          UNCONSTRAINED levels=1 datapath=10.576 start=fold_g.fold_u/fsm_reg[1]/C end=tag_out_o[109]
+input ports -> output ports                  UNCONSTRAINED levels=1 datapath=2.098 start=rst_i end=out_valid_o

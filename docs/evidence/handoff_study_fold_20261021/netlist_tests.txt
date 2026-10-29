@@ -1,0 +1,43 @@
+== nl_icarus_default_ascon rc=0 wall=6s args: KAT_LIMIT=8 --sim icarus --netlist /home/kroix/ascon_fold_scratch/generated/default.v --module test_ascon
+                                                        ** test_ascon.official_and_boundary_vectors                   PASS        7371.00           0.51      14585.81  **
+                                                        ** test_ascon.corrupted_tag_discards_plaintext                PASS        1240.00           0.07      18439.90  **
+                                                        ** test_ascon.malformed_streams_report_error                  PASS        1690.00           0.09      18599.19  **
+                                                        ** test_ascon.wrong_phase_and_held_extra_beats_are_rejected   PASS        1350.00           0.07      18298.75  **
+                                                        ** test_ascon.outputs_remain_stable_during_backpressure       PASS         510.00           0.03      19910.97  **
+                                                        ** test_ascon.reset_aborts_an_active_transaction              PASS          51.00           0.00      18701.65  **
+                                                        ** test_ascon.reset_clears_each_major_controller_phase        PASS        2830.00           0.16      17714.81  **
+                                                        ** test_ascon.delayed_tag_and_authentication_timing           PASS         741.00           0.04      19378.24  **
+                                                        ** test_ascon.changed_authenticated_inputs_are_rejected       PASS        3930.00           0.25      15465.40  **
+                                                        ** test_ascon.deterministic_randomized_differential_cases     PASS       12061.00           0.91      13300.38  **
+                                                        ** TESTS=10 PASS=10 FAIL=0 SKIP=0                                        31774.01           2.15      14744.77  **
+== nl_icarus_fold_ascon rc=0 wall=8s args: KAT_LIMIT=8 --sim icarus --netlist /home/kroix/ascon_fold_scratch/generated/fold.v --rounds-per-cycle 3 --buffering --folded --module test_ascon
+                                                        ** test_ascon.official_and_boundary_vectors                   PASS        2731.00           1.02       2681.97  **
+                                                        ** test_ascon.corrupted_tag_discards_plaintext                PASS         420.00           0.14       3095.39  **
+                                                        ** test_ascon.malformed_streams_report_error                  PASS         700.00           0.20       3574.11  **
+                                                        ** test_ascon.wrong_phase_and_held_extra_beats_are_rejected   PASS         530.00           0.17       3122.97  **
+                                                        ** test_ascon.outputs_remain_stable_during_backpressure       PASS         260.00           0.05       5272.64  **
+                                                        ** test_ascon.reset_aborts_an_active_transaction              PASS          51.00           0.01       4253.52  **
+                                                        ** test_ascon.reset_clears_each_major_controller_phase        PASS        5150.00           1.70       3036.90  **
+                                                        ** test_ascon.delayed_tag_and_authentication_timing           PASS         331.00           0.07       5036.73  **
+                                                        ** test_ascon.changed_authenticated_inputs_are_rejected       PASS        1410.00           0.44       3207.72  **
+                                                        ** test_ascon.deterministic_randomized_differential_cases     PASS        3601.00           1.60       2254.74  **
+                                                        ** TESTS=10 PASS=10 FAIL=0 SKIP=0                                        15184.01           5.42       2801.02  **
+== nl_icarus_fold_cycles rc=0 wall=10s args:  --sim icarus --netlist /home/kroix/ascon_fold_scratch/generated/fold.v --rounds-per-cycle 3 --buffering --folded --module test_cycles
+                                                        ** test_cycles.cycle_counts_match_documented_values   PASS       16776.00           7.31       2293.82  **
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                                  16776.00           7.32       2291.63  **
+== nl_icarus_fold_stream rc=0 wall=51s args: FULL_KAT=0 --sim icarus --netlist /home/kroix/ascon_fold_scratch/generated/fold.v --rounds-per-cycle 3 --buffering --folded --module test_stream
+                                                        ** test_stream.concurrent_kats_protocol_and_metrics   PASS      164151.00          47.18       3479.52  **
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                                 164151.00          47.19       3478.67  **
+== nl_icarus_buf_stream rc=0 wall=63s args: FULL_KAT=0 --sim icarus --netlist /home/kroix/ascon_fold_scratch/generated/buffered.v --rounds-per-cycle 3 --buffering --module test_stream
+                                                        ** test_stream.concurrent_kats_protocol_and_metrics   PASS      245921.00          58.59       4197.05  **
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                                 245921.00          58.61       4196.22  **
+== nl_verilator_fold_stream rc=0 wall=31s args: FULL_KAT=0 --sim verilator --netlist /home/kroix/ascon_fold_scratch/generated/fold.v --rounds-per-cycle 3 --buffering --folded --module test_stream
+                                                        ** test_stream.concurrent_kats_protocol_and_metrics   PASS      164151.00           7.46      22010.53  **
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                                 164151.00           7.47      21962.75  **
+== nl_verilator_fold_cycles rc=0 wall=18s args:  --sim verilator --netlist /home/kroix/ascon_fold_scratch/generated/fold.v --rounds-per-cycle 3 --buffering --folded --module test_cycles
+                                                        ** test_cycles.cycle_counts_match_documented_values   PASS       16776.00           0.55      30332.58  **
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                                  16776.00           0.56      29954.05  **
+== nl_verilator_buf_stream rc=0 wall=40s args: FULL_KAT=0 --sim verilator --netlist /home/kroix/ascon_fold_scratch/generated/buffered.v --rounds-per-cycle 3 --buffering --module test_stream
+                                                        ** test_stream.concurrent_kats_protocol_and_metrics   PASS      245921.00          10.97      22421.83  **
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                                 245921.00          10.98      22399.52  **
+NETLIST_DONE

@@ -1,0 +1,10 @@
+mkdir -p build/board-demo
+cd build/board-demo && ghdl -a --std=08 ../../rtl/ascon_pkg.vhd ../../rtl/ascon_permutation.vhd ../../rtl/ascon_aead128_core.vhd ../../rtl/ascon_demo_top.vhd ../../rtl/ascon_demo_autotest.vhd ../../verification/vhdl/tb_weight_demo.vhd
+cd build/board-demo && ghdl --elab-run --std=08 tb_weight_demo --assert-level=error
+../../src/ieee2008/numeric_std-body.vhdl:3036:7:@0ms:(assertion warning): NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+../../verification/vhdl/tb_weight_demo.vhd:22:2:@2785ns:(report note): DEMO PASS cases=8 cycles=274
+simulation finished @2785ns
+cd build/board-demo && ghdl --elab-run --std=08 tb_weight_demo -gG_ROUNDS_PER_CYCLE=1 -gG_BUFFERING_ENABLE=false --assert-level=error
+../../src/ieee2008/numeric_std-body.vhdl:3036:7:@0ms:(assertion warning): NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+../../verification/vhdl/tb_weight_demo.vhd:22:2:@4805ns:(report note): DEMO PASS cases=8 cycles=476
+simulation finished @4805ns

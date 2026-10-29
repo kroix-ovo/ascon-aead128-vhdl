@@ -1,0 +1,22 @@
+model validation: 93 measured rows reproduced exactly, 0 mismatches
+
+PREDICTIONS (R=3, empty AD, full-block payload; inferred, not measured)
+scheme                                           1 KiB   small-llama 1,641,984 B       adapter 2,397,696 B   clk/block
+measured_candidate                                 401                   615,761                   899,153   6
+P1_absorb_on_completion                            338                   513,138                   749,298   5
+P2_launch_on_absorb                                337                   513,137                   749,297   5
+P1+P2                                              274                   410,514                   599,442   4
+P3_tail_fold                                       211                   307,891                   449,587   3
+P3+fixed_fusions                                   207                   307,887                   449,583   3
+floor_rounds_only                                  202                   307,882                   449,578   3
+
+Other unrolling factors (P3-style fold where the absorb XOR rides in a round-group clock)
+R=3 measured_candidate                           401                   615,761                   899,153
+R=3 P1+P2                                        274                   410,514                   599,442
+R=3 P3_tail_fold                                 211                   307,891                   449,587
+R=4 measured_candidate                           335                   513,135                   749,295
+R=4 P1+P2                                        208                   307,888                   449,584
+R=4 P3_tail_fold                                 145                   205,265                   299,729
+R=8 measured_candidate                           269                   410,509                   599,437
+R=8 P1+P2                                        142                   205,262                   299,726
+R=8 P3_tail_fold                                  79                   102,639                   149,871

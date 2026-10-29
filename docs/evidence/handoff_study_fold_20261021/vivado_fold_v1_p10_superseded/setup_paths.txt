@@ -1,0 +1,627 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Wed Oct 21 14:50:09 2026
+| Host         : KroixLaptop running 64-bit major release  (build 9200)
+| Command      : report_timing -delay_type max -max_paths 10 -path_type full_clock_expanded -file C:/Users/Symok/Downloads/ascon-aead128-vhdl-main/worktrees/ascon-weight-stream-handoff/build/handoff_fold/vivado/fold_p10/setup_paths.txt
+| Design       : ascon_aead128_core
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.024ns  (required time - arrival time)
+  Source:                 fold_g.fold_u/s_reg_reg[58]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            fold_g.fold_u/s_reg_reg[236]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.956ns  (logic 2.141ns (21.506%)  route 7.815ns (78.494%))
+  Logic Levels:           7  (LUT3=1 LUT4=1 LUT5=2 LUT6=2 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=1085, unset)         0.973     0.973    fold_g.fold_u/clk_i
+    SLICE_X48Y107        FDRE                                         r  fold_g.fold_u/s_reg_reg[58]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X48Y107        FDRE (Prop_fdre_C_Q)         0.456     1.429 r  fold_g.fold_u/s_reg_reg[58]/Q
+                         net (fo=9, routed)           1.969     3.398    fold_g.fold_u/s_reg_reg_n_0_[58]
+    SLICE_X64Y96         LUT5 (Prop_lut5_I4_O)        0.152     3.550 r  fold_g.fold_u/oq[1][data][125]_i_23/O
+                         net (fo=5, routed)           1.124     4.674    fold_g.fold_u/oq[1][data][125]_i_23_n_0
+    SLICE_X58Y95         LUT6 (Prop_lut6_I1_O)        0.326     5.000 r  fold_g.fold_u/s_reg[189]_i_11/O
+                         net (fo=3, routed)           1.133     6.132    fold_g.fold_u/s_reg[189]_i_11_n_0
+    SLICE_X52Y91         LUT6 (Prop_lut6_I1_O)        0.124     6.256 r  fold_g.fold_u/s_reg[317]_i_21/O
+                         net (fo=2, routed)           1.184     7.440    fold_g.fold_u/s_reg[317]_i_21_n_0
+    SLICE_X52Y98         LUT3 (Prop_lut3_I1_O)        0.154     7.594 r  fold_g.fold_u/s_reg[317]_i_13/O
+                         net (fo=6, routed)           1.242     8.836    fold_g.fold_u/s_reg[317]_i_13_n_0
+    SLICE_X53Y107        LUT4 (Prop_lut4_I3_O)        0.357     9.193 r  fold_g.fold_u/s_reg[253]_i_7/O
+                         net (fo=3, routed)           1.163    10.357    fold_g.fold_u/s_reg[253]_i_7_n_0
+    SLICE_X64Y108        LUT5 (Prop_lut5_I4_O)        0.327    10.684 r  fold_g.fold_u/s_reg[236]_i_3/O
+                         net (fo=1, routed)           0.000    10.684    fold_g.fold_u/s_reg[236]_i_3_n_0
+    SLICE_X64Y108        MUXF7 (Prop_muxf7_I1_O)      0.245    10.929 r  fold_g.fold_u/s_reg_reg[236]_i_1/O
+                         net (fo=1, routed)           0.000    10.929    fold_g.fold_u/p_1_in[236]
+    SLICE_X64Y108        FDRE                                         r  fold_g.fold_u/s_reg_reg[236]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=1085, unset)         0.924    10.924    fold_g.fold_u/clk_i
+    SLICE_X64Y108        FDRE                                         r  fold_g.fold_u/s_reg_reg[236]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X64Y108        FDRE (Setup_fdre_C_D)        0.064    10.953    fold_g.fold_u/s_reg_reg[236]
+  -------------------------------------------------------------------
+                         required time                         10.953    
+                         arrival time                         -10.929    
+  -------------------------------------------------------------------
+                         slack                                  0.024    
+
+Slack (MET) :             0.151ns  (required time - arrival time)
+  Source:                 fold_g.fold_u/s_reg_reg[22]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            fold_g.fold_u/s_reg_reg[250]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.829ns  (logic 1.647ns (16.756%)  route 8.182ns (83.244%))
+  Logic Levels:           7  (LUT3=1 LUT4=2 LUT5=2 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=1085, unset)         0.973     0.973    fold_g.fold_u/clk_i
+    SLICE_X49Y105        FDRE                                         r  fold_g.fold_u/s_reg_reg[22]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X49Y105        FDRE (Prop_fdre_C_Q)         0.456     1.429 r  fold_g.fold_u/s_reg_reg[22]/Q
+                         net (fo=9, routed)           1.624     3.053    fold_g.fold_u/s_reg_reg_n_0_[22]
+    SLICE_X57Y92         LUT4 (Prop_lut4_I1_O)        0.124     3.177 r  fold_g.fold_u/oq[1][data][104]_i_8/O
+                         net (fo=6, routed)           1.180     4.358    fold_g.fold_u/oq[1][data][104]_i_8_n_0
+    SLICE_X64Y97         LUT6 (Prop_lut6_I1_O)        0.124     4.482 r  fold_g.fold_u/oq[1][data][45]_i_16/O
+                         net (fo=4, routed)           1.017     5.498    fold_g.fold_u/oq[1][data][45]_i_16_n_0
+    SLICE_X63Y97         LUT4 (Prop_lut4_I3_O)        0.152     5.650 r  fold_g.fold_u/s_reg[301]_i_12/O
+                         net (fo=4, routed)           1.645     7.295    fold_g.fold_u/s_reg[301]_i_12_n_0
+    SLICE_X49Y100        LUT3 (Prop_lut3_I1_O)        0.326     7.621 r  fold_g.fold_u/s_reg[260]_i_4/O
+                         net (fo=6, routed)           1.025     8.646    fold_g.fold_u/s_reg[260]_i_4_n_0
+    SLICE_X47Y98         LUT5 (Prop_lut5_I3_O)        0.124     8.770 r  fold_g.fold_u/s_reg[250]_i_6/O
+                         net (fo=3, routed)           1.691    10.461    fold_g.fold_u/s_reg[250]_i_6_n_0
+    SLICE_X68Y103        LUT5 (Prop_lut5_I2_O)        0.124    10.585 r  fold_g.fold_u/s_reg[250]_i_3/O
+                         net (fo=1, routed)           0.000    10.585    fold_g.fold_u/s_reg[250]_i_3_n_0
+    SLICE_X68Y103        MUXF7 (Prop_muxf7_I1_O)      0.217    10.802 r  fold_g.fold_u/s_reg_reg[250]_i_1/O
+                         net (fo=1, routed)           0.000    10.802    fold_g.fold_u/p_1_in[250]
+    SLICE_X68Y103        FDRE                                         r  fold_g.fold_u/s_reg_reg[250]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=1085, unset)         0.924    10.924    fold_g.fold_u/clk_i
+    SLICE_X68Y103        FDRE                                         r  fold_g.fold_u/s_reg_reg[250]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X68Y103        FDRE (Setup_fdre_C_D)        0.064    10.953    fold_g.fold_u/s_reg_reg[250]
+  -------------------------------------------------------------------
+                         required time                         10.953    
+                         arrival time                         -10.802    
+  -------------------------------------------------------------------
+                         slack                                  0.151    
+
+Slack (MET) :             0.195ns  (required time - arrival time)
+  Source:                 fold_g.fold_u/s_reg_reg[127]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            fold_g.fold_u/s_reg_reg[221]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.834ns  (logic 1.839ns (18.700%)  route 7.995ns (81.300%))
+  Logic Levels:           7  (LUT3=1 LUT4=1 LUT5=3 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=1085, unset)         0.973     0.973    fold_g.fold_u/clk_i
+    SLICE_X61Y108        FDRE                                         r  fold_g.fold_u/s_reg_reg[127]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y108        FDRE (Prop_fdre_C_Q)         0.456     1.429 r  fold_g.fold_u/s_reg_reg[127]/Q
+                         net (fo=12, routed)          1.641     3.070    fold_g.fold_u/state_word029_in[63]
+    SLICE_X51Y96         LUT5 (Prop_lut5_I1_O)        0.124     3.194 r  fold_g.fold_u/oq[1][data][127]_i_42/O
+                         net (fo=5, routed)           1.115     4.309    fold_g.fold_u/oq[1][data][127]_i_42_n_0
+    SLICE_X66Y99         LUT6 (Prop_lut6_I5_O)        0.124     4.433 r  fold_g.fold_u/oq[1][data][113]_i_5/O
+                         net (fo=5, routed)           1.263     5.696    fold_g.fold_u/oq[1][data][113]_i_5_n_0
+    SLICE_X58Y99         LUT4 (Prop_lut4_I0_O)        0.146     5.842 r  fold_g.fold_u/s_reg[302]_i_9/O
+                         net (fo=5, routed)           1.451     7.293    fold_g.fold_u/s_reg[302]_i_9_n_0
+    SLICE_X49Y102        LUT3 (Prop_lut3_I0_O)        0.324     7.617 r  fold_g.fold_u/s_reg[295]_i_4/O
+                         net (fo=5, routed)           1.223     8.840    fold_g.fold_u/s_reg[295]_i_4_n_0
+    SLICE_X51Y90         LUT5 (Prop_lut5_I2_O)        0.327     9.167 r  fold_g.fold_u/s_reg[231]_i_6/O
+                         net (fo=3, routed)           1.302    10.469    fold_g.fold_u/s_reg[231]_i_6_n_0
+    SLICE_X62Y90         LUT5 (Prop_lut5_I2_O)        0.124    10.593 r  fold_g.fold_u/s_reg[221]_i_3/O
+                         net (fo=1, routed)           0.000    10.593    fold_g.fold_u/s_reg[221]_i_3_n_0
+    SLICE_X62Y90         MUXF7 (Prop_muxf7_I1_O)      0.214    10.807 r  fold_g.fold_u/s_reg_reg[221]_i_1/O
+                         net (fo=1, routed)           0.000    10.807    fold_g.fold_u/p_1_in[221]
+    SLICE_X62Y90         FDRE                                         r  fold_g.fold_u/s_reg_reg[221]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=1085, unset)         0.924    10.924    fold_g.fold_u/clk_i
+    SLICE_X62Y90         FDRE                                         r  fold_g.fold_u/s_reg_reg[221]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X62Y90         FDRE (Setup_fdre_C_D)        0.113    11.002    fold_g.fold_u/s_reg_reg[221]
+  -------------------------------------------------------------------
+                         required time                         11.002    
+                         arrival time                         -10.807    
+  -------------------------------------------------------------------
+                         slack                                  0.195    
+
+Slack (MET) :             0.203ns  (required time - arrival time)
+  Source:                 fold_g.fold_u/s_reg_reg[40]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            fold_g.fold_u/s_reg_reg[39]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.826ns  (logic 2.614ns (26.602%)  route 7.212ns (73.398%))
+  Logic Levels:           7  (LUT3=2 LUT4=1 LUT5=3 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=1085, unset)         0.973     0.973    fold_g.fold_u/clk_i
+    SLICE_X44Y103        FDRE                                         r  fold_g.fold_u/s_reg_reg[40]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X44Y103        FDRE (Prop_fdre_C_Q)         0.456     1.429 r  fold_g.fold_u/s_reg_reg[40]/Q
+                         net (fo=10, routed)          1.531     2.960    fold_g.fold_u/s_reg_reg_n_0_[40]
+    SLICE_X64Y97         LUT5 (Prop_lut5_I2_O)        0.152     3.112 r  fold_g.fold_u/oq[1][data][110]_i_19/O
+                         net (fo=4, routed)           1.248     4.360    fold_g.fold_u/oq[1][data][110]_i_19_n_0
+    SLICE_X59Y96         LUT3 (Prop_lut3_I2_O)        0.354     4.714 r  fold_g.fold_u/oq[1][data][90]_i_6/O
+                         net (fo=5, routed)           1.022     5.736    fold_g.fold_u/oq[1][data][90]_i_6_n_0
+    SLICE_X55Y95         LUT4 (Prop_lut4_I1_O)        0.354     6.090 r  fold_g.fold_u/s_reg[314]_i_8/O
+                         net (fo=4, routed)           1.241     7.331    fold_g.fold_u/s_reg[314]_i_8_n_0
+    SLICE_X58Y102        LUT3 (Prop_lut3_I0_O)        0.360     7.691 r  fold_g.fold_u/s_reg[314]_i_4/O
+                         net (fo=5, routed)           0.865     8.556    fold_g.fold_u/s_reg[314]_i_4_n_0
+    SLICE_X58Y101        LUT5 (Prop_lut5_I2_O)        0.376     8.932 r  fold_g.fold_u/s_reg[58]_i_6/O
+                         net (fo=3, routed)           1.305    10.237    fold_g.fold_u/s_reg[58]_i_6_n_0
+    SLICE_X38Y101        LUT5 (Prop_lut5_I2_O)        0.348    10.585 r  fold_g.fold_u/s_reg[39]_i_3/O
+                         net (fo=1, routed)           0.000    10.585    fold_g.fold_u/s_reg[39]_i_3_n_0
+    SLICE_X38Y101        MUXF7 (Prop_muxf7_I1_O)      0.214    10.799 r  fold_g.fold_u/s_reg_reg[39]_i_1/O
+                         net (fo=1, routed)           0.000    10.799    fold_g.fold_u/p_1_in[39]
+    SLICE_X38Y101        FDRE                                         r  fold_g.fold_u/s_reg_reg[39]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=1085, unset)         0.924    10.924    fold_g.fold_u/clk_i
+    SLICE_X38Y101        FDRE                                         r  fold_g.fold_u/s_reg_reg[39]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X38Y101        FDRE (Setup_fdre_C_D)        0.113    11.002    fold_g.fold_u/s_reg_reg[39]
+  -------------------------------------------------------------------
+                         required time                         11.002    
+                         arrival time                         -10.799    
+  -------------------------------------------------------------------
+                         slack                                  0.203    
+
+Slack (MET) :             0.256ns  (required time - arrival time)
+  Source:                 fold_g.fold_u/s_reg_reg[58]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            fold_g.fold_u/s_reg_reg[86]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.724ns  (logic 1.880ns (19.333%)  route 7.844ns (80.667%))
+  Logic Levels:           7  (LUT3=1 LUT5=3 LUT6=2 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=1085, unset)         0.973     0.973    fold_g.fold_u/clk_i
+    SLICE_X48Y107        FDRE                                         r  fold_g.fold_u/s_reg_reg[58]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X48Y107        FDRE (Prop_fdre_C_Q)         0.456     1.429 r  fold_g.fold_u/s_reg_reg[58]/Q
+                         net (fo=9, routed)           1.969     3.398    fold_g.fold_u/s_reg_reg_n_0_[58]
+    SLICE_X64Y96         LUT5 (Prop_lut5_I4_O)        0.152     3.550 r  fold_g.fold_u/oq[1][data][125]_i_23/O
+                         net (fo=5, routed)           1.124     4.674    fold_g.fold_u/oq[1][data][125]_i_23_n_0
+    SLICE_X58Y95         LUT6 (Prop_lut6_I1_O)        0.326     5.000 r  fold_g.fold_u/s_reg[189]_i_11/O
+                         net (fo=3, routed)           1.133     6.132    fold_g.fold_u/s_reg[189]_i_11_n_0
+    SLICE_X52Y91         LUT6 (Prop_lut6_I1_O)        0.124     6.256 r  fold_g.fold_u/s_reg[317]_i_21/O
+                         net (fo=2, routed)           1.184     7.440    fold_g.fold_u/s_reg[317]_i_21_n_0
+    SLICE_X52Y98         LUT3 (Prop_lut3_I1_O)        0.154     7.594 r  fold_g.fold_u/s_reg[317]_i_13/O
+                         net (fo=6, routed)           1.082     8.676    fold_g.fold_u/s_reg[317]_i_13_n_0
+    SLICE_X52Y107        LUT5 (Prop_lut5_I0_O)        0.327     9.003 r  fold_g.fold_u/s_reg[125]_i_6/O
+                         net (fo=3, routed)           1.353    10.356    fold_g.fold_u/s_reg[125]_i_6_n_0
+    SLICE_X68Y92         LUT5 (Prop_lut5_I4_O)        0.124    10.480 r  fold_g.fold_u/s_reg[86]_i_3/O
+                         net (fo=1, routed)           0.000    10.480    fold_g.fold_u/s_reg[86]_i_3_n_0
+    SLICE_X68Y92         MUXF7 (Prop_muxf7_I1_O)      0.217    10.697 r  fold_g.fold_u/s_reg_reg[86]_i_1/O
+                         net (fo=1, routed)           0.000    10.697    fold_g.fold_u/p_1_in[86]
+    SLICE_X68Y92         FDRE                                         r  fold_g.fold_u/s_reg_reg[86]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=1085, unset)         0.924    10.924    fold_g.fold_u/clk_i
+    SLICE_X68Y92         FDRE                                         r  fold_g.fold_u/s_reg_reg[86]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X68Y92         FDRE (Setup_fdre_C_D)        0.064    10.953    fold_g.fold_u/s_reg_reg[86]
+  -------------------------------------------------------------------
+                         required time                         10.953    
+                         arrival time                         -10.697    
+  -------------------------------------------------------------------
+                         slack                                  0.256    
+
+Slack (MET) :             0.264ns  (required time - arrival time)
+  Source:                 fold_g.fold_u/s_reg_reg[22]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            fold_g.fold_u/s_reg_reg[220]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.765ns  (logic 2.102ns (21.525%)  route 7.663ns (78.475%))
+  Logic Levels:           7  (LUT3=1 LUT4=2 LUT5=2 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=1085, unset)         0.973     0.973    fold_g.fold_u/clk_i
+    SLICE_X49Y105        FDRE                                         r  fold_g.fold_u/s_reg_reg[22]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X49Y105        FDRE (Prop_fdre_C_Q)         0.456     1.429 r  fold_g.fold_u/s_reg_reg[22]/Q
+                         net (fo=9, routed)           1.624     3.053    fold_g.fold_u/s_reg_reg_n_0_[22]
+    SLICE_X57Y92         LUT4 (Prop_lut4_I1_O)        0.124     3.177 r  fold_g.fold_u/oq[1][data][104]_i_8/O
+                         net (fo=6, routed)           1.180     4.358    fold_g.fold_u/oq[1][data][104]_i_8_n_0
+    SLICE_X64Y97         LUT6 (Prop_lut6_I1_O)        0.124     4.482 r  fold_g.fold_u/oq[1][data][45]_i_16/O
+                         net (fo=4, routed)           1.017     5.498    fold_g.fold_u/oq[1][data][45]_i_16_n_0
+    SLICE_X63Y97         LUT4 (Prop_lut4_I3_O)        0.152     5.650 r  fold_g.fold_u/s_reg[301]_i_12/O
+                         net (fo=4, routed)           1.645     7.295    fold_g.fold_u/s_reg[301]_i_12_n_0
+    SLICE_X49Y100        LUT3 (Prop_lut3_I0_O)        0.354     7.649 r  fold_g.fold_u/s_reg[294]_i_4/O
+                         net (fo=5, routed)           0.739     8.388    fold_g.fold_u/s_reg[294]_i_4_n_0
+    SLICE_X49Y103        LUT5 (Prop_lut5_I2_O)        0.352     8.740 r  fold_g.fold_u/s_reg[230]_i_6/O
+                         net (fo=3, routed)           1.458    10.198    fold_g.fold_u/s_reg[230]_i_6_n_0
+    SLICE_X62Y94         LUT5 (Prop_lut5_I2_O)        0.326    10.524 r  fold_g.fold_u/s_reg[220]_i_3/O
+                         net (fo=1, routed)           0.000    10.524    fold_g.fold_u/s_reg[220]_i_3_n_0
+    SLICE_X62Y94         MUXF7 (Prop_muxf7_I1_O)      0.214    10.738 r  fold_g.fold_u/s_reg_reg[220]_i_1/O
+                         net (fo=1, routed)           0.000    10.738    fold_g.fold_u/p_1_in[220]
+    SLICE_X62Y94         FDRE                                         r  fold_g.fold_u/s_reg_reg[220]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=1085, unset)         0.924    10.924    fold_g.fold_u/clk_i
+    SLICE_X62Y94         FDRE                                         r  fold_g.fold_u/s_reg_reg[220]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X62Y94         FDRE (Setup_fdre_C_D)        0.113    11.002    fold_g.fold_u/s_reg_reg[220]
+  -------------------------------------------------------------------
+                         required time                         11.002    
+                         arrival time                         -10.738    
+  -------------------------------------------------------------------
+                         slack                                  0.264    
+
+Slack (MET) :             0.264ns  (required time - arrival time)
+  Source:                 fold_g.fold_u/s_reg_reg[58]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            fold_g.fold_u/s_reg_reg[64]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.716ns  (logic 1.880ns (19.349%)  route 7.836ns (80.651%))
+  Logic Levels:           7  (LUT3=1 LUT5=3 LUT6=2 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=1085, unset)         0.973     0.973    fold_g.fold_u/clk_i
+    SLICE_X48Y107        FDRE                                         r  fold_g.fold_u/s_reg_reg[58]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X48Y107        FDRE (Prop_fdre_C_Q)         0.456     1.429 r  fold_g.fold_u/s_reg_reg[58]/Q
+                         net (fo=9, routed)           1.969     3.398    fold_g.fold_u/s_reg_reg_n_0_[58]
+    SLICE_X64Y96         LUT5 (Prop_lut5_I4_O)        0.152     3.550 r  fold_g.fold_u/oq[1][data][125]_i_23/O
+                         net (fo=5, routed)           1.124     4.674    fold_g.fold_u/oq[1][data][125]_i_23_n_0
+    SLICE_X58Y95         LUT6 (Prop_lut6_I1_O)        0.326     5.000 r  fold_g.fold_u/s_reg[189]_i_11/O
+                         net (fo=3, routed)           1.133     6.132    fold_g.fold_u/s_reg[189]_i_11_n_0
+    SLICE_X52Y91         LUT6 (Prop_lut6_I1_O)        0.124     6.256 r  fold_g.fold_u/s_reg[317]_i_21/O
+                         net (fo=2, routed)           1.184     7.440    fold_g.fold_u/s_reg[317]_i_21_n_0
+    SLICE_X52Y98         LUT3 (Prop_lut3_I1_O)        0.154     7.594 r  fold_g.fold_u/s_reg[317]_i_13/O
+                         net (fo=6, routed)           1.082     8.676    fold_g.fold_u/s_reg[317]_i_13_n_0
+    SLICE_X52Y107        LUT5 (Prop_lut5_I0_O)        0.327     9.003 r  fold_g.fold_u/s_reg[125]_i_6/O
+                         net (fo=3, routed)           1.345    10.348    fold_g.fold_u/s_reg[125]_i_6_n_0
+    SLICE_X43Y92         LUT5 (Prop_lut5_I2_O)        0.124    10.472 r  fold_g.fold_u/s_reg[64]_i_3/O
+                         net (fo=1, routed)           0.000    10.472    fold_g.fold_u/s_reg[64]_i_3_n_0
+    SLICE_X43Y92         MUXF7 (Prop_muxf7_I1_O)      0.217    10.689 r  fold_g.fold_u/s_reg_reg[64]_i_1/O
+                         net (fo=1, routed)           0.000    10.689    fold_g.fold_u/p_1_in[64]
+    SLICE_X43Y92         FDRE                                         r  fold_g.fold_u/s_reg_reg[64]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=1085, unset)         0.924    10.924    fold_g.fold_u/clk_i
+    SLICE_X43Y92         FDRE                                         r  fold_g.fold_u/s_reg_reg[64]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X43Y92         FDRE (Setup_fdre_C_D)        0.064    10.953    fold_g.fold_u/s_reg_reg[64]
+  -------------------------------------------------------------------
+                         required time                         10.953    
+                         arrival time                         -10.689    
+  -------------------------------------------------------------------
+                         slack                                  0.264    
+
+Slack (MET) :             0.270ns  (required time - arrival time)
+  Source:                 fold_g.fold_u/s_reg_reg[127]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            fold_g.fold_u/s_reg_reg[231]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.759ns  (logic 1.839ns (18.844%)  route 7.920ns (81.156%))
+  Logic Levels:           7  (LUT3=1 LUT4=1 LUT5=3 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=1085, unset)         0.973     0.973    fold_g.fold_u/clk_i
+    SLICE_X61Y108        FDRE                                         r  fold_g.fold_u/s_reg_reg[127]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y108        FDRE (Prop_fdre_C_Q)         0.456     1.429 r  fold_g.fold_u/s_reg_reg[127]/Q
+                         net (fo=12, routed)          1.641     3.070    fold_g.fold_u/state_word029_in[63]
+    SLICE_X51Y96         LUT5 (Prop_lut5_I1_O)        0.124     3.194 r  fold_g.fold_u/oq[1][data][127]_i_42/O
+                         net (fo=5, routed)           1.115     4.309    fold_g.fold_u/oq[1][data][127]_i_42_n_0
+    SLICE_X66Y99         LUT6 (Prop_lut6_I5_O)        0.124     4.433 r  fold_g.fold_u/oq[1][data][113]_i_5/O
+                         net (fo=5, routed)           1.263     5.696    fold_g.fold_u/oq[1][data][113]_i_5_n_0
+    SLICE_X58Y99         LUT4 (Prop_lut4_I0_O)        0.146     5.842 r  fold_g.fold_u/s_reg[302]_i_9/O
+                         net (fo=5, routed)           1.451     7.293    fold_g.fold_u/s_reg[302]_i_9_n_0
+    SLICE_X49Y102        LUT3 (Prop_lut3_I0_O)        0.324     7.617 r  fold_g.fold_u/s_reg[295]_i_4/O
+                         net (fo=5, routed)           1.223     8.840    fold_g.fold_u/s_reg[295]_i_4_n_0
+    SLICE_X51Y90         LUT5 (Prop_lut5_I2_O)        0.327     9.167 r  fold_g.fold_u/s_reg[231]_i_6/O
+                         net (fo=3, routed)           1.227    10.394    fold_g.fold_u/s_reg[231]_i_6_n_0
+    SLICE_X56Y103        LUT5 (Prop_lut5_I2_O)        0.124    10.518 r  fold_g.fold_u/s_reg[231]_i_3/O
+                         net (fo=1, routed)           0.000    10.518    fold_g.fold_u/s_reg[231]_i_3_n_0
+    SLICE_X56Y103        MUXF7 (Prop_muxf7_I1_O)      0.214    10.732 r  fold_g.fold_u/s_reg_reg[231]_i_1/O
+                         net (fo=1, routed)           0.000    10.732    fold_g.fold_u/p_1_in[231]
+    SLICE_X56Y103        FDRE                                         r  fold_g.fold_u/s_reg_reg[231]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=1085, unset)         0.924    10.924    fold_g.fold_u/clk_i
+    SLICE_X56Y103        FDRE                                         r  fold_g.fold_u/s_reg_reg[231]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X56Y103        FDRE (Setup_fdre_C_D)        0.113    11.002    fold_g.fold_u/s_reg_reg[231]
+  -------------------------------------------------------------------
+                         required time                         11.002    
+                         arrival time                         -10.732    
+  -------------------------------------------------------------------
+                         slack                                  0.270    
+
+Slack (MET) :             0.292ns  (required time - arrival time)
+  Source:                 fold_g.fold_u/s_reg_reg[274]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            fold_g.fold_u/s_reg_reg[247]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.737ns  (logic 1.967ns (20.201%)  route 7.770ns (79.799%))
+  Logic Levels:           7  (LUT3=1 LUT5=4 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=1085, unset)         0.973     0.973    fold_g.fold_u/clk_i
+    SLICE_X54Y107        FDRE                                         r  fold_g.fold_u/s_reg_reg[274]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X54Y107        FDRE (Prop_fdre_C_Q)         0.518     1.491 r  fold_g.fold_u/s_reg_reg[274]/Q
+                         net (fo=11, routed)          1.414     2.905    fold_g.fold_u/state_word121_in[18]
+    SLICE_X57Y92         LUT5 (Prop_lut5_I2_O)        0.124     3.029 r  fold_g.fold_u/oq[1][data][127]_i_46/O
+                         net (fo=3, routed)           1.351     4.380    fold_g.fold_u/oq[1][data][127]_i_46_n_0
+    SLICE_X62Y93         LUT6 (Prop_lut6_I2_O)        0.124     4.504 r  fold_g.fold_u/oq[1][data][107]_i_12/O
+                         net (fo=4, routed)           1.018     5.521    fold_g.fold_u/oq[1][data][107]_i_12_n_0
+    SLICE_X53Y93         LUT5 (Prop_lut5_I4_O)        0.150     5.671 r  fold_g.fold_u/s_reg[135]_i_30/O
+                         net (fo=3, routed)           1.216     6.887    fold_g.fold_u/s_reg[135]_i_30_n_0
+    SLICE_X52Y99         LUT3 (Prop_lut3_I1_O)        0.354     7.241 r  fold_g.fold_u/s_reg[314]_i_12/O
+                         net (fo=6, routed)           1.188     8.429    fold_g.fold_u/s_reg[314]_i_12_n_0
+    SLICE_X41Y98         LUT5 (Prop_lut5_I4_O)        0.326     8.755 r  fold_g.fold_u/s_reg[247]_i_6/O
+                         net (fo=3, routed)           1.584    10.339    fold_g.fold_u/s_reg[247]_i_6_n_0
+    SLICE_X62Y107        LUT5 (Prop_lut5_I2_O)        0.124    10.463 r  fold_g.fold_u/s_reg[247]_i_3/O
+                         net (fo=1, routed)           0.000    10.463    fold_g.fold_u/s_reg[247]_i_3_n_0
+    SLICE_X62Y107        MUXF7 (Prop_muxf7_I1_O)      0.247    10.710 r  fold_g.fold_u/s_reg_reg[247]_i_1/O
+                         net (fo=1, routed)           0.000    10.710    fold_g.fold_u/p_1_in[247]
+    SLICE_X62Y107        FDRE                                         r  fold_g.fold_u/s_reg_reg[247]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=1085, unset)         0.924    10.924    fold_g.fold_u/clk_i
+    SLICE_X62Y107        FDRE                                         r  fold_g.fold_u/s_reg_reg[247]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X62Y107        FDRE (Setup_fdre_C_D)        0.113    11.002    fold_g.fold_u/s_reg_reg[247]
+  -------------------------------------------------------------------
+                         required time                         11.002    
+                         arrival time                         -10.710    
+  -------------------------------------------------------------------
+                         slack                                  0.292    
+
+Slack (MET) :             0.295ns  (required time - arrival time)
+  Source:                 fold_g.fold_u/s_reg_reg[17]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            fold_g.fold_u/s_reg_reg[185]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.685ns  (logic 1.653ns (17.067%)  route 8.032ns (82.933%))
+  Logic Levels:           7  (LUT3=1 LUT4=3 LUT5=1 LUT6=1 MUXF7=1)
+  Clock Path Skew:        -0.049ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.924ns = ( 10.924 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.973ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=1085, unset)         0.973     0.973    fold_g.fold_u/clk_i
+    SLICE_X39Y100        FDRE                                         r  fold_g.fold_u/s_reg_reg[17]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X39Y100        FDRE (Prop_fdre_C_Q)         0.456     1.429 r  fold_g.fold_u/s_reg_reg[17]/Q
+                         net (fo=9, routed)           1.574     3.003    fold_g.fold_u/s_reg_reg_n_0_[17]
+    SLICE_X56Y93         LUT4 (Prop_lut4_I2_O)        0.124     3.127 r  fold_g.fold_u/oq[1][data][107]_i_14/O
+                         net (fo=6, routed)           1.720     4.847    fold_g.fold_u/oq[1][data][107]_i_14_n_0
+    SLICE_X65Y100        LUT6 (Prop_lut6_I4_O)        0.124     4.971 r  fold_g.fold_u/oq[1][data][40]_i_5/O
+                         net (fo=8, routed)           1.024     5.995    fold_g.fold_u/oq[1][data][40]_i_5_n_0
+    SLICE_X61Y99         LUT4 (Prop_lut4_I0_O)        0.124     6.119 r  fold_g.fold_u/s_reg[319]_i_17/O
+                         net (fo=5, routed)           1.375     7.494    fold_g.fold_u/s_reg[319]_i_17_n_0
+    SLICE_X46Y104        LUT3 (Prop_lut3_I1_O)        0.153     7.647 r  fold_g.fold_u/s_reg[319]_i_9/O
+                         net (fo=5, routed)           0.844     8.491    fold_g.fold_u/s_reg[319]_i_9_n_0
+    SLICE_X46Y106        LUT4 (Prop_lut4_I0_O)        0.331     8.822 r  fold_g.fold_u/s_reg[191]_i_6/O
+                         net (fo=3, routed)           1.496    10.317    fold_g.fold_u/s_reg[191]_i_6_n_0
+    SLICE_X69Y101        LUT5 (Prop_lut5_I2_O)        0.124    10.441 r  fold_g.fold_u/s_reg[185]_i_3/O
+                         net (fo=1, routed)           0.000    10.441    fold_g.fold_u/s_reg[185]_i_3_n_0
+    SLICE_X69Y101        MUXF7 (Prop_muxf7_I1_O)      0.217    10.658 r  fold_g.fold_u/s_reg_reg[185]_i_1/O
+                         net (fo=1, routed)           0.000    10.658    fold_g.fold_u/p_1_in[185]
+    SLICE_X69Y101        FDRE                                         r  fold_g.fold_u/s_reg_reg[185]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=1085, unset)         0.924    10.924    fold_g.fold_u/clk_i
+    SLICE_X69Y101        FDRE                                         r  fold_g.fold_u/s_reg_reg[185]/C
+                         clock pessimism              0.000    10.924    
+                         clock uncertainty           -0.035    10.889    
+    SLICE_X69Y101        FDRE (Setup_fdre_C_D)        0.064    10.953    fold_g.fold_u/s_reg_reg[185]
+  -------------------------------------------------------------------
+                         required time                         10.953    
+                         arrival time                         -10.658    
+  -------------------------------------------------------------------
+                         slack                                  0.295    
+
+
+
+

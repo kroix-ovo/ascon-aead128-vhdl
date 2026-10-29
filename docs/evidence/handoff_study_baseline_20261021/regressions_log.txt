@@ -1,0 +1,38 @@
+== fetch_vectors (offline, pinned SHA check)
+validated /home/kroix/ascon_handoff_scratch/verification/vectors/LWC_AEAD_KAT_128_128.txt from the existing pinned KAT file
+wrote /home/kroix/ascon_handoff_scratch/verification/vectors/xsim_vectors.txt with 1089 compact TextIO records
+bbbc34692fe05e5fda0a3b025585622ab3e3747495e5e3655b29aae8c2a4bd33  verification/vectors/LWC_AEAD_KAT_128_128.txt
+591f7ace36c01a09a06040f0d9f5c8036cf82d839d70c9035d26719a779f5111  verification/vectors/xsim_vectors.txt
+== adapter export guards
+Ran 6 tests in 0.012s
+
+OK
+== simulate_adapter.validate on real artifacts
+validate PASS c184175fc18d24373f009875c03698e630e8c36a5341146aab2bd13a98fff8eb [('down_w', [12, 32, 768], 0, 1179648), ('down_b', [12, 32], 1179648, 1536), ('up_w', [12, 768, 32], 1181184, 1179648), ('up_b', [12, 768], 2360832, 36864)]
+exit=0
+CASE 1089 DECRYPT ad_len=32 msg_len=32 expected0=2F2E2D2C2B2A29282726252423222120 expected1=3F3E3D3C3B3A39383736353433323130 actual0=2F2E2D2C2B2A29282726252423222120 actual1=3F3E3D3C3B3A39383736353433323130 expected_tag=AA7C3D1728ED150A1C217FA4501719FD actual_tag=AA7C3D1728ED150A1C217FA4501719FD auth=1 cycles=88 PASS
+TOTAL vectors=1089 checks=2178 pass=2178 fail=0
+exit=0
+CASE 1089 DECRYPT ad_len=32 msg_len=32 expected0=2F2E2D2C2B2A29282726252423222120 expected1=3F3E3D3C3B3A39383736353433323130 actual0=2F2E2D2C2B2A29282726252423222120 actual1=3F3E3D3C3B3A39383736353433323130 expected_tag=AA7C3D1728ED150A1C217FA4501719FD actual_tag=AA7C3D1728ED150A1C217FA4501719FD auth=1 cycles=47 PASS
+TOTAL vectors=1089 checks=2178 pass=2178 fail=0
+exit=0
+CASE 1089 DECRYPT ad_len=32 msg_len=32 expected0=2F2E2D2C2B2A29282726252423222120 expected1=3F3E3D3C3B3A39383736353433323130 actual0=2F2E2D2C2B2A29282726252423222120 actual1=3F3E3D3C3B3A39383736353433323130 expected_tag=AA7C3D1728ED150A1C217FA4501719FD actual_tag=AA7C3D1728ED150A1C217FA4501719FD auth=1 cycles=45 PASS
+TOTAL vectors=1089 checks=2178 pass=2178 fail=0
+== cocotb permutation u3
+                                                        ** test_permutation.p12_and_p8_match_reference   PASS       13881.00           0.40      34904.92  **
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                             13881.00           0.40      34476.22  **
+== cocotb test_stream u3 buffered FULL_KAT=0
+                                                        ** test_stream.concurrent_kats_protocol_and_metrics   PASS      245921.00           9.38      26217.03  **
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                                 245921.00           9.39      26196.39  **
+== cocotb test_ascon u3 buffered (default subset)
+                                                        ** test_ascon.official_and_boundary_vectors                   PASS       51551.00           0.74      69506.64  **
+                                                        ** test_ascon.corrupted_tag_discards_plaintext                PASS         650.00           0.01      55372.04  **
+                                                        ** test_ascon.malformed_streams_report_error                  FAIL          51.00           0.00      50060.73  **
+                                                        ** test_ascon.wrong_phase_and_held_extra_beats_are_rejected   FAIL          61.00           0.00      32547.07  **
+                                                        ** test_ascon.outputs_remain_stable_during_backpressure       PASS         300.00           0.00     101051.33  **
+                                                        ** test_ascon.reset_aborts_an_active_transaction              PASS          51.00           0.00      65596.29  **
+                                                        ** test_ascon.reset_clears_each_major_controller_phase        FAIL         291.00           0.00      60297.52  **
+                                                        ** test_ascon.delayed_tag_and_authentication_timing           PASS         441.00           0.01      70381.19  **
+                                                        ** test_ascon.changed_authenticated_inputs_are_rejected       PASS        2120.00           0.03      65581.44  **
+                                                        ** test_ascon.deterministic_randomized_differential_cases     PASS        6031.00           0.09      66989.70  **
+                                                        ** TESTS=10 PASS=7 FAIL=3 SKIP=0                                         61547.00           0.92      67095.62  **
