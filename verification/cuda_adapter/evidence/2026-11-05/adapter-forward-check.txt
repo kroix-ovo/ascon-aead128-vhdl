@@ -1,0 +1,89 @@
+Multi-GPU support is disabled. Using a single GPU.
++-----------------------+----------------------------------------------------+
+| Parameter             | Value                                              |
++-----------------------+----------------------------------------------------+
+| train data pattern    | /home/kroix/projects/SAGE_Accelerator/llmc-gpt2/dev/data/tinyshakespeare/tiny_shakespeare_train.bin |
+| val data pattern      | /home/kroix/projects/SAGE_Accelerator/llmc-gpt2/dev/data/tinyshakespeare/tiny_shakespeare_val.bin |
+| output log dir        | NULL                                               |
+| checkpoint_every      | 0                                                  |
+| resume                | 0                                                  |
+| micro batch size B    | 1                                                  |
+| sequence length T     | 64                                                 |
+| total batch size      | 64                                                 |
+| LR scheduler          | cosine                                             |
+| learning rate (LR)    | 3.000000e-04                                       |
+| warmup iterations     | 0                                                  |
+| final LR fraction     | 1.000000e+00                                       |
+| weight decay          | 0.000000e+00                                       |
+| skip update lossz     | 0.000000                                           |
+| skip update gradz     | 0.000000                                           |
+| max_steps             | 0                                                  |
+| val_loss_every        | 20                                                 |
+| val_max_steps         | 1                                                  |
+| sample_every          | 0                                                  |
+| genT                  | 64                                                 |
+| overfit_single_batch  | 0                                                  |
+| use_master_weights    | enabled                                            |
+| gelu_fusion           | 0                                                  |
+| recompute             | 0                                                  |
++-----------------------+----------------------------------------------------+
+| device                | NVIDIA GeForce RTX 3080 Laptop GPU                 |
+| peak TFlops           | -1.0                                               |
+| precision             | FP32                                               |
++-----------------------+----------------------------------------------------+
+building model from .bin file /home/kroix/projects/SAGE_Accelerator/llmc-gpt2/gpt2_124M.bin
+| weight init method    | /home/kroix/projects/SAGE_Accelerator/llmc-gpt2/gpt2_124M.bin |
+| max_sequence_length T | 1024                                               |
+| vocab_size V          | 50257                                              |
+| padded_vocab_size Vp  | 50304                                              |
+| num_layers L          | 12                                                 |
+| num_heads NH          | 12                                                 |
+| channels C            | 768                                                |
+| num_parameters        | 124475904                                          |
++-----------------------+----------------------------------------------------+
+| train_num_batches     | 0                                                  |
+| val_num_batches       | 1                                                  |
++-----------------------+----------------------------------------------------+
+| run hellaswag         | no                                                 |
++-----------------------+----------------------------------------------------+
+| Zero Optimization is disabled                                              |
+| num_processes         | 1                                                  |
+| zero_stage            | 0                                                  |
++-----------------------+----------------------------------------------------+
+HellaSwag eval not found at dev/data/hellaswag/hellaswag_val.bin, skipping its evaluation
+You can run `python dev/data/hellaswag.py` to export and use it with `-h 1`.
+num_parameters: 124475904 => bytes: 497903616
+allocated 474 MiB for model parameters
+batch_size B=1 * seq_len T=64 * num_processes=1 and total_batch_size=64
+=> setting grad_accum_steps=1
+---
+WARNING: Failed to open the tokenizer file gpt2_tokenizer.bin
+The Tokenizer is a new feature added April 14 2024.
+Re-run `python train_gpt2.py` to write it
+---
+allocating 474 MiB for parameter gradients
+allocating 51 MiB for activations
+allocating 474 MiB for AdamW optimizer state m
+allocating 474 MiB for AdamW optimizer state v
+allocating 474 MiB for master copy of params
+device memory usage: 3565 MiB / 8191 MiB
+memory per sequence: 51 MiB
+ -> estimated maximum batch size: 90
+adapters: r=32 params=0.60M (2.29 MiB)
+!!!!!!!!
+WARNING:
+- The training sequence length is: T=64 (set with -t)
+- The model's max sequence length is: max_seq_len=1024
+You are attempting to train with a sequence length shorter than the model's max.
+This will lead to unused parameters in the wpe position embedding weights.
+If you know what you're doing you can ignore this warning.
+If you're like ???, you are most likely misconfiguring your training run.
+---> HINT: If you're training GPT-2 use -t 1024. If GPT-3, use -t 2048.
+!!!!!!!!
+Planned training steps: 0
+Starting at step 0; validation reports measure completed loop steps.
+Relative loss = 100 * current loss / first measured loss of that type.
+Lower is better; this percentage is not token error rate or accuracy.
+Teaching copy: inherited adapter training defects remain; see the top comment.
+Step 0 of 0 had validation loss 5.151681 nats/token; loss relative to first validation: 100.00% (step 0 reference: 5.151681).
+Average step time after warmup: unavailable (fewer than two training steps).
